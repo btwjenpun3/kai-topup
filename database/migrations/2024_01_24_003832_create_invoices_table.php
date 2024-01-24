@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nomor_invoice')->unique();
             $table->string('user_id')->nullable();
             $table->string('server_id')->nullable();
-            $table->fullText('xendit_invoice_id');            
+            $table->text('xendit_invoice_id');            
             $table->string('xendit_invoice_url');
             $table->string('status');
             $table->timestamps();
