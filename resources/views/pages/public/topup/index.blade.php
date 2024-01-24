@@ -219,7 +219,7 @@
                             // window.location.href = response.redirect;
                         } else {
                             $('#loadingOverlay').hide();
-                            showError(response.unaccepted);
+                            showError(response);
                         }
                     },
                     error: function(xhr, status, error) {

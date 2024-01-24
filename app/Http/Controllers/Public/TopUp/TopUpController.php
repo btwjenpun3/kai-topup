@@ -80,7 +80,7 @@ class TopUpController extends Controller
                             'status' => 'PENDING'
                         ]); 
                         // return response()->json(['redirect' => route('invoice.index', ['id' => $invoiceNumber])]);
-                        return response()->json(['redirect' => $response]);
+                        return response()->json($response);
                     } else {
                         return response()->json([
                             'unaccepted' => 'Produk dan harga tidak cocok!'
