@@ -54,32 +54,19 @@ class TopUpController extends Controller
                         $response = Http::withHeaders([
                             'Content-Type' => 'application/json',
                             'Authorization' => 'Basic ' . base64_encode(env('XENDIT_SECRET_KEY') . ':'),
-                        ])->post('https://api.xendit.co/v2/invoices', [
-                            'external_id' => 'payment-link-example',
-                            'amount' => $request->price,
-                            'available_banks' => [
-                                [
-                                    'bank_code'=> 'BCA',
-                                    'collection_type'=> 'POOL',
-                                    'transfer_amount'=> $request->price,
-                                    'bank_branch'=> 'Virtual Account',
-                                    'account_holder_name' => 'KAIA'
-                                ]
+                        ])->post('https://api.xendit.co/ewallets/charges', [
+                            'reference_id' => 'order-id-123',
+                            'currency' => 'IDR',
+                            'amount' => 25000,
+                            'checkout_method' => 'ONE_TIME_PAYMENT',
+                            'channel_code' => 'ID_SHOPEEPAY',
+                            'channel_properties' => [
+                                'success_redirect_url' => 'https://redirect.me/payment',
                             ],
-                            'items' => [
-                                [
-                                    'name' => $request->itemName,
-                                    'quantity' => 1,
-                                    'price' => $request->price
-                                ]
+                            'metadata' => [
+                                'branch_area' => 'PLUIT',
+                                'branch_city' => 'JAKARTA',
                             ],
-                            'success_redirect_url' => route('invoice.index', ['id' => $invoiceNumber]),
-                            'fees' => [
-                                [
-                                    'type' => 'ADMIN',
-                                    'value' => 4000
-                                ]
-                            ]
                         ]);
                         $game = Game::where('slug', $request->slug)->first();
                         Invoice::create([
@@ -88,11 +75,12 @@ class TopUpController extends Controller
                             'nomor_invoice' => $invoiceNumber,
                             'user_id' => $request->userId,
                             'server_id' => $request->serverId,
-                            'xendit_invoice_id' => $response['id'],
-                            'xendit_invoice_url' => $response['invoice_url'],
+                            'xendit_invoice_id' => $response,
+                            'xendit_invoice_url' => '123',
                             'status' => 'PENDING'
                         ]); 
-                        return response()->json(['redirect' => route('invoice.index', ['id' => $invoiceNumber])]);
+                        // return response()->json(['redirect' => route('invoice.index', ['id' => $invoiceNumber])]);
+                        return response()->json(['redirect' => $response]);
                     } else {
                         return response()->json([
                             'unaccepted' => 'Produk dan harga tidak cocok!'
@@ -105,7 +93,7 @@ class TopUpController extends Controller
                 }
             }                
         } catch (\Exception $e) {
-            return response()->json($e->getMessage());
+            return response()->json(['unaccepted' => $e->getMessage()]);
         }
     }
 }

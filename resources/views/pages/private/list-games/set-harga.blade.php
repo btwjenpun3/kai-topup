@@ -76,9 +76,9 @@
                                         <td><img src="{{ asset(Storage::url($h->gambar)) }}"></td>
                                         <td>{{ $h->nama_produk }}</td>
                                         <td>{{ $game->kode }}-{{ $h->kode_produk }}</td>
-                                        <td>Rp. {{ $h->modal }}</td>
-                                        <td>Rp. {{ $h->harga_jual }}</td>
-                                        <td>Rp. {{ $h->profit }}</td>
+                                        <td>Rp. {{ number_format($h->modal, 0, ',', '.') }}</td>
+                                        <td>Rp. {{ number_format($h->harga_jual, 0, ',', '.') }}</td>
+                                        <td>Rp. {{ number_format($h->profit, 0, ',', '.') }}</td>
                                         @if ($h->status == 1)
                                             <td> <span class="badge bg-success me-1"></span>Aktif</td>
                                         @else

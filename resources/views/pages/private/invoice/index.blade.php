@@ -59,7 +59,7 @@
                                         <td>{{ $invoice->server_id }}</td>
                                         <td><a href="{{ route('invoice.index', ['id' => $invoice->nomor_invoice]) }}"
                                                 target="_blank">{{ $invoice->nomor_invoice }}</a></td>
-                                        <td>@money($invoice->harga->harga_jual, 'IDR')</td>
+                                        <td>Rp. {{ number_format($invoice->harga->harga_jual, 0, ',', '.') }}</td>
                                         @if ($invoice->status == 'PENDING')
                                             <td class="text-warning"><span
                                                     class="badge bg-warning me-1"></span>{{ $invoice->status }}</td>

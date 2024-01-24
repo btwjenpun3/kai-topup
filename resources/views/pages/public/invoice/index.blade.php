@@ -44,7 +44,7 @@
                     <h6>{{ $item }}</h6>
                 </div>
                 <div class="col-md-4 text-end">
-                    <h6>Rp. {{ $harga }}</h6>
+                    <h6>Rp. {{ number_format($harga, 0, ',', '.') }}</h6>
                 </div>
             </div>
             <div class="row pt-3">
@@ -60,7 +60,7 @@
                     <h6>Biaya Admin</h6>
                 </div>
                 <div class="col-md-6 text-end">
-                    <h6>Rp. 4000</h6>
+                    <h6>Rp. {{ number_format(4000, 0, ',', '.') }}</h6>
                 </div>
             </div>
             <div class="row pt-3">
@@ -68,7 +68,7 @@
                     <h6 class="text-success">Total</h6>
                 </div>
                 <div class="col-md-6 text-end">
-                    <h6 class="text-success">Rp. 20500</h6>
+                    <h6 class="text-success">Rp. {{ number_format(20500, 0, ',', '.') }}</h6>
                 </div>
             </div>
         </div>

@@ -49,7 +49,7 @@
                                     <div class="item text-center clickable-item">
                                         <img src="{{ asset(Storage::url($h->gambar)) }}">
                                         <h4>{{ $h->nama_produk }}</h4>
-                                        <span>{{ money($h->harga_jual, 'IDR') }}</span>
+                                        <span>Rp. {{ number_format($h->harga_jual, 0, ',', '.') }}</span>
                                         <input id="getItemId-{{ $h->id }}" type="hidden"
                                             value="{{ $h->id }}" />
                                         <input id="getItemPrice-{{ $h->id }}" type="hidden"
@@ -215,7 +215,8 @@
                     },
                     success: function(response) {
                         if (response.redirect) {
-                            window.location.href = response.redirect;
+                            console.log(JSON.stringify(response.redirect, null, 2));
+                            // window.location.href = response.redirect;
                         } else {
                             $('#loadingOverlay').hide();
                             showError(response.unaccepted);
