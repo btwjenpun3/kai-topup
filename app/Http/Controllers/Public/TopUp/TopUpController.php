@@ -75,7 +75,7 @@ class TopUpController extends Controller
                             'nomor_invoice' => $invoiceNumber,
                             'user_id' => $request->userId,
                             'server_id' => $request->serverId,
-                            'xendit_invoice_id' => $response,
+                            'xendit_invoice_id' => '123',
                             'xendit_invoice_url' => '123',
                             'status' => 'PENDING'
                         ]); 
