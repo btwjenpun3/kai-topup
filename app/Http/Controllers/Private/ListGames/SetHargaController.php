@@ -8,6 +8,8 @@ use App\Models\Game;
 use App\Models\Harga;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class SetHargaController extends Controller
 {
@@ -24,16 +26,21 @@ class SetHargaController extends Controller
         try {
             $validation = $request->validate([
                 'nama_produk' => 'required',
-                'kode_produk' => 'required|unique:hargas,kode_produk',
+                'kode_produk' => 'required',
                 'modal' => 'required|integer',
                 'harga_jual' => 'required|integer',
+                'gambar' => 'required|unique:hargas,gambar|image|mimes:jpeg,png,jpg,webp|max:2048'
             ]);
             if($validation) {            
                 $profit = $request->harga_jual - $request->modal;
+                $originalName = $request->file('gambar')->getClientOriginalName();
+                $randomName = Str::random(10) . '-' . $originalName;
+                $gambarPath = $request->file('gambar')->storeAs('produk', $randomName, 'public');
                 Harga::create([
                     'game_id' => $request->id,
                     'nama_produk' => $request->nama_produk,
                     'kode_produk' => $request->kode_produk,
+                    'gambar' => $gambarPath,
                     'modal' => $request->modal,
                     'harga_jual' => $request->harga_jual,
                     'profit' => $profit,
@@ -99,7 +106,9 @@ class SetHargaController extends Controller
     public function destroy(Request $request)
     {
         try {
-            Harga::where('id', $request->id)->delete();
+            $getData = Harga::where('id', $request->id)->first();
+            Storage::disk('public')->delete($getData->gambar);
+            $getData->delete();
             return response()->json([
                 'success' => 'Produk berhasil di hapus!'
             ], 200);

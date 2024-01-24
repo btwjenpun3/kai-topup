@@ -33,9 +33,9 @@
                             @if ($h->status == 1)
                                 <div class="col-lg-2 col-sm-6 col-md-4 col-6">
                                     <div class="item text-center clickable-item">
-                                        <img src="{{ asset(Storage::url('/product/diamond.webp')) }}">
+                                        <img src="{{ asset(Storage::url($h->gambar)) }}">
                                         <h4>{{ $h->nama_produk }}</h4>
-                                        <span>Rp. {{ $h->harga_jual }}</span>
+                                        <span>@money($h->harga_jual, 'IDR')</span>
                                         <input id="itemId" type="hidden" value="{{ $h->id }}" />
                                     </div>
                                 </div>

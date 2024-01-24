@@ -13,11 +13,19 @@
                         <h4><em>Invoice</em> ({{ $invoice }})</h4>
                     </div>
                 </div>
-                <div class="col-md-3 text-center">
-                    <div class="heading-section  text-end">
-                        <h4 class="text-warning">PENDING</h4>
+                @if ($status == 'PAID')
+                    <div class="col-md-3 text-center">
+                        <div class="heading-section  text-end">
+                            <h4 class="text-success">PAID</h4>
+                        </div>
                     </div>
-                </div>
+                @else
+                    <div class="col-md-3 text-center">
+                        <div class="heading-section  text-end">
+                            <h4 class="text-warning">PENDING</h4>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="col-md-12">
@@ -65,19 +73,22 @@
             </div>
         </div>
     </div>
-    <div class="game-details">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="content">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="main-border-button">
-                                <a href="{{ $invoice_url }}" id="checkout">Checkout</a>
+    @if ($status == 'PAID')
+    @else
+        <div class="game-details">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="main-border-button">
+                                    <a href="{{ $invoice_url }}" id="checkout">Checkout</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
 @endsection

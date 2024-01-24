@@ -12,15 +12,13 @@ class InvoiceController extends Controller
     {
         try {
             $invoice = Invoice::where('nomor_invoice', $request->id)->first();
-            $item = $invoice->harga->nama_produk;
-            $harga = $invoice->harga->harga_jual;
-            $gambar = $invoice->game->url_gambar;
             return view('pages.public.invoice.index', [
                 'invoice' => $invoice->nomor_invoice,
-                'item' => $item,
-                'harga' => $harga,
-                'gambar' => $gambar,
-                'invoice_url' => $invoice->invoice_url
+                'item' => $invoice->harga->nama_produk,
+                'harga' => $invoice->harga->harga_jual,
+                'gambar' => $invoice->game->url_gambar,
+                'invoice_url' => $invoice->xendit_invoice_url,
+                'status' => $invoice->status
             ]);
         } catch (\Exception $e) {
 

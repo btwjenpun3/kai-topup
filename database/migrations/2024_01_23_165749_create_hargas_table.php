@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('game_id')->constrained();
             $table->string('nama_produk');
-            $table->string('kode_produk')->unique();
+            $table->string('kode_produk');
+            $table->string('gambar')->unique();
             $table->integer('modal');
             $table->integer('harga_jual');
             $table->integer('profit');

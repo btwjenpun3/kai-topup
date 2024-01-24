@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Game;
 use App\Models\Invoice;
+use Illuminate\Support\Facades\DB;
 
 use function PHPSTORM_META\map;
 
@@ -32,6 +33,17 @@ class TopUpController extends Controller
                 'itemId' => 'required'
             ]);
             if($validation) {
+                /**
+                 * Ini bagian untuk pembuata nomor Invoice
+                 */
+                $datePart = now()->format('Ymd');
+                $lastOrder = Invoice::orderby('id', 'desc')->first();
+                $sequenceNumber = $lastOrder ? sprintf('%08d', $lastOrder->id + 1) : '00000001';
+                $invoiceNumber = 'TRX' . $datePart . $sequenceNumber;
+
+                /**
+                 * Setelah nomor invoice di buat, mari berlanjut ke pengiriman Data ke XENDIT
+                 */
                 $response = Http::withHeaders([
                     'Content-Type' => 'application/json',
                     'Authorization' => 'Basic ' . base64_encode(env('XENDIT_SECRET_KEY') . ':'),
@@ -54,7 +66,7 @@ class TopUpController extends Controller
                             'price' => $request->price
                         ]
                     ],
-                    'success_redirect_url' => env('APP_URL'),
+                    'success_redirect_url' => route('invoice.index', ['id' => $invoiceNumber]),
                     'fees' => [
                         [
                             'type' => 'ADMIN',
@@ -65,14 +77,15 @@ class TopUpController extends Controller
                 $game = Game::where('slug', $request->slug)->first();
                 Invoice::create([
                     'game_id' => $game->id,
-                    'harga_id' => $request->itemId,
+                    'harga_id' => $request->itemId,                    
+                    'nomor_invoice' => $invoiceNumber,
                     'user_id' => $request->userId,
                     'server_id' => $request->serverId,
-                    'nomor_invoice' => $response['id'],
-                    'invoice_url' => $response['invoice_url'],
+                    'xendit_invoice_id' => $response['id'],
+                    'xendit_invoice_url' => $response['invoice_url'],
                     'status' => 'PENDING'
                 ]); 
-                return response()->json(['redirect' => route('invoice.index', ['id' => $response['id']])]);
+                return response()->json(['redirect' => route('invoice.index', ['id' => $invoiceNumber])]);
             }                
         } catch (\Exception $e) {
             return response()->json($e->getMessage());

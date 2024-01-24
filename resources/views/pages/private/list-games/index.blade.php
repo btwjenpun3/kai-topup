@@ -60,8 +60,7 @@
                                         <td>{{ $game->nama }}</td>
                                         <td class="text-muted"> {{ $game->kode }} </td>
                                         <td>
-                                            <a href="#" class="text-reset" data-bs-toggle="modal"
-                                                data-bs-target="#modal-gambar-game"
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#modal-gambar-game"
                                                 onclick="tampilkanGambar('{{ asset(Storage::url($game->url_gambar)) }}')">
                                                 {{ str_replace('games/', '', $game->url_gambar) }}
                                             </a>

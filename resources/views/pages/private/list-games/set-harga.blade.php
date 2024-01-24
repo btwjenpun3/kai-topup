@@ -60,6 +60,7 @@
                         @if (isset($harga) && count($harga) > 0)
                             <thead>
                                 <tr>
+                                    <th class="w-7"></th>
                                     <th>Nama Produk</th>
                                     <th>Kode Produk</th>
                                     <th>Modal</th>
@@ -72,6 +73,7 @@
                             <tbody>
                                 @foreach ($harga as $h)
                                     <tr>
+                                        <td><img src="{{ asset(Storage::url($h->gambar)) }}"></td>
                                         <td>{{ $h->nama_produk }}</td>
                                         <td>{{ $game->kode }}-{{ $h->kode_produk }}</td>
                                         <td>Rp. {{ $h->modal }}</td>
@@ -177,6 +179,19 @@
                                 <input type="text" name="profit" id="profit" class="form-control"
                                     aria-describedby="modal_prepend" disabled />
                             </div>
+                        </div>
+                        <div class="row mb-3 align-items-end">
+                            <label class="form-label" for="gambar">Gambar</label>
+                            <div class="input-group mb-3">
+                                <input type="file" name="gambar" id="gambar" class="form-control" />
+                            </div>
+                            <span class="text-danger small lh-base">
+                                <ul>
+                                    <li>Ukuran yang disarankan 512x512 px</li>
+                                    <li>Ukuran file maksimal 2048 kbps</li>
+                                    <li>Format harus berupa : <i>jpeg,png,jpg,webp</i></li>
+                                </ul>
+                            </span>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -300,105 +315,104 @@
             </div>
         </div>
     </div>
-    <div class="modal modal-blur fade" id="modal-team" tabindex="-1" role="dialog" aria-hidden="true">
-    @endsection
+@endsection
 
-    @section('js')
-        <script>
-            var produkId;
-            // Fungsi untuk menghitung profit
-            function hitungProfit() {
-                var modal = parseFloat(document.getElementById('modal').value) || 0;
-                var hargaJual = parseFloat(document.getElementById('harga_jual').value) || 0;
-                var profit = hargaJual - modal;
-                document.getElementById('profit').value = profit;
-            }
-            document.getElementById('modal').addEventListener('input', hitungProfit);
-            document.getElementById('harga_jual').addEventListener('input', hitungProfit);
+@section('js')
+    <script>
+        var produkId;
+        // Fungsi untuk menghitung profit
+        function hitungProfit() {
+            var modal = parseFloat(document.getElementById('modal').value) || 0;
+            var hargaJual = parseFloat(document.getElementById('harga_jual').value) || 0;
+            var profit = hargaJual - modal;
+            document.getElementById('profit').value = profit;
+        }
+        document.getElementById('modal').addEventListener('input', hitungProfit);
+        document.getElementById('harga_jual').addEventListener('input', hitungProfit);
 
-            //Fungsi hitung profit di edit
-            function hitungProfitEdit() {
-                var modal = parseFloat(document.getElementById('edit_modal').value) || 0;
-                var hargaJual = parseFloat(document.getElementById('edit_harga_jual').value) || 0;
-                var profit = hargaJual - modal;
-                document.getElementById('edit_profit').value = profit;
-            }
-            document.getElementById('edit_modal').addEventListener('input', hitungProfitEdit);
-            document.getElementById('edit_harga_jual').addEventListener('input', hitungProfitEdit);
+        //Fungsi hitung profit di edit
+        function hitungProfitEdit() {
+            var modal = parseFloat(document.getElementById('edit_modal').value) || 0;
+            var hargaJual = parseFloat(document.getElementById('edit_harga_jual').value) || 0;
+            var profit = hargaJual - modal;
+            document.getElementById('edit_profit').value = profit;
+        }
+        document.getElementById('edit_modal').addEventListener('input', hitungProfitEdit);
+        document.getElementById('edit_harga_jual').addEventListener('input', hitungProfitEdit);
 
-            //Fungsi untuk melihat data yang akan di edit
-            function show(id) {
-                produkId = id;
+        //Fungsi untuk melihat data yang akan di edit
+        function show(id) {
+            produkId = id;
+            $.ajax({
+                url: '/realm/set-harga/show/' + id,
+                type: 'GET',
+                success: function(response) {
+                    document.getElementById('edit_nama_produk').value = response.nama_produk;
+                    document.getElementById('edit_kode_produk').value = response.kode_produk;
+                    document.getElementById('edit_modal').value = response.modal;
+                    document.getElementById('edit_harga_jual').value = response.harga_jual;
+                    document.getElementById('edit_profit').value = response.profit;
+                },
+                error: function(xhr, error, status) {}
+            });
+        }
+
+        $(document).ready(function() {
+            var gameId = '{{ $game->id }}';
+            $('#update').click(function() {
                 $.ajax({
-                    url: '/set-harga/show/' + id,
-                    type: 'GET',
-                    success: function(response) {
-                        document.getElementById('edit_nama_produk').value = response.nama_produk;
-                        document.getElementById('edit_kode_produk').value = response.kode_produk;
-                        document.getElementById('edit_modal').value = response.modal;
-                        document.getElementById('edit_harga_jual').value = response.harga_jual;
-                        document.getElementById('edit_profit').value = response.profit;
+                    url: '/realm/set-harga/update/' + gameId + '/' + produkId,
+                    type: 'POST',
+                    data: {
+                        edit_nama_produk: $('#edit_nama_produk').val(),
+                        edit_kode_produk: $('#edit_kode_produk').val(),
+                        edit_modal: $('#edit_modal').val(),
+                        edit_harga_jual: $('#edit_harga_jual').val(),
+                        edit_status: $('#edit_status').val(),
+                        _token: '{{ csrf_token() }}'
                     },
-                    error: function(xhr, error, status) {}
-                });
-            }
-
-            $(document).ready(function() {
-                var gameId = '{{ $game->id }}';
-                $('#update').click(function() {
-                    $.ajax({
-                        url: '/set-harga/update/' + gameId + '/' + produkId,
-                        type: 'POST',
-                        data: {
-                            edit_nama_produk: $('#edit_nama_produk').val(),
-                            edit_kode_produk: $('#edit_kode_produk').val(),
-                            edit_modal: $('#edit_modal').val(),
-                            edit_harga_jual: $('#edit_harga_jual').val(),
-                            edit_status: $('#edit_status').val(),
-                            _token: '{{ csrf_token() }}'
-                        },
-                        success: function(response) {
-                            var successMessage = document.createElement(
-                                "div");
-                            successMessage.className =
-                                "alert alert-success";
-                            successMessage.textContent = response.success;
-                            $('#modal-edit').modal('hide');
-                            $('#produk-berhasil-di-update').html(successMessage);
-                            $("#table-harga").load(location.href + " #table-harga");
-                        },
-                        error: function(xhr, error, status) {
-                            var errorMessage = document.createElement(
-                                "div");
-                            errorMessage.className = "alert alert-danger";
-                            errorMessage.textContent = xhr.responseJSON.error;
-                            $('#produk-gagal-di-update').html(errorMessage);
-                        }
-                    });
+                    success: function(response) {
+                        var successMessage = document.createElement(
+                            "div");
+                        successMessage.className =
+                            "alert alert-success";
+                        successMessage.textContent = response.success;
+                        $('#modal-edit').modal('hide');
+                        $('#produk-berhasil-di-update').html(successMessage);
+                        $("#table-harga").load(location.href + " #table-harga");
+                    },
+                    error: function(xhr, error, status) {
+                        var errorMessage = document.createElement(
+                            "div");
+                        errorMessage.className = "alert alert-danger";
+                        errorMessage.textContent = xhr.responseJSON.error;
+                        $('#produk-gagal-di-update').html(errorMessage);
+                    }
                 });
             });
+        });
 
-            //Fungsi untuk menghapus Harga
-            function hapus(id) {
-                $('#btn-hapus').on('click', function() {
-                    $.ajax({
-                        type: 'DELETE',
-                        url: '/set-harga/' + id,
-                        data: {
-                            "_token": "{{ csrf_token() }}",
-                        },
-                        success: function(response) {
-                            var successMessage = document.createElement(
-                                "div");
-                            successMessage.className =
-                                "alert alert-success";
-                            successMessage.textContent = response.success;
-                            $('#produk-berhasil-di-hapus').html(successMessage);
-                            $("#table-harga").load(location.href + " #table-harga");
-                        },
-                        error: function(xhr, status, error) {}
-                    });
+        //Fungsi untuk menghapus Harga
+        function hapus(id) {
+            $('#btn-hapus').on('click', function() {
+                $.ajax({
+                    type: 'DELETE',
+                    url: '/realm/set-harga/' + id,
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                    },
+                    success: function(response) {
+                        var successMessage = document.createElement(
+                            "div");
+                        successMessage.className =
+                            "alert alert-success";
+                        successMessage.textContent = response.success;
+                        $('#produk-berhasil-di-hapus').html(successMessage);
+                        $("#table-harga").load(location.href + " #table-harga");
+                    },
+                    error: function(xhr, status, error) {}
                 });
-            }
-        </script>
-    @endsection
+            });
+        }
+    </script>
+@endsection

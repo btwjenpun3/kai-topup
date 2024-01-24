@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('game_id')->constrained();
             $table->foreignId('harga_id')->constrained();
+            $table->string('nomor_invoice')->unique();
             $table->string('user_id')->nullable();
             $table->string('server_id')->nullable();
-            $table->string('nomor_invoice');
-            $table->string('invoice_url');
+            $table->string('xendit_invoice_id');            
+            $table->string('xendit_invoice_url');
             $table->string('status');
             $table->timestamps();
         });
