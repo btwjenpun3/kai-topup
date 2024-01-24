@@ -35,8 +35,9 @@
                                     <div class="item text-center clickable-item">
                                         <img src="{{ asset(Storage::url($h->gambar)) }}">
                                         <h4>{{ $h->nama_produk }}</h4>
-                                        <span>@money($h->harga_jual, 'IDR')</span>
+                                        <span>{{ money($h->harga_jual, 'IDR') }}</span>
                                         <input id="itemId" type="hidden" value="{{ $h->id }}" />
+                                        <input id="itemPrice" type="hidden" value="{{ $h->harga_jual }}" />
                                     </div>
                                 </div>
                             @endif
