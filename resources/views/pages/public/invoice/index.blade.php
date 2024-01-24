@@ -1,0 +1,83 @@
+@extends('master.public.index')
+
+@section('title')
+    <title>Kai Top Up - Invoice</title>
+@endsection
+
+@section('content')
+    <div class="featured-games">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="heading-section">
+                        <h4><em>Invoice</em> ({{ $invoice }})</h4>
+                    </div>
+                </div>
+                <div class="col-md-3 text-center">
+                    <div class="heading-section  text-end">
+                        <h4 class="text-warning">PENDING</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <h5>Rincian Pembelian</h5>
+            <hr>
+            <div class="row">
+                <div class="col-md-12 pt-3">
+                    <img src="{{ asset(Storage::url($gambar)) }}" style="width:100px;height:100px;">
+                </div>
+            </div>
+            <div class="row pt-5">
+                <div class="col-md-4">
+                    <h6>Nama Item</h6>
+                </div>
+                <div class="col-md-4">
+                    <h6>{{ $item }}</h6>
+                </div>
+                <div class="col-md-4 text-end">
+                    <h6>Rp. {{ $harga }}</h6>
+                </div>
+            </div>
+            <div class="row pt-3">
+                <div class="col-md-4">
+                    <h6>Metode Pembayaran</h6>
+                </div>
+                <div class="col-md-4">
+                    <h6>Virtual Account BCA</h6>
+                </div>
+            </div>
+            <div class="row pt-3">
+                <div class="col-md-6">
+                    <h6>Biaya Admin</h6>
+                </div>
+                <div class="col-md-6 text-end">
+                    <h6>Rp. 4000</h6>
+                </div>
+            </div>
+            <div class="row pt-3">
+                <div class="col-md-6">
+                    <h6 class="text-success">Total</h6>
+                </div>
+                <div class="col-md-6 text-end">
+                    <h6 class="text-success">Rp. 20500</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="game-details">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="main-border-button">
+                                <a href="{{ $invoice_url }}" id="checkout">Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
