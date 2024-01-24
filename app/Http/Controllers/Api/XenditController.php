@@ -42,4 +42,10 @@ class XenditController extends Controller
 
         }
     }
+
+    public function handleCallBackEWallet(Request $request)
+    {
+        $data = $request->all();
+        echo $data;
+    }
 }

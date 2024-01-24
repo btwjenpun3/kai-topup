@@ -20,3 +20,5 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::post('/xendit/callback', [XenditController::class, 'handleCallBack']);
+
+Route::post('/xendit/callback/ewallet', [XenditController::class, 'handleCallBackEWallet']);
