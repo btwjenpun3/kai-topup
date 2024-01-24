@@ -71,10 +71,7 @@ class SetHargaController extends Controller
         try {
             $validation = $request->validate([
                 'edit_nama_produk' => 'required',
-                'edit_kode_produk' => [
-                    'required',
-                    Rule::unique('hargas', 'kode_produk')->ignore($request->id)
-                ],
+                'edit_kode_produk' => 'required',
                 'edit_modal' => 'required|integer',
                 'edit_harga_jual' => 'required|integer',
                 'edit_status' => 'required'

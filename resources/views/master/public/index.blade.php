@@ -35,7 +35,7 @@
     <!-- ***** Navbar Area Start ***** -->
     @include('partials.public.navbar')
     <!-- ***** Navbar Area End ***** -->
-
+    @yield('loading')
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -52,6 +52,7 @@
             </div>
         </div>
     </div>
+    @yield('message')
     @yield('modal')
     @include('partials.public.footer')
 

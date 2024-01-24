@@ -4,6 +4,20 @@
     <title>Kai Top Up - {{ $game->nama }}</title>
 @endsection
 
+@section('message')
+    <div class="alert alert-danger" role="alert" id="stickyAlert" style="display:none;">
+        <span id="errorMessage"></span>
+    </div>
+@endsection
+
+@section('loading')
+    <div id="loadingOverlay" style="display:none;">
+        <h4>Mohon di tunggu</h4>
+        <h6>Invoice kamu sedang di proses</h6>
+        <div id="loadingSpinner"></div>
+    </div>
+@endsection
+
 @section('content')
     <div class="featured-games">
         <div class="col-lg-12">
@@ -36,8 +50,12 @@
                                         <img src="{{ asset(Storage::url($h->gambar)) }}">
                                         <h4>{{ $h->nama_produk }}</h4>
                                         <span>{{ money($h->harga_jual, 'IDR') }}</span>
-                                        <input id="itemId" type="hidden" value="{{ $h->id }}" />
-                                        <input id="itemPrice" type="hidden" value="{{ $h->harga_jual }}" />
+                                        <input id="getItemId-{{ $h->id }}" type="hidden"
+                                            value="{{ $h->id }}" />
+                                        <input id="getItemPrice-{{ $h->id }}" type="hidden"
+                                            value="{{ $h->harga_jual }}" />
+                                        <input id="getItemName-{{ $h->id }}" type="hidden"
+                                            value="{{ $h->nama_produk }}" />
                                     </div>
                                 </div>
                             @endif
@@ -129,14 +147,28 @@
 
 @section('js')
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        $(document).ready(function() {
+            function showError(message) {
+                $('#errorMessage').text(message);
+                $('#stickyAlert').fadeIn('slow');
+                setTimeout(function() {
+                    $('#stickyAlert').fadeOut('slow');
+                }, 7000);
+            }
+
+            // Fungsi untuk menyembunyikan alert
+            function hideError() {
+                $('#stickyAlert').fadeOut('slow');
+            }
+
             var selectedPrice = null;
 
             function handleItemClick(item) {
                 $('.clickable-item').removeClass('clicked');
                 $(item).addClass('clicked');
-                selectedPrice = $(item).find('span').text().trim();
-                selectedItemId = $(item).find('input[type="hidden"]').val();
+                selectedPrice = $(item).find('[id^="getItemPrice-"]').val();
+                selectedItemId = $(item).find('[id^="getItemId-"]').val();
+                selectedItemName = $(item).find('[id^="getItemName-"]').val();
             }
 
             $('.clickable-item').click(function() {
@@ -144,45 +176,54 @@
             });
 
             $('#checkout').click(function() {
+                // Mengambil nilai dari input
+                var userIdInputValue = $('#userIdInput').val();
+                var serverIdInputValue = $('#serverIdInput').val();
+
+                // Pemeriksaan apakah input sudah diisi
+                if (userIdInputValue.trim() === '' || serverIdInputValue.trim() === '') {
+                    showError('Harap isi semua Data kamu!');
+                    return; // Hentikan proses jika input belum diisi
+                }
                 if (selectedPrice !== null) {
                     // Set data pada modal berdasarkan item yang dipilih
-                    var itemName = $('.clicked h4').text().trim();
-                    $('#itemName').text(itemName);
+                    $('#itemName').text(selectedItemName);
                     $('#itemPrice').text(selectedPrice);
                     $('#itemId').val(selectedItemId);
-                    $('#userId').text($('#userIdInput').val()); // Gantilah dengan ID elemen form user id
+                    $('#userId').text($('#userIdInput').val());
                     $('#serverId').text($('#serverIdInput').val());
 
                     // Tampilkan modal
                     $('#checkoutModal').modal('show');
                 } else {
-                    alert('Silakan pilih harga terlebih dahulu.');
+                    showError('Silakan pilih harga terlebih dahulu.');
                 }
             });
 
             $('#confirmCheckout').click(function() {
-                var hargaAngka = parseInt(selectedPrice.replace(/[^0-9]/g, ''), 10);
+                $('#loadingOverlay').show();
                 $.ajax({
                     url: '/topup/{{ $game->slug }}/process',
                     type: 'POST',
                     data: {
-                        price: hargaAngka,
-                        itemName: $('#itemName').text(),
+                        price: selectedPrice,
+                        itemName: selectedItemName,
                         userId: $('#userId').text(),
                         serverId: $('#serverId').text(),
-                        itemId: $('#itemId').val(),
+                        itemId: selectedItemId,
                         _token: '{{ csrf_token() }}'
                     },
                     success: function(response) {
                         if (response.redirect) {
                             window.location.href = response.redirect;
                         } else {
-                            console.log(response)
+                            $('#loadingOverlay').hide();
+                            showError(response.unaccepted);
                         }
                     },
                     error: function(xhr, status, error) {
-                        console.error(error);
-                        // Tindakan lain untuk penanganan kesalahan
+                        $('#loadingOverlay').hide();
+                        showError(error.unaccepted);
                     }
                 });
 
@@ -204,6 +245,57 @@
             /* Warna hijau */
             color: #white;
             /* Warna teks putih */
+        }
+
+        #stickyAlert {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            width: 350px;
+            /* Atur lebar sesuai kebutuhan Anda */
+        }
+
+        #loadingOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(47, 61, 145, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        #loadingOverlay h4 {
+            margin-bottom: 10px;
+        }
+
+        #loadingOverlay h6 {
+            margin-bottom: 20px;
+        }
+
+        #loadingSpinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
 @endsection

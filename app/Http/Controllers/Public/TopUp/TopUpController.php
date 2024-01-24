@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Game;
 use App\Models\Invoice;
+use App\Models\Harga;
 use Illuminate\Support\Facades\DB;
 
 use function PHPSTORM_META\map;
@@ -34,58 +35,74 @@ class TopUpController extends Controller
             ]);
             if($validation) {
                 /**
-                 * Ini bagian untuk pembuata nomor Invoice
+                 * Validasi terlebih dahulu apakah itemId dan itemPrice cocok dengan Database
                  */
-                $datePart = now()->format('Ymd');
-                $lastOrder = Invoice::orderby('id', 'desc')->first();
-                $sequenceNumber = $lastOrder ? sprintf('%08d', $lastOrder->id + 1) : '00000001';
-                $invoiceNumber = 'TRX' . $datePart . $sequenceNumber;
+                $data = Harga::where('id', $request->itemId)->first();
+                if($data) {
+                    if($request->price == $data->harga_jual) {
+                        /**
+                         * Ini bagian untuk pembuata nomor Invoice
+                         */
+                        $datePart = now()->format('Ymd');
+                        $lastOrder = Invoice::orderby('id', 'desc')->first();
+                        $sequenceNumber = $lastOrder ? sprintf('%08d', $lastOrder->id + 1) : '00000001';
+                        $invoiceNumber = 'TRX' . $datePart . $sequenceNumber;
 
-                /**
-                 * Setelah nomor invoice di buat, mari berlanjut ke pengiriman Data ke XENDIT
-                 */
-                $response = Http::withHeaders([
-                    'Content-Type' => 'application/json',
-                    'Authorization' => 'Basic ' . base64_encode(env('XENDIT_SECRET_KEY') . ':'),
-                ])->post('https://api.xendit.co/v2/invoices', [
-                    'external_id' => 'payment-link-example',
-                    'amount' => $request->price,
-                    'available_banks' => [
-                        [
-                            'bank_code'=> 'BCA',
-                            'collection_type'=> 'POOL',
-                            'transfer_amount'=> $request->price,
-                            'bank_branch'=> 'Virtual Account',
-                            'account_holder_name' => 'KAIA'
-                        ]
-                    ],
-                    'items' => [
-                        [
-                            'name' => $request->itemName,
-                            'quantity' => 1,
-                            'price' => $request->price
-                        ]
-                    ],
-                    'success_redirect_url' => route('invoice.index', ['id' => $invoiceNumber]),
-                    'fees' => [
-                        [
-                            'type' => 'ADMIN',
-                            'value' => 4000
-                        ]
-                    ]
-                ]);
-                $game = Game::where('slug', $request->slug)->first();
-                Invoice::create([
-                    'game_id' => $game->id,
-                    'harga_id' => $request->itemId,                    
-                    'nomor_invoice' => $invoiceNumber,
-                    'user_id' => $request->userId,
-                    'server_id' => $request->serverId,
-                    'xendit_invoice_id' => $response['id'],
-                    'xendit_invoice_url' => $response['invoice_url'],
-                    'status' => 'PENDING'
-                ]); 
-                return response()->json(['redirect' => route('invoice.index', ['id' => $invoiceNumber])]);
+                        /**
+                         * Setelah nomor invoice di buat, mari berlanjut ke pengiriman Data ke XENDIT
+                         */
+                        $response = Http::withHeaders([
+                            'Content-Type' => 'application/json',
+                            'Authorization' => 'Basic ' . base64_encode(env('XENDIT_SECRET_KEY') . ':'),
+                        ])->post('https://api.xendit.co/v2/invoices', [
+                            'external_id' => 'payment-link-example',
+                            'amount' => $request->price,
+                            'available_banks' => [
+                                [
+                                    'bank_code'=> 'BCA',
+                                    'collection_type'=> 'POOL',
+                                    'transfer_amount'=> $request->price,
+                                    'bank_branch'=> 'Virtual Account',
+                                    'account_holder_name' => 'KAIA'
+                                ]
+                            ],
+                            'items' => [
+                                [
+                                    'name' => $request->itemName,
+                                    'quantity' => 1,
+                                    'price' => $request->price
+                                ]
+                            ],
+                            'success_redirect_url' => route('invoice.index', ['id' => $invoiceNumber]),
+                            'fees' => [
+                                [
+                                    'type' => 'ADMIN',
+                                    'value' => 4000
+                                ]
+                            ]
+                        ]);
+                        $game = Game::where('slug', $request->slug)->first();
+                        Invoice::create([
+                            'game_id' => $game->id,
+                            'harga_id' => $request->itemId,                    
+                            'nomor_invoice' => $invoiceNumber,
+                            'user_id' => $request->userId,
+                            'server_id' => $request->serverId,
+                            'xendit_invoice_id' => $response['id'],
+                            'xendit_invoice_url' => $response['invoice_url'],
+                            'status' => 'PENDING'
+                        ]); 
+                        return response()->json(['redirect' => route('invoice.index', ['id' => $invoiceNumber])]);
+                    } else {
+                        return response()->json([
+                            'unaccepted' => 'Produk dan harga tidak cocok!'
+                        ]);
+                    }
+                } else {
+                    return response()->json([
+                        'unaccepted' => 'Produk tidak ditemukan!'
+                    ]);
+                }
             }                
         } catch (\Exception $e) {
             return response()->json($e->getMessage());
