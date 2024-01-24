@@ -77,7 +77,7 @@
                                         <td>Rp. {{ $h->modal }}</td>
                                         <td>Rp. {{ $h->harga_jual }}</td>
                                         <td>Rp. {{ $h->profit }}</td>
-                                        @if ($h->status === 1)
+                                        @if ($h->status == 1)
                                             <td> <span class="badge bg-success me-1"></span>Aktif</td>
                                         @else
                                             <td><span class="badge bg-danger me-1"></span>Tidak Aktif</td>

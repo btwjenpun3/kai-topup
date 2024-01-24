@@ -30,7 +30,7 @@
                 <div class="col-md-12">
                     <div class="row">
                         @foreach ($harga as $h)
-                            @if ($h->status === 1)
+                            @if ($h->status == 1)
                                 <div class="col-lg-2 col-sm-6 col-md-4 col-6">
                                     <div class="item text-center clickable-item">
                                         <img src="{{ asset(Storage::url('/product/diamond.webp')) }}">
