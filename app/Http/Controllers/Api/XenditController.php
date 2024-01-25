@@ -49,7 +49,7 @@ class XenditController extends Controller
             $header = $request->header('x-callback-token');
             if($header == env('XENDIT_CALLBACK_TOKEN')) {
                 $response = $request->all();
-                if($response) {
+                if($response['data']['status'] == "SUCCEEDED") {
                     $invoice = Invoice::where('nomor_invoice', $response['data']['reference_id'])->first();
                     if(isset($invoice)) {
                         $invoice->update([
@@ -64,9 +64,7 @@ class XenditController extends Controller
                         ], 401);
                     }
                 } else {
-                    return response()->json([
-                        'error' => 'Unauthorized'
-                    ], 401);
+                    return redirect()->route('invoice.index', ['id' => $response['data']['reference_id']])->with('message', 'Pemabayaran sedang Pending. Harap menunggu beberapa saat atau hubungi Admin');
                 }
             } else {
                 return response()->json([
@@ -75,7 +73,7 @@ class XenditController extends Controller
             }
         } catch (\Exception $e) {
             return response()->json([
-                'error' => $e->getMessage()
+                'error' => 'Unknown Error'
             ], 401);
         }
     }
