@@ -64,7 +64,7 @@ class XenditController extends Controller
                         ], 401);
                     }
                 } else {
-                    return redirect()->route('invoice.index', ['id' => $response['data']['reference_id']])->with('message', 'Pemabayaran sedang Pending. Harap menunggu beberapa saat atau hubungi Admin');
+                    return redirect()->route('invoice.index', ['id' => $response['data']['reference_id']])->with(['message' => 'Pembayaran kamu sedang Pending. Harap menunggu beberapa saat dan refresh halaman ini atau hubungi Admin']);
                 }
             } else {
                 return response()->json([
