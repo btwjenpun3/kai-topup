@@ -74,7 +74,9 @@ class XenditController extends Controller
                 ], 401);
             }
         } catch (\Exception $e) {
-
+            return response()->json([
+                'error' => 'Unknown Error'
+            ], 401);
         }
     }
 }
