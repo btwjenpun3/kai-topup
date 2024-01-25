@@ -75,7 +75,7 @@ class XenditController extends Controller
             }
         } catch (\Exception $e) {
             return response()->json([
-                'error' => 'Unknown Error'
+                'error' => $e->getMessage()
             ], 401);
         }
     }
