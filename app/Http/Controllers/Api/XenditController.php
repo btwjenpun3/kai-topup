@@ -64,10 +64,9 @@ class XenditController extends Controller
                         ], 401);
                     }
                 } else {
-                    return response()
-                            ->view(400)
-                            ->header('Content-Type', 'text/html')
-                            ->with('message', 'Pembayaran sedang Pending, harap tunggu sesaat atau hubungi Admin');
+                    return response()->json([
+                        'error' => 'Unauthorized'
+                    ], 401);
                 }
             } else {
                 return response()->json([
