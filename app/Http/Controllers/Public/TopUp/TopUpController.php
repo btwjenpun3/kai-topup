@@ -31,7 +31,9 @@ class TopUpController extends Controller
                 'itemName' => 'required',
                 'userId' => 'required',
                 'serverId' => 'required',
-                'itemId' => 'required'
+                'itemId' => 'required',
+                'paymentType' => 'required',
+                'paymentMethod' => 'required'
             ]);
             if($validation) {
                 /**
@@ -40,8 +42,22 @@ class TopUpController extends Controller
                 $data = Harga::where('id', $request->itemId)->first();
                 if($data) {
                     if($request->price == $data->harga_jual) {
+
                         /**
-                         * Ini bagian untuk pembuata nomor Invoice
+                         * Cek Pembayaran apa yang di gunakan. ini berguna untuk menentukan biaya Admin
+                         */
+                        if($request->paymentMethod == 'ID_SHOPEEPAY') {
+                            $adminFee = $request->price * (4.5 / 100);
+                            $total = $request->price + $adminFee;
+                        } elseif ($request->paymentMethod == 'ID_DANA') {
+                            $adminFee = $request->price * (2 / 100);
+                            $total = $request->price + $adminFee;
+                        } elseif ($request->paymentMethod == 'ID_OVO') {
+                            $adminFee = $request->price * (4 / 100);
+                            $total = $request->price + $adminFee;
+                        }
+                        /**
+                         * Ini bagian untuk pembuatan nomor Invoice
                          */
                         $datePart = now()->format('Ymd');
                         $lastOrder = Invoice::orderby('id', 'desc')->first();
@@ -51,36 +67,50 @@ class TopUpController extends Controller
                         /**
                          * Setelah nomor invoice di buat, mari berlanjut ke pengiriman Data ke XENDIT
                          */
-                        $response = Http::withHeaders([
-                            'Content-Type' => 'application/json',
-                            'Authorization' => 'Basic ' . base64_encode(env('XENDIT_SECRET_KEY') . ':'),
-                        ])->post('https://api.xendit.co/ewallets/charges', [
-                            'reference_id' => 'order-id-123',
-                            'currency' => 'IDR',
-                            'amount' => 25000,
-                            'checkout_method' => 'ONE_TIME_PAYMENT',
-                            'channel_code' => 'ID_SHOPEEPAY',
-                            'channel_properties' => [
-                                'success_redirect_url' => 'https://redirect.me/payment',
-                            ],
-                            'metadata' => [
-                                'branch_area' => 'PLUIT',
-                                'branch_city' => 'JAKARTA',
-                            ],
-                        ]);
-                        $game = Game::where('slug', $request->slug)->first();
-                        Invoice::create([
-                            'game_id' => $game->id,
-                            'harga_id' => $request->itemId,                    
-                            'nomor_invoice' => $invoiceNumber,
-                            'user_id' => $request->userId,
-                            'server_id' => $request->serverId,
-                            'xendit_invoice_id' => $response,
-                            'xendit_invoice_url' => '123',
-                            'status' => 'PENDING'
-                        ]); 
-                        // return response()->json(['redirect' => route('invoice.index', ['id' => $invoiceNumber])]);
-                        return response()->json($response);
+                        if($request->paymentType == 'EWALLET') {
+                            $response = Http::withHeaders([
+                                'Content-Type' => 'application/json',
+                                'Authorization' => 'Basic ' . base64_encode(env('XENDIT_SECRET_KEY') . ':'),
+                            ])->post('https://api.xendit.co/ewallets/charges', [
+                                'reference_id' => $invoiceNumber,
+                                'currency' => 'IDR',
+                                'amount' => $total,
+                                'checkout_method' => 'ONE_TIME_PAYMENT',
+                                'channel_code' => $request->paymentMethod,
+                                'channel_properties' => [
+                                    'success_redirect_url' => route('invoice.index', ['id' => $invoiceNumber]),
+                                ],
+                                'metadata' => [
+                                    'branch_area' => 'PLUIT',
+                                    'branch_city' => 'JAKARTA',
+                                ],
+                            ]);
+                            /**
+                             * Cek Methode pembayaran untuk di masukkan URL nya ke Invoice
+                             */
+                            if($request->paymentMethod == 'ID_SHOPEEPAY') {
+                                $invoice_url = $response['actions']['mobile_deeplink_checkout_url'];
+                            } elseif ($request->paymentMethod == 'ID_DANA') {
+                                $invoice_url = $response['actions']['desktop_web_checkout_url'];
+                            } 
+    
+                            $game = Game::where('slug', $request->slug)->first();
+                            Invoice::create([
+                                'game_id' => $game->id,
+                                'harga_id' => $request->itemId,                    
+                                'nomor_invoice' => $invoiceNumber,
+                                'user_id' => $request->userId,
+                                'server_id' => $request->serverId,
+                                'xendit_invoice_id' => $response['id'],
+                                'xendit_invoice_url' => $invoice_url,
+                                'payment_method' => $response['channel_code'],
+                                'total' => $total,
+                                'status' => 'PENDING'
+                            ]); 
+                            return response()->json(['redirect' => route('invoice.index', ['id' => $invoiceNumber])]);
+                        } else {
+
+                        }                                                
                     } else {
                         return response()->json([
                             'unaccepted' => 'Produk dan harga tidak cocok!'

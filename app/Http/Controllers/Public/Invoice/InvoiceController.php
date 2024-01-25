@@ -15,7 +15,7 @@ class InvoiceController extends Controller
             return view('pages.public.invoice.index', [
                 'invoice' => $invoice->nomor_invoice,
                 'item' => $invoice->harga->nama_produk,
-                'harga' => $invoice->harga->harga_jual,
+                'total' => $invoice->total,
                 'gambar' => $invoice->game->url_gambar,
                 'invoice_url' => $invoice->xendit_invoice_url,
                 'status' => $invoice->status

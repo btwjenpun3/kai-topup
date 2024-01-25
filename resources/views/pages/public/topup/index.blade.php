@@ -95,9 +95,32 @@
                     <h4><em>Pilih Metode</em> Pembayaran</h4>
                 </div>
                 <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-12">
-
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-lg-2 col-sm-6 col-md-4 col-6">
+                                <div class="item payment text-center clickable-payment">
+                                    <img src="{{ asset(Storage::url('/payment/dana.webp')) }}">
+                                    <h4>DANA</h4>
+                                    <p>Biaya Admin 2%</p>
+                                    <input id="ID_DANA" type="hidden" value="ID_DANA">
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-sm-6 col-md-4 col-6">
+                                <div class="item payment text-center clickable-payment">
+                                    <img src="{{ asset(Storage::url('/payment/shopeepay.webp')) }}">
+                                    <h4>Shopee Pay</h4>
+                                    <p>Biaya Admin 4.5%</p>
+                                    <input id="ID_SHOPEEPAY" type="hidden" value="ID_SHOPEEPAY">
+                                </div>
+                            </div>
+                            {{-- <div class="col-lg-2 col-sm-6 col-md-4 col-6">
+                                <div class="item payment text-center clickable-payment">
+                                    <img src="{{ asset(Storage::url('/payment/ovo.webp')) }}">
+                                    <h4>OVO</h4>
+                                    <p>Biaya Admin 4%</p>
+                                    <input id="ID_OVO" type="hidden" value="ID_OVO">
+                                </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -133,6 +156,7 @@
                     <!-- Tampilkan data item, harga, dan form user id dan server id di sini -->
                     <p><strong>Nama Item:</strong> <span id="itemName"></span></p>
                     <p><strong>Harga:</strong> <span id="itemPrice"></span></p>
+                    <p><strong>Metode Pembayaran:</strong> <span id="paymentMethod"></span></p>
                     <p><strong>User ID:</strong> <span id="userId"></span></p>
                     <p><strong>Server ID:</strong> <span id="serverId"></span></p>
                 </div>
@@ -175,6 +199,17 @@
                 handleItemClick(this);
             });
 
+            function handlePaymentClick(item) {
+                $('.clickable-payment').removeClass('clicked');
+                $(item).addClass('clicked');
+                getPaymentMethodValue = $(item).find('input[type="hidden"]').val();
+            }
+
+            $('.clickable-payment').click(function() {
+                handlePaymentClick(this);
+            });
+
+
             $('#checkout').click(function() {
                 // Mengambil nilai dari input
                 var userIdInputValue = $('#userIdInput').val();
@@ -192,6 +227,7 @@
                     $('#itemId').val(selectedItemId);
                     $('#userId').text($('#userIdInput').val());
                     $('#serverId').text($('#serverIdInput').val());
+                    $('#paymentMethod').text(getPaymentMethodValue);
 
                     // Tampilkan modal
                     $('#checkoutModal').modal('show');
@@ -211,12 +247,13 @@
                         userId: $('#userId').text(),
                         serverId: $('#serverId').text(),
                         itemId: selectedItemId,
+                        paymentType: 'EWALLET',
+                        paymentMethod: getPaymentMethodValue,
                         _token: '{{ csrf_token() }}'
                     },
                     success: function(response) {
                         if (response.redirect) {
-                            console.log(JSON.stringify(response.redirect, null, 2));
-                            // window.location.href = response.redirect;
+                            window.location.href = response.redirect;
                         } else {
                             $('#loadingOverlay').hide();
                             showError(response.unaccepted);
@@ -243,9 +280,20 @@
 
         .most-popular .item.clicked {
             background-color: #28a745;
-            /* Warna hijau */
             color: #white;
-            /* Warna teks putih */
+        }
+
+        .clickable-payment {
+            cursor: pointer;
+        }
+
+        .most-popular .clickable-payment.clicked {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .most-popular .clickable-payment.clicked p {
+            color: white;
         }
 
         #stickyAlert {
