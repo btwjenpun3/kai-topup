@@ -5,6 +5,11 @@
 @endsection
 
 @section('content')
+    @if (session()->has('message'))
+        <div class="alert alert-warning" role="alert">
+            {{ session('message') }}
+        </div>
+    @endif
     <div class="featured-games">
         <div class="col-lg-12">
             <div class="row">
