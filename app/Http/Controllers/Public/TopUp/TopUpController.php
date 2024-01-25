@@ -48,13 +48,13 @@ class TopUpController extends Controller
                          */
                         if($request->paymentMethod == 'ID_SHOPEEPAY') {
                             $adminFee = $request->price * (4.5 / 100);
-                            $total = $request->price + $adminFee;
+                            $total = round($request->price + $adminFee);
                         } elseif ($request->paymentMethod == 'ID_DANA') {
                             $adminFee = $request->price * (2 / 100);
-                            $total = $request->price + $adminFee;
+                            $total = round($request->price + $adminFee);
                         } elseif ($request->paymentMethod == 'ID_OVO') {
                             $adminFee = $request->price * (4 / 100);
-                            $total = $request->price + $adminFee;
+                            $total = round($request->price + $adminFee);
                         }
                         /**
                          * Ini bagian untuk pembuatan nomor Invoice
@@ -123,7 +123,7 @@ class TopUpController extends Controller
                 }
             }                
         } catch (\Exception $e) {
-            return response()->json(['unaccepted' => $e->getMessage()]);
+            return response()->json(['unaccepted' => 'Payment sedang Offline, silahkan pilih metode pembayaran yang lain']);
         }
     }
 }

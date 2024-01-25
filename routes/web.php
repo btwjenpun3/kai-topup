@@ -4,6 +4,7 @@ use App\Http\Controllers\Private\Dashboard\DashboardContoller;
 use App\Http\Controllers\Private\Invoice\InvoiceRealmController;
 use App\Http\Controllers\Private\ListGames\ListGamesController;
 use App\Http\Controllers\Private\ListGames\SetHargaController;
+use App\Http\Controllers\Private\Testing\TestingController;
 use App\Http\Controllers\Public\Home\HomeController;
 use App\Http\Controllers\Public\Invoice\InvoiceController;
 use App\Http\Controllers\Public\TopUp\TopUpController;
@@ -79,3 +80,11 @@ Route::prefix('/realm/invoice')
     ->group(function () {
         Route::get('/', 'index')->name('index');
     });
+
+Route::prefix('/realm/testing')
+    ->name('testing.')
+    ->controller(TestingController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/shopeepay', 'testShopeePay')->name('shopeePay');
+    });   
