@@ -49,9 +49,9 @@ class XenditController extends Controller
             $header = $request->header('x-callback-token');
             if($header == env('XENDIT_CALLBACK_TOKEN')) {
                 $response = $request->all();
-                if($response) {
+                if($response['status'] == 'SUCCEEDED') {
                     $invoice = Invoice::where('xendit_invoice_id', $response['id'])->first();
-                    if($invoice) {
+                    if(isset($invoice)) {
                         $invoice->update([
                             'status' => 'PAID'
                         ]);
