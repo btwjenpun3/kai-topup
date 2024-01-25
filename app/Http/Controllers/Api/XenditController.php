@@ -50,7 +50,7 @@ class XenditController extends Controller
             if($header == env('XENDIT_CALLBACK_TOKEN')) {
                 $response = $request->all();
                 if($response['status'] == 'SUCCEEDED') {
-                    $invoice = Invoice::where('xendit_invoice_id', $response['id'])->first();
+                    $invoice = Invoice::where('nomor_invoice', $response['reference_id'])->first();
                     if(isset($invoice)) {
                         $invoice->update([
                             'status' => 'PAID'
@@ -64,7 +64,10 @@ class XenditController extends Controller
                         ], 401);
                     }
                 } else {
-                    return redirect()->route('invoice.index', ['id' => $response['id']])->with('message', 'Pembayaran sedang Pending, harap tunggu sesaat atau hubungi Admin');
+                    return response()
+                            ->view(400)
+                            ->header('Content-Type', 'text/html')
+                            ->with('message', 'Pembayaran sedang Pending, harap tunggu sesaat atau hubungi Admin');
                 }
             } else {
                 return response()->json([
