@@ -118,7 +118,7 @@
                                 <div class="col-lg-12">
                                     <div class="main-border-button">
                                         <a href="#" id="cekStatus"
-                                            onclick="cekStatus('{{ $invoice->nomor_invoice }}')"><span id="loadingIcon"
+                                            onclick="simulasi('{{ $invoice->nomor_invoice }}')"><span id="loadingIcon"
                                                 style="display: none;"><i class="fas fa-spinner fa-spin"></i></span> Cek
                                             Status
                                             Pembayaran</a>
@@ -127,6 +127,26 @@
                                 <div class="col-lg-12">
                                     <div class="main-border-button">
                                         <a href="{{ $invoice->xendit_invoice_url }}" id="checkout">Checkout</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @elseif ($invoice->payment_type == 'QRIS')
+            <div class="game-details">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="main-border-button">
+                                        <a href="#" id="cekStatus"
+                                            onclick="simulate('{{ $invoice->nomor_invoice }}')"><span id="loadingIcon"
+                                                style="display: none;"><i class="fas fa-spinner fa-spin"></i></span>
+                                            Simulasi
+                                            Pembayaran</a>
                                     </div>
                                 </div>
                             </div>
@@ -174,8 +194,42 @@
                     $('#loadingIcon').hide();
                     $('#cekStatusButton').prop('disabled', false);
                 }
-            })
-        }
+            });
+        };
+
+        function simulate(id) {
+            $('#cekStatus').prop('disabled', true);
+            $('#loadingIcon').show();
+            $.ajax({
+                url: '/invoice/status/' + id,
+                type: 'POST',
+                data: {
+                    'amount': '{{ $invoice->total }}',
+                    '_token': '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    if (response.status == 'SUCCEEDED') {
+                        $('#stickyAlert').addClass('alert-success');
+                        showStatus('Pembayaran berhasil, harap tunggu kami akan memuat ulang halaman ini.');
+                        setTimeout(function() {
+                            location.reload();
+                        }, 3000);
+                    } else {
+                        $('#stickyAlert').addClass('alert-warning');
+                        showStatus('Pembayaran kamu belum berhasil.');
+                    }
+                },
+                error: function(xhr, error) {
+                    $('#stickyAlert').addClass('alert-danger');
+                    console.log(xhr);
+                    showStatus('Terdapat kesalahan, harap tunggu beberapa saat atau hubungi Customer Service');
+                },
+                complete: function() {
+                    $('#loadingIcon').hide();
+                    $('#cekStatusButton').prop('disabled', false);
+                }
+            });
+        };
     </script>
 @endsection
 

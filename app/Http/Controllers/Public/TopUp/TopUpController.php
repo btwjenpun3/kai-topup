@@ -140,6 +140,7 @@ class TopUpController extends Controller
                                 'type' => 'DYNAMIC',
                                 'currency' => 'IDR',
                                 'amount' => $total,
+                                'channel_code' => 'ID_DANA',
                                 'expires_at'=> $expiredAt
                             ]);
                             $game = Game::where('slug', $request->slug)->first();

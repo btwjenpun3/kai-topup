@@ -26,7 +26,7 @@ class InvoiceController extends Controller
         try {            
             $data = Invoice::where('nomor_invoice', $request->id)->first();
             if($data->payment_type == 'EWALLET') {
-                $response = Http::withHeaders([
+                $response = Http::withHeaders([                    
                     'Authorization' => 'Basic ' . base64_encode(env('XENDIT_SECRET_KEY') . ':'),
                 ])->get('https://api.xendit.co/ewallets/charges/' . $data->xendit_invoice_id);
                 if($response['status'] == 'SUCCEEDED') {
@@ -37,6 +37,19 @@ class InvoiceController extends Controller
                 return response()->json([
                     'status' => $response['status']
                 ]); 
+            } elseif($data->payment_type == 'QRIS') {
+                $response = Http::withHeaders([   
+                    'api-version' => '2022-07-31',
+                    'Content-Type' => 'application/json',                 
+                    'Authorization' => 'Basic ' . base64_encode(env('XENDIT_SECRET_KEY') . ':'),
+                ])->post('https://api.xendit.co/qr_codes/'.$data->xendit_invoice_id.'/payments/simulate', [
+                    'amount' => $data->total
+                ]);
+                if($response['status'] == 'SUCCEEDED') {
+                    $data->update([
+                        'status' => 'PAID'
+                    ]);
+                }
             }  
         } catch (\Exception $e) {
 
