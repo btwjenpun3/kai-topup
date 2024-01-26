@@ -43,7 +43,7 @@ class InvoiceController extends Controller
                     'Content-Type' => 'application/json',                 
                     'Authorization' => 'Basic ' . base64_encode(env('XENDIT_SECRET_KEY') . ':'),
                 ])->post('https://api.xendit.co/qr_codes/'.$data->xendit_invoice_id.'/payments/simulate', [
-                    'amount' => '2293'
+                    'amount' => $data->total
                 ]);
                 return response()->json($response->body());
             }  
