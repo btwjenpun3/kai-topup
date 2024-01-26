@@ -204,7 +204,7 @@
                 url: '/invoice/status/' + id,
                 type: 'POST',
                 data: {
-                    'amount': '{{ $invoice->total }}',
+                    'amount': {{ intval($invoice->total) }},
                     '_token': '{{ csrf_token() }}'
                 },
                 success: function(response) {
