@@ -45,11 +45,7 @@ class InvoiceController extends Controller
                 ])->post('https://api.xendit.co/qr_codes/'.$data->xendit_invoice_id.'/payments/simulate', [
                     'amount' => $data->total
                 ]);
-                if($response['status'] == 'SUCCEEDED') {
-                    $data->update([
-                        'status' => 'PAID'
-                    ]);
-                }
+                return response()->json($response->body());
             }  
         } catch (\Exception $e) {
 

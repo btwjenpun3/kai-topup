@@ -209,12 +209,14 @@
                 },
                 success: function(response) {
                     if (response.status == 'SUCCEEDED') {
+                        console.log(response)
                         $('#stickyAlert').addClass('alert-success');
                         showStatus('Pembayaran berhasil, harap tunggu kami akan memuat ulang halaman ini.');
                         setTimeout(function() {
                             location.reload();
                         }, 3000);
                     } else {
+                        console.log(response)
                         $('#stickyAlert').addClass('alert-warning');
                         showStatus('Pembayaran kamu belum berhasil.');
                     }
