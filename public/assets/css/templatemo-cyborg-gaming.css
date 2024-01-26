@@ -1336,6 +1336,14 @@ Game Details Style
 --------------------------------------------- 
 */
 
+.qr .content {
+  margin-top:60px;
+  border-radius: 23px;
+  padding: 30px;
+  background-color: #1f2122;
+}
+
+
 .game-details h2 {
   font-size: 45px;
   text-transform: uppercase;

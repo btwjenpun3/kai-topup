@@ -20,14 +20,14 @@ class TestingController extends Controller
     {        
         try {        
             $slug = 'mobile-legend';    
-            $price = '21500';
+            $price = '16500';
             $itemName = 'Diamond 500';
             $userId = '123';
             $serverId = '123';
             $itemId = '1';
             $paymentType = 'EWALLET';
             $checkoutMethod = 'ONE_TIME_PAYMENT';
-            $paymentMethod = 'ID_SHOPEEPAY';
+            $paymentMethod = 'ID_ASTRAPAY';
                 /**
                  * Validasi terlebih dahulu apakah itemId dan itemPrice cocok dengan Database
                  */
@@ -47,7 +47,17 @@ class TestingController extends Controller
                         } elseif ($paymentMethod == 'ID_OVO') {
                             $adminFee = $price * (4 / 100);
                             $total = $price + $adminFee;
+                        } elseif ($paymentMethod == 'ID_LINKAJA') {
+                            $adminFee = $price * (4 / 100);
+                            $total = round($price + $adminFee);
+                        } elseif ($paymentMethod == 'ID_ASTRAPAY') {
+                            $adminFee = $price * (2 / 100);
+                            $total = round($price + $adminFee);
                         }
+
+                        $currentTime = now();
+                        $expiredTime = $currentTime->addDay(1);
+                        $expiredAt = $expiredTime->format('Y-m-d\TH:i:s.u\Z');
                         /**
                          * Ini bagian untuk pembuatan nomor Invoice
                          */
@@ -61,22 +71,16 @@ class TestingController extends Controller
                          */
                         if($paymentType == 'EWALLET') {
                             $response = Http::withHeaders([
+                                'api-version' => '2022-07-31',
                                 'Content-Type' => 'application/json',
                                 'Authorization' => 'Basic ' . base64_encode(env('XENDIT_SECRET_KEY') . ':'),
-                            ])->post('https://api.xendit.co/ewallets/charges', [
+                            ])->post('https://api.xendit.co/qr_codes', [
                                 'reference_id' => $invoiceNumber,
-                                'currency' => 'IDR',                                
+                                'type' => 'DYNAMIC',
+                                'currency' => 'IDR',
                                 'amount' => $total,
-                                'checkout_method' => $checkoutMethod,
-                                'channel_code' => $paymentMethod,
-                                'channel_properties' => [
-                                    'success_redirect_url' => route('invoice.index', ['id' => $invoiceNumber]),
-                                ],
-                                'metadata' => [
-                                    'branch_area' => 'PLUIT',
-                                    'branch_city' => 'JAKARTA',
-                                ],
-                            ]);                          
+                                'expires_at'=> $expiredAt
+                            ]);                        
                              
                             return view('pages.private.test.index', [
                                 'response' => $response

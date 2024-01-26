@@ -19,10 +19,13 @@ return new class extends Migration
             $table->string('user_id')->nullable();
             $table->string('server_id')->nullable();
             $table->string('xendit_invoice_id');            
-            $table->string('xendit_invoice_url');
+            $table->string('xendit_invoice_url')->nullable();
+            $table->string('xendit_qr_string')->nullable();
+            $table->string('payment_type');
             $table->string('payment_method');
             $table->integer('total');
             $table->string('status');
+            $table->string('expired_at')->nullable();
             $table->timestamps();
         });
     }

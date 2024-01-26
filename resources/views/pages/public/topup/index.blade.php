@@ -103,24 +103,51 @@
                                     <h4>DANA</h4>
                                     <p>Biaya Admin 2%</p>
                                     <input id="ID_DANA" type="hidden" value="ID_DANA">
+                                    <input class="getPaymentType" type="hidden" value="EWALLET">
                                 </div>
                             </div>
                             <div class="col-lg-2 col-sm-6 col-md-4 col-6">
                                 <div class="item payment text-center clickable-payment">
                                     <img src="{{ asset(Storage::url('/payment/shopeepay.webp')) }}">
                                     <h4>Shopee Pay</h4>
-                                    <p>Biaya Admin 4.5%</p>
+                                    <p>Biaya Admin 4%</p>
                                     <input id="ID_SHOPEEPAY" type="hidden" value="ID_SHOPEEPAY">
+                                    <input class="getPaymentType" type="hidden" value="EWALLET">
                                 </div>
                             </div>
-                            {{-- <div class="col-lg-2 col-sm-6 col-md-4 col-6">
+                            <div class="col-lg-2 col-sm-6 col-md-4 col-6">
                                 <div class="item payment text-center clickable-payment">
-                                    <img src="{{ asset(Storage::url('/payment/ovo.webp')) }}">
-                                    <h4>OVO</h4>
+                                    <img src="{{ asset(Storage::url('/payment/linkaja.webp')) }}">
+                                    <h4>LinkAja</h4>
                                     <p>Biaya Admin 4%</p>
-                                    <input id="ID_OVO" type="hidden" value="ID_OVO">
+                                    <input id="ID_LINKAJA" type="hidden" value="ID_LINKAJA">
+                                    <input class="getPaymentType" type="hidden" value="EWALLET">
                                 </div>
-                            </div> --}}
+                            </div>
+                            <div class="col-lg-2 col-sm-6 col-md-4 col-6">
+                                <div class="item payment text-center clickable-payment">
+                                    <img src="{{ asset(Storage::url('/payment/astrapay.webp')) }}">
+                                    <h4>AstraPay</h4>
+                                    <p>Biaya Admin 2%</p>
+                                    <input id="ID_ASTRAPAY" type="hidden" value="ID_ASTRAPAY">
+                                    <input class="getPaymentType" type="hidden" value="EWALLET">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-lg-2 col-sm-6 col-md-4 col-6">
+                                <div class="item payment text-center clickable-payment">
+                                    <img src="{{ asset(Storage::url('/payment/qris.webp')) }}">
+                                    <h4>QRIS</h4>
+                                    <p>Biaya Admin 0.8%</p>
+                                    <input id="ID_QRIS" type="hidden" value="QRIS">
+                                    <input class="getPaymentType" type="hidden" value="QRIS">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -156,6 +183,7 @@
                     <!-- Tampilkan data item, harga, dan form user id dan server id di sini -->
                     <p><strong>Nama Item:</strong> <span id="itemName"></span></p>
                     <p><strong>Harga:</strong> <span id="itemPrice"></span></p>
+                    <p><strong>Tipe Pembayaran:</strong> <span id="paymentType"></span></p>
                     <p><strong>Metode Pembayaran:</strong> <span id="paymentMethod"></span></p>
                     <p><strong>User ID:</strong> <span id="userId"></span></p>
                     <p><strong>Server ID:</strong> <span id="serverId"></span></p>
@@ -203,6 +231,7 @@
                 $('.clickable-payment').removeClass('clicked');
                 $(item).addClass('clicked');
                 getPaymentMethodValue = $(item).find('input[type="hidden"]').val();
+                paymentTypeValue = $(item).find('.getPaymentType').val();
             }
 
             $('.clickable-payment').click(function() {
@@ -227,6 +256,7 @@
                     $('#itemId').val(selectedItemId);
                     $('#userId').text($('#userIdInput').val());
                     $('#serverId').text($('#serverIdInput').val());
+                    $('#paymentType').text(paymentTypeValue);
                     $('#paymentMethod').text(getPaymentMethodValue);
 
                     // Tampilkan modal
@@ -247,7 +277,7 @@
                         userId: $('#userId').text(),
                         serverId: $('#serverId').text(),
                         itemId: selectedItemId,
-                        paymentType: 'EWALLET',
+                        paymentType: paymentTypeValue,
                         paymentMethod: getPaymentMethodValue,
                         _token: '{{ csrf_token() }}'
                     },

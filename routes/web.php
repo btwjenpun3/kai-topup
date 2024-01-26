@@ -41,6 +41,7 @@ Route::prefix('/invoice')
     ->controller(InvoiceController::class)
     ->group(function () {
         Route::get('/{id}', 'index')->name('index');
+        Route::get('/status/{id}', 'statusPembayaran')->name('status');
     });
 
 /**
