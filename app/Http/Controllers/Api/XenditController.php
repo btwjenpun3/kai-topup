@@ -84,22 +84,17 @@ class XenditController extends Controller
             $header = $request->header('x-callback-token');
             if($header == env('XENDIT_CALLBACK_TOKEN')) {
                 $response = $request->all();
-                if($response['status'] == "SUCCEEDED") {
-                    $invoice = Invoice::where('xendit_invoice_id', $response['qr_id'])->first();
-                    if(isset($invoice)) {
+                if($response['data']['status'] == "SUCCEEDED") {
+                    $invoice = Invoice::where('xendit_invoice_id', $response['data']['qr_id'])->first();
                         $invoice->update([
                             'status' => 'PAID'
                         ]);
                         return response()->json([
-                            'success' => 'Invoice' . $response['reference_id'] . ' successfully paid'
+                            'success' => 'Invoice' . $response['data']['reference_id'] . ' successfully paid'
                         ], 200);
-                    } else {
-                        return response()->json([
-                            'error' => 'Invoice not found'
-                        ], 401);
-                    }
+                    
                 } else {
-                    return redirect()->route('invoice.index', ['id' => $response['reference_id']])->with(['message' => 'Pembayaran kamu sedang Pending. Harap menunggu beberapa saat dan refresh halaman ini atau hubungi Admin']);
+                    return redirect()->route('invoice.index', ['id' => $response['data']['reference_id']])->with(['message' => 'Pembayaran kamu sedang Pending. Harap menunggu beberapa saat dan refresh halaman ini atau hubungi Admin']);
                 }
             } else {
                 return response()->json([
