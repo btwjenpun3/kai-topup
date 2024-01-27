@@ -68,7 +68,7 @@
                                     <h6>Tipe Pembayaran</h6>
                                 </td>
                                 <td>
-                                    <h6>{{ $invoice->payment_type }}</h6>
+                                    <h6>{{ $invoice->payment->payment_type }}</h6>
                                 </td>
                                 <td></td>
                             </tr>
@@ -77,7 +77,7 @@
                                     <h6>Metode Pembayaran</h6>
                                 </td>
                                 <td>
-                                    <h6>{{ $invoice->payment_method }}</h6>
+                                    <h6>{{ $invoice->payment->payment_method }}</h6>
                                 </td>
                                 <td></td>
                             </tr>
@@ -112,7 +112,7 @@
     </div>
     @if ($invoice->status == 'PAID')
     @else
-        @if ($invoice->payment_type == 'EWALLET')
+        @if ($invoice->payment->payment_type == 'EWALLET')
             <div class="game-details">
                 <div class="row">
                     <div class="col-lg-12">

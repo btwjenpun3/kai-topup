@@ -4,6 +4,7 @@ use App\Http\Controllers\Private\Dashboard\DashboardContoller;
 use App\Http\Controllers\Private\Invoice\InvoiceRealmController;
 use App\Http\Controllers\Private\ListGames\ListGamesController;
 use App\Http\Controllers\Private\ListGames\SetHargaController;
+use App\Http\Controllers\Private\Payment\PaymentController;
 use App\Http\Controllers\Private\Testing\TestingController;
 use App\Http\Controllers\Public\Home\HomeController;
 use App\Http\Controllers\Public\Invoice\InvoiceController;
@@ -78,6 +79,13 @@ Route::prefix('/realm/set-harga')
 Route::prefix('/realm/invoice')
     ->name('invoice.realm.')
     ->controller(InvoiceRealmController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+    });
+
+Route::prefix('/realm/payment')
+    ->name('payment.')
+    ->controller(PaymentController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
     });

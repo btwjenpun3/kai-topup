@@ -15,14 +15,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('game_id')->constrained();
             $table->foreignId('harga_id')->constrained();
+            $table->foreignId('payment_id')->constrained();
             $table->string('nomor_invoice')->unique();
             $table->string('user_id')->nullable();
             $table->string('server_id')->nullable();
             $table->string('xendit_invoice_id');            
             $table->string('xendit_invoice_url')->nullable();
             $table->string('xendit_qr_string')->nullable();
-            $table->string('payment_type');
-            $table->string('payment_method');
             $table->integer('total');
             $table->string('status');
             $table->string('expired_at')->nullable();

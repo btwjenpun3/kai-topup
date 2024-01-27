@@ -25,7 +25,7 @@ class InvoiceController extends Controller
     {
         try {            
             $data = Invoice::where('nomor_invoice', $request->id)->first();
-            if($data->payment_type == 'EWALLET') {
+            if($data->payment->payment_type == 'EWALLET') {
                 $response = Http::withHeaders([                    
                     'Authorization' => 'Basic ' . base64_encode(env('XENDIT_SECRET_KEY') . ':'),
                 ])->get('https://api.xendit.co/ewallets/charges/' . $data->xendit_invoice_id);

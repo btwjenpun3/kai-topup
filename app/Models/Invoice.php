@@ -20,4 +20,9 @@ class Invoice extends Model
     {
         return $this->belongsTo(Game::class);
     }
+
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class);
+    }
 }

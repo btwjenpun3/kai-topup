@@ -97,57 +97,36 @@
                 <div class="col-md-12">
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="col-lg-2 col-sm-6 col-md-4 col-6">
-                                <div class="item payment text-center clickable-payment">
-                                    <img src="{{ asset(Storage::url('/payment/dana.webp')) }}">
-                                    <h4>DANA</h4>
-                                    <p>Biaya Admin 2%</p>
-                                    <input id="ID_DANA" type="hidden" value="ID_DANA">
-                                    <input class="getPaymentType" type="hidden" value="EWALLET">
+                            @foreach ($ewallets as $ewallet)
+                                <div class="col-lg-2 col-sm-6 col-md-4 col-6">
+                                    <div class="item payment text-center clickable-payment">
+                                        <img src="{{ asset(Storage::url($ewallet->image)) }}">
+                                        <h4>{{ $ewallet->name }}</h4>
+                                        <p>Biaya Admin {{ $ewallet->admin_fee }}%</p>
+                                        <input id="{{ $ewallet->payment_method }}" type="hidden"
+                                            value="{{ $ewallet->payment_method }}">
+                                        <input class="getPaymentType" type="hidden" value="{{ $ewallet->payment_type }}">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-2 col-sm-6 col-md-4 col-6">
-                                <div class="item payment text-center clickable-payment">
-                                    <img src="{{ asset(Storage::url('/payment/shopeepay.webp')) }}">
-                                    <h4>Shopee Pay</h4>
-                                    <p>Biaya Admin 4%</p>
-                                    <input id="ID_SHOPEEPAY" type="hidden" value="ID_SHOPEEPAY">
-                                    <input class="getPaymentType" type="hidden" value="EWALLET">
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-sm-6 col-md-4 col-6">
-                                <div class="item payment text-center clickable-payment">
-                                    <img src="{{ asset(Storage::url('/payment/linkaja.webp')) }}">
-                                    <h4>LinkAja</h4>
-                                    <p>Biaya Admin 4%</p>
-                                    <input id="ID_LINKAJA" type="hidden" value="ID_LINKAJA">
-                                    <input class="getPaymentType" type="hidden" value="EWALLET">
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-sm-6 col-md-4 col-6">
-                                <div class="item payment text-center clickable-payment">
-                                    <img src="{{ asset(Storage::url('/payment/astrapay.webp')) }}">
-                                    <h4>AstraPay</h4>
-                                    <p>Biaya Admin 2%</p>
-                                    <input id="ID_ASTRAPAY" type="hidden" value="ID_ASTRAPAY">
-                                    <input class="getPaymentType" type="hidden" value="EWALLET">
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="col-lg-2 col-sm-6 col-md-4 col-6">
-                                <div class="item payment text-center clickable-payment">
-                                    <img src="{{ asset(Storage::url('/payment/qris.webp')) }}">
-                                    <h4>QRIS</h4>
-                                    <p>Biaya Admin 0.8%</p>
-                                    <input id="ID_QRIS" type="hidden" value="QRIS">
-                                    <input class="getPaymentType" type="hidden" value="QRIS">
+                            @foreach ($qris as $q)
+                                <div class="col-lg-2 col-sm-6 col-md-4 col-6">
+                                    <div class="item payment text-center clickable-payment">
+                                        <img src="{{ asset(Storage::url($q->image)) }}">
+                                        <h4>{{ $q->name }}</h4>
+                                        <p>Biaya Admin {{ $q->admin_fee }}%</p>
+                                        <input id="{{ $q->payment_method }}" type="hidden"
+                                            value="{{ $q->payment_method }}">
+                                        <input class="getPaymentType" type="hidden" value="{{ $q->payment_type }}">
+                                    </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

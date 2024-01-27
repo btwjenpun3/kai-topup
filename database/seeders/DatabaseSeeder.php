@@ -42,5 +42,50 @@ class DatabaseSeeder extends Seeder
             'profit' => 25,
             'status' => 1
         ]); 
+
+        \App\Models\Payment::create([
+            'name' => 'DANA',
+            'payment_type' => 'EWALLET',
+            'payment_method' => 'ID_DANA',
+            'admin_fee' => 2,
+            'image' => 'payment/dana.webp',
+            'status' => 1
+        ]); 
+
+        \App\Models\Payment::create([
+            'name' => 'Shopee Pay',
+            'payment_type' => 'EWALLET',
+            'payment_method' => 'ID_SHOPEEPAY',
+            'admin_fee' => 4,
+            'image' => 'payment/shopeepay.webp',
+            'status' => 1
+        ]);
+
+        \App\Models\Payment::create([
+            'name' => 'LinkAja',
+            'payment_type' => 'EWALLET',
+            'payment_method' => 'ID_LINKAJA',
+            'admin_fee' => 4,
+            'image' => 'payment/linkaja.webp',
+            'status' => 1
+        ]);
+
+        \App\Models\Payment::create([
+            'name' => 'AstraPay',
+            'payment_type' => 'EWALLET',
+            'payment_method' => 'ID_ASTRAPAY',
+            'admin_fee' => 2,
+            'image' => 'payment/astrapay.webp',
+            'status' => 1
+        ]);
+
+        \App\Models\Payment::create([
+            'name' => 'QRIS',
+            'payment_type' => 'QRIS',
+            'payment_method' => 'QRIS',
+            'admin_fee' => 0.8,
+            'image' => 'payment/qris.webp',
+            'status' => 1
+        ]);
     }
 }
