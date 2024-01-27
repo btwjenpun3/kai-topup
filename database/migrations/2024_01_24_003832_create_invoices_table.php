@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('xendit_invoice_id');            
             $table->string('xendit_invoice_url')->nullable();
             $table->string('xendit_qr_string')->nullable();
+            $table->string('xendit_va_name')->nullable();
+            $table->string('xendit_va_number')->nullable();
             $table->integer('total');
             $table->string('status');
             $table->string('expired_at')->nullable();

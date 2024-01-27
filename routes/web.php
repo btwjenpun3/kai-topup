@@ -8,6 +8,7 @@ use App\Http\Controllers\Private\Payment\PaymentController;
 use App\Http\Controllers\Private\Testing\TestingController;
 use App\Http\Controllers\Public\Home\HomeController;
 use App\Http\Controllers\Public\Invoice\InvoiceController;
+use App\Http\Controllers\Public\Simulate\SimulateController;
 use App\Http\Controllers\Public\TopUp\TopUpController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,13 @@ Route::prefix('/invoice')
     ->group(function () {
         Route::get('/{id}', 'index')->name('index');
         Route::get('/status/{id}', 'statusPembayaran')->name('status');
+    });
+
+Route::prefix('/simulate')
+    ->name('simulate.')
+    ->controller(SimulateController::class)
+    ->group(function () {
+        Route::post('/va/{id}', 'simulateVa');
     });
 
 /**

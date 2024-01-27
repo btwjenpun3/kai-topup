@@ -36,7 +36,19 @@ class InvoiceController extends Controller
                 }
                 return response()->json([
                     'status' => $response['status']
-                ]); 
+                ], 200); 
+            } elseif($data->payment->payment_type == 'VA') {
+                $response = Http::withHeaders([                    
+                    'Authorization' => 'Basic ' . base64_encode(env('XENDIT_SECRET_KEY') . ':'),
+                ])->get('https://api.xendit.co/callback_virtual_accounts/' . $data->xendit_invoice_id);
+                if($response['status'] == 'ACTIVE') {
+                    $data->update([
+                        'status' => 'PAID'
+                    ]);
+                }
+                return response()->json([
+                    'status' => $response['status']
+                ], 200); 
             }  
         } catch (\Exception $e) {
 

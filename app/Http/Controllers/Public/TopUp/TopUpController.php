@@ -9,6 +9,7 @@ use App\Models\Game;
 use App\Models\Invoice;
 use App\Models\Harga;
 use App\Models\Payment;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 
 use function PHPSTORM_META\map;
@@ -23,6 +24,7 @@ class TopUpController extends Controller
             'harga' => $game->harga,
             'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
             'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+            'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
         ]);
     }
 
@@ -45,13 +47,19 @@ class TopUpController extends Controller
                 $data = Harga::where('id', $request->itemId)->first();
                 if($data) {
                     if($request->price == $data->harga_jual) {
-
+                        $game = $data->game->where('slug', $request->slug)->first();
+                        $payment = Payment::where('payment_method', $request->paymentMethod)->first();
                         /**
                          * Cek Pembayaran apa yang di gunakan. ini berguna untuk menentukan biaya Admin
                          */
-                        $payment = Payment::where('payment_method', $request->paymentMethod)->first();
-                        $adminFee = $data->harga_jual * ($payment->admin_fee / 100);
-                        $total = round($data->harga_jual + $adminFee);                        
+                        if ($payment->payment_type == 'EWALLET' || $payment->payment_type == 'QRIS') {
+                            $adminFee = $data->harga_jual * ($payment->admin_fee / 100);
+                            $total = round($data->harga_jual + $adminFee);
+                        } elseif ($payment->payment_type = 'VA') {
+                            $adminFee = $payment->admin_fee_fixed;
+                            $total = $data->harga_jual + $adminFee;
+                        }                        
+                                                    
                         /**
                          * Ini bagian untuk pembuatan nomor Invoice
                          */
@@ -99,12 +107,11 @@ class TopUpController extends Controller
                                 $invoice_url = $response['actions']['mobile_web_checkout_url'];
                             } elseif ($payment->payment_method == 'ID_ASTRAPAY') {
                                 $invoice_url = $response['actions']['mobile_web_checkout_url'];
-                            } 
-    
-                            $game = Game::where('slug', $request->slug)->first();
+                            }   
+                            
                             Invoice::create([
                                 'game_id' => $game->id,
-                                'harga_id' => $request->itemId, 
+                                'harga_id' => $data->id, 
                                 'payment_id' => $payment->id,                   
                                 'nomor_invoice' => $invoiceNumber,
                                 'user_id' => $request->userId,
@@ -129,10 +136,9 @@ class TopUpController extends Controller
                                 'channel_code' => 'ID_DANA',
                                 'expires_at'=> $expiredAt
                             ]);
-                            $game = Game::where('slug', $request->slug)->first();
                             Invoice::create([
                                 'game_id' => $game->id,
-                                'harga_id' => $request->itemId,   
+                                'harga_id' => $data->id,   
                                 'payment_id' => $payment->id,                 
                                 'nomor_invoice' => $invoiceNumber,
                                 'user_id' => $request->userId,
@@ -144,6 +150,39 @@ class TopUpController extends Controller
                                 'expired_at' => $expiredAt,
                             ]);
                             return response()->json(['redirect' => route('invoice.index', ['id' => $invoiceNumber])]);
+                        } elseif($payment->payment_type == 'VA') {
+                            if($data->harga_jual >= 10000) {
+                                $response = Http::withHeaders([
+                                    'Content-Type' => 'application/json',
+                                    'Authorization' => 'Basic ' . base64_encode(env('XENDIT_SECRET_KEY') . ':'),
+                                ])->post('https://api.xendit.co/callback_virtual_accounts', [
+                                    'external_id' => $invoiceNumber,
+                                    'bank_code' => $payment->payment_method,
+                                    'name' => 'Muhamad Helmi',
+                                    'is_closed' => true,
+                                    'expected_amount' => $total,
+                                    'expiration_date' => $expiredAt
+                                ]);                                
+                                Invoice::create([
+                                    'game_id' => $game->id,
+                                    'harga_id' => $data->id,   
+                                    'payment_id' => $payment->id,                 
+                                    'nomor_invoice' => $invoiceNumber,
+                                    'user_id' => $request->userId,
+                                    'server_id' => $request->serverId,
+                                    'xendit_invoice_id' => $response['id'],
+                                    'xendit_va_name' => $response['name'],
+                                    'xendit_va_number' => $response['account_number'],
+                                    'total' => $total,
+                                    'status' => 'PENDING',
+                                    'expired_at' => $expiredAt,
+                                ]);
+                                return response()->json(['redirect' => route('invoice.index', ['id' => $invoiceNumber])]);
+                            } else {
+                                return response()->json([
+                                    'unaccepted' => 'Minimal pembelian dengan Virtual Account adalah Rp. 10.000'
+                                ]);
+                            }                                                       
                         } else {
                             return response()->json([
                                 'unaccepted' => 'Tipe pembayaran tidak ditemukan.'
@@ -161,6 +200,7 @@ class TopUpController extends Controller
                 }
             }                
         } catch (\Exception $e) {
+            Log::channel('invoice')->error('Error occurred: ' . $e->getMessage());            
             return response()->json(['unaccepted' => 'Payment sedang Offline, silahkan pilih metode pembayaran yang lain']);
         }
     }

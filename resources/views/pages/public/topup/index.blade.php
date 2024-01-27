@@ -130,6 +130,24 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="row">
+                            @foreach ($vas as $va)
+                                <div class="col-lg-2 col-sm-6 col-md-4 col-6">
+                                    <div class="item payment text-center clickable-payment">
+                                        <img src="{{ asset(Storage::url($va->image)) }}">
+                                        <h4>{{ $va->name }}</h4>
+                                        <p>Biaya Admin Rp. {{ $va->admin_fee_fixed }}</p>
+                                        <input id="{{ $va->payment_method }}" type="hidden"
+                                            value="{{ $va->payment_method }}">
+                                        <input class="getPaymentType" type="hidden" value="{{ $va->payment_type }}">
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

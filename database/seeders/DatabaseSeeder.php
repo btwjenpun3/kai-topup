@@ -43,6 +43,17 @@ class DatabaseSeeder extends Seeder
             'status' => 1
         ]); 
 
+        \App\Models\Harga::create([
+            'game_id' => 1,
+            'nama_produk' => '100 (95+5) Diamonds',
+            'kode_produk' => '0003',
+            'gambar' => 'produk/wb9lgambXZ-diamond.webp',
+            'modal' => 12250,
+            'harga_jual' => 12275,
+            'profit' => 25,
+            'status' => 1
+        ]); 
+
         \App\Models\Payment::create([
             'name' => 'DANA',
             'payment_type' => 'EWALLET',
@@ -85,6 +96,51 @@ class DatabaseSeeder extends Seeder
             'payment_method' => 'QRIS',
             'admin_fee' => 0.8,
             'image' => 'payment/qris.webp',
+            'status' => 1
+        ]);
+
+        \App\Models\Payment::create([
+            'name' => 'VA BCA',
+            'payment_type' => 'VA',
+            'payment_method' => 'BCA',
+            'admin_fee_fixed' => 4000,
+            'image' => 'payment/bca.webp',
+            'status' => 1
+        ]);
+
+        \App\Models\Payment::create([
+            'name' => 'VA BNI',
+            'payment_type' => 'VA',
+            'payment_method' => 'BNI',
+            'admin_fee_fixed' => 4000,
+            'image' => 'payment/bni.webp',
+            'status' => 1
+        ]);
+
+        \App\Models\Payment::create([
+            'name' => 'VA BRI',
+            'payment_type' => 'VA',
+            'payment_method' => 'BRI',
+            'admin_fee_fixed' => 4000,
+            'image' => 'payment/bri.webp',
+            'status' => 1
+        ]);
+
+        \App\Models\Payment::create([
+            'name' => 'VA BJB',
+            'payment_type' => 'VA',
+            'payment_method' => 'BJB',
+            'admin_fee_fixed' => 4000,
+            'image' => 'payment/bjb.webp',
+            'status' => 1
+        ]);
+
+        \App\Models\Payment::create([
+            'name' => 'VA BSI',
+            'payment_type' => 'VA',
+            'payment_method' => 'BSI',
+            'admin_fee_fixed' => 4000,
+            'image' => 'payment/bsi.webp',
             'status' => 1
         ]);
     }

@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('payment_type');
             $table->string('payment_method');
-            $table->decimal('admin_fee');
+            $table->decimal('admin_fee')->nullable();
+            $table->integer('admin_fee_fixed')->nullable();
             $table->string('image');
             $table->boolean('status');
             $table->timestamps();

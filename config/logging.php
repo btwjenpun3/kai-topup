@@ -126,6 +126,11 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+        'invoice' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/invoice.log'),
+            'level' => 'error',
+        ],
     ],
 
 ];

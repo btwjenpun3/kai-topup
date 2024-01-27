@@ -192,10 +192,32 @@ p {
   overflow: hidden;
 }
 
+.main-status-button a {
+  font-size: 14px;
+  color: #35be40;
+  background-color: transparent;
+  border: 1px solid #35be40;
+  padding: 12px 30px;
+  display: inline-block;
+  border-radius: 25px;
+  font-weight: 400;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+}
+
 .main-border-button a:hover {
   border-color: #fff;
   background-color: #fff;
   color: #e75e8d;
+}
+
+.main-status-button a:hover {
+  border-color: #fff;
+  background-color: #fff;
+  color: #21a041;
 }
 
 .border-no-active a {
@@ -1437,6 +1459,15 @@ Game Details Style
   width: 100%;
 } 
 
+.game-details .main-status-button {
+  margin-top: 10px;
+}
+
+.game-details .main-status-button a {
+  text-align: center;
+  width: 100%;
+} 
+
 /* 
 ---------------------------------------------
 Other Related Style
@@ -1696,6 +1727,11 @@ body {
   .main-banner h4 {
     font-size: 35px;
   }
+
+  .va-info {
+    margin-bottom: 60px;
+  }
+
   .gaming-library .item ul li,
   .gaming-library .item ul li:first-child,
   .gaming-library .item ul li:last-child {
@@ -1754,6 +1790,10 @@ body {
   .featured-games {
     margin-bottom: 60px;
   }
+
+  .va-info {
+    margin-bottom: 60px;
+  }
   .start-stream .item {
     margin: 15px 0px;
   }
@@ -1777,4 +1817,109 @@ body {
   .gaming-library .item ul li {
     width: 16%;
   }
+}
+
+.va-info {
+  margin-top: 30px;
+  border-radius: 23px;
+  background-color: #1f2122;
+  padding: 30px;
+}
+
+.va-info .item .thumb {
+  position: relative;
+  overflow: hidden;
+}
+
+.va-info .item .thumb .hover-effect {
+  position: absolute;
+  bottom: -100px;
+  text-align: center;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .4s;
+}
+
+.va-info .item .thumb:hover .hover-effect {
+  opacity: 1;
+  visibility: visible;
+  bottom: 15px;
+}
+
+.va-info .item .thumb .hover-effect h6 {
+  background-color: rgba(31,33,34,0.95);
+  display: inline-block;
+  color: #ec6090;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: 25px;
+}
+
+.va-info .item img {
+  border-radius: 23px;
+}
+
+.va-info .item h4 {
+  font-size: 15px;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  display: inline-block;
+}
+
+.va-info .item span {
+  color: #666;
+  display: block;
+  margin-top: 7px;
+  font-weight: 400;
+}
+
+.va-info .item ul {
+  float: right;
+  margin-top: 20px;
+}
+
+.va-info .item ul li {
+  text-align: right;
+  color: #fff;
+  font-size: 14px;
+}
+
+.va-info .item ul li:first-child i {
+  color: yellow;
+}
+
+.va-info .item ul li:last-child i {
+  color: #ec6090;
+}
+
+.va-info .owl-nav {
+  position: absolute;
+  margin: 0 auto;
+  top: -70px;
+  right: 0;
+}
+
+.va-info .owl-nav .owl-prev {
+  margin-right: 2.5px;
+}
+
+.va-info .owl-nav .owl-next {
+  margin-left: 2.5px;
+}
+
+.va-info .owl-nav .owl-prev span,
+.va-info .owl-nav .owl-next span  {
+  font-size: 36px;
+  display: inline-block;
+  color: #666;
+  opacity: 1;
+  transition: all .3s;
+}
+
+.va-info .owl-nav .owl-prev span:hover,
+.va-info .owl-nav .owl-next span:hover {
+  opacity: 1;
+  color: #ec6090;
 }
