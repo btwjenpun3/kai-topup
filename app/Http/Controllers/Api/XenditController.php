@@ -121,7 +121,7 @@ class XenditController extends Controller
                 $response = $request->all();
                 $invoice = Invoice::where('xendit_invoice_id', $response['id'])->first();
                 if(isset($invoice)) {
-                    if($response['external_id'] == $invoice->nomor_invoice && $response['amount'] == $invoice->total && $response['bank_code'] == $invoice->payment->payment_method) {
+                    if($response['external_id'] == $invoice->nomor_invoice) {
                         $invoice->update([
                             'status' => 'PAID'
                         ]);
