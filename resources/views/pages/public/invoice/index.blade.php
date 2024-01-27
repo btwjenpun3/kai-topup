@@ -60,7 +60,7 @@
                                     <h6>{{ $invoice->harga->nama_produk }}</h6>
                                 </td>
                                 <td class="text-end">
-                                    <h6>Rp. {{ number_format($invoice->total, 0, ',', '.') }}</h6>
+                                    <h6>Rp. {{ number_format($invoice->harga->harga_jual, 0, ',', '.') }}</h6>
                                 </td>
                             </tr>
                             <tr>
@@ -80,6 +80,15 @@
                                     <h6>{{ $invoice->payment->payment_method }}</h6>
                                 </td>
                                 <td></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h6>Admin Fee</h6>
+                                </td>
+                                <td></td>
+                                <td class="text-end">
+                                    <h6>{{ $invoice->payment->admin_fee }}%</h6>
+                                </td>
                             </tr>
                             <tr>
                                 <td>

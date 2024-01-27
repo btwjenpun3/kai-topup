@@ -21,12 +21,8 @@ class TopUpController extends Controller
         return view('pages.public.topup.index', [
             'game' => $game,
             'harga' => $game->harga,
-            'ewallets' => Payment::where('status', 1)
-                                ->where('payment_type', 'EWALLET')
-                                ->get(),
-            'qris' => Payment::where('status', 1)
-                            ->where('payment_type', 'QRIS')
-                            ->get(),
+            'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+            'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
         ]);
     }
 

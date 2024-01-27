@@ -15,4 +15,44 @@ class PaymentController extends Controller
             'datas' => $data
         ]);
     }
+
+    public function show(Request $request)
+    {
+        try {
+            $data = Payment::where('id', $request->id)->first();
+            return response()->json($data);
+        } catch (\Exception $e) {
+
+        }
+    }
+
+    public function update(Request $request)
+    {
+        try {
+            $validation = $request->validate([
+                'admin_fee' => 'required',
+                'status' => 'required|boolean'
+            ]);
+            if($validation) {
+                $data = Payment::where('id', $request->id)->first();
+                if($data) {
+                    $data->update([
+                        'admin_fee' => $request->admin_fee,
+                        'status' => $request->status
+                    ]);
+                    return response()->json([
+                        'success' => 'Payment' . $data->name . ' berhasil di update.'
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'error' => 'Payment' . $data->name . ' gagal di update.'
+                    ]);
+                }
+            }            
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
 }

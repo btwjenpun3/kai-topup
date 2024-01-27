@@ -88,6 +88,8 @@ Route::prefix('/realm/payment')
     ->controller(PaymentController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/show/{id}', 'show')->name('show');
+        Route::post('/update/{id}', 'update')->name('update');
     });
 
 Route::prefix('/realm/testing')

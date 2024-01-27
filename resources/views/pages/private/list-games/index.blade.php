@@ -75,8 +75,6 @@
                                                     <a class="dropdown-item"
                                                         href="{{ route('harga.index', ['id' => $game->id]) }}"> Set Harga
                                                     </a>
-                                                    <a class="dropdown-item" href="#"> Edit </a>
-                                                    <a class="dropdown-item text-danger" href="#"> Hapus </a>
                                                 </div>
                                             </div>
                                         </td>
