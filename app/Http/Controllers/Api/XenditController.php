@@ -124,7 +124,8 @@ class XenditController extends Controller
                     if($response['external_id'] == $invoice->nomor_invoice) {
                         $invoice->update([
                             'xendit_va_payment_id' => $response['payment_id'],
-                            'status' => 'PAID'
+                            'status' => 'PAID',
+                            'webhook_id' => $request->header('webhook-id')
                         ]);
                         return response()->json([
                             'success' => 'Invoice' . $response['data']['reference_id'] . ' successfully paid'
