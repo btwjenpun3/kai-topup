@@ -24,8 +24,10 @@ return new class extends Migration
             $table->string('xendit_qr_string')->nullable();
             $table->string('xendit_va_name')->nullable();
             $table->string('xendit_va_number')->nullable();
+            $table->string('xendit_va_payment_id')->nullable();
             $table->integer('total');
             $table->string('status');
+            $table->string('webhook_id')->nullable()->unique();
             $table->string('expired_at')->nullable();
             $table->timestamps();
         });

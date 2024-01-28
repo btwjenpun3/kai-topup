@@ -251,7 +251,7 @@
                         }, 3000);
                     } else {
                         $('#stickyAlert').addClass('alert-warning');
-                        showStatus(response);
+                        showStatus('Pembayaran belum berhasil');
                     }
                 },
                 error: function(xhr, error) {
@@ -299,7 +299,7 @@
             left: 50%;
             transform: translateX(-50%);
             z-index: 9999;
-            width: 450px;
+            max-width: 450px;
             /* Atur lebar sesuai kebutuhan Anda */
         }
     </style>

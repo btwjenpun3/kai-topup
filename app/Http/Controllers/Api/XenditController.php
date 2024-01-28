@@ -123,6 +123,7 @@ class XenditController extends Controller
                 if(isset($invoice)) {
                     if($response['external_id'] == $invoice->nomor_invoice) {
                         $invoice->update([
+                            'xendit_va_payment_id' => $response['payment_id'],
                             'status' => 'PAID'
                         ]);
                         return response()->json([

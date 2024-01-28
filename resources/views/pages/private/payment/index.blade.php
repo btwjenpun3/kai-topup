@@ -30,7 +30,8 @@
                                 <th>Nama</th>
                                 <th>Tipe Pembayaran</th>
                                 <th>Metode Pembayaran</th>
-                                <th>Biaya Admin</th>
+                                <th>Biaya Admin (%)</th>
+                                <th>Biaya Admin (Rp.)</th>
                                 <th>Status</th>
                                 <th class="w-1"></th>
                             </tr>
@@ -42,7 +43,16 @@
                                     <td><b>{{ $data->name }}</b></td>
                                     <td>{{ $data->payment_type }}</td>
                                     <td>{{ $data->payment_method }}</td>
-                                    <td>{{ $data->admin_fee }}%</td>
+                                    @if (isset($data->admin_fee))
+                                        <td>{{ $data->admin_fee }}%</td>
+                                    @else
+                                        <td>-</td>
+                                    @endif
+                                    @if (isset($data->admin_fee_fixed))
+                                        <td>Rp. {{ number_format($data->admin_fee_fixed, 0, ',', '.') }}</td>
+                                    @else
+                                        <td>-</td>
+                                    @endif
                                     @if ($data->status == 0)
                                         <td class="text-warning"><span class="badge bg-danger me-1"></span>TIDAK AKTIF</td>
                                     @elseif ($data->status == 1)
@@ -76,12 +86,21 @@
                         </div>
                     </div>
                     <div class="row mb-3 align-items-end">
-                        <label class="form-label" for="admin_fee">Biaya Admin</label>
+                        <label class="form-label" for="admin_fee">Biaya Admin (%)</label>
                         <div class="input-group mb-3">
                             <input type="text" name="admin_fee" id="admin_fee" class="form-control" />
                             <div class="input-group-append">
                                 <div class="input-group-text">%</div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3 align-items-end">
+                        <label class="form-label" for="admin_fee_fixed">Biaya Admin (Rp.)</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Rp.</div>
+                            </div>
+                            <input type="text" name="admin_fee_fixed" id="admin_fee_fixed" class="form-control" />
                         </div>
                     </div>
                     <div class="row mb-3 align-items-end">
@@ -115,6 +134,7 @@
                 success: function(response) {
                     document.getElementById('name').value = response.name;
                     document.getElementById('admin_fee').value = response.admin_fee;
+                    document.getElementById('admin_fee_fixed').value = response.admin_fee_fixed;
                     document.getElementById('status').value = response.status;
                 },
                 error: function(xhr, error, status) {}
@@ -128,6 +148,7 @@
                 data: {
                     name: $('#name').val(),
                     admin_fee: $('#admin_fee').val(),
+                    admin_fee_fixed: $('#admin_fee_fixed').val(),
                     status: $('#status').val(),
                     _token: '{{ csrf_token() }}'
                 },

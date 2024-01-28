@@ -135,7 +135,7 @@ body .page-content {
 }
 
 p {
-  font-size: 15px;
+  font-size: 12px;
   color: #666;
   line-height: 30px;
   margin-bottom: 0px;
@@ -418,7 +418,7 @@ Header Style
 }
 
 .data-input input {
-  width: calc(100% - 45px);
+  width: 100%;
   height: 46px;
   background-color: #27292a;
   border-radius: 23px;
@@ -871,7 +871,7 @@ Most Popular Style
 
 .most-popular .item {
   background-color: #27292a;
-  padding: 30px 15px;
+  padding: 15px 15px;
   border-radius: 23px;
   margin-bottom: 30px;
 }
@@ -888,7 +888,7 @@ Most Popular Style
 }
 
 .most-popular .item h4 {
-  font-size: 15px;
+  font-size: 13px;
   margin-top: 20px;
   margin-bottom: 0px;
   display: inline-block;
@@ -1374,7 +1374,7 @@ Game Details Style
 }
 
 .game-details .content {
-  margin-top:60px;
+  margin-top:30px;
   margin-bottom:60px;
   border-radius: 23px;
   padding: 30px;
@@ -1788,7 +1788,7 @@ body {
     text-align: left;
   }
   .featured-games {
-    margin-bottom: 60px;
+    margin-bottom: 30px;
   }
 
   .va-info {
@@ -1922,4 +1922,134 @@ body {
 .va-info .owl-nav .owl-next span:hover {
   opacity: 1;
   color: #ec6090;
+}
+
+.products {
+  margin-top: 60px;
+  padding: 30px;
+  background-color: #1f2122;
+  border-radius: 23px;
+}
+
+.products .item {
+  background-color: #27292a;
+  padding: 15px 10px;
+  border-radius: 23px;
+  margin-bottom: 30px;
+}
+
+.products .item .item {
+  padding: 0px;
+  border-radius: 0px;
+  background-color: transparent;
+  margin-bottom: 0px;
+}
+
+.products .item img {
+  border-radius: 23px;
+  width: 12vh;
+}
+
+.products .item h4 {
+  font-size: 12px;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  display: inline-block;
+}
+
+.products .item span {
+  color: #e7e7e7;
+  font-size: 13px;
+  display: block;
+  margin-top: 7px;
+  font-weight: 400;
+}
+
+.products .item ul {
+  float: right;
+  margin-top: 20px;
+}
+
+.products .item ul li {
+  text-align: right;
+  color: #fff;
+  font-size: 14px;
+}
+
+.products .item ul li:first-child i {
+  color: yellow;
+}
+
+.products .item ul li:last-child i {
+  color: #ec6090;
+}
+
+.products .main-button {
+  text-align: center;
+  margin-bottom: -53px;
+}
+
+.payments {
+  margin-top: 60px;
+  padding: 30px;
+  background-color: #1f2122;
+  border-radius: 23px;
+}
+
+.payments .item {
+  background-color: #27292a;
+  padding: 15px 10px;
+  border-radius: 23px;
+  margin-bottom: 30px;
+}
+
+.payments .item .item {
+  padding: 0px;
+  border-radius: 0px;
+  background-color: transparent;
+  margin-bottom: 0px;
+}
+
+.payments .item img {
+  border-radius: 23px;
+  width: 12vh;
+}
+
+.payments .item h4 {
+  font-size: 12px;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  display: inline-block;
+}
+
+.payments .item span {
+  color: #e7e7e7;
+  font-size: 13px;
+  display: block;
+  margin-top: 7px;
+  font-weight: 400;
+}
+
+.payments .item ul {
+  float: right;
+  margin-top: 20px;
+}
+
+.payments .item ul li {
+  text-align: right;
+  color: #fff;
+  font-size: 14px;
+}
+
+.payments .item ul li:first-child i {
+  color: yellow;
+}
+
+.payments .item ul li:last-child i {
+  color: #ec6090;
+}
+
+.payments .main-button {
+  text-align: center;
+  margin-bottom: -53px;
 }

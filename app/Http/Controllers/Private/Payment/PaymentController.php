@@ -30,7 +30,6 @@ class PaymentController extends Controller
     {
         try {
             $validation = $request->validate([
-                'admin_fee' => 'required',
                 'status' => 'required|boolean'
             ]);
             if($validation) {
@@ -38,6 +37,7 @@ class PaymentController extends Controller
                 if($data) {
                     $data->update([
                         'admin_fee' => $request->admin_fee,
+                        'admin_fee_fixed' => $request->admin_fee_fixed,
                         'status' => $request->status
                     ]);
                     return response()->json([
