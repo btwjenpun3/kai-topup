@@ -14,6 +14,10 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
+        /**
+         * Product
+         */
+
         \App\Models\Game::create([
             'nama' => 'Mobile Legend',
             'kode' => 'ml',
@@ -53,6 +57,10 @@ class DatabaseSeeder extends Seeder
             'profit' => 25,
             'status' => 1
         ]); 
+
+        /**
+         * Payment
+         */
 
         \App\Models\Payment::create([
             'name' => 'DANA',
@@ -141,6 +149,24 @@ class DatabaseSeeder extends Seeder
             'payment_method' => 'BSI',
             'admin_fee_fixed' => 4440,
             'image' => 'payment/bsi.webp',
+            'status' => 1
+        ]);
+
+        \App\Models\Payment::create([
+            'name' => 'Alfamart',
+            'payment_type' => 'OUTLET',
+            'payment_method' => 'ALFAMART',
+            'admin_fee_fixed' => 5550,
+            'image' => 'payment/alfamart.webp',
+            'status' => 1
+        ]);
+
+        \App\Models\Payment::create([
+            'name' => 'Indomaret',
+            'payment_type' => 'OUTLET',
+            'payment_method' => 'INDOMARET',
+            'admin_fee_fixed' => 5550,
+            'image' => 'payment/indomaret.webp',
             'status' => 1
         ]);
     }

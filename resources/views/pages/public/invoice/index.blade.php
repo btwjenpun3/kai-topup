@@ -103,7 +103,7 @@
                                     <h6 class="text-success">Rp. {{ number_format($invoice->total, 0, ',', '.') }}</h6>
                                 </td>
                             </tr>
-                            @if (isset($invoice->xendit_qr_string))
+                            @if (isset($invoice->qr->xendit_qr_string))
                                 @if ($invoice->status == 'PAID')
                                 @else
                                     <tr>
@@ -112,7 +112,7 @@
                                         </td>
                                         <td></td>
                                         <td class="text-end">
-                                            {{ QrCode::size(200)->generate($invoice->xendit_qr_string) }}
+                                            {{ QrCode::size(200)->generate($invoice->qr->xendit_qr_string) }}
                                         </td>
                                     </tr>
                                 @endif
@@ -142,7 +142,7 @@
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="main-status-button">
-                                        <a href="{{ $invoice->xendit_invoice_url }}" id="checkout">Checkout</a>
+                                        <a href="{{ $invoice->ewallet->xendit_invoice_url }}" id="checkout">Checkout</a>
                                     </div>
                                 </div>
                             </div>
@@ -165,7 +165,7 @@
                                             </td>
                                             <td></td>
                                             <td class="text-end">
-                                                <h6 class="text-info">{{ $invoice->xendit_va_name }}</h6>
+                                                <h6 class="text-info">{{ $invoice->va->xendit_va_name }}</h6>
                                             </td>
                                         </tr>
                                         <tr>
@@ -183,7 +183,7 @@
                                             </td>
                                             <td></td>
                                             <td class="text-end">
-                                                <h6 class="text-info">{{ $invoice->xendit_va_number }}</h6>
+                                                <h6 class="text-info">{{ $invoice->va->xendit_va_number }}</h6>
                                             </td>
                                         </tr>
                                         <tr>

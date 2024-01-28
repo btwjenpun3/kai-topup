@@ -148,6 +148,25 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <div class="row">
+                            @foreach ($outlets as $outlet)
+                                <div class="col-lg-2 col-sm-6 col-md-4 col-6">
+                                    <div class="item payment text-center clickable-payment">
+                                        <img src="{{ asset(Storage::url($outlet->image)) }}">
+                                        <h4 class="text-sm">{{ $outlet->name }}</h4>
+                                        <p class="text-sm">Biaya Admin Rp. {{ $outlet->admin_fee_fixed }}</p>
+                                        <input id="{{ $outlet->payment_method }}" type="hidden"
+                                            value="{{ $outlet->payment_method }}">
+                                        <input class="getPaymentType" type="hidden"
+                                            value="{{ $outlet->payment_type }}">
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

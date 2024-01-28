@@ -13,18 +13,16 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
+            $table->string('nomor_invoice')->unique();
+            $table->string('user_id');
+            $table->string('server_id');
+            $table->string('xendit_invoice_id');
             $table->foreignId('game_id')->constrained();
             $table->foreignId('harga_id')->constrained();
-            $table->foreignId('payment_id')->constrained();
-            $table->string('nomor_invoice')->unique();
-            $table->string('user_id')->nullable();
-            $table->string('server_id')->nullable();
-            $table->string('xendit_invoice_id');            
-            $table->string('xendit_invoice_url')->nullable();
-            $table->string('xendit_qr_string')->nullable();
-            $table->string('xendit_va_name')->nullable();
-            $table->string('xendit_va_number')->nullable();
-            $table->string('xendit_va_payment_id')->nullable();
+            $table->foreignId('payment_id')->constrained();    
+            $table->foreignId('xendit_e_wallet_id')->nullable()->constrained(); 
+            $table->foreignId('xendit_qr_id')->nullable()->constrained();
+            $table->foreignId('xendit_va_id')->nullable()->constrained();
             $table->integer('total');
             $table->string('status');
             $table->string('webhook_id')->nullable()->unique();

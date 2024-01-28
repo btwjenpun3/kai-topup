@@ -9,6 +9,9 @@ use App\Models\Game;
 use App\Models\Invoice;
 use App\Models\Harga;
 use App\Models\Payment;
+use App\Models\XenditEWallet;
+use App\Models\XenditQr;
+use App\Models\XenditVa;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 
@@ -25,6 +28,7 @@ class TopUpController extends Controller
             'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
             'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
             'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+            'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
         ]);
     }
 
@@ -55,7 +59,7 @@ class TopUpController extends Controller
                         if ($payment->payment_type == 'EWALLET' || $payment->payment_type == 'QRIS') {
                             $adminFee = $data->harga_jual * ($payment->admin_fee / 100);
                             $total = round($data->harga_jual + $adminFee);
-                        } elseif ($payment->payment_type = 'VA') {
+                        } elseif ($payment->payment_type == 'VA' || $payment->payment_type == 'OUTLET') {
                             $adminFee = $payment->admin_fee_fixed;
                             $total = $data->harga_jual + $adminFee;
                         }                        
@@ -108,20 +112,22 @@ class TopUpController extends Controller
                             } elseif ($payment->payment_method == 'ID_ASTRAPAY') {
                                 $invoice_url = $response['actions']['mobile_web_checkout_url'];
                             }   
-                            
-                            Invoice::create([
-                                'game_id' => $game->id,
-                                'harga_id' => $data->id, 
-                                'payment_id' => $payment->id,                   
-                                'nomor_invoice' => $invoiceNumber,
+                            $eWalletCreate = XenditEWallet::create([
+                                'xendit_invoice_url' => $invoice_url
+                            ]);
+                            Invoice::create([                                                   
+                                'nomor_invoice' => $invoiceNumber,                                
                                 'user_id' => $request->userId,
                                 'server_id' => $request->serverId,
+                                'game_id' => $game->id,
+                                'harga_id' => $data->id, 
+                                'payment_id' => $payment->id,
                                 'xendit_invoice_id' => $response['id'],
-                                'xendit_invoice_url' => $invoice_url,
+                                'xendit_e_wallet_id' => $eWalletCreate['id'],
                                 'total' => $total,
                                 'status' => 'PENDING',                                
                                 'expired_at' => $expiredAt,
-                            ]); 
+                            ]);                             
                             return response()->json(['redirect' => route('invoice.index', ['id' => $invoiceNumber])]);
                         } elseif($payment->payment_type == 'QRIS') {
                             $response = Http::withHeaders([
@@ -136,17 +142,20 @@ class TopUpController extends Controller
                                 'channel_code' => 'ID_DANA',
                                 'expires_at'=> $expiredAt
                             ]);
-                            Invoice::create([
-                                'game_id' => $game->id,
-                                'harga_id' => $data->id,   
-                                'payment_id' => $payment->id,                 
-                                'nomor_invoice' => $invoiceNumber,
+                            $QrCreate = XenditQr::create([
+                                'xendit_qr_string' => $response['qr_string']
+                            ]);
+                            Invoice::create([                                                   
+                                'nomor_invoice' => $invoiceNumber,                                
                                 'user_id' => $request->userId,
                                 'server_id' => $request->serverId,
+                                'game_id' => $game->id,
+                                'harga_id' => $data->id, 
+                                'payment_id' => $payment->id,
                                 'xendit_invoice_id' => $response['id'],
-                                'xendit_qr_string' => $response['qr_string'],
+                                'xendit_qr_id' => $QrCreate['id'],
                                 'total' => $total,
-                                'status' => 'PENDING',
+                                'status' => 'PENDING',                                
                                 'expired_at' => $expiredAt,
                             ]);
                             return response()->json(['redirect' => route('invoice.index', ['id' => $invoiceNumber])]);
@@ -163,18 +172,21 @@ class TopUpController extends Controller
                                     'expected_amount' => $total,
                                     'expiration_date' => $expiredAt
                                 ]);                                
-                                Invoice::create([
-                                    'game_id' => $game->id,
-                                    'harga_id' => $data->id,   
-                                    'payment_id' => $payment->id,                 
-                                    'nomor_invoice' => $invoiceNumber,
+                                $VaCreate = XenditVa::create([
+                                    'xendit_va_name' => $response['name'],
+                                    'xendit_va_number' => $response['account_number']
+                                ]);
+                                Invoice::create([                                                   
+                                    'nomor_invoice' => $invoiceNumber,                                
                                     'user_id' => $request->userId,
                                     'server_id' => $request->serverId,
+                                    'game_id' => $game->id,
+                                    'harga_id' => $data->id, 
+                                    'payment_id' => $payment->id,
                                     'xendit_invoice_id' => $response['id'],
-                                    'xendit_va_name' => $response['name'],
-                                    'xendit_va_number' => $response['account_number'],
+                                    'xendit_va_id' => $VaCreate['id'],
                                     'total' => $total,
-                                    'status' => 'PENDING',
+                                    'status' => 'PENDING',                                
                                     'expired_at' => $expiredAt,
                                 ]);
                                 return response()->json(['redirect' => route('invoice.index', ['id' => $invoiceNumber])]);
@@ -183,6 +195,28 @@ class TopUpController extends Controller
                                     'unaccepted' => 'Minimal pembelian dengan Virtual Account adalah Rp. 10.000'
                                 ]);
                             }                                                       
+                        } else if($payment->payment_type == 'OUTLET') {
+                            $response = Http::withHeaders([
+                                'Content-Type' => 'application/json',
+                                'Authorization' => 'Basic ' . base64_encode(env('XENDIT_SECRET_KEY') . ':'),
+                            ])->post('https://api.xendit.co/fixed_payment_code', [
+                                'external_id' => $invoiceNumber,
+                                'retail_outlet_name' => $payment->payment_method,
+                                'name' => 'Kai Top Up',
+                                'expected_amount' => $total
+                            ]); 
+                            Invoice::create([
+                                'game_id' => $game->id,
+                                'harga_id' => $data->id,   
+                                'payment_id' => $payment->id,                 
+                                'nomor_invoice' => $invoiceNumber,
+                                'user_id' => $request->userId,
+                                'server_id' => $request->serverId,
+                                'xendit_invoice_id' => $response['id'],
+                                'total' => $total,
+                                'status' => 'PENDING',
+                                'expired_at' => $expiredAt,
+                            ]);
                         } else {
                             return response()->json([
                                 'unaccepted' => 'Tipe pembayaran tidak ditemukan.'

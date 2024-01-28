@@ -25,4 +25,19 @@ class Invoice extends Model
     {
         return $this->belongsTo(Payment::class);
     }
+
+    public function ewallet()
+    {
+        return $this->belongsTo(XenditEWallet::class, 'xendit_e_wallet_id');
+    }
+
+    public function qr()
+    {
+        return $this->belongsTo(XenditQr::class, 'xendit_qr_id');
+    }
+
+    public function va()
+    {
+        return $this->belongsTo(XenditVa::class, 'xendit_va_id');
+    }
 }
