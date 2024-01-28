@@ -1,0 +1,43 @@
+  
+ul#countdown {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    margin: 0 auto;
+    padding: 15px 0 20px 0;
+    color: #fff;
+    border-width: 1px 0;
+    overflow: hidden;
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+
+    li {
+        margin: 0 -3px 0 0;
+        padding: 0;
+        display: inline-block;
+        width: 15%;
+        font-size: 45px;
+        text-align: center;
+
+        .label {
+            color: #adafb2;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+    }
+
+    @media (max-width: 768px) {
+        li {
+            width: 25%; /* Adjust the width for smaller screens */
+            font-size: 30px; /* Adjust the font size for smaller screens */
+        }
+    }
+
+    @media (max-width: 576px) {
+        li {
+            width: 50%; /* Adjust the width for even smaller screens */
+            font-size: 20px; /* Adjust the font size for even smaller screens */
+        }
+    }
+}

@@ -79,7 +79,7 @@ class TopUpController extends Controller
                          * Setelah nomor invoice di buat, mari berlanjut ke pembuatan Expired_At
                          */
                         $currentTime = now();
-                        $expiredTime = $currentTime->addDay(1);
+                        $expiredTime = $currentTime->addHours(17);
                         $expiredAt = $expiredTime->format('Y-m-d\TH:i:s.u\Z');
                          /**
                          * Setelah nomor invoice di buat, mari berlanjut ke Request POST untuk membuat Invoice

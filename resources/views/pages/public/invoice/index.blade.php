@@ -43,10 +43,9 @@
             <h5>Rincian Pembelian</h5>
             <hr>
             <div class="row">
-                <div class="col-md-9 pt-3">
+                <div class="col-md-12 pt-3">
                     <img src="{{ asset(Storage::url($invoice->game->url_gambar)) }}" style="width:100px;height:100px;">
                 </div>
-
             </div>
             <div class="container mt-5">
                 <div class="table-responsive">
@@ -90,7 +89,8 @@
                                     @if ($invoice->payment->payment_type == 'EWALLET' || $invoice->payment->payment_type == 'QRIS')
                                         <h6>{{ $invoice->payment->admin_fee }}%</h6>
                                     @elseif ($invoice->payment->payment_type == 'VA')
-                                        <h6>Rp. {{ number_format($invoice->payment->admin_fee_fixed, 0, ',', '.') }}</h6>
+                                        <h6>Rp. {{ number_format($invoice->payment->admin_fee_fixed, 0, ',', '.') }}
+                                        </h6>
                                     @endif
                                 </td>
                             </tr>
@@ -123,6 +123,34 @@
             </div>
         </div>
     </div>
+    @if ($invoice->status == 'PENDING')
+        <div class="featured-games mt-4">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-12 text-center">
+                        <ul id="countdown">
+                            <li id="days">
+                                <div class="number text-secondary">00</div>
+                                <div class="label text-sm">Days</div>
+                            </li>
+                            <li id="hours">
+                                <div class="number text-secondary">00</div>
+                                <div class="label text-sm">Hours</div>
+                            </li>
+                            <li id="minutes">
+                                <div class="number text-secondary">00</div>
+                                <div class="label text-sm">Minutes</div>
+                            </li>
+                            <li id="seconds">
+                                <div class="number text-secondary">00</div>
+                                <div class="label text-sm">Seconds</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
     @if ($invoice->status == 'PAID')
     @else
         @if ($invoice->payment->payment_type == 'EWALLET')
@@ -163,7 +191,6 @@
                                             <td>
                                                 <h6>Nama</h6>
                                             </td>
-                                            <td></td>
                                             <td class="text-end">
                                                 <h6 class="text-info">{{ $invoice->va->xendit_va_name }}</h6>
                                             </td>
@@ -172,7 +199,6 @@
                                             <td>
                                                 <h6>Bank</h6>
                                             </td>
-                                            <td></td>
                                             <td class="text-end">
                                                 <h6 class="text-info">{{ $invoice->payment->payment_method }}</h6>
                                             </td>
@@ -181,7 +207,6 @@
                                             <td>
                                                 <h6>Nomor Virtual Account</h6>
                                             </td>
-                                            <td></td>
                                             <td class="text-end">
                                                 <h6 class="text-warning" id="copyableNumber">
                                                     {{ $invoice->va->xendit_va_number }}</h6>
@@ -192,7 +217,6 @@
                                             <td>
                                                 <h6>Nominal</h6>
                                             </td>
-                                            <td></td>
                                             <td class="text-end">
                                                 <h6 class="text-info">Rp.
                                                     {{ number_format($invoice->total, 0, ',', '.') }}</h6>
@@ -238,7 +262,6 @@
                                             <td>
                                                 <h6>Nama</h6>
                                             </td>
-                                            <td></td>
                                             <td class="text-end">
                                                 <h6 class="text-info">{{ $invoice->outlet->name }}</h6>
                                             </td>
@@ -247,7 +270,6 @@
                                             <td>
                                                 <h6>Kode Pembayaran</h6>
                                             </td>
-                                            <td></td>
                                             <td class="text-end">
                                                 <h6 class="text-warning">{{ $invoice->outlet->payment_code }}</h6>
                                                 <p>Infokan ke petugas kasir kode pembayaran ini</p>
@@ -257,7 +279,6 @@
                                             <td>
                                                 <h6>Nominal</h6>
                                             </td>
-                                            <td></td>
                                             <td class="text-end">
                                                 <h6 class="text-info">Rp.
                                                     {{ number_format($invoice->total, 0, ',', '.') }}</h6>
@@ -280,7 +301,10 @@
 @endsection
 
 @section('js')
+    <script src="/assets/js/invoice_countdown.js"></script>
     <script>
+        var targetDate = new Date("{{ $invoice->expired_at }}");
+
         function showStatus(message) {
             $('#statusMessage').text(message);
             $('#stickyAlert').fadeIn('slow');
@@ -367,6 +391,7 @@
 @endsection
 
 @section('css')
+    <link rel="stylesheet" href="/assets/css/invoice_countdown.css">
     <style>
         #stickyAlert {
             position: fixed;
