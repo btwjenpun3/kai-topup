@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreignId('xendit_e_wallet_id')->nullable()->constrained(); 
             $table->foreignId('xendit_qr_id')->nullable()->constrained();
             $table->foreignId('xendit_va_id')->nullable()->constrained();
+            $table->foreignId('xendit_outlet_id')->nullable()->constrained();
             $table->integer('total');
             $table->string('status');
             $table->string('webhook_id')->nullable()->unique();

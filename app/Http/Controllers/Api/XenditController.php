@@ -22,7 +22,7 @@ class XenditController extends Controller
                             'webhook_id' => $request->header('webhook-id')
                         ]);
                         return response()->json([
-                            'success' => 'Invoice' . $response['id'] . ' successfully paid'
+                            'success' => 'Invoice' . $invoice->nomor_invoice . ' successfully paid'
                         ], 200);
                     } else {
                         return response()->json([
@@ -58,7 +58,7 @@ class XenditController extends Controller
                             'webhook_id' => $request->header('webhook-id')
                         ]);
                         return response()->json([
-                            'success' => 'Invoice' . $response['data']['reference_id'] . ' successfully paid'
+                            'success' => 'Invoice' . $invoice->nomor_invoice . ' successfully paid'
                         ], 200);
                     } else {
                         return response()->json([
@@ -97,7 +97,50 @@ class XenditController extends Controller
                             'xendit_va_payment_id' => $response['payment_id'],
                         ]);
                         return response()->json([
-                            'success' => 'Invoice' . $response['data']['reference_id'] . ' successfully paid'
+                            'success' => 'Invoice' . $invoice->nomor_invoice . ' successfully paid'
+                        ], 200);
+                    } else {
+                        return response()->json([
+                            'error' => 'Invoice not match'
+                        ], 401);
+                    }
+                } else {
+                    return response()->json([
+                        'error' => 'Invoice not found'
+                    ], 404);
+                }                
+            } else {
+                return response()->json([
+                    'error' => 'Unauthorized'
+                ], 401);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Unknown Error'
+            ], 401);
+        }
+    }
+
+    public function handleCallBackOutlet(Request $request)
+    {
+        try {
+            $header = $request->header('x-callback-token');
+            if($header == env('XENDIT_CALLBACK_TOKEN')) {
+                $response = $request->all();
+                $invoice = Invoice::where('nomor_invoice', $response['external_id'])->first();
+                if(isset($invoice)) {
+                    if($response['status'] == 'COMPLETED') {
+                        $invoice->update([                            
+                            'status' => 'PAID',
+                            'webhook_id' => $request->header('webhook-id')
+                        ]);
+                        $invoice->outlet()->update([
+                            'payment_id' => $response['payment_id'],
+                            'fixed_payment_code_payment_id' => $response['fixed_payment_code_payment_id'],
+                            'fixed_payment_code_id' => $response['fixed_payment_code_id']                            
+                        ]);
+                        return response()->json([
+                            'success' => 'Invoice' . $invoice->nomor_invoice . ' successfully paid'
                         ], 200);
                     } else {
                         return response()->json([

@@ -183,7 +183,9 @@
                                             </td>
                                             <td></td>
                                             <td class="text-end">
-                                                <h6 class="text-info">{{ $invoice->va->xendit_va_number }}</h6>
+                                                <h6 class="text-warning" id="copyableNumber">
+                                                    {{ $invoice->va->xendit_va_number }}</h6>
+                                                <p id="copyMessage">Ketuk untuk Copy nomor Virtual Account</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -217,6 +219,57 @@
                                             Pembayaran</a>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @elseif ($invoice->payment->payment_type == 'OUTLET')
+            <div class="va-info">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <h4 class="text-info pt-4">Lakukan pembayaran ke {{ $invoice->payment->payment_method }}</h4>
+                        <h6 class="text-muted pt-2">Dan infokan petugas kasir data pembayaran di bawah ini</h6>
+                        <div class="container mt-5">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <h6>Nama</h6>
+                                            </td>
+                                            <td></td>
+                                            <td class="text-end">
+                                                <h6 class="text-info">{{ $invoice->outlet->name }}</h6>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h6>Kode Pembayaran</h6>
+                                            </td>
+                                            <td></td>
+                                            <td class="text-end">
+                                                <h6 class="text-warning">{{ $invoice->outlet->payment_code }}</h6>
+                                                <p>Infokan ke petugas kasir kode pembayaran ini</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h6>Nominal</h6>
+                                            </td>
+                                            <td></td>
+                                            <td class="text-end">
+                                                <h6 class="text-info">Rp.
+                                                    {{ number_format($invoice->total, 0, ',', '.') }}</h6>
+                                                <p>Belum termasuk biaya Admin</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <img class="barcode"
+                                    src="data:image/png;base64,{{ DNS1D::getBarcodePNG($invoice->outlet->payment_code, 'C39') }}"
+                                    alt="barcode" />
+                                <p class="text-end">Atau gunakan Barcode ini untuk di Scan oleh petugas kasir</p>
                             </div>
                         </div>
                     </div>
@@ -288,6 +341,28 @@
                 }
             });
         };
+
+        document.getElementById('copyableNumber').addEventListener('click', function() {
+            var copyableNumber = document.getElementById('copyableNumber').innerText;
+            var tempInput = document.createElement('textarea');
+            tempInput.value = copyableNumber;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+
+            // Hapus elemen textarea sementara
+            document.body.removeChild(tempInput);
+
+            // Tampilkan pesan bahwa teks telah disalin
+            document.getElementById('copyMessage').innerHTML =
+                '<p class="text-success">Virtual Account berhasil di copy<p>';
+
+            // Set timeout untuk mengembalikan pesan ke aslinya setelah beberapa detik (opsional)
+            setTimeout(function() {
+                document.getElementById('copyMessage').innerHTML =
+                    '<p>Ketuk untuk Copy nomor Virtual Account<p>';
+            }, 2000);
+        });
     </script>
 @endsection
 
@@ -301,6 +376,11 @@
             z-index: 9999;
             max-width: 450px;
             /* Atur lebar sesuai kebutuhan Anda */
+        }
+
+        .barcode {
+            background-color: white;
+            /* Atur warna latar belakang halaman */
         }
     </style>
 @endsection

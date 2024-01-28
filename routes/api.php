@@ -19,10 +19,10 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('/xendit/callback', [XenditController::class, 'handleCallBack']);
-
 Route::post('/xendit/callback/ewallet', [XenditController::class, 'handleCallBackEWallet']);
 
 Route::post('/xendit/callback/qris', [XenditController::class, 'handleCallBackQris']);
 
 Route::post('/xendit/callback/va', [XenditController::class, 'handleCallBackVa']);
+
+Route::post('/xendit/callback/outlet', [XenditController::class, 'handleCallBackOutlet']);

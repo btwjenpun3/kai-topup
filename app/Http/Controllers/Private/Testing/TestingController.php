@@ -27,7 +27,7 @@ class TestingController extends Controller
             $itemId = '3';
             $paymentType = 'EWALLET';
             $checkoutMethod = 'ONE_TIME_PAYMENT';
-            $paymentMethod = 'BCA';
+            $paymentMethod = 'ALFAMART';
                 /**
                  * Validasi terlebih dahulu apakah itemId dan itemPrice cocok dengan Database
                  */
@@ -52,19 +52,17 @@ class TestingController extends Controller
                     $expiredAt = $expiredTime->format('Y-m-d\TH:i:s.u\Z');
                      
                     if($paymentType == 'EWALLET') {
-                        if($data->harga_jual >= 10000) {
-                            $response = Http::withHeaders([
-                                'Content-Type' => 'application/json',
-                                'Authorization' => 'Basic ' . base64_encode(env('XENDIT_SECRET_KEY') . ':'),
-                            ])->post('https://api.xendit.co/callback_virtual_accounts', [
-                                'external_id' => $invoiceNumber,
-                                'bank_code' => $payment->payment_method,
-                                'name' => 'Muhamad Helmi',
-                                'is_closed' => true,
-                                'expected_amount' => $total,
-                                'expiration_date' => $expiredAt
-                            ]);
-                        } 
+                        $response = Http::withHeaders([
+                            'Content-Type' => 'application/json',
+                            'Authorization' => 'Basic ' . base64_encode(env('XENDIT_SECRET_KEY') . ':'),
+                        ])->post('https://api.xendit.co/fixed_payment_code', [
+                            'external_id' => $invoiceNumber,
+                            'retail_outlet_name' => $payment->payment_method,
+                            'name' => 'Kai Top Up',
+                            'expected_amount' => $total,
+                            'expiration_date' => $expiredAt
+                        ]);                       
+                        
                          return view('pages.private.test.index', [
                                 'response' => $response
                             ]);

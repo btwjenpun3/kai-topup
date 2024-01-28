@@ -40,4 +40,9 @@ class Invoice extends Model
     {
         return $this->belongsTo(XenditVa::class, 'xendit_va_id');
     }
+
+    public function outlet()
+    {
+        return $this->belongsTo(XenditOutlet::class, 'xendit_outlet_id');
+    }
 }
