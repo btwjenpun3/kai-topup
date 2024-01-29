@@ -43,13 +43,13 @@
                                     <td class="text-danger">Rp.
                                         {{ number_format($data->digiflazz->saldo_terpotong, 0, ',', '.') }}</td>
                                     <td>{{ $data->digiflazz->created_at }}</td>
-                                    @if ($data->digiflazz->status == 'PENDING')
+                                    @if ($data->digiflazz->status == 'Pending')
                                         <td class="text-warning"><span
                                                 class="badge bg-warning me-1"></span>{{ $data->digiflazz->status }}</td>
-                                    @elseif ($data->digiflazz->status == 'PAID')
+                                    @elseif ($data->digiflazz->status == 'Sukses')
                                         <td class="text-success"><span
                                                 class="badge bg-success me-1"></span>{{ $data->digiflazz->status }}</td>
-                                    @elseif ($data->digiflazz->status == 'EXPIRED')
+                                    @elseif ($data->digiflazz->status == 'Gagal')
                                         <td class="text-danger"><span
                                                 class="badge bg-danger me-1"></span>{{ $data->digiflazz->status }}</td>
                                     @endif
