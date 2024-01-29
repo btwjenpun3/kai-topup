@@ -45,4 +45,9 @@ class Invoice extends Model
     {
         return $this->belongsTo(XenditOutlet::class, 'xendit_outlet_id');
     }
+
+    public function digiflazz()
+    {
+        return $this->belongsTo(Digiflazz::class);
+    }
 }

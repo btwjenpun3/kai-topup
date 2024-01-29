@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('xendit_invoice_id');
             $table->foreignId('game_id')->constrained();
             $table->foreignId('harga_id')->constrained();
-            $table->foreignId('payment_id')->constrained();    
+            $table->foreignId('payment_id')->constrained();   
+            $table->foreignId('digiflazz_id')->nullable()->constrained();  
             $table->foreignId('xendit_e_wallet_id')->nullable()->constrained(); 
             $table->foreignId('xendit_qr_id')->nullable()->constrained();
             $table->foreignId('xendit_va_id')->nullable()->constrained();
