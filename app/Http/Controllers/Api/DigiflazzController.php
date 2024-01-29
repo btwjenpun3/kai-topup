@@ -13,8 +13,8 @@ class DigiflazzController extends Controller
     {
         try {
             $secret = env('DIGIFLAZZ_WEBHOOK_SECRET'); 
-            $payload = $request->getContent();                       
-            $signature = hash_hmac('sha1', $payload, $secret);
+            $payload = json_decode($request->getContent(), true);                       
+            $signature = hash_hmac('sha1', $request->getContent(), $secret);
             if ($request->header('X-Hub-Signature') == 'sha1=' . $signature) {
                 if($payload['data']['status'] == 'Sukses') {
                     Invoice::with('digiflazz')->where('nomor_invoice', $payload['data']['ref_id'])->update([
