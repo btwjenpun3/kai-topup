@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('digiflazzs', function (Blueprint $table) {
             $table->id();
+            $table->string('trx_id')->nullable();
             $table->integer('saldo_terakhir');
             $table->integer('saldo_terpotong');
             $table->string('message');

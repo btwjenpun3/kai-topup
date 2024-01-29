@@ -15,10 +15,10 @@ class DigiflazzController extends Controller
             $payload = $request->getContent();                       
             $signature = hash_hmac('sha1', $payload, $secret);
             if ($request->header('X-Hub-Signature') == 'sha1=' . $signature) {
-                Log::error(json_decode($request->getContent(), true));
+                Log::error('Payload Berhasil:' . json_decode($request->getContent(), true));
             } 
         } catch (\Exception $e) {
-            Log::error(json_decode($request->getContent(), true));
+            Log::error('Payload Error:' . $e->getMessage());
         }
     }
 }
