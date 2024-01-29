@@ -14,12 +14,16 @@ return new class extends Migration
         Schema::create('hargas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('game_id')->constrained();
-            $table->string('nama_produk');
+            $table->string('nama_produk');            
+            $table->string('seller_name');
             $table->string('kode_produk');
+            $table->string('deskripsi');
             $table->string('gambar');
             $table->integer('modal');
             $table->integer('harga_jual');
             $table->integer('profit');
+            $table->string('start_cut_off');
+            $table->string('end_cut_off');
             $table->boolean('status');
             $table->timestamps();
         });

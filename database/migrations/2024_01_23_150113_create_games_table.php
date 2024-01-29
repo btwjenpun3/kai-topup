@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->string('brand');
             $table->string('kode')->unique();
             $table->string('url_gambar')->unique();
             $table->string('slug')->unique();

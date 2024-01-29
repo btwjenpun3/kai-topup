@@ -5,6 +5,7 @@ use App\Http\Controllers\Private\Invoice\InvoiceRealmController;
 use App\Http\Controllers\Private\ListGames\ListGamesController;
 use App\Http\Controllers\Private\ListGames\SetHargaController;
 use App\Http\Controllers\Private\Payment\PaymentController;
+use App\Http\Controllers\Private\Product\ProductController;
 use App\Http\Controllers\Private\Testing\TestingController;
 use App\Http\Controllers\Public\Home\HomeController;
 use App\Http\Controllers\Public\Invoice\InvoiceController;
@@ -64,6 +65,13 @@ Route::prefix('/realm')
         Route::get('/', 'index')->name('index');
     });
 
+Route::prefix('/realm/products')
+    ->name('product.')
+    ->controller(ProductController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+    });
+
 Route::prefix('/realm/list-games')
     ->name('games.')
     ->controller(ListGamesController::class)
@@ -78,6 +86,7 @@ Route::prefix('/realm/set-harga')
     ->group(function () {
         Route::get('/{id}', 'index')->name('index');
         Route::post('/{id}', 'store')->name('store');
+        Route::post('/import/{id}', 'import');
         Route::get('/show/{id}', 'show')->name('show');
         Route::post('/update/{gameId}/{id}', 'update')->name('update');
         Route::delete('/{id}', 'destroy')->name('destroy');
@@ -89,6 +98,7 @@ Route::prefix('/realm/invoice')
     ->controller(InvoiceRealmController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/show/{id}', 'show');
     });
 
 Route::prefix('/realm/payment')

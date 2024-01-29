@@ -10,9 +10,14 @@ class InvoiceRealmController extends Controller
 {
     public function index()
     {
-        $invoices = Invoice::all();
+        $invoices = Invoice::orderBy('nomor_invoice', 'desc')->paginate(10);
         return view('pages.private.invoice.index', [
             'invoices' => $invoices,
         ]);
+    }
+
+    public function show(Request $request) {
+        $invoices = Invoice::with(['game', 'harga', 'payment'])->where('nomor_invoice', $request->id)->first();
+        return response()->json($invoices);
     }
 }

@@ -28,6 +28,16 @@
                 </svg>
                 Tambah Produk
             </a>
+            <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
+                data-bs-target="#modal-import">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M12 5l0 14" />
+                    <path d="M5 12l14 0" />
+                </svg>
+                Import
+            </a>
         </div>
     </div>
 @endsection
@@ -47,6 +57,8 @@
             </ul>
         </div>
     @endif
+    <div id="import-berhasil"></div>
+    <div id="import-gagal"></div>
     <div id="produk-berhasil-di-hapus"></div>
     <div id="produk-berhasil-di-update"></div>
 @endsection
@@ -66,6 +78,8 @@
                                     <th>Modal</th>
                                     <th>Harga Jual</th>
                                     <th>Profit</th>
+                                    <th>Start Cut Off</th>
+                                    <th>End Cut Off</th>
                                     <th>Status</th>
                                     <th class="w-1"></th>
                                 </tr>
@@ -75,10 +89,12 @@
                                     <tr>
                                         <td><img src="{{ asset(Storage::url($h->gambar)) }}"></td>
                                         <td>{{ $h->nama_produk }}</td>
-                                        <td>{{ $game->kode }}-{{ $h->kode_produk }}</td>
+                                        <td>{{ $h->kode_produk }}</td>
                                         <td>Rp. {{ number_format($h->modal, 0, ',', '.') }}</td>
                                         <td>Rp. {{ number_format($h->harga_jual, 0, ',', '.') }}</td>
                                         <td>Rp. {{ number_format($h->profit, 0, ',', '.') }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($h->start_cut_off)->format('H:i') }} WIB</td>
+                                        <td>{{ \Carbon\Carbon::parse($h->end_cut_off)->format('H:i') }} WIB</td>
                                         @if ($h->status == 1)
                                             <td> <span class="badge bg-success me-1"></span>Aktif</td>
                                         @else
@@ -222,11 +238,8 @@
                     <div class="row mb-3 align-items-end">
                         <label class="form-label" for="kode_produk">Kode Produk</label>
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="kode_prepend">{{ $game->kode }} -</span>
-                            </div>
                             <input type="text" name="kode_produk" id="edit_kode_produk" class="form-control"
-                                placeholder="Misal '00001'" aria-describedby="kode_prepend" required />
+                                placeholder="Misal '00001'" disabled />
                         </div>
                     </div>
                     <div class="row mb-3 align-items-end">
@@ -272,6 +285,45 @@
                 <div class="modal-footer">
                     <button type="button" class="btn me-auto" data-bs-dismiss="modal">Tutup</button>
                     <button id="update" type="button" class="btn btn-primary">Edit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal modal-blur fade" id="modal-import" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-status bg-info"></div>
+                <div class="modal-body text-center py-4">
+                    <div id="import_loading" style="display: none;">
+                        <div class="text-muted mb-3">Data sedang di import</div>
+                        <div class="progress progress-sm">
+                            <div class="progress-bar progress-bar-indeterminate"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="import">
+                    <div class="modal-body text-center py-4">
+                        <div class="text-muted">Kamu yakin ingin mengimport Data game dari Digiflazz ?</div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="w-100">
+                            <div class="row">
+                                <div class="col">
+                                    <a href="#" class="btn w-100" data-bs-dismiss="modal">
+                                        Batal
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a href="#" id="btn-import" class="btn btn-success w-100"
+                                        onclick="importHarga({{ $game->id }})">
+                                        Iya
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -385,14 +437,48 @@
                         var errorMessage = document.createElement(
                             "div");
                         errorMessage.className = "alert alert-danger";
-                        errorMessage.textContent = xhr.responseJSON.error;
+                        errorMessage.textContent = xhr.responseJSON.message;
                         $('#produk-gagal-di-update').html(errorMessage);
                     }
                 });
             });
         });
 
-        //Fungsi untuk menghapus Harga
+        function importHarga(id) {
+            $('#import_loading').show();
+            $('#import').hide();
+            $.ajax({
+                type: 'POST',
+                url: '/realm/set-harga/import/' + id,
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                },
+                success: function(response) {
+                    var successMessage = document.createElement(
+                        "div");
+                    successMessage.className =
+                        "alert alert-success";
+                    successMessage.textContent = response.success;
+                    $('#import-berhasil').html(successMessage);
+                    $('#import_loading').hide();
+                    $('#modal-import').modal('hide');
+                    $('#import').show();
+                    $("#table-harga").load(location.href + " #table-harga");
+                },
+                error: function(xhr, status, error) {
+                    var errorMessage = document.createElement(
+                        "div");
+                    errorMessage.className =
+                        "alert alert-danger";
+                    errorMessage.textContent = xhr.responseJSON.message;
+                    $('#import-gagal').html(errorMessage);
+                    $('#import_loading').hide();
+                    $('#import').show();
+                    $('#modal-import').modal('hide');
+                }
+            });
+        }
+
         function hapus(id) {
             $('#btn-hapus').on('click', function() {
                 $.ajax({

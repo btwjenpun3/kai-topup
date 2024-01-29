@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->string('nomor_invoice')->unique();
+            $table->string('customer');
             $table->string('user_id');
             $table->string('server_id');
             $table->string('xendit_invoice_id');

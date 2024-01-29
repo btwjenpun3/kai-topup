@@ -185,6 +185,25 @@
             </div>
         </div>
     </div>
+    <div class="most-popular">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="heading-section">
+                    <h4><em>Masukkan Telepon</em> Kamu</h4>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="data-input">
+                                <input id="userPhoneInput" type="text"
+                                    placeholder="Contoh : 6285740199222 (Tanpa Tanda Plus)" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="game-details">
         <div class="row">
             <div class="col-lg-12">
@@ -213,6 +232,10 @@
                         <span class="theme-color">Cek data kamu sebelum proses pembelian.</span>
                         <div class="mb-3">
                             <hr class="new1">
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <small>Telepon</small>
+                            <small><span id="userPhoneNumber"></span></small>
                         </div>
                         <div class="d-flex justify-content-between">
                             <small>User ID</small>
@@ -296,12 +319,19 @@
             $('#checkout').click(function() {
                 var userIdInputValue = $('#userIdInput').val();
                 var serverIdInputValue = $('#serverIdInput').val();
+                var userPhoneInputValue = $('#userPhoneInput').val();
 
                 if (userIdInputValue.trim() === '' || serverIdInputValue.trim() === '') {
                     showError('Harap isi semua Data kamu!');
                     return;
                 }
+
+                if (userPhoneInputValue.trim() === '') {
+                    showError('Harap isi nomor telepon kamu!');
+                    return;
+                }
                 if (selectedPrice !== null) {
+                    $('#userPhoneNumber').text(userPhoneInputValue);
                     $('#itemName').text(selectedItemName);
                     $('#itemPrice').text('Rp. ' + formatRupiah(selectedPrice));
                     $('#itemId').val(selectedItemId);
@@ -326,6 +356,7 @@
                         itemName: selectedItemName,
                         userId: $('#userId').text(),
                         serverId: $('#serverId').text(),
+                        userPhone: $('#userPhoneInput').val(),
                         itemId: selectedItemId,
                         paymentType: paymentTypeValue,
                         paymentMethod: getPaymentMethodValue,

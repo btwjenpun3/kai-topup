@@ -50,6 +50,7 @@
                                 <tr>
                                     <th>Nama</th>
                                     <th>Kode</th>
+                                    <th>Brand</th>
                                     <th>URL Gambar</th>
                                     <th class="w-1"></th>
                                 </tr>
@@ -59,6 +60,7 @@
                                     <tr>
                                         <td>{{ $game->nama }}</td>
                                         <td class="text-muted"> {{ $game->kode }} </td>
+                                        <td> {{ $game->brand }} </td>
                                         <td>
                                             <a href="#" data-bs-toggle="modal" data-bs-target="#modal-gambar-game"
                                                 onclick="tampilkanGambar('{{ asset(Storage::url($game->url_gambar)) }}')">
