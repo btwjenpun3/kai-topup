@@ -17,23 +17,32 @@ class DigiflazzController extends Controller
             $signature = hash_hmac('sha1', $request->getContent(), $secret);
             if ($request->header('X-Hub-Signature') == 'sha1=' . $signature) {
                 if($payload['data']['status'] == 'Sukses') {
-                    Invoice::with('digiflazz')->where('nomor_invoice', $payload['data']['ref_id'])->update([
-                        'trx_id' => $payload['data']['trx_id'],
-                        'message' => $payload['data']['message'],
-                        'status' => $payload['data']['status']
-                    ]);
+                    $invoice = Invoice::with('digiflazz')->where('nomor_invoice', $payload['data']['ref_id'])->first();
+                    if ($invoice) {
+                        $invoice->digiflazz->update([
+                            'trx_id' => $payload['data']['trx_id'],
+                            'message' => $payload['data']['message'],
+                            'status' => $payload['data']['status']
+                        ]);
+                    }
                 } else if ($payload['data']['status'] == 'Pending') {
-                    Invoice::with('digiflazz')->where('nomor_invoice', $payload['data']['ref_id'])->update([
-                        'trx_id' => $payload['data']['trx_id'],
-                        'message' => $payload['data']['message'],
-                        'status' => $payload['data']['status']
-                    ]);
+                    $invoice = Invoice::with('digiflazz')->where('nomor_invoice', $payload['data']['ref_id'])->first();
+                    if ($invoice) {
+                        $invoice->digiflazz->update([
+                            'trx_id' => $payload['data']['trx_id'],
+                            'message' => $payload['data']['message'],
+                            'status' => $payload['data']['status']
+                        ]);
+                    }
                 } else if ($payload['data']['status'] == 'Gagal') {
-                    Invoice::with('digiflazz')->where('nomor_invoice', $payload['data']['ref_id'])->update([
-                        'trx_id' => $payload['data']['trx_id'],
-                        'message' => $payload['data']['message'],
-                        'status' => $payload['data']['status']
-                    ]);
+                    $invoice = Invoice::with('digiflazz')->where('nomor_invoice', $payload['data']['ref_id'])->first();
+                    if ($invoice) {
+                        $invoice->digiflazz->update([
+                            'trx_id' => $payload['data']['trx_id'],
+                            'message' => $payload['data']['message'],
+                            'status' => $payload['data']['status']
+                        ]);
+                    }
                 }                
             } 
         } catch (\Exception $e) {
