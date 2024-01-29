@@ -24,6 +24,7 @@ class DigiflazzController extends Controller
                             'message' => $payload['data']['message'],
                             'status' => $payload['data']['status']
                         ]);
+                        return response()->json(200);
                     }
                 } else if ($payload['data']['status'] == 'Pending') {
                     $invoice = Invoice::with('digiflazz')->where('nomor_invoice', $payload['data']['ref_id'])->first();
@@ -33,6 +34,7 @@ class DigiflazzController extends Controller
                             'message' => $payload['data']['message'],
                             'status' => $payload['data']['status']
                         ]);
+                        return response()->json(200);
                     }
                 } else if ($payload['data']['status'] == 'Gagal') {
                     $invoice = Invoice::with('digiflazz')->where('nomor_invoice', $payload['data']['ref_id'])->first();
@@ -42,6 +44,7 @@ class DigiflazzController extends Controller
                             'message' => $payload['data']['message'],
                             'status' => $payload['data']['status']
                         ]);
+                        return response()->json(200);
                     }
                 }                
             } 

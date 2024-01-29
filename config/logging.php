@@ -133,6 +133,12 @@ return [
             'level' => 'error',
         ],
 
+        'digiflazz' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/digiflazz.log'),
+            'level' => 'error',
+        ],
+
         'product-import' => [
             'driver' => 'single',
             'path' => storage_path('logs/product-import.log'),
