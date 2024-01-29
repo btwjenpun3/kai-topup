@@ -136,7 +136,7 @@ class SetHargaController extends Controller
                                     'seller_name' => $item['seller_name'],
                                     'kode_produk' => $item['buyer_sku_code'],
                                     'deskripsi' => $item['desc'],
-                                    'gambar' => 'produk/P5KN1mr2pZ-diamond.webp',
+                                    'gambar' => 'produk/ml-diamond.webp',
                                     'modal' => $item['price'],
                                     'harga_jual' => 0,
                                     'profit' => 0,
