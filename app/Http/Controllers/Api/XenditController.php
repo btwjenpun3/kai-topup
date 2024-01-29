@@ -37,46 +37,20 @@ class XenditController extends Controller
                         if($digiflazz->successful()) {
                             $updateDigiflazz = Digiflazz::create([
                                 'message' => $digiflazz['data']['message'],
+                                'seller_telegram' => $digiflazz['data']['tele'],
+                                'seller_whatsapp' => $digiflazz['data']['wa'],
                                 'status' => $digiflazz['data']['status']
                             ]);
                             $invoice->update([
                                 'digiflazz_id' => $updateDigiflazz->id
-                            ]);
-                            Log::error('Berhasil:' . json_decode($digiflazz->getBody()->getContents(), true));                             
+                            ]);                             
                             return response()->json(200);
                         } else {
                             Log::error('Gagal:' . json_decode($digiflazz->getBody()->getContents(), true));
                             return response()->json(401);
-                        }                                            
-                        
-                        // dispatch(function () use ($invoice, $request) {                          
-                        //     $digiflazz = Http::withHeaders([
-                        //         'Content-Type' => 'application/json',
-                        //     ])->post('https://api.digiflazz.com/v1/transaction', [
-                        //         'username' => env('DIGIFLAZZ_USERNAME'),
-                        //         'buyer_sku_code' => 'xld10',
-                        //         'customer_no' => '087800001230',
-                        //         'ref_id' => $invoice->nomor_invoice,
-                        //         'testing' => true,
-                        //         'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . $invoice->nomor_invoice)
-                        //     ]);
-                        //     if($digiflazz->successful()) {
-                        //         $updateDigiflazz = Digiflazz::create([
-                        //             'message' => $digiflazz['data']['message'],
-                        //             'status' => $digiflazz['data']['status']
-                        //         ]);
-                        //         $invoice->update([
-                        //             'digiflazz_id' => $updateDigiflazz->id
-                        //         ]);
-                        //         Log::error(json_decode($digiflazz->getContent(), true));                             
-                        //         return response()->json(200);
-                        //     } else {
-                        //         Log::error(json_decode($digiflazz->getContent(), true));
-                        //         return response()->json(401);
-                        //     }                            
-                        // });
+                        } 
                     } else {
-                        return response()->json([
+                        return response()->json([                            
                             'error' => 'Invoice not found'
                         ], 404);
                     }

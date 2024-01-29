@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('digiflazzs', function (Blueprint $table) {
             $table->id();
             $table->string('message');
+            $table->string('seller_telegram');
+            $table->string('seller_whatsapp');
             $table->string('status');
             $table->timestamps();
         });
