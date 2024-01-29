@@ -29,7 +29,7 @@ class XenditController extends Controller
                         ])->post('https://api.digiflazz.com/v1/transaction', [
                             'username' => env('DIGIFLAZZ_USERNAME'),
                             'buyer_sku_code' => 'xld10',
-                            'customer_no' => '087800001230',
+                            'customer_no' => '087800001233',
                             'ref_id' => $invoice->nomor_invoice,
                             'testing' => true,
                             'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . $invoice->nomor_invoice)
