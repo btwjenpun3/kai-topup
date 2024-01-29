@@ -28,15 +28,16 @@
                 </svg>
                 Tambah Produk
             </a>
-            <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
+            <a href="#" class="btn btn-info d-none d-sm-inline-block" data-bs-toggle="modal"
                 data-bs-target="#modal-import">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
-                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24"
+                    height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M12 5l0 14" />
-                    <path d="M5 12l14 0" />
+                    <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
+                    <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
                 </svg>
-                Import
+                Sync
             </a>
         </div>
     </div>
@@ -297,7 +298,7 @@
                 <div class="modal-status bg-info"></div>
                 <div class="modal-body text-center py-4">
                     <div id="import_loading" style="display: none;">
-                        <div class="text-muted mb-3">Data sedang di import</div>
+                        <div class="text-muted mb-3">Data sedang di sinkronisasi</div>
                         <div class="progress progress-sm">
                             <div class="progress-bar progress-bar-indeterminate"></div>
                         </div>
@@ -305,7 +306,7 @@
                 </div>
                 <div id="import">
                     <div class="modal-body text-center py-4">
-                        <div class="text-muted">Kamu yakin ingin mengimport Data game dari Digiflazz ?</div>
+                        <div class="text-muted">Kamu yakin ingin sinkronisasi data game dari Digiflazz ?</div>
                     </div>
                     <div class="modal-footer">
                         <div class="w-100">

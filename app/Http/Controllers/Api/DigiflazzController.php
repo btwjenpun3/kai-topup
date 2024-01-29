@@ -16,9 +16,7 @@ class DigiflazzController extends Controller
             $signature = hash_hmac('sha1', $payload, $secret);
             if ($request->header('X-Hub-Signature') == 'sha1=' . $signature) {
                 Log::error(json_decode($request->getContent(), true));
-            } else {
-                Log::error(json_decode($request->getContent(), true));
-            }
+            } 
         } catch (\Exception $e) {
             Log::error(json_decode($request->getContent(), true));
         }

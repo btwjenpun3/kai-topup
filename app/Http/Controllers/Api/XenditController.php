@@ -36,6 +36,8 @@ class XenditController extends Controller
                         ]);
                         if($digiflazz->successful()) {
                             $updateDigiflazz = Digiflazz::create([
+                                'saldo_terakhir' => $digiflazz['data']['buyer_last_saldo'],
+                                'saldo_terpotong' => $digiflazz['data']['price'],
                                 'message' => $digiflazz['data']['message'],
                                 'seller_telegram' => $digiflazz['data']['tele'],
                                 'seller_whatsapp' => $digiflazz['data']['wa'],
@@ -47,7 +49,7 @@ class XenditController extends Controller
                             return response()->json(200);
                         } else {
                             Log::error('Gagal:' . json_decode($digiflazz->getBody()->getContents(), true));
-                            return response()->json(401);
+                            return response()->json(200);
                         } 
                     } else {
                         return response()->json([                            
@@ -63,6 +65,7 @@ class XenditController extends Controller
                 ], 401);
             }
         } catch (\Exception $e) {
+            Log::error('Gagal:' . $e->getMessage());
             return response()->json([
                 'error' => 'Unknown Error'
             ], 401);

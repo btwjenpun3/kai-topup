@@ -7,6 +7,7 @@ use App\Http\Controllers\Private\ListGames\SetHargaController;
 use App\Http\Controllers\Private\Payment\PaymentController;
 use App\Http\Controllers\Private\Product\ProductController;
 use App\Http\Controllers\Private\Testing\TestingController;
+use App\Http\Controllers\Private\Transaction\TransactionController;
 use App\Http\Controllers\Public\Home\HomeController;
 use App\Http\Controllers\Public\Invoice\InvoiceController;
 use App\Http\Controllers\Public\Simulate\SimulateController;
@@ -99,6 +100,13 @@ Route::prefix('/realm/invoice')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/show/{id}', 'show');
+    });
+
+Route::prefix('/realm/transaksi')
+    ->name('transaksi.')
+    ->controller(TransactionController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
     });
 
 Route::prefix('/realm/payment')
