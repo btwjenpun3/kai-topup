@@ -22,26 +22,36 @@ class XenditController extends Controller
                             'status' => 'PAID',
                             'webhook_id' => $request->header('webhook-id')
                         ]);
+                        Http::withHeaders([
+                            'Content-Type' => 'application/json',
+                        ])->post('https://api.digiflazz.com/v1/transaction', [
+                            'username' => env('DIGIFLAZZ_USERNAME'),
+                            'buyer_sku_code' => 'xld10',
+                            'customer_no' => '087800001230',
+                            'ref_id' => $invoice->nomor_invoice,
+                            'testing' => true,
+                            'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . $invoice->nomor_invoice)
+                        ]);                         
                         return response()->json([
                             'success' => 'Invoice' . $invoice->nomor_invoice . ' successfully paid'
                         ], 200);
-                        dispatch(function () use ($invoice, $request) {                          
-                            $getResponse = Http::withHeaders([
-                                'Content-Type' => 'application/json',
-                            ])->post('https://api.digiflazz.com/v1/transaction', [
-                                'username' => env('DIGIFLAZZ_USERNAME'),
-                                'buyer_sku_code' => 'xld10',
-                                'customer_no' => '087800001230',
-                                'ref_id' => $invoice->nomor_invoice,
-                                'testing' => true,
-                                'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . $invoice->nomor_invoice)
-                            ]);
-                            if($getResponse->successful()) {
-                                return response()->json(200);
-                            } else {
-                                return response()->json(401);
-                            }                            
-                        });
+                        // dispatch(function () use ($invoice, $request) {                          
+                        //     $getResponse = Http::withHeaders([
+                        //         'Content-Type' => 'application/json',
+                        //     ])->post('https://api.digiflazz.com/v1/transaction', [
+                        //         'username' => env('DIGIFLAZZ_USERNAME'),
+                        //         'buyer_sku_code' => 'xld10',
+                        //         'customer_no' => '087800001230',
+                        //         'ref_id' => $invoice->nomor_invoice,
+                        //         'testing' => true,
+                        //         'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . $invoice->nomor_invoice)
+                        //     ]);
+                        //     if($getResponse->successful()) {
+                        //         return response()->json(200);
+                        //     } else {
+                        //         return response()->json(401);
+                        //     }                            
+                        // });
                     } else {
                         return response()->json([
                             'error' => 'Invoice not found'
