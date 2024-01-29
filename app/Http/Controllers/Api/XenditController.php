@@ -37,13 +37,9 @@ class XenditController extends Controller
                                 'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . $invoice->nomor_invoice)
                             ]);
                             if($getResponse->successful()) {
-                                return response()->json([
-                                    'success' => 'Invoice ' . $invoice->nomor_invoice . ' successfully paid'
-                                ], 200);
+                                return response()->json(200);
                             } else {
-                                return response()->json([
-                                    'failed' => 'Invoice ' . $invoice->nomor_invoice . ' failed'
-                                ], 401);
+                                return response()->json(401);
                             }                            
                         });
                     } else {
