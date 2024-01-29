@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Invoice;
 use App\Models\Digiflazz;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class XenditController extends Controller
 { 
@@ -44,9 +45,11 @@ class XenditController extends Controller
                                 ]);
                                 $invoice->update([
                                     'digiflazz_id' => $updateDigiflazz->id
-                                ]);                             
+                                ]);
+                                Log::error(json_decode($digiflazz->getContent(), true));                             
                                 return response()->json(200);
                             } else {
+                                Log::error(json_decode($digiflazz->getContent(), true));
                                 return response()->json(401);
                             }                            
                         });
