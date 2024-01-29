@@ -42,10 +42,10 @@ class XenditController extends Controller
                             $invoice->update([
                                 'digiflazz_id' => $updateDigiflazz->id
                             ]);
-                            Log::error(json_decode($digiflazz->getBody()->getContents(), true));                             
+                            Log::error('Berhasil:' . json_decode($digiflazz->getBody()->getContents(), true));                             
                             return response()->json(200);
                         } else {
-                            Log::error(json_decode($digiflazz->getBody()->getContents(), true));
+                            Log::error('Gagal:' . json_decode($digiflazz->getBody()->getContents(), true));
                             return response()->json(401);
                         }                                            
                         
