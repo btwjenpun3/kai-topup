@@ -12,8 +12,9 @@ class DigiflazzController extends Controller
     {
         try {
             $secret = env('DIGIFLAZZ_WEBHOOK_SECRET'); 
-            $payload = file_get_contents('php://input');                       
+            $payload = $request->getContent();                       
             $signature = hash_hmac('sha1', $payload, $secret);
+            Log::error($signature);
             if ($request->header('X-Hub-Signature') == 'sha1=' . $signature) {
                 Log::error('Payload Berhasil:' . json_decode($request->getContent(), true));
             } else {
