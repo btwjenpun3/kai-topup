@@ -33,6 +33,14 @@ class DatabaseSeeder extends Seeder
             'url_gambar' => 'games/freefire.webp',
             'slug' => 'free-fire'
         ]); 
+
+        \App\Models\Game::create([
+            'nama' => 'Undawn',
+            'kode' => 'ud',
+            'brand' => 'Undawn',
+            'url_gambar' => 'games/undawn.webp',
+            'slug' => 'undawn'
+        ]); 
         
         // \App\Models\Harga::create([
         //     'game_id' => 1,
