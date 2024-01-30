@@ -11,8 +11,8 @@ class TransactionController extends Controller
 {
     public function index()
     {
-        $data = Invoice::with('digiflazz')->get();
-        $transactions = Digiflazz::orderBy('id', 'desc')->get();
+        $data = Invoice::with('digiflazz')->orderBy('id', 'desc')->get();
+        $transactions = Digiflazz::get();
         return view('pages.private.transaksi.index', [
             'datas' => $data,
             'transactions' => $transactions
