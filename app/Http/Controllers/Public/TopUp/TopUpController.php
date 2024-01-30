@@ -24,9 +24,10 @@ class TopUpController extends Controller
     public function index(Request $request)
     {
         $game = Game::where('slug', $request->slug)->firstOrFail();
+        $harga = $game->harga()->orderBy('kode_produk', 'asc')->get();
         return view('pages.public.topup.index', [            
             'game' => $game,
-            'harga' => $game->harga,
+            'harga' => $harga,
             'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
             'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
             'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
