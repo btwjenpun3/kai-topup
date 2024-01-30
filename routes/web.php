@@ -65,11 +65,13 @@ Route::prefix('/realm/auth')
     ->controller(AuthController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::post('/', 'auth')->name('process');
     });
 
 Route::prefix('/realm/dashboard')
     ->name('dashboard.')
     ->controller(DashboardContoller::class)
+    ->middleware('auth')
     ->group(function () {
         Route::get('/', 'index')->name('index');
     });
@@ -77,6 +79,7 @@ Route::prefix('/realm/dashboard')
 Route::prefix('/realm/products')
     ->name('product.')
     ->controller(ProductController::class)
+    ->middleware('auth')
     ->group(function () {
         Route::get('/', 'index')->name('index');
     });
@@ -84,6 +87,7 @@ Route::prefix('/realm/products')
 Route::prefix('/realm/list-games')
     ->name('games.')
     ->controller(ListGamesController::class)
+    ->middleware('auth')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/', 'store')->name('store');
@@ -92,6 +96,7 @@ Route::prefix('/realm/list-games')
 Route::prefix('/realm/set-harga')
     ->name('harga.')
     ->controller(SetHargaController::class)
+    ->middleware('auth')
     ->group(function () {
         Route::get('/{id}', 'index')->name('index');
         Route::post('/{id}', 'store')->name('store');
@@ -105,6 +110,7 @@ Route::prefix('/realm/set-harga')
 Route::prefix('/realm/invoice')
     ->name('invoice.realm.')
     ->controller(InvoiceRealmController::class)
+    ->middleware('auth')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/show/{id}', 'show');
@@ -113,6 +119,7 @@ Route::prefix('/realm/invoice')
 Route::prefix('/realm/transaksi')
     ->name('transaksi.')
     ->controller(TransactionController::class)
+    ->middleware('auth')
     ->group(function () {
         Route::get('/', 'index')->name('index');
     });
@@ -120,6 +127,7 @@ Route::prefix('/realm/transaksi')
 Route::prefix('/realm/payment')
     ->name('payment.')
     ->controller(PaymentController::class)
+    ->middleware('auth')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/show/{id}', 'show')->name('show');
@@ -129,6 +137,7 @@ Route::prefix('/realm/payment')
 Route::prefix('/realm/testing')
     ->name('testing.')
     ->controller(TestingController::class)
+    ->middleware('auth')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/shopeepay', 'testShopeePay')->name('shopeePay');
