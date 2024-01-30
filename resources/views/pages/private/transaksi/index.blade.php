@@ -38,44 +38,49 @@
                             </thead>
                             <tbody>
                                 @foreach ($datas as $data)
-                                    <tr>
-                                        <td>{{ $data->nomor_invoice }}</td>
-                                        @if (isset($data->digiflazz->trx_id))
-                                            <td>{{ $data->digiflazz->trx_id }}</td>
-                                        @else
-                                            <td>-</td>
-                                        @endif
-                                        <td>{{ $data->harga->nama_produk }}</td>
-                                        <td>{{ $data->harga->kode_produk }}</td>
-                                        @if (isset($data->digiflazz->saldo_terakhir) && isset($data->digiflazz->saldo_terpotong))
-                                            <td class="text-success">Rp.
-                                                {{ number_format($data->digiflazz->saldo_terakhir, 0, ',', '.') }}</td>
-                                            <td class="text-danger">Rp.
-                                                {{ number_format($data->digiflazz->saldo_terpotong, 0, ',', '.') }}</td>
-                                        @else
-                                            <td>-</td>
-                                        @endif
-                                        @if (isset($data->digiflazz->created_at))
-                                            <td>{{ \Carbon\Carbon::parse($data->digiflazz->created_at)->isoFormat('dddd, D MMMM YYYY, HH:mm:ss') }}
-                                                WIB
-                                            </td>
-                                        @else
-                                            <td>-</td>
-                                        @endif
-                                        @if (isset($data->digiflazz->status) && $data->digiflazz->status == 'Pending')
-                                            <td class="text-warning"><span
-                                                    class="badge bg-warning me-1"></span>{{ $data->digiflazz->status }}</td>
-                                        @elseif (isset($data->digiflazz->status) && $data->digiflazz->status == 'Sukses')
-                                            <td class="text-success"><span
-                                                    class="badge bg-success me-1"></span>{{ $data->digiflazz->status }}</td>
-                                        @elseif (isset($data->digiflazz->status) && $data->digiflazz->status == 'Gagal')
-                                            <td class="text-danger"><span
-                                                    class="badge bg-danger me-1"></span>{{ $data->digiflazz->status }}</td>
-                                        @else
-                                            <td>-</td>
-                                        @endif
-                                        <td><button class="btn">Edit</button></td>
-                                    </tr>
+                                    @if (isset($data->status))
+                                        <tr>
+                                            <td>{{ $data->nomor_invoice }}</td>
+                                            @if (isset($data->digiflazz->trx_id))
+                                                <td>{{ $data->digiflazz->trx_id }}</td>
+                                            @else
+                                                <td>-</td>
+                                            @endif
+                                            <td>{{ $data->harga->nama_produk }}</td>
+                                            <td>{{ $data->harga->kode_produk }}</td>
+                                            @if (isset($data->digiflazz->saldo_terakhir) && isset($data->digiflazz->saldo_terpotong))
+                                                <td class="text-success">Rp.
+                                                    {{ number_format($data->digiflazz->saldo_terakhir, 0, ',', '.') }}</td>
+                                                <td class="text-danger">Rp.
+                                                    {{ number_format($data->digiflazz->saldo_terpotong, 0, ',', '.') }}</td>
+                                            @else
+                                                <td>-</td>
+                                            @endif
+                                            @if (isset($data->digiflazz->created_at))
+                                                <td>{{ \Carbon\Carbon::parse($data->digiflazz->created_at)->isoFormat('dddd, D MMMM YYYY, HH:mm:ss') }}
+                                                    WIB
+                                                </td>
+                                            @else
+                                                <td>-</td>
+                                            @endif
+                                            @if (isset($data->digiflazz->status) && $data->digiflazz->status == 'Pending')
+                                                <td class="text-warning"><span
+                                                        class="badge bg-warning me-1"></span>{{ $data->digiflazz->status }}
+                                                </td>
+                                            @elseif (isset($data->digiflazz->status) && $data->digiflazz->status == 'Sukses')
+                                                <td class="text-success"><span
+                                                        class="badge bg-success me-1"></span>{{ $data->digiflazz->status }}
+                                                </td>
+                                            @elseif (isset($data->digiflazz->status) && $data->digiflazz->status == 'Gagal')
+                                                <td class="text-danger"><span
+                                                        class="badge bg-danger me-1"></span>{{ $data->digiflazz->status }}
+                                                </td>
+                                            @else
+                                                <td>-</td>
+                                            @endif
+                                            <td><button class="btn">Edit</button></td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         @else
