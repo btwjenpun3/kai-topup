@@ -49,7 +49,10 @@
                                         @if (isset($data->digiflazz->saldo_terakhir))
                                             <td class="text-success">Rp.
                                                 {{ number_format($data->digiflazz->saldo_terakhir, 0, ',', '.') }}</td>
-                                        @elseif (isset($data->digiflazz->saldo_terpotong))
+                                        @else
+                                            <td>-</td>
+                                        @endif
+                                        @if (isset($data->digiflazz->saldo_terpotong))
                                             <td class="text-danger">Rp.
                                                 {{ number_format($data->digiflazz->saldo_terpotong, 0, ',', '.') }}</td>
                                         @else
