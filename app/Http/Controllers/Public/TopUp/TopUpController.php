@@ -52,6 +52,24 @@ class TopUpController extends Controller
                  * Validasi terlebih dahulu apakah itemId dan itemPrice cocok dengan Database
                  */
                 $data = Harga::where('id', $request->itemId)->first();
+
+                /**
+                 * Cek saldo Digiflazz terlebih dahulu
+                 */
+                $saldo = Http::withHeaders([
+                    'Content-Type' => 'application/json',
+                ])->post('https://api.digiflazz.com/v1/cek-saldo', [
+                    'cmd' => 'deposit',
+                    'username' => env('DIGIFLAZZ_USERNAME'),
+                    'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . 'depo')
+                ]);
+                if($saldo['data']['deposit'] < $data->modal) {
+                    Log::channel('digiflazz')->error('Saldo habis! Kamu butuh Rp. ' . $data->modal . ' dan saldo kamu sisa Rp. ' . $saldo['data']['deposit']);
+                    return response()->json([                          
+                        'unaccepted' => 'Produk ini sedang Offline, silahkan pilih produk yang lain'
+                    ]);
+                }
+
                 /**
                  * Cek apakah produk tersebut sedang Cut Off atau tidak
                  */
@@ -59,7 +77,7 @@ class TopUpController extends Controller
                     $waktuSekarang = Carbon::now();
                     $mulaiCutOff = Carbon::parse($data->start_cut_off);
                     $selesaiCutOff = Carbon::parse($data->end_cut_off)->addDay();
-                    if ($waktuSekarang->between($mulaiCutOff, $selesaiCutOff)) {
+                    if ($waktuSekarang->between($mulaiCutOff, $selesaiCutOff)) {                        
                         return response()->json([
                             'unaccepted' => 'Produk ini sedang Offline hingga pukul ' . $data->end_cut_off . ' WIB'
                         ]);

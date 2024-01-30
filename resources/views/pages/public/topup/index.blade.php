@@ -255,6 +255,19 @@
 
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
+    <script>
+        function showError(message) {
+            $('#errorMessage').text(message);
+            $('#stickyAlert').fadeIn('slow');
+            setTimeout(function() {
+                $('#stickyAlert').fadeOut('slow');
+            }, 7000);
+        }
+
+        function hideError() {
+            $('#stickyAlert').fadeOut('slow');
+        }
+    </script>
     @if ($game->slug == 'mobile-legend')
         <script src="/assets/js/form-with-serverid.js"></script>
         <script>
