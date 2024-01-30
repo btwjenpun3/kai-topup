@@ -47,10 +47,10 @@
                                         @endif
                                         <td>{{ $data->harga->nama_produk }}</td>
                                         <td>{{ $data->harga->kode_produk }}</td>
-                                        @if (isset($data->digiflazz->saldo_terakhir) && isset($data->digiflazz->saldo_terpotong))
+                                        @if (isset($data->digiflazz->saldo_terakhir))
                                             <td class="text-success">Rp.
                                                 {{ number_format($data->digiflazz->saldo_terakhir, 0, ',', '.') }}</td>
-                                        @elseif (isset($data->digiflazz->saldo_terakhir) && isset($data->digiflazz->saldo_terpotong))
+                                        @elseif (isset($data->digiflazz->saldo_terpotong))
                                             <td class="text-danger">Rp.
                                                 {{ number_format($data->digiflazz->saldo_terpotong, 0, ',', '.') }}</td>
                                         @else
@@ -76,7 +76,6 @@
                                             <td class="text-secondary"><span class="badge bg-secondary me-1"></span>Menunggu
                                             </td>
                                         @endif
-                                        <td><button class="btn">Edit</button></td>
                                     </tr>
                                 @endforeach
                             </tbody>
