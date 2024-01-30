@@ -66,16 +66,13 @@
                                             <td>-</td>
                                         @endif
                                         @if (isset($data->digiflazz->status) && $data->digiflazz->status == 'Pending')
-                                            <td class="text-warning"><span
-                                                    class="badge bg-warning me-1"></span>{{ $data->digiflazz->status }}</td>
+                                            <td class="text-warning"><span class="badge bg-warning me-1"></span></td>
                                         @elseif (isset($data->digiflazz->status) && $data->digiflazz->status == 'Sukses')
-                                            <td class="text-success"><span
-                                                    class="badge bg-success me-1"></span>{{ $data->digiflazz->status }}</td>
+                                            <td class="text-success"><span class="badge bg-success me-1"></span></td>
                                         @elseif (isset($data->digiflazz->status) && $data->digiflazz->status == 'Gagal')
-                                            <td class="text-danger"><span
-                                                    class="badge bg-danger me-1"></span>{{ $data->digiflazz->status }}</td>
+                                            <td class="text-danger"><span class="badge bg-danger me-1"></span></td>
                                         @else
-                                            <td class="text-secondary"><span class="badge bg-secondary me-1"></span>Menunggu
+                                            <td class="text-secondary"><span class="badge bg-secondary me-1"></span>
                                             </td>
                                         @endif
                                     </tr>
