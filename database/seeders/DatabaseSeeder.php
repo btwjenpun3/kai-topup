@@ -47,6 +47,14 @@ class DatabaseSeeder extends Seeder
             'url_gambar' => 'games/undawn.webp',
             'slug' => 'undawn'
         ]); 
+
+        \App\Models\Game::create([
+            'nama' => 'LifeAfter',
+            'kode' => 'la',
+            'brand' => 'LifeAfter Credits',
+            'url_gambar' => 'games/lifeafter.webp',
+            'slug' => 'lifeafter'
+        ]);
         
         // \App\Models\Harga::create([
         //     'game_id' => 1,

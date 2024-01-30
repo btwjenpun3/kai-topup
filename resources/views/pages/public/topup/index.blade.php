@@ -46,7 +46,14 @@
                 @elseif($game->slug == 'free-fire')
                     @include('pages.public.topup.games.free-fire')
                 @elseif($game->slug == 'undawn')
+                    <div class="alert alert-warning text-center mb-4" role="alert">
+                        ⚠ Produk ini hanya untuk akun yang <b>TIDAK</b> bind Garena! ⚠
+                        <br>
+                        <small>Kesalahan karena hal ini bukan tanggung jawab kami</small>
+                    </div>
                     @include('pages.public.topup.games.undawn')
+                @elseif($game->slug == 'lifeafter')
+                    @include('pages.public.topup.games.lifeafter')
                 @endif
             </div>
         </div>
@@ -63,6 +70,8 @@
                     @include('pages.public.topup.form.mobile-legend')
                 @elseif($game->slug == 'free-fire')
                     @include('pages.public.topup.form.free-fire')
+                @elseif($game->slug == 'lifeafter')
+                    @include('pages.public.topup.form.lifeafter')
                 @endif
             </div>
         </div>
@@ -342,6 +351,45 @@
             });
         </script>
     @elseif($game->slug == 'free-fire')
+        <script src="/assets/js/form-with-serverid.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#confirmCheckout').click(function() {
+                    $('#loadingOverlay').show();
+                    $.ajax({
+                        url: '/topup/{{ $game->slug }}/process',
+                        type: 'POST',
+                        data: {
+                            price: selectedPrice,
+                            itemName: selectedItemName,
+                            userId: $('#userId').text(),
+                            serverId: $('#serverId').text(),
+                            userPhone: $('#userPhoneInput').val(),
+                            itemId: selectedItemId,
+                            paymentType: paymentTypeValue,
+                            paymentMethod: getPaymentMethodValue,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            if (response.redirect) {
+                                window.location.href = response.redirect;
+                            } else {
+                                $('#loadingOverlay').hide();
+                                showError(response.unaccepted);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            $('#loadingOverlay').hide();
+                            showError(error.unaccepted);
+                        }
+                    });
+
+                    // Tutup modal setelah mengklik "OK"
+                    $('#checkoutModal').modal('hide');
+                });
+            });
+        </script>
+    @elseif($game->slug == 'lifeafter')
         <script src="/assets/js/form-with-serverid.js"></script>
         <script>
             $(document).ready(function() {

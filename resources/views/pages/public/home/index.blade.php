@@ -29,7 +29,7 @@
                 </div>
                 <div class="row">
                     @foreach ($games as $game)
-                        <div class="col-lg-3 col-sm-6">
+                        <div class="col-lg-3 col-sm-6 col-6 col-md-6">
                             <div class="item text-center">
                                 <a href="{{ route('topup.index', ['slug' => $game->slug]) }}">
                                     <img src="{{ asset(Storage::url($game->url_gambar)) }}" alt="">

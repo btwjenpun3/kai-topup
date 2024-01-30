@@ -63,11 +63,11 @@ class TopUpController extends Controller
                     'username' => env('DIGIFLAZZ_USERNAME'),
                     'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . 'depo')
                 ]);
-                if($saldo['data']['deposit'] < $data->modal) {
-                    Log::channel('digiflazz')->error('Saldo habis! Kamu butuh Rp. ' . $data->modal . ' dan saldo kamu sisa Rp. ' . $saldo['data']['deposit']);
+                if($saldo['data']['deposit'] <= $data->modal) {
+                    Log::channel('digiflazz')->error('Saldo kurang! Kamu butuh Rp. ' . $data->modal . ' dan saldo kamu sisa Rp. ' . $saldo['data']['deposit']);
                     return response()->json([                          
                         'unaccepted' => 'Produk ini sedang Offline, silahkan pilih produk yang lain'
-                    ]);
+                    ], 200);
                 }
 
                 /**
