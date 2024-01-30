@@ -255,15 +255,118 @@
 
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
-    <script>
-        var selectedPrice = null;
-    </script>
     @if ($game->slug == 'mobile-legend')
         <script src="/assets/js/form-with-serverid.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#confirmCheckout').click(function() {
+                    $('#loadingOverlay').show();
+                    $.ajax({
+                        url: '/topup/{{ $game->slug }}/process',
+                        type: 'POST',
+                        data: {
+                            price: selectedPrice,
+                            itemName: selectedItemName,
+                            userId: $('#userId').text(),
+                            serverId: $('#serverId').text(),
+                            userPhone: $('#userPhoneInput').val(),
+                            itemId: selectedItemId,
+                            paymentType: paymentTypeValue,
+                            paymentMethod: getPaymentMethodValue,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            if (response.redirect) {
+                                window.location.href = response.redirect;
+                            } else {
+                                $('#loadingOverlay').hide();
+                                showError(response.unaccepted);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            $('#loadingOverlay').hide();
+                            showError(error.unaccepted);
+                        }
+                    });
+
+                    // Tutup modal setelah mengklik "OK"
+                    $('#checkoutModal').modal('hide');
+                });
+            });
+        </script>
     @elseif($game->slug == 'undawn')
         <script src="/assets/js/form-without-serverid.js"></script>
+        <script>
+            $('#confirmCheckout').click(function() {
+                $('#loadingOverlay').show();
+                $.ajax({
+                    url: '/topup/{{ $game->slug }}/process',
+                    type: 'POST',
+                    data: {
+                        price: selectedPrice,
+                        itemName: selectedItemName,
+                        userId: $('#userId').text(),
+                        userPhone: $('#userPhoneInput').val(),
+                        itemId: selectedItemId,
+                        paymentType: paymentTypeValue,
+                        paymentMethod: getPaymentMethodValue,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        if (response.redirect) {
+                            window.location.href = response.redirect;
+                        } else {
+                            $('#loadingOverlay').hide();
+                            showError(response.unaccepted);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        $('#loadingOverlay').hide();
+                        showError(error.unaccepted);
+                    }
+                });
+                $('#checkoutModal').modal('hide');
+            });
+        </script>
     @elseif($game->slug == 'free-fire')
         <script src="/assets/js/form-with-serverid.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#confirmCheckout').click(function() {
+                    $('#loadingOverlay').show();
+                    $.ajax({
+                        url: '/topup/{{ $game->slug }}/process',
+                        type: 'POST',
+                        data: {
+                            price: selectedPrice,
+                            itemName: selectedItemName,
+                            userId: $('#userId').text(),
+                            serverId: $('#serverId').text(),
+                            userPhone: $('#userPhoneInput').val(),
+                            itemId: selectedItemId,
+                            paymentType: paymentTypeValue,
+                            paymentMethod: getPaymentMethodValue,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            if (response.redirect) {
+                                window.location.href = response.redirect;
+                            } else {
+                                $('#loadingOverlay').hide();
+                                showError(response.unaccepted);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            $('#loadingOverlay').hide();
+                            showError(error.unaccepted);
+                        }
+                    });
+
+                    // Tutup modal setelah mengklik "OK"
+                    $('#checkoutModal').modal('hide');
+                });
+            });
+        </script>
     @endif
 @endsection
 
