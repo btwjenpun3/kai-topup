@@ -22,6 +22,7 @@ class DigiflazzController extends Controller
                         $invoice->digiflazz->update([
                             'trx_id' => $payload['data']['trx_id'],
                             'message' => $payload['data']['message'],
+                            'sn' => $payload['data']['sn'],
                             'status' => $payload['data']['status']
                         ]);
                         return response()->json(200);

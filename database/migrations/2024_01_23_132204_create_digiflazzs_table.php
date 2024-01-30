@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('message');
             $table->string('seller_telegram');
             $table->string('seller_whatsapp');
+            $table->string('sn')->nullable();
             $table->string('status');
             $table->timestamps();
         });
