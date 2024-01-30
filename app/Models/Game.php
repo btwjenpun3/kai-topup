@@ -11,6 +11,11 @@ class Game extends Model
 
     protected $guarded = ['id'];
 
+    public function type()
+    {
+        return $this->belongsTo(Harga::class);
+    }
+
     public function harga()
     {
         return $this->hasMany(Harga::class);

@@ -75,6 +75,7 @@
                                 <tr>
                                     <th class="w-7"></th>
                                     <th>Nama Produk</th>
+                                    <th>Tipe</th>
                                     <th>Kode Produk</th>
                                     <th>Modal</th>
                                     <th>Harga Jual</th>
@@ -90,6 +91,7 @@
                                     <tr>
                                         <td><img src="{{ asset(Storage::url($h->gambar)) }}"></td>
                                         <td>{{ $h->nama_produk }}</td>
+                                        <td>{{ $h->tipe }}</td>
                                         <td>{{ $h->kode_produk }}</td>
                                         <td>Rp. {{ number_format($h->modal, 0, ',', '.') }}</td>
                                         <td>Rp. {{ number_format($h->harga_jual, 0, ',', '.') }}</td>
@@ -274,6 +276,13 @@
                         </div>
                     </div>
                     <div class="row mb-3 align-items-end">
+                        <label class="form-label" for="gambar">Gambar</label>
+                        <div class="input-group mb-3">
+                            <input type="file" name="gambar" id="edit_gambar" class="form-control"
+                                aria-describedby="modal_prepend" />
+                        </div>
+                    </div>
+                    <div class="row mb-3 align-items-end">
                         <label class="form-label" for="edit_status">Status</label>
                         <div class="input-group mb-3">
                             <select class="form-select" name="edit_status" id="edit_status">
@@ -405,6 +414,7 @@
                     document.getElementById('edit_modal').value = response.modal;
                     document.getElementById('edit_harga_jual').value = response.harga_jual;
                     document.getElementById('edit_profit').value = response.profit;
+                    document.getElementById('edit_gambar').value = null;
                 },
                 error: function(xhr, error, status) {}
             });
@@ -413,17 +423,23 @@
         $(document).ready(function() {
             var gameId = '{{ $game->id }}';
             $('#update').click(function() {
+                var editGambar = $('#edit_gambar')[0].files[0];
+                var formData = new FormData($('#myForm')[0]);
+
+                formData.append('edit_nama_produk', $('#edit_nama_produk').val());
+                formData.append('edit_kode_produk', $('#edit_kode_produk').val());
+                formData.append('edit_modal', $('#edit_modal').val());
+                formData.append('edit_gambar', editGambar);
+                formData.append('edit_harga_jual', $('#edit_harga_jual').val());
+                formData.append('edit_status', $('#edit_status').val());
+                formData.append('_token', '{{ csrf_token() }}');
+
                 $.ajax({
                     url: '/realm/set-harga/update/' + gameId + '/' + produkId,
                     type: 'POST',
-                    data: {
-                        edit_nama_produk: $('#edit_nama_produk').val(),
-                        edit_kode_produk: $('#edit_kode_produk').val(),
-                        edit_modal: $('#edit_modal').val(),
-                        edit_harga_jual: $('#edit_harga_jual').val(),
-                        edit_status: $('#edit_status').val(),
-                        _token: '{{ csrf_token() }}'
-                    },
+                    processData: false, // Set to false because we are using FormData
+                    contentType: false, // Set to false because we are using FormData
+                    data: formData, // Pass FormData directly
                     success: function(response) {
                         var successMessage = document.createElement(
                             "div");
@@ -438,7 +454,7 @@
                         var errorMessage = document.createElement(
                             "div");
                         errorMessage.className = "alert alert-danger";
-                        errorMessage.textContent = xhr.responseJSON.message;
+                        errorMessage.textContent = xhr.responseJSON.failed;
                         $('#produk-gagal-di-update').html(errorMessage);
                     }
                 });

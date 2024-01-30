@@ -53,6 +53,33 @@
                         <tbody>
                             <tr>
                                 <td>
+                                    <h6>User ID</h6>
+                                </td>
+                                <td> </td>
+                                <td class="text-end">
+                                    <h6>{{ $invoice->user_id }}</h6>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h6>Server ID</h6>
+                                </td>
+                                <td> </td>
+                                <td class="text-end">
+                                    <h6>{{ $invoice->server_id }}</h6>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h6>Telepon</h6>
+                                </td>
+                                <td> </td>
+                                <td class="text-end">
+                                    <h6>{{ $invoice->phone }}</h6>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     <h6>Nama Item</h6>
                                 </td>
                                 <td>

@@ -22,45 +22,54 @@
             <div class="card">
                 <div class="table-responsive">
                     <table id="payment-table" class="table table-vcenter card-table table-striped">
-                        <thead>
-                            <tr>
-                                <th>TRX ID</th>
-                                <th>Nama</th>
-                                <th>Kode Produk</th>
-                                <th>Saldo Terakhir</th>
-                                <th>Saldo Terpotong</th>
-                                <th>Tanggal</th>
-                                <th>Status</th>
-                                <th class="w-1"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($datas as $data)
+                        @if (isset($datas) && count($transactions) > 0)
+                            <thead>
                                 <tr>
-                                    <td>{{ $data->digiflazz->trx_id }}</td>
-                                    <td>{{ $data->harga->nama_produk }}</td>
-                                    <td>{{ $data->harga->kode_produk }}</td>
-                                    <td class="text-success">Rp.
-                                        {{ number_format($data->digiflazz->saldo_terakhir, 0, ',', '.') }}</td>
-                                    <td class="text-danger">Rp.
-                                        {{ number_format($data->digiflazz->saldo_terpotong, 0, ',', '.') }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($data->digiflazz->created_at)->isoFormat('dddd, D MMMM YYYY, HH:mm:ss') }}
-                                        WIB
-                                    </td>
-                                    @if ($data->digiflazz->status == 'Pending')
-                                        <td class="text-warning"><span
-                                                class="badge bg-warning me-1"></span>{{ $data->digiflazz->status }}</td>
-                                    @elseif ($data->digiflazz->status == 'Sukses')
-                                        <td class="text-success"><span
-                                                class="badge bg-success me-1"></span>{{ $data->digiflazz->status }}</td>
-                                    @elseif ($data->digiflazz->status == 'Gagal')
-                                        <td class="text-danger"><span
-                                                class="badge bg-danger me-1"></span>{{ $data->digiflazz->status }}</td>
-                                    @endif
-                                    <td><button class="btn">Edit</button></td>
+                                    <th>TRX ID</th>
+                                    <th>Nama</th>
+                                    <th>Kode Produk</th>
+                                    <th>Saldo Terakhir</th>
+                                    <th>Saldo Terpotong</th>
+                                    <th>Tanggal</th>
+                                    <th>Status</th>
+                                    <th class="w-1"></th>
                                 </tr>
-                            @endforeach
-                        </tbody>
+                            </thead>
+                            <tbody>
+                                @foreach ($datas as $data)
+                                    <tr>
+                                        <td>{{ $data->digiflazz->trx_id }}</td>
+                                        <td>{{ $data->harga->nama_produk }}</td>
+                                        <td>{{ $data->harga->kode_produk }}</td>
+                                        <td class="text-success">Rp.
+                                            {{ number_format($data->digiflazz->saldo_terakhir, 0, ',', '.') }}</td>
+                                        <td class="text-danger">Rp.
+                                            {{ number_format($data->digiflazz->saldo_terpotong, 0, ',', '.') }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($data->digiflazz->created_at)->isoFormat('dddd, D MMMM YYYY, HH:mm:ss') }}
+                                            WIB
+                                        </td>
+                                        @if ($data->digiflazz->status == 'Pending')
+                                            <td class="text-warning"><span
+                                                    class="badge bg-warning me-1"></span>{{ $data->digiflazz->status }}</td>
+                                        @elseif ($data->digiflazz->status == 'Sukses')
+                                            <td class="text-success"><span
+                                                    class="badge bg-success me-1"></span>{{ $data->digiflazz->status }}</td>
+                                        @elseif ($data->digiflazz->status == 'Gagal')
+                                            <td class="text-danger"><span
+                                                    class="badge bg-danger me-1"></span>{{ $data->digiflazz->status }}</td>
+                                        @endif
+                                        <td><button class="btn">Edit</button></td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        @else
+                            <tbody>
+                                <tr>
+                                    <td>Tidak ada Data. Harap menambah Game baru melalui tombol <code>Buat</code> di atas.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        @endif
                     </table>
                 </div>
             </div>

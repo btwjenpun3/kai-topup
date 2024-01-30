@@ -15,4 +15,9 @@ class Harga extends Model
     {
         return $this->belongsTo(Game::class);
     }
+
+    public function type()
+    {
+        return $this->belongsTo(Game::class);
+    }
 }

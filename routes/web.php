@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Private\Dashboard\DashboardContoller;
 use App\Http\Controllers\Private\Invoice\InvoiceRealmController;
 use App\Http\Controllers\Private\ListGames\ListGamesController;
@@ -59,7 +60,14 @@ Route::prefix('/simulate')
  * Private Route Start Here
  */
 
-Route::prefix('/realm')
+Route::prefix('/realm/auth')
+    ->name('auth.')
+    ->controller(AuthController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+    });
+
+Route::prefix('/realm/dashboard')
     ->name('dashboard.')
     ->controller(DashboardContoller::class)
     ->group(function () {

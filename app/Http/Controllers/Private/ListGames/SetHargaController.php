@@ -78,7 +78,7 @@ class SetHargaController extends Controller
                 'edit_status' => 'required'
             ]);
             if($validation) {
-                $profit = $request->edit_harga_jual - $request->edit_modal;
+                $profit = $request->edit_harga_jual - $request->edit_modal;                
                 Harga::where('id', $request->id)->update([
                     'nama_produk' => $request->edit_nama_produk,
                     'kode_produk' => $request->edit_kode_produk,
@@ -87,17 +87,19 @@ class SetHargaController extends Controller
                     'profit' => $profit,
                     'status' => $request->edit_status 
                 ]);
+                if ($request->hasFile('edit_gambar')) {
+                    $gambarPath = $request->file('edit_gambar')->storeAs('produk', $request->file('edit_gambar')->getClientOriginalName(), 'public');
+                    Harga::where('id', $request->id)->update([
+                        'gambar' => $gambarPath 
+                    ]);
+                }
                 return response()->json([
                     'success' => 'Produk berhasil di update!'
                 ], 200);
-            } else {
-                return response()->json([
-                    'error' => 'Gagal di Update'
-                ], 422);
             }
         } catch (\Exception $e) {
             Log::error('Pesan Error: ' . $e->getMessage());
-            return response()->json(['error' => $e->getMessage()], 500);
+            return response()->json(['failed' => $e->getMessage()], 500);
         }        
     }
 
@@ -121,7 +123,7 @@ class SetHargaController extends Controller
                             if($produk->contains('kode_produk', $item['buyer_sku_code'])) {
                                 Harga::where('kode_produk', $item['buyer_sku_code'])->update([
                                     'game_id' => $data->id,
-                                    'nama_produk' => $item['product_name'],
+                                    'nama_produk' => $item['product_name'],                                    
                                     'seller_name' => $item['seller_name'],
                                     'kode_produk' => $item['buyer_sku_code'],
                                     'deskripsi' => $item['desc'],
@@ -133,6 +135,7 @@ class SetHargaController extends Controller
                                 Harga::create([
                                     'game_id' => $data->id,
                                     'nama_produk' => $item['product_name'],
+                                    'tipe' => $item['type'],
                                     'seller_name' => $item['seller_name'],
                                     'kode_produk' => $item['buyer_sku_code'],
                                     'deskripsi' => $item['desc'],

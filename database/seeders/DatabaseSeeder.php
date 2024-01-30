@@ -24,7 +24,15 @@ class DatabaseSeeder extends Seeder
             'brand' => 'MOBILE LEGENDS',
             'url_gambar' => 'games/mobile-legend.webp',
             'slug' => 'mobile-legend'
-        ]);   
+        ]);
+        
+        \App\Models\Game::create([
+            'nama' => 'Free Fire',
+            'kode' => 'ff',
+            'brand' => 'FREE FIRE',
+            'url_gambar' => 'games/freefire.webp',
+            'slug' => 'free-fire'
+        ]); 
         
         // \App\Models\Harga::create([
         //     'game_id' => 1,

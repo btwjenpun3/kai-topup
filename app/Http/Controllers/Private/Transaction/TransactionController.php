@@ -11,9 +11,11 @@ class TransactionController extends Controller
 {
     public function index()
     {
-        $data = Invoice::all();
+        $data = Invoice::get();
+        $transactions = Digiflazz::get();
         return view('pages.private.transaksi.index', [
-            'datas' => $data
+            'datas' => $data,
+            'transactions' => $transactions
         ]);
     }
 }

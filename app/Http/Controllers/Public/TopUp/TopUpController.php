@@ -13,6 +13,7 @@ use App\Models\XenditEWallet;
 use App\Models\XenditOutlet;
 use App\Models\XenditQr;
 use App\Models\XenditVa;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 
@@ -23,7 +24,7 @@ class TopUpController extends Controller
     public function index(Request $request)
     {
         $game = Game::where('slug', $request->slug)->firstOrFail();
-        return view('pages.public.topup.index', [
+        return view('pages.public.topup.index', [            
             'game' => $game,
             'harga' => $game->harga,
             'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
@@ -51,6 +52,19 @@ class TopUpController extends Controller
                  * Validasi terlebih dahulu apakah itemId dan itemPrice cocok dengan Database
                  */
                 $data = Harga::where('id', $request->itemId)->first();
+                /**
+                 * Cek apakah produk tersebut sedang Cut Off atau tidak
+                 */
+                if(!($data->start_cut_off == $data->end_cut_off)) {
+                    $waktuSekarang = Carbon::now();
+                    $mulaiCutOff = Carbon::parse($data->start_cut_off);
+                    $selesaiCutOff = Carbon::parse($data->end_cut_off)->addDay();
+                    if ($waktuSekarang->between($mulaiCutOff, $selesaiCutOff)) {
+                        return response()->json([
+                            'unaccepted' => 'Produk ini sedang Offline hingga pukul ' . $data->end_cut_off . ' WIB'
+                        ]);
+                    }
+                }                
                 if($data) {
                     if($request->price == $data->harga_jual) {
                         $game = $data->game->where('slug', $request->slug)->first();

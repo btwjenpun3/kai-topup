@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('hargas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('game_id')->constrained();
-            $table->string('nama_produk');            
+            $table->string('nama_produk');
+            $table->string('tipe');          
             $table->string('seller_name');
             $table->string('kode_produk');
             $table->string('deskripsi');
