@@ -57,20 +57,13 @@
                 <div class="heading-section">
                     <h4><em>Masukkan</em> Data Kamu</h4>
                 </div>
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <div class="data-input">
-                                <input id="userIdInput" type="text" placeholder="Masukkan User ID" />
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                            <div class="data-input">
-                                <input id="serverIdInput" type="text" placeholder="Masukkan Server ID" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @if ($game->slug == 'undawn')
+                    @include('pages.public.topup.form.undawn')
+                @elseif($game->slug == 'mobile-legend')
+                    @include('pages.public.topup.form.mobile-legend')
+                @elseif($game->slug == 'free-fire')
+                    @include('pages.public.topup.form.free-fire')
+                @endif
             </div>
         </div>
     </div>
@@ -179,7 +172,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-12 col-sm-12">
                             <div class="data-input">
                                 <input id="userPhoneInput" type="text"
                                     placeholder="Contoh : 6285740199222 (Tanpa Tanda Plus)" />
@@ -263,126 +256,15 @@
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
     <script>
-        $(document).ready(function() {
-            function showError(message) {
-                $('#errorMessage').text(message);
-                $('#stickyAlert').fadeIn('slow');
-                setTimeout(function() {
-                    $('#stickyAlert').fadeOut('slow');
-                }, 7000);
-            }
-
-            function hideError() {
-                $('#stickyAlert').fadeOut('slow');
-            }
-
-            var selectedPrice = null;
-
-            function handleItemClick(item) {
-                $('.clickable-item').removeClass('clicked');
-                $(item).addClass('clicked');
-                selectedPrice = $(item).find('[id^="getItemPrice-"]').val();
-                selectedItemId = $(item).find('[id^="getItemId-"]').val();
-                selectedItemName = $(item).find('[id^="getItemName-"]').val();
-            }
-
-            $('.clickable-item').click(function() {
-                handleItemClick(this);
-            });
-
-            function handlePaymentClick(item) {
-                $('.clickable-payment').removeClass('clicked');
-                $(item).addClass('clicked');
-                getPaymentMethodValue = $(item).find('input[type="hidden"]').val();
-                paymentTypeValue = $(item).find('.getPaymentType').val();
-            }
-
-            $('.clickable-payment').click(function() {
-                handlePaymentClick(this);
-            });
-
-
-            $('#checkout').click(function() {
-                var userIdInputValue = $('#userIdInput').val();
-                var serverIdInputValue = $('#serverIdInput').val();
-                var userPhoneInputValue = $('#userPhoneInput').val();
-
-                if (userIdInputValue.trim() === '') {
-                    showError('Harap isi semua Data kamu!');
-                    return;
-                }
-
-                if (userPhoneInputValue.trim() === '') {
-                    showError('Harap isi nomor telepon kamu!');
-                    return;
-                }
-                if (selectedPrice !== null) {
-                    $('#userPhoneNumber').text(userPhoneInputValue);
-                    $('#itemName').text(selectedItemName);
-                    $('#itemPrice').text('Rp. ' + formatRupiah(selectedPrice));
-                    $('#itemId').val(selectedItemId);
-                    $('#userId').text($('#userIdInput').val());
-                    $('#serverId').text($('#serverIdInput').val());
-                    $('#paymentType').text(paymentTypeValue);
-                    $('#paymentMethod').text(getPaymentMethodValue);
-
-                    $('#checkoutModal').modal('show');
-                } else {
-                    showError('Silakan pilih harga terlebih dahulu.');
-                }
-            });
-
-            $('#confirmCheckout').click(function() {
-                $('#loadingOverlay').show();
-                $.ajax({
-                    url: '/topup/{{ $game->slug }}/process',
-                    type: 'POST',
-                    data: {
-                        price: selectedPrice,
-                        itemName: selectedItemName,
-                        userId: $('#userId').text(),
-                        serverId: $('#serverId').text(),
-                        userPhone: $('#userPhoneInput').val(),
-                        itemId: selectedItemId,
-                        paymentType: paymentTypeValue,
-                        paymentMethod: getPaymentMethodValue,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(response) {
-                        if (response.redirect) {
-                            window.location.href = response.redirect;
-                        } else {
-                            $('#loadingOverlay').hide();
-                            showError(response.unaccepted);
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        $('#loadingOverlay').hide();
-                        showError(error.unaccepted);
-                    }
-                });
-
-                // Tutup modal setelah mengklik "OK"
-                $('#checkoutModal').modal('hide');
-            });
-        });
-
-        function formatRupiah(angka) {
-            var number_string = angka.toString();
-            var split = number_string.split(',');
-            var sisa = split[0].length % 3;
-            var rupiah = split[0].substr(0, sisa);
-            var ribuan = split[0].substr(sisa).match(/\d{1,3}/gi);
-
-            if (ribuan) {
-                separator = sisa ? '.' : '';
-                rupiah += separator + ribuan.join('.');
-            }
-
-            rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
-            return rupiah;
-        }
+        var selectedPrice = null;
     </script>
+    @if ($game->slug == 'mobile-legend')
+        <script src="/assets/js/form-with-serverid.js"></script>
+    @elseif($game->slug == 'undawn')
+        <script src="/assets/js/form-without-serverid.js"></script>
+    @elseif($game->slug == 'free-fire')
+        <script src="/assets/js/form-with-serverid.js"></script>
+    @endif
 @endsection
 
 @section('css')
