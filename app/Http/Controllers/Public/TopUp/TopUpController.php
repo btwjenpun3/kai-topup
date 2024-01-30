@@ -106,7 +106,7 @@ class TopUpController extends Controller
                         $datePart = now()->format('Ymd');
                         $lastOrder = Invoice::orderby('id', 'desc')->first();
                         $randNumber = rand(100,999);
-                        $sequenceNumber = $lastOrder ? sprintf('%08d', $lastOrder->id + 1) : '00001';
+                        $sequenceNumber = $lastOrder ? sprintf('%05d', $lastOrder->id + 1) : '00001';
                         $invoiceNumber = 'TRX' . $datePart . $randNumber . $sequenceNumber;
 
                         /**
