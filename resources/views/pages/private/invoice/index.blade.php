@@ -60,7 +60,7 @@
                                         <td>{{ \Carbon\Carbon::parse($invoice->created_at)->isoFormat('dddd, D MMMM YYYY, HH:mm:ss') }}
                                             WIB
                                         </td>
-                                        <td>Rp. {{ number_format($invoice->harga->harga_jual, 0, ',', '.') }}</td>
+                                        <td>Rp. {{ number_format($invoice->harga->total, 0, ',', '.') }}</td>
                                         @if ($invoice->status == 'PENDING')
                                             <td class="text-warning"><span
                                                     class="badge bg-warning me-1"></span>{{ $invoice->status }}</td>
