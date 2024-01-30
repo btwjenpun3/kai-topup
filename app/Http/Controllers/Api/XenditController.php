@@ -88,10 +88,9 @@ class XenditController extends Controller
                             'Content-Type' => 'application/json',
                         ])->post('https://api.digiflazz.com/v1/transaction', [
                             'username' => env('DIGIFLAZZ_USERNAME'),
-                            'buyer_sku_code' => 'xld10',
-                            'customer_no' => '087800001233',
+                            'buyer_sku_code' => $invoice->harga->kode_produk,
+                            'customer_no' => $invoice->customer,
                             'ref_id' => $invoice->nomor_invoice,
-                            'testing' => true,
                             'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . $invoice->nomor_invoice)
                         ]);
                         if($digiflazz->successful()) {
@@ -151,10 +150,9 @@ class XenditController extends Controller
                             'Content-Type' => 'application/json',
                         ])->post('https://api.digiflazz.com/v1/transaction', [
                             'username' => env('DIGIFLAZZ_USERNAME'),
-                            'buyer_sku_code' => 'xld10',
-                            'customer_no' => '087800001233',
+                            'buyer_sku_code' => $invoice->harga->kode_produk,
+                            'customer_no' => $invoice->customer,
                             'ref_id' => $invoice->nomor_invoice,
-                            'testing' => true,
                             'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . $invoice->nomor_invoice)
                         ]);
                         if($digiflazz->successful()) {
@@ -218,10 +216,9 @@ class XenditController extends Controller
                             'Content-Type' => 'application/json',
                         ])->post('https://api.digiflazz.com/v1/transaction', [
                             'username' => env('DIGIFLAZZ_USERNAME'),
-                            'buyer_sku_code' => 'xld10',
-                            'customer_no' => '087800001233',
+                            'buyer_sku_code' => $invoice->harga->kode_produk,
+                            'customer_no' => $invoice->customer,
                             'ref_id' => $invoice->nomor_invoice,
-                            'testing' => true,
                             'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . $invoice->nomor_invoice)
                         ]);
                         if($digiflazz->successful()) {

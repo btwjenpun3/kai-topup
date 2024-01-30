@@ -25,6 +25,7 @@
                         @if (count($transactions) > 0)
                             <thead>
                                 <tr>
+                                    <th>Invoice</th>
                                     <th>TRX ID</th>
                                     <th>Nama</th>
                                     <th>Kode Produk</th>
@@ -38,6 +39,7 @@
                             <tbody>
                                 @foreach ($datas as $data)
                                     <tr>
+                                        <td>{{ $data->nomor_invoice }}</td>
                                         @if (isset($data->digiflazz->trx_id))
                                             <td>{{ $data->digiflazz->trx_id }}</td>
                                         @else
