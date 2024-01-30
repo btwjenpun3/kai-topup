@@ -87,8 +87,9 @@ class TopUpController extends Controller
                          */
                         $datePart = now()->format('Ymd');
                         $lastOrder = Invoice::orderby('id', 'desc')->first();
-                        $sequenceNumber = $lastOrder ? sprintf('%08d', $lastOrder->id + 1) : '00000001';
-                        $invoiceNumber = 'TRX' . $datePart . $sequenceNumber;
+                        $randNumber = rand(100,999);
+                        $sequenceNumber = $lastOrder ? sprintf('%08d', $lastOrder->id + 1) : '00001';
+                        $invoiceNumber = 'TRX' . $datePart . $randNumber . $sequenceNumber;
 
                         /**
                          * Setelah nomor invoice di buat, mari berlanjut ke pembuatan Expired_At
