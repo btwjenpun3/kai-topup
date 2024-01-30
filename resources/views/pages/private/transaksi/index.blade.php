@@ -33,7 +33,6 @@
                                     <th>Saldo Terpotong</th>
                                     <th>Tanggal</th>
                                     <th>Status</th>
-                                    <th class="w-1"></th>
                                 </tr>
                             </thead>
                             <tbody>
