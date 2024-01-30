@@ -45,6 +45,8 @@
                     @include('pages.public.topup.games.mobile-legend')
                 @elseif($game->slug == 'free-fire')
                     @include('pages.public.topup.games.free-fire')
+                @elseif($game->slug == 'undawn')
+                    @include('pages.public.topup.games.undawn')
                 @endif
             </div>
         </div>
@@ -305,7 +307,7 @@
                 var serverIdInputValue = $('#serverIdInput').val();
                 var userPhoneInputValue = $('#userPhoneInput').val();
 
-                if (userIdInputValue.trim() === '' || serverIdInputValue.trim() === '') {
+                if (userIdInputValue.trim() === '') {
                     showError('Harap isi semua Data kamu!');
                     return;
                 }

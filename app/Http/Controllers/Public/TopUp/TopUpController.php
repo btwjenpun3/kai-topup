@@ -41,7 +41,7 @@ class TopUpController extends Controller
                 'price' => 'required',
                 'itemName' => 'required',
                 'userId' => 'required',
-                'serverId' => 'required',
+                'serverId' => 'nullable',
                 'userPhone' => 'required',
                 'itemId' => 'required',
                 'paymentType' => 'required',
