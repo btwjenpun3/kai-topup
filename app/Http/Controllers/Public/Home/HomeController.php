@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function index()
     {
         $now =  Carbon::now()->format('Y-m-d H:i:s');
-        $flashsales = Flashsale::where('status', '1')->where('stock', '>', '0')->get();
+        $flashsales = Flashsale::where('status', '1')->where('expired_at', '>', $now)->where('stock', '>', '0')->get();
         dd($flashsales);
         return view('pages.public.home.index', [
             'flashsales' => $flashsales,
