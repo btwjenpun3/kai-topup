@@ -19,16 +19,30 @@
 @endsection
 
 @section('content')
-    <div class="featured-games">
-        <div class="col-lg-12">
-            <div class="row">
-                <div class="col-md-3">
-                    <img src="{{ asset(Storage::url($game->url_gambar)) }}">
-                </div>
-                <div class="col-md-9">
-                    <div class="heading-section">
-                        <h4><em>Cara Top Up</em> {{ $game->nama }}</h4>
-                        <p>Cara Top Up Mobile Legends Murah</p>
+    <div class="product-header">
+        <div class="container">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img src="{{ asset(Storage::url($game->url_gambar)) }}" class="img-fluid">
+                    </div>
+                    <div class="col-md-9">
+                        <div class="heading-section text-center">
+                            <h4>Cara Top Up {{ $game->nama }}</h4>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="description">
+                                <p>Cara Top Up Mobile Legends Murah</p>
+                                <ul>
+                                    <li>1. Masukkan ID(SERVER) </li>
+                                    <li>2. Pilih Jumlah Nominal Diamond</li>
+                                    <li>3. Pilih Metode Pembayaran</li>
+                                    <li>4. Masukkan Nomor Whatsapp </li>
+                                    <li>5. Klik Beli Sekarang & Melakukan Pembayaran </li>
+                                    <li>6. Tunggu Beberapa Saat Diamond Akan Otomatis Masuk Ke Akun Anda.</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -140,23 +154,27 @@
             </div>
         </div>
     </div>
-    <div class="most-popular">
+    <div class="data">
         <div class="row">
-            <div class="col-lg-12">
-                <div class="heading-section">
-                    <h4><em>Masukkan</em> Data Kamu</h4>
-                </div>
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <div class="data-input">
-                                <input id="userIdInput" type="text" placeholder="Masukkan User ID" required />
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                            <div class="data-input">
-                                <input id="serverIdInput" type="text" placeholder="Masukkan Server ID / Zone ID"
-                                    required />
+            <div class="container">
+                <div class="col-lg-12">
+                    <div class="heading-section text-center">
+                        <h4>Masukkan Data Kamu</h4>
+                    </div>
+                    <div class="data-parent">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="data-input">
+                                        <input id="userIdInput" type="text" placeholder="Masukkan User ID" required />
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="data-input">
+                                        <input id="serverIdInput" type="text"
+                                            placeholder="Masukkan Server ID / Zone ID" required />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -167,116 +185,100 @@
     <div class="payments">
         <div class="row">
             <div class="col-lg-12">
-                <div class="heading-section">
-                    <h4><em>Pilih Metode</em> Pembayaran</h4>
+                <div class="heading-section text-center">
+                    <h4>Pilih Metode Pembayaran</h4>
                 </div>
-                <div class="col-md-12">
+                <div class="payment-parent">
                     <div class="col-md-12">
-                        <div class="row">
-                            <ul id="accordion" class="accordion">
-                                <li>
-                                    <div class="link">EWALLET<i class="fa fa-chevron-down"></i></div>
-                                    <ul class="submenu">
-                                        <div class="row">
-                                            @foreach ($ewallets as $ewallet)
-                                                <div class="col-lg-2 col-sm-6 col-md-4 col-6">
-                                                    <div class="item payment text-center clickable-payment">
-                                                        <img src="{{ asset(Storage::url($ewallet->image)) }}"
-                                                            class="img-fluid">
-                                                        <h4 class="text-sm">{{ $ewallet->name }}</h4>
-                                                        <span class="text-sm">Biaya Admin
-                                                            {{ $ewallet->admin_fee }}%</span>
-                                                        <input id="{{ $ewallet->payment_method }}" type="hidden"
-                                                            value="{{ $ewallet->payment_method }}">
-                                                        <input class="getPaymentType" type="hidden"
-                                                            value="{{ $ewallet->payment_type }}">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <ul id="accordion" class="accordion">
+                                    <li>
+                                        <div class="link">EWALLET<i class="fa fa-chevron-down"></i></div>
+                                        <ul class="submenu">
+                                            <div class="row">
+                                                @foreach ($ewallets as $ewallet)
+                                                    <div class="col-lg-2 col-sm-6 col-md-4 col-6">
+                                                        <div class="item payment text-center clickable-payment">
+                                                            <img src="{{ asset(Storage::url($ewallet->image)) }}"
+                                                                class="img-fluid">
+                                                            <h4 class="text-sm">{{ $ewallet->name }}</h4>
+                                                            <span class="text-sm">Biaya Admin
+                                                                {{ $ewallet->admin_fee }}%</span>
+                                                            <input id="{{ $ewallet->payment_method }}" type="hidden"
+                                                                value="{{ $ewallet->payment_method }}">
+                                                            <input class="getPaymentType" type="hidden"
+                                                                value="{{ $ewallet->payment_type }}">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <div class="link">QRIS<i class="fa fa-chevron-down"></i></div>
-                                    <ul class="submenu">
-                                        <div class="row">
-                                            @foreach ($qris as $q)
-                                                <div class="col-lg-2 col-sm-6 col-md-4 col-6">
-                                                    <div class="item payment text-center clickable-payment">
-                                                        <img src="{{ asset(Storage::url($q->image)) }}"
-                                                            class="img-fluid">
-                                                        <h4 class="text-sm">{{ $q->name }}</h4>
-                                                        <span class="text-sm">Biaya Admin {{ $q->admin_fee }}%</span>
-                                                        <input id="{{ $q->payment_method }}" type="hidden"
-                                                            value="{{ $q->payment_method }}">
-                                                        <input class="getPaymentType" type="hidden"
-                                                            value="{{ $q->payment_type }}">
+                                                @endforeach
+                                            </div>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="link">QRIS<i class="fa fa-chevron-down"></i></div>
+                                        <ul class="submenu">
+                                            <div class="row">
+                                                @foreach ($qris as $q)
+                                                    <div class="col-lg-2 col-sm-6 col-md-4 col-6">
+                                                        <div class="item payment text-center clickable-payment">
+                                                            <img src="{{ asset(Storage::url($q->image)) }}"
+                                                                class="img-fluid">
+                                                            <h4 class="text-sm">{{ $q->name }}</h4>
+                                                            <span class="text-sm">Biaya Admin {{ $q->admin_fee }}%</span>
+                                                            <input id="{{ $q->payment_method }}" type="hidden"
+                                                                value="{{ $q->payment_method }}">
+                                                            <input class="getPaymentType" type="hidden"
+                                                                value="{{ $q->payment_type }}">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <div class="link">VIRTUAL ACCOUNT<i class="fa fa-chevron-down"></i></div>
-                                    <ul class="submenu">
-                                        <div class="row">
-                                            @foreach ($vas as $va)
-                                                <div class="col-lg-2 col-sm-6 col-md-4 col-6">
-                                                    <div class="item payment text-center clickable-payment">
-                                                        <img src="{{ asset(Storage::url($va->image)) }}"
-                                                            class="img-fluid">
-                                                        <h4 class="text-sm">{{ $va->name }}</h4>
-                                                        <span class="text-sm">Biaya Admin Rp.
-                                                            {{ number_format($va->admin_fee_fixed, 0, ',', '.') }}</span>
-                                                        <input id="{{ $va->payment_method }}" type="hidden"
-                                                            value="{{ $va->payment_method }}">
-                                                        <input class="getPaymentType" type="hidden"
-                                                            value="{{ $va->payment_type }}">
+                                                @endforeach
+                                            </div>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="link">VIRTUAL ACCOUNT<i class="fa fa-chevron-down"></i></div>
+                                        <ul class="submenu">
+                                            <div class="row">
+                                                @foreach ($vas as $va)
+                                                    <div class="col-lg-2 col-sm-6 col-md-4 col-6">
+                                                        <div class="item payment text-center clickable-payment">
+                                                            <img src="{{ asset(Storage::url($va->image)) }}"
+                                                                class="img-fluid">
+                                                            <h4 class="text-sm">{{ $va->name }}</h4>
+                                                            <span class="text-sm">Biaya Admin Rp.
+                                                                {{ number_format($va->admin_fee_fixed, 0, ',', '.') }}</span>
+                                                            <input id="{{ $va->payment_method }}" type="hidden"
+                                                                value="{{ $va->payment_method }}">
+                                                            <input class="getPaymentType" type="hidden"
+                                                                value="{{ $va->payment_type }}">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <div class="link">OUTLET<i class="fa fa-chevron-down"></i></div>
-                                    <ul class="submenu">
-                                        <div class="row">
-                                            @foreach ($outlets as $outlet)
-                                                <div class="col-lg-2 col-sm-6 col-md-4 col-6">
-                                                    <div class="item payment text-center clickable-payment">
-                                                        <img src="{{ asset(Storage::url($outlet->image)) }}"
-                                                            class="img-fluid">
-                                                        <h4 class="text-sm">{{ $outlet->name }}</h4>
-                                                        <input id="{{ $outlet->payment_method }}" type="hidden"
-                                                            value="{{ $outlet->payment_method }}">
-                                                        <input class="getPaymentType" type="hidden"
-                                                            value="{{ $outlet->payment_type }}">
+                                                @endforeach
+                                            </div>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="link">OUTLET<i class="fa fa-chevron-down"></i></div>
+                                        <ul class="submenu">
+                                            <div class="row">
+                                                @foreach ($outlets as $outlet)
+                                                    <div class="col-lg-2 col-sm-6 col-md-4 col-6">
+                                                        <div class="item payment text-center clickable-payment">
+                                                            <img src="{{ asset(Storage::url($outlet->image)) }}"
+                                                                class="img-fluid">
+                                                            <h4 class="text-sm">{{ $outlet->name }}</h4>
+                                                            <input id="{{ $outlet->payment_method }}" type="hidden"
+                                                                value="{{ $outlet->payment_method }}">
+                                                            <input class="getPaymentType" type="hidden"
+                                                                value="{{ $outlet->payment_type }}">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="most-popular">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="heading-section">
-                    <h4><em>Masukkan Telepon</em> Kamu</h4>
-                </div>
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12">
-                            <div class="data-input">
-                                <input id="userPhoneInput" type="text" placeholder="62857xxx (Tanpa Tanda Plus)" />
+                                                @endforeach
+                                            </div>
+                                        </ul>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -284,14 +286,37 @@
             </div>
         </div>
     </div>
-    <div class="game-details">
+    <div class="data">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="heading-section text-center">
+                    <h4>Masukkan Telepon Kamu</h4>
+                </div>
+                <div class="data-parent">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="data-input">
+                                    <input id="userPhoneInput" type="text"
+                                        placeholder="62857xxx (Tanpa Tanda Plus)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="data">
         <div class="row">
             <div class="col-lg-12">
                 <div class="content">
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="main-border-button">
-                                <a href="#" id="checkout">Konfirmasi Top Up</a>
+                            <div class="data-parent">
+                                <div class="main-border-button text-center">
+                                    <a href="#" id="checkout">Konfirmasi Top Up</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -492,6 +517,8 @@
     <link rel="stylesheet" href="/assets/css/accordion.css">
     <link rel="stylesheet" href="/assets/css/products.css">
     <link rel="stylesheet" href="/assets/css/payment.css">
+    <link rel="stylesheet" href="/assets/css/data.css">
+    <link rel="stylesheet" href="/assets/css/product-header.css">
     <style>
         .clickable-item {
             cursor: pointer;
@@ -499,7 +526,7 @@
 
         .products .item.clicked {
             background-color: #28a745;
-            color: #white;
+            color: #fff;
         }
 
         .clickable-payment {
@@ -508,11 +535,11 @@
 
         .payments .clickable-payment.clicked {
             background-color: #28a745;
-            color: white;
+            color: #fff;
         }
 
         .payments .clickable-payment.clicked p {
-            color: white;
+            color: #fff;
         }
 
         #stickyAlert {

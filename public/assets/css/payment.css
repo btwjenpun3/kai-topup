@@ -1,24 +1,41 @@
 .payments {
+    position: relative;
     margin-top: 60px;
-    padding: 30px;
-    background-color: #1f2122;
     border-radius: 23px;
   }
+
+  .payments .payment-parent {
+    padding:20px;
+    background-color: #061b29;
+    border-radius: 23px;
+    border-bottom: 8px solid #f1f1f1;
+}
   
   .payments .item {
     display: flex;
     flex-direction: column;
     align-items: center;  /* Center items horizontally */
     text-align: center;   /* Center text */
-    background-color: #27292a;
-    padding: 15px 10px;
+    background-color: #e6eeee;
+    box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.6);
+    padding: 15px 15px;
     border-radius: 23px;
+    margin-bottom: 30px;
+  }
+
+  .payments .heading-section h4 {
+    border-radius: 23px;
+    padding:10px;
+    background-color: #ffffff;
+    box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.6);
+    color: #061b29;
+    font-size: 34px;
+    text-decoration: none;
     margin-bottom: 30px;
   }
   
   .payments .item img {
     border-radius: 23px;
-    width: 10vh;
     margin-bottom: 10px;  /* Add some margin between image and text */
   }
   
@@ -26,6 +43,7 @@
     font-size: 12px;
     margin-top: 10px;  /* Reset top margin */
     margin-bottom: 0px;
+    color: #082538;
     display: inline-block;
   }
   
@@ -57,4 +75,11 @@
   .payments .main-button {
     text-align: center;
     margin-bottom: -53px;
+  }
+
+  @media (max-width: 767px) {
+
+    .payments .heading-section h4 {        
+        font-size: 19px;
+      } 
   }

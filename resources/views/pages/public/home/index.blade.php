@@ -7,6 +7,7 @@
 @section('css')
     <link rel="stylesheet" href="/assets/css/flashsale.css">
     <link rel="stylesheet" href="/assets/css/games.css">
+    <link rel="stylesheet" href="/assets/css/button-home.css">
 @endsection
 
 @section('slider')
@@ -24,10 +25,11 @@
                         <div class="row">
                             <div class="col-lg-12 text-center">
                                 <div class="heading-section">
-                                    <h4>⚡ Flash Sale ⚡</h4>
+                                    <button class='glowing-btn'>
+                                        <span class='glowing-txt'>⚡ Flash<span class="faulty-letter"> Sale</span> ⚡</span>
+                                    </button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <div class="row justify-content-center">
