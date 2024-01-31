@@ -122,8 +122,7 @@ class SetHargaController extends Controller
                         if ($item['brand'] == $data->brand) {
                             if($produk->contains('kode_produk', $item['buyer_sku_code'])) {
                                 Harga::where('kode_produk', $item['buyer_sku_code'])->update([
-                                    'game_id' => $data->id,
-                                    'nama_produk' => $item['product_name'],                                    
+                                    'game_id' => $data->id,                                   
                                     'seller_name' => $item['seller_name'],
                                     'kode_produk' => $item['buyer_sku_code'],
                                     'deskripsi' => $item['desc'],
@@ -172,12 +171,14 @@ class SetHargaController extends Controller
     public function destroy(Request $request)
     {
         try {
-            $getData = Harga::where('id', $request->id)->first();
-            Storage::disk('public')->delete($getData->gambar);
-            $getData->delete();
-            return response()->json([
-                'success' => 'Produk berhasil di hapus!'
-            ], 200);
+            $getData = Harga::where('id', $request->id)->first();            
+            $delete = $getData->delete();
+            if($delete) {
+                Storage::disk('public')->delete($getData->gambar);
+                return response()->json([
+                    'success' => 'Produk berhasil di hapus!'
+                ], 200);
+            }            
         } catch (\Exception $e) {
             Log::error('Pesan Error: ' . $e->getMessage());
         }

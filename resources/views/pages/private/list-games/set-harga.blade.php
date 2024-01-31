@@ -69,10 +69,11 @@
         <div class="col-12">
             <div class="card">
                 <div class="table-responsive">
-                    <table id="table-harga" class="table table-vcenter card-table table-striped">
+                    <table id="table-harga" class="table table-vcenter text-nowrap card-table table-striped">
                         @if (isset($harga) && count($harga) > 0)
                             <thead>
                                 <tr>
+                                    <th class="w-1"></th>
                                     <th class="w-7"></th>
                                     <th>Nama Produk</th>
                                     <th>Tipe</th>
@@ -82,27 +83,64 @@
                                     <th>Profit</th>
                                     <th>Start Cut Off</th>
                                     <th>End Cut Off</th>
-                                    <th>Status</th>
                                     <th class="w-1"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($harga as $h)
                                     <tr>
+                                        @if ($h->status == 1)
+                                            <td> <span class="badge bg-success me-1"></span></td>
+                                        @else
+                                            <td><span class="badge bg-danger me-1"></span></td>
+                                        @endif
                                         <td><img src="{{ asset(Storage::url($h->gambar)) }}"></td>
                                         <td>{{ $h->nama_produk }}</td>
                                         <td>{{ $h->tipe }}</td>
                                         <td>{{ $h->kode_produk }}</td>
                                         <td>Rp. {{ number_format($h->modal, 0, ',', '.') }}</td>
-                                        <td>Rp. {{ number_format($h->harga_jual, 0, ',', '.') }}</td>
-                                        <td>Rp. {{ number_format($h->profit, 0, ',', '.') }}</td>
+                                        @if (isset($h->flashsale->final_price))
+                                            <td><s class="text-danger">Rp.
+                                                    {{ number_format($h->harga_jual, 0, ',', '.') }}</s>
+                                                Rp. {{ number_format($h->flashsale->final_price, 0, ',', '.') }}
+                                            </td>
+                                        @else
+                                            <td>Rp. {{ number_format($h->harga_jual, 0, ',', '.') }}</td>
+                                        @endif
+                                        @if (isset($h->flashsale->profit))
+                                            @if ($h->flashsale->profit > 0)
+                                                <td class="text-success">
+                                                    <s class="text-danger">Rp.
+                                                        {{ number_format($h->profit, 0, ',', '.') }}</s>
+                                                    Rp. {{ number_format($h->flashsale->profit, 0, ',', '.') }}
+                                                </td>
+                                            @elseif($h->flashsale->profit < 0)
+                                                <td class="text-danger">
+                                                    <s class="text-danger">Rp.
+                                                        {{ number_format($h->profit, 0, ',', '.') }}</s>
+                                                    Rp. {{ number_format($h->flashsale->profit, 0, ',', '.') }}
+                                                </td>
+                                            @else
+                                                <td class="text-secondary">Rp.
+                                                    <s class="text-danger">Rp.
+                                                        {{ number_format($h->profit, 0, ',', '.') }}</s>
+                                                    Rp. {{ number_format($h->flashsale->profit, 0, ',', '.') }}
+                                                </td>
+                                            @endif
+                                        @else
+                                            @if ($h->profit > 0)
+                                                <td class="text-success">Rp. {{ number_format($h->profit, 0, ',', '.') }}
+                                                </td>
+                                            @elseif($h->profit < 0)
+                                                <td class="text-danger">Rp. {{ number_format($h->profit, 0, ',', '.') }}
+                                                </td>
+                                            @else
+                                                <td class="text-secondary">Rp. {{ number_format($h->profit, 0, ',', '.') }}
+                                                </td>
+                                            @endif
+                                        @endif
                                         <td>{{ \Carbon\Carbon::parse($h->start_cut_off)->format('H:i') }} WIB</td>
                                         <td>{{ \Carbon\Carbon::parse($h->end_cut_off)->format('H:i') }} WIB</td>
-                                        @if ($h->status == 1)
-                                            <td> <span class="badge bg-success me-1"></span>Aktif</td>
-                                        @else
-                                            <td><span class="badge bg-danger me-1"></span>Tidak Aktif</td>
-                                        @endif
                                         <td>
                                             <div class="dropdown">
                                                 <button class="btn dropdown-toggle align-text-top"

@@ -23,16 +23,52 @@ class TopUpController extends Controller
 {
     public function index(Request $request)
     {
-        $game = Game::where('slug', $request->slug)->firstOrFail();
+        $now =  Carbon::now()->format('Y-m-d H:i:s');
+        $game = Game::with('harga')->where('slug', $request->slug)->firstOrFail();
         $harga = $game->harga()->orderBy('kode_produk', 'asc')->get();
-        return view('pages.public.topup.index', [            
-            'game' => $game,
-            'harga' => $harga,
-            'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
-            'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
-            'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
-            'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
-        ]);
+        if($game->slug == 'mobile-legend') {
+            return view('pages.public.topup.mobile-legend', [     
+                'now' => $now,       
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);
+        } elseif($game->slug == 'free-fire') {
+            return view('pages.public.topup.free-fire', [   
+                'now' => $now,            
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);
+        } elseif($game->slug == 'undawn') {
+            return view('pages.public.topup.undawn', [   
+                'now' => $now,            
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);
+        } elseif($game->slug == 'lifeafter') {
+            return view('pages.public.topup.lifeafter', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);
+        } else {
+            abort(404);
+        }       
     }
 
     public function process(Request $request)

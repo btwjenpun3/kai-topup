@@ -14,10 +14,15 @@ class Harga extends Model
     public function game()
     {
         return $this->belongsTo(Game::class);
-    }
+    }    
 
     public function type()
     {
         return $this->belongsTo(Game::class);
+    }
+
+    public function flashsale()
+    {
+        return $this->hasOne(Flashsale::class);
     }
 }

@@ -26,6 +26,7 @@
                     <table id="payment-table" class="table table-vcenter card-table table-striped">
                         <thead>
                             <tr>
+                                <th class="w-1"></th>
                                 <th class="w-7"></th>
                                 <th>Nama</th>
                                 <th>Tipe Pembayaran</th>
@@ -39,6 +40,11 @@
                         <tbody>
                             @foreach ($datas as $data)
                                 <tr>
+                                    @if ($data->status == 0)
+                                        <td class="text-warning"><span class="badge bg-danger me-1"></span></td>
+                                    @elseif ($data->status == 1)
+                                        <td class="text-success"><span class="badge bg-success me-1"></span></td>
+                                    @endif
                                     <td><img src="{{ asset(Storage::url($data->image)) }}"></td>
                                     <td><b>{{ $data->name }}</b></td>
                                     <td>{{ $data->payment_type }}</td>
@@ -52,11 +58,6 @@
                                         <td>Rp. {{ number_format($data->admin_fee_fixed, 0, ',', '.') }}</td>
                                     @else
                                         <td>-</td>
-                                    @endif
-                                    @if ($data->status == 0)
-                                        <td class="text-warning"><span class="badge bg-danger me-1"></span>TIDAK AKTIF</td>
-                                    @elseif ($data->status == 1)
-                                        <td class="text-success"><span class="badge bg-success me-1"></span>AKTIF</td>
                                     @endif
                                     <td><button class="btn" data-bs-toggle="modal" data-bs-target="#modal-edit"
                                             onclick="show({{ $data->id }})">Edit</button></td>

@@ -25,6 +25,7 @@
                         @if (count($transactions) > 0)
                             <thead>
                                 <tr>
+                                    <th class="w-1"></th>
                                     <th>Invoice</th>
                                     <th>TRX ID</th>
                                     <th>Nama</th>
@@ -38,6 +39,20 @@
                             <tbody>
                                 @foreach ($datas as $data)
                                     <tr>
+                                        @if (isset($data->digiflazz->status) && $data->digiflazz->status == 'Pending')
+                                            <td class="text-warning text-center"><span class="badge bg-warning me-1"></span>
+                                            </td>
+                                        @elseif (isset($data->digiflazz->status) && $data->digiflazz->status == 'Sukses')
+                                            <td class="text-success text-center"><span class="badge bg-success me-1"></span>
+                                            </td>
+                                        @elseif (isset($data->digiflazz->status) && $data->digiflazz->status == 'Gagal')
+                                            <td class="text-danger text-center"><span class="badge bg-danger me-1"></span>
+                                            </td>
+                                        @else
+                                            <td class="text-secondary text-center"><span
+                                                    class="badge bg-secondary me-1"></span>
+                                            </td>
+                                        @endif
                                         <td>{{ $data->nomor_invoice }}</td>
                                         @if (isset($data->digiflazz->trx_id))
                                             <td>{{ $data->digiflazz->trx_id }}</td>
@@ -65,28 +80,13 @@
                                         @else
                                             <td>-</td>
                                         @endif
-                                        @if (isset($data->digiflazz->status) && $data->digiflazz->status == 'Pending')
-                                            <td class="text-warning text-center"><span class="badge bg-warning me-1"></span>
-                                            </td>
-                                        @elseif (isset($data->digiflazz->status) && $data->digiflazz->status == 'Sukses')
-                                            <td class="text-success text-center"><span class="badge bg-success me-1"></span>
-                                            </td>
-                                        @elseif (isset($data->digiflazz->status) && $data->digiflazz->status == 'Gagal')
-                                            <td class="text-danger text-center"><span class="badge bg-danger me-1"></span>
-                                            </td>
-                                        @else
-                                            <td class="text-secondary text-center"><span
-                                                    class="badge bg-secondary me-1"></span>
-                                            </td>
-                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>
                         @else
                             <tbody>
                                 <tr>
-                                    <td>Tidak ada Data. Harap menambah Game baru melalui tombol <code>Buat</code> di atas.
-                                    </td>
+                                    <td>Belum ada transaksi. </td>
                                 </tr>
                             </tbody>
                         @endif

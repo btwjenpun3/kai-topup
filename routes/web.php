@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Private\Dashboard\DashboardContoller;
+use App\Http\Controllers\Private\Flashsale\FlashsaleController;
 use App\Http\Controllers\Private\Invoice\InvoiceRealmController;
 use App\Http\Controllers\Private\ListGames\ListGamesController;
 use App\Http\Controllers\Private\ListGames\SetHargaController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\Public\Home\HomeController;
 use App\Http\Controllers\Public\Invoice\InvoiceController;
 use App\Http\Controllers\Public\Simulate\SimulateController;
 use App\Http\Controllers\Public\TopUp\TopUpController;
+use App\Models\Flashsale;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -132,6 +134,17 @@ Route::prefix('/realm/payment')
         Route::get('/', 'index')->name('index');
         Route::get('/show/{id}', 'show')->name('show');
         Route::post('/update/{id}', 'update')->name('update');
+    });
+
+Route::prefix('/realm/flashsale')
+    ->name('flashsale.')
+    ->controller(FlashsaleController::class)
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/', 'store')->name('store');
+        Route::post('/expired', 'storeExpired')->name('expired');
+        Route::delete('/destroy/{id}', 'destroy')->name('destroy');
     });
 
 Route::prefix('/realm/testing')

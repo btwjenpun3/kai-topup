@@ -39,6 +39,7 @@
                         @if (isset($invoices) && count($invoices) > 0)
                             <thead>
                                 <tr>
+                                    <th class="w-1"></th>
                                     <th class="w-7"></th>
                                     <th></th>
                                     <th>Produk</th>
@@ -52,6 +53,13 @@
                             <tbody>
                                 @foreach ($invoices as $invoice)
                                     <tr>
+                                        @if ($invoice->status == 'PENDING')
+                                            <td class="text-warning"><span class="badge bg-warning me-1"></span></td>
+                                        @elseif ($invoice->status == 'PAID')
+                                            <td class="text-success"><span class="badge bg-success me-1"></span></td>
+                                        @elseif ($invoice->status == 'EXPIRED')
+                                            <td class="text-danger"><span class="badge bg-danger me-1"></span></td>
+                                        @endif
                                         <td><img src="{{ asset(Storage::url($invoice->game->url_gambar)) }}"></td>
                                         <td>{{ $invoice->game->nama }}</td>
                                         <td>{{ $invoice->harga->nama_produk }}</td>
@@ -61,16 +69,6 @@
                                             WIB
                                         </td>
                                         <td>Rp. {{ number_format($invoice->total, 0, ',', '.') }}</td>
-                                        @if ($invoice->status == 'PENDING')
-                                            <td class="text-warning"><span
-                                                    class="badge bg-warning me-1"></span>{{ $invoice->status }}</td>
-                                        @elseif ($invoice->status == 'PAID')
-                                            <td class="text-success"><span
-                                                    class="badge bg-success me-1"></span>{{ $invoice->status }}</td>
-                                        @elseif ($invoice->status == 'EXPIRED')
-                                            <td class="text-danger"><span
-                                                    class="badge bg-danger me-1"></span>{{ $invoice->status }}</td>
-                                        @endif
                                         <td> <button class="btn btn-md" data-bs-toggle="modal"
                                                 data-bs-target="#modal-detail"
                                                 onclick="lihat('{{ $invoice->nomor_invoice }}')">Detail</button> </td>
