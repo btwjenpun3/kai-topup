@@ -227,13 +227,14 @@
                             <input class="form-control" type="text" placeholder="Select a date" id="datepicker" />
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn me-auto" data-bs-dismiss="modal">Tutup</button>
-                        <button id="simpan" class="btn btn-primary">Simpan</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn me-auto" data-bs-dismiss="modal">Tutup</button>
+                    <button id="simpan" class="btn btn-primary">Simpan</button>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     </div>
 
