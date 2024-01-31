@@ -16,7 +16,7 @@
 @endsection
 
 @section('content')
-    @if (isset($flashsales) && count($flashsales) > 0)
+    @if (count($flashsales) > 0)
         <div class="flash-sale">
             <div class="row">
                 <div class="col-lg-12">
