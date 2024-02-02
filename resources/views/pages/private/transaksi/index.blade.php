@@ -21,7 +21,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="table-responsive">
-                    <table id="payment-table" class="table table-vcenter card-table table-striped">
+                    <table id="payment-table" class="table table-hover table-vcenter card-table table-striped">
                         @if (count($transactions) > 0)
                             <thead>
                                 <tr>

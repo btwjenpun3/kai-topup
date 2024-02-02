@@ -69,7 +69,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="table-responsive">
-                    <table id="table-harga" class="table table-vcenter text-nowrap card-table">
+                    <table id="table-harga" class="table table-hover table-vcenter text-nowrap card-table">
                         @if (isset($harga) && count($harga) > 0)
                             <thead>
                                 <tr>
