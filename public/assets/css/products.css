@@ -95,4 +95,8 @@
         margin-bottom: 0px;
         display: inline-block;
       }
+
+      .products .alert-undawn span {        
+        font-size: 12px;
+      }
   }
