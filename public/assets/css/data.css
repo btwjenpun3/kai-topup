@@ -29,6 +29,11 @@
     color:rgb(0, 0, 0);
     background-color: white;
   }
+
+  .data .data-parent select {
+    color:rgb(0, 0, 0);
+    background-color: white;
+  }
   
  .data .main-button {
     text-align: center;
