@@ -24,7 +24,7 @@
                     <div class="col-lg-12">
                         <div class="row">
                             <div class="col-lg-12 text-center">
-                                <div class="heading-section mb-5">
+                                <div class="heading-section mb-4">
                                     <button class='glowing-btn'>
                                         <span class='glowing-txt'>⚡ Flash<span class="faulty-letter"> Sale</span> ⚡</span>
                                     </button>
