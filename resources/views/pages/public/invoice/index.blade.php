@@ -16,6 +16,9 @@
             {{ session('message') }}
         </div>
     @endif
+    <div class="heading-top-section text-center">
+        <h4>Terimakasih sudah membeli.</h4>
+    </div>
     <div class="invoice">
         <div class="col-lg-12">
             <div class="row">
@@ -181,16 +184,18 @@
     @if ($invoice->status == 'PAID' && $invoice->game->brand == 'PLN')
         @if (isset($invoice->digiflazz->sn))
             <div class="invoice">
-                <div class="col-lg-12">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h5 class="text-center">Kode Token Listrik Anda : </h5>
-                            <p class="text-light text-center">Kode listrik anda sebelum "/RUKO"</p>
-                        </div>
-                        <div class="pln">
+                <div class="invoice-pln-paid">
+                    <div class="col-lg-12">
+                        <div class="row">
                             <div class="col-lg-12">
-                                <h5 class="text-center text-light">
-                                    {{ $invoice->digiflazz->sn }}</h5>
+                                <h5 class="text-center">Kode Token Listrik Anda : </h5>
+                                <p class="text-light text-center">Kode listrik anda sebelum "/RUKO"</p>
+                            </div>
+                            <div class="pln">
+                                <div class="col-lg-12">
+                                    <h5 class="text-center text-light">
+                                        {{ $invoice->digiflazz->sn }}</h5>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -198,17 +203,19 @@
             </div>
         @else
             <div class="invoice">
-                <div class="col-lg-12">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h6 class="text-center">Klik Tombol 'Muat Ulang' jika kamu belum menerima kode Token
-                            </h6>
-                        </div>
-                        <div class="col-lg-12 mt-4">
-                            <div class="main-status-button text-center">
-                                <a href="#" style="width:100%;" onClick="window.location.reload();">
-                                    Muat Ulang
-                                </a>
+                <div class="invoice-pln-paid">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h6 class="text-center">Klik Tombol 'Muat Ulang' jika kamu belum menerima kode Token
+                                </h6>
+                            </div>
+                            <div class="col-lg-12 mt-4">
+                                <div class="main-status-button text-center">
+                                    <a href="#" style="width:100%;" onClick="window.location.reload();">
+                                        Muat Ulang
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>

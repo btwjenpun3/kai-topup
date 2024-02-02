@@ -14,41 +14,17 @@
   .invoice .content .main-status-button a {
     text-align: center;
     width: 100%;
-  }
-  
-  .invoice .item .thumb {
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .invoice .item .thumb .hover-effect {
-    position: absolute;
-    bottom: -100px;
-    text-align: center;
-    width: 100%;
-    opacity: 0;
-    visibility: hidden;
-    transition: all .4s;
-  }
-  
-  .invoice .item .thumb:hover .hover-effect {
-    opacity: 1;
-    visibility: visible;
-    bottom: 15px;
-  }
-  
-  .invoice .item .thumb .hover-effect h6 {
-    background-color: rgba(31,33,34,0.95);
-    display: inline-block;
-    color: #ec6090;
-    font-weight: 600;
-    font-size: 14px;
-    padding: 10px 20px;
-    border-radius: 25px;
-  }
-  
-  .invoice .item img {
+  } 
+
+  .heading-top-section h4 {
     border-radius: 23px;
+    padding:10px;
+    background-color: #ffffff;
+    box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.6);
+    color: #061b29;
+    font-size: 34px;
+    text-decoration: none;
+    margin-bottom: 30px;
   }
   
   .invoice .item h4 {
@@ -58,61 +34,6 @@
     display: inline-block;
   }
   
-  .invoice .item span {
-    color: #666;
-    display: block;
-    margin-top: 7px;
-    font-weight: 400;
-  }
-  
-  .invoice .item ul {
-    float: right;
-    margin-top: 20px;
-  }
-  
-  .invoice .item ul li {
-    text-align: right;
-    color: #fff;
-    font-size: 14px;
-  }
-  
-  .invoice .item ul li:first-child i {
-    color: yellow;
-  }
-  
-  .invoice .item ul li:last-child i {
-    color: #ec6090;
-  }
-  
-  .invoice .owl-nav {
-    position: absolute;
-    margin: 0 auto;
-    top: -70px;
-    right: 0;
-  }
-  
-  .invoice .owl-nav .owl-prev {
-    margin-right: 2.5px;
-  }
-  
-  .invoice .owl-nav .owl-next {
-    margin-left: 2.5px;
-  }
-  
-  .invoice .owl-nav .owl-prev span,
-  .invoice .owl-nav .owl-next span  {
-    font-size: 36px;
-    display: inline-block;
-    color: #666;
-    opacity: 1;
-    transition: all .3s;
-  }
-  
-  .invoice .owl-nav .owl-prev span:hover,
-  .invoice .owl-nav .owl-next span:hover {
-    opacity: 1;
-    color: #ec6090;
-  }
 
   @media (max-width: 767px) {
   .invoice .pln {    
@@ -125,5 +46,13 @@
   }
   .invoice .pln h5 {
     font-size: 15px;
+  }
+
+  .heading-top-section {      
+    padding-top:30px;
+  }
+
+  .heading-top-section h4 {
+    font-size: 16px; 
   }
 }
