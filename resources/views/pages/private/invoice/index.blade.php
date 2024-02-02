@@ -73,7 +73,7 @@
                                             <td class="text-success">Rp. {{ number_format($invoice->profit, 0, ',', '.') }}
                                             </td>
                                         @else
-                                            <td class="text-success">- </td>
+                                            <td>-</td>
                                         @endif
                                         <td>Rp. {{ number_format($invoice->total, 0, ',', '.') }}</td>
                                         <td> <button class="btn btn-md" data-bs-toggle="modal"
