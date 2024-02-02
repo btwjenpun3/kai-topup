@@ -10,7 +10,7 @@ class InvoiceRealmController extends Controller
 {
     public function index()
     {
-        $invoices = Invoice::orderBy('nomor_invoice', 'desc')->paginate(10);
+        $invoices = Invoice::orderBy('id', 'desc')->paginate(10);
         return view('pages.private.invoice.index', [
             'invoices' => $invoices,
         ]);
