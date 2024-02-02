@@ -69,7 +69,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="table-responsive">
-                    <table id="table-harga" class="table table-vcenter text-nowrap card-table table-striped">
+                    <table id="table-harga" class="table table-vcenter text-nowrap card-table">
                         @if (isset($harga) && count($harga) > 0)
                             <thead>
                                 <tr>
@@ -88,7 +88,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($harga as $h)
-                                    <tr>
+                                    <tr @if ($h->harga_jual <= '0') class="bg-danger text-light" @else @endif>
                                         @if ($h->status == 1)
                                             <td> <span class="badge bg-success me-1"></span></td>
                                         @else
@@ -290,7 +290,7 @@
                                 <span class="input-group-text" id="modal_prepend">Rp.</span>
                             </div>
                             <input type="text" name="modal" id="edit_modal" class="form-control"
-                                placeholder="Misal '15000'" aria-describedby="modal_prepend" required />
+                                placeholder="Misal '15000'" aria-describedby="modal_prepend" disabled />
                         </div>
                     </div>
                     <div class="row mb-3 align-items-end">

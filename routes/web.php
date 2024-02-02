@@ -68,6 +68,7 @@ Route::prefix('/realm/auth')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/', 'auth')->name('process');
+        Route::post('/logout', 'logout')->name('logout');
     });
 
 Route::prefix('/realm/dashboard')

@@ -88,7 +88,7 @@ class SetHargaController extends Controller
                     'status' => $request->edit_status 
                 ]);
                 if ($request->hasFile('edit_gambar')) {
-                    $gambarPath = $request->file('edit_gambar')->storeAs('produk', $request->file('edit_gambar')->getClientOriginalName(), 'public');
+                    $gambarPath = $request->file('edit_gambar')->storeAs('produk', Str::random(4) . '-' . $request->file('edit_gambar')->getClientOriginalName(), 'public');
                     Harga::where('id', $request->id)->update([
                         'gambar' => $gambarPath 
                     ]);
