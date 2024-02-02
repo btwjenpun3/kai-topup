@@ -33,7 +33,6 @@
                                     <th>Saldo Terakhir</th>
                                     <th>Saldo Terpotong</th>
                                     <th>Tanggal</th>
-                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
