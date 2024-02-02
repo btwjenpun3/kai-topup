@@ -64,7 +64,7 @@
                     <div class="col-md-12">
                         <div class="row align-items-center mb-4">
                             <div class="col">
-                                <h5>💎 Diamond</h5>
+                                <h5>💰 Raven Credits</h5>
                             </div>
                         </div>
                         <div class="row">
