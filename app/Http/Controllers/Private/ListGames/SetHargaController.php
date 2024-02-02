@@ -18,7 +18,7 @@ class SetHargaController extends Controller
     {
         return view('pages.private.list-games.set-harga', [
             'game' => Game::where('id', $request->id)->first(),
-            'harga' => Harga::orderBy('kode_produk', 'asc')->where('game_id', $request->id)->get()
+            'harga' => Harga::orderBy('kode_produk', 'asc')->where('game_id', $request->id)->paginate(10)
         ]);
     }
 

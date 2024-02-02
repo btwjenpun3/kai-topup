@@ -173,6 +173,38 @@
                         @endif
                     </table>
                 </div>
+                <div class="pagination justify-content-end">
+                    <ul class="pagination m-3">
+                        <li class="page-item {{ $harga->onFirstPage() ? 'disabled' : '' }}">
+                            <a class="page-link" href="{{ $harga->previousPageUrl() }}" tabindex="-1"
+                                aria-disabled="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M15 6l-6 6l6 6" />
+                                </svg>
+                                prev
+                            </a>
+                        </li>
+                        @for ($i = 1; $i <= $harga->lastPage(); $i++)
+                            <li class="page-item {{ $harga->currentPage() === $i ? 'active' : '' }}">
+                                <a class="page-link" href="{{ $harga->url($i) }}">{{ $i }}</a>
+                            </li>
+                        @endfor
+                        <li class="page-item {{ $harga->hasMorePages() ? '' : 'disabled' }}">
+                            <a class="page-link" href="{{ $harga->nextPageUrl() }}">
+                                next
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M9 6l6 6l-6 6" />
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

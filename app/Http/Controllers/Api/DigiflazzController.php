@@ -18,7 +18,7 @@ class DigiflazzController extends Controller
             if ($request->header('X-Hub-Signature') == 'sha1=' . $signature) {
                 if($payload['data']['status'] == 'Sukses') {
                     $invoice = Invoice::with('digiflazz')->where('nomor_invoice', $payload['data']['ref_id'])->first();
-                    if ($invoice) {
+                    if ($invoice) {                        
                         $invoice->digiflazz->update([
                             'trx_id' => $payload['data']['trx_id'],
                             'message' => $payload['data']['message'],
