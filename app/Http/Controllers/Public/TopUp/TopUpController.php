@@ -118,7 +118,17 @@ class TopUpController extends Controller
                             'unaccepted' => 'Produk ini sedang Offline hingga pukul ' . $data->end_cut_off . ' WIB'
                         ]);
                     }
-                }                
+                } 
+
+                /**
+                 * Cek Seller, ini berlaku jika customer_no butuh format khusus 
+                 */  
+                if($data->seller_name == 'BANGJEFF' && $data->game->brand == 'LifeAfter Credits') {
+                    $customer_no = $request->userId . ',' . $request->serverId;
+                } else {
+                    $customer_no = $request->userId . $request->serverId;
+                }
+
                 if($data) {
                     if($request->price == $data->harga_jual) {
                         $game = $data->game->where('slug', $request->slug)->first();
@@ -192,7 +202,7 @@ class TopUpController extends Controller
                                 'nomor_invoice' => $invoiceNumber,                                
                                 'user_id' => $request->userId,
                                 'server_id' => $request->serverId,
-                                'customer' => $request->userId . $request->serverId,
+                                'customer' => $customer_no,
                                 'phone' => $request->userPhone,
                                 'game_id' => $game->id,
                                 'harga_id' => $data->id, 
@@ -225,7 +235,7 @@ class TopUpController extends Controller
                                 'nomor_invoice' => $invoiceNumber,                                
                                 'user_id' => $request->userId,
                                 'server_id' => $request->serverId,
-                                'customer' => $request->userId . $request->serverId,
+                                'customer' => $customer_no,
                                 'phone' => $request->userPhone,
                                 'game_id' => $game->id,
                                 'harga_id' => $data->id, 
@@ -259,7 +269,7 @@ class TopUpController extends Controller
                                     'nomor_invoice' => $invoiceNumber,                                
                                     'user_id' => $request->userId,
                                     'server_id' => $request->serverId,
-                                    'customer' => $request->userId . $request->serverId,
+                                    'customer' => $customer_no,
                                     'phone' => $request->userPhone,
                                     'game_id' => $game->id,
                                     'harga_id' => $data->id, 
@@ -298,7 +308,7 @@ class TopUpController extends Controller
                                     'nomor_invoice' => $invoiceNumber,                                
                                     'user_id' => $request->userId,
                                     'server_id' => $request->serverId,
-                                    'customer' => $request->userId . $request->serverId,
+                                    'customer' => $customer_no,
                                     'phone' => $request->userPhone,
                                     'game_id' => $game->id,
                                     'harga_id' => $data->id, 
