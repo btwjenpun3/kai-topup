@@ -16,7 +16,8 @@ class HomeController extends Controller
         $flashsales = Flashsale::where('status', '1')->where('expired_at', '>', $now)->where('stock', '>', '0')->get();
         return view('pages.public.home.index', [
             'flashsales' => $flashsales,
-            'games' => Game::all()
+            'games' => Game::where('kategori', 'Games')->get(),
+            'listriks' => Game::where('kategori', 'Listrik')->get()
         ]);
     }
 }

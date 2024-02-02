@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('brand');
+            $table->string('kategori');
             $table->string('kode')->unique();
             $table->string('url_gambar')->unique();
             $table->string('slug')->unique();

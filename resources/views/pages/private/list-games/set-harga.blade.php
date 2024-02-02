@@ -151,7 +151,9 @@
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-end">
                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                        data-bs-target="#modal-edit" onclick="show({{ $h->id }})">
+                                                        data-bs-target="#modal-edit"
+                                                        data-option-value="{{ $h->tipe }}"
+                                                        onclick="show({{ $h->id }})">
                                                         Edit </a>
                                                     <a class="dropdown-item
                                                         text-danger"
@@ -498,6 +500,7 @@
                 success: function(response) {
                     document.getElementById('edit_nama_produk').value = response.nama_produk;
                     document.getElementById('edit_kode_produk').value = response.kode_produk;
+                    document.getElementById('edit_tipe').value = response.tipe;
                     document.getElementById('edit_modal').value = response.modal;
                     document.getElementById('edit_harga_jual').value = response.harga_jual;
                     document.getElementById('edit_profit').value = response.profit;

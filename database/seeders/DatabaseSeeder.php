@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Game::create([
             'nama' => 'Mobile Legend',
             'kode' => 'ml',
+            'kategori' => 'Games',
             'brand' => 'MOBILE LEGENDS',
             'url_gambar' => 'games/mobile-legend.webp',
             'slug' => 'mobile-legend'
@@ -35,6 +36,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Game::create([
             'nama' => 'Free Fire',
             'kode' => 'ff',
+            'kategori' => 'Games',
             'brand' => 'FREE FIRE',
             'url_gambar' => 'games/freefire.webp',
             'slug' => 'free-fire'
@@ -43,6 +45,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Game::create([
             'nama' => 'Undawn',
             'kode' => 'ud',
+            'kategori' => 'Games',
             'brand' => 'Undawn',
             'url_gambar' => 'games/undawn.webp',
             'slug' => 'undawn'
@@ -51,9 +54,19 @@ class DatabaseSeeder extends Seeder
         \App\Models\Game::create([
             'nama' => 'LifeAfter',
             'kode' => 'la',
+            'kategori' => 'Games',
             'brand' => 'LifeAfter Credits',
             'url_gambar' => 'games/lifeafter.webp',
             'slug' => 'lifeafter'
+        ]);
+
+        \App\Models\Game::create([
+            'nama' => 'PLN',
+            'kode' => 'pln',
+            'kategori' => 'Listrik',
+            'brand' => 'PLN',
+            'url_gambar' => 'games/pln.webp',
+            'slug' => 'pln'
         ]);
         
         // \App\Models\Harga::create([
