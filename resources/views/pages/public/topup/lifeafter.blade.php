@@ -54,6 +54,7 @@
                 <div class="heading-section text-center">
                     <h4>Pilih Produk dan Nominal</h4>
                 </div>
+                <img src="{{ asset(Storage::url('games/la-denom.webp')) }}" class="mb-4" style="border-radius: 15px">
                 <div class="item-parent mb-4">
                     <div class="col-md-12">
                         <div class="row align-items-center mb-4">
