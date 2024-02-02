@@ -74,4 +74,8 @@
         margin-bottom: 0px;
         display: inline-block;
       }
+      
+      .games .heading-section h4 {
+        font-size: 16px;
+      }
   }
