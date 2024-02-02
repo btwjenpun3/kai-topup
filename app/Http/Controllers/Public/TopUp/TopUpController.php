@@ -66,7 +66,18 @@ class TopUpController extends Controller
                 'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
                 'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
             ]);
-        } else {
+        } elseif($game->slug == 'pln') {
+            return view('pages.public.topup.pln', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);
+        }        
+        else {
             abort(404);
         }       
     }
@@ -346,5 +357,30 @@ class TopUpController extends Controller
             Log::channel('invoice')->error('Error occurred: ' . $e->getMessage());            
             return response()->json(['unaccepted' => 'Payment sedang Offline, silahkan pilih metode pembayaran yang lain']);
         }
+    }
+
+    public function cekNomorPln(Request $request)
+    {
+        try {
+            $randomNumber = rand(100,200);
+            $response = Http::withHeaders([
+                'Content-Type' => 'application/json',
+            ])->post('https://api.digiflazz.com/v1/transaction', [
+                'username' => env('DIGIFLAZZ_USERNAME'),
+                'buyer_sku_code' => 'PLNCNTP',
+                'customer_no' => $request->id,
+                'ref_id' => 'PLNNB' . $randomNumber,
+                'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . 'PLNNB' .  $randomNumber)
+            ]);
+            if($response->successful()) {
+                return response()->json($response->json());
+            } else {
+                Log::channel('invoice')->error('Error occurred: ' . $response);
+                return response()->json($response->json());
+            }
+        } catch (\Exception $e) {
+            Log::channel('invoice')->error('Error occurred: ' . $e->getMessage());            
+            return response()->json(['unaccepted' => 'Payment sedang Offline, silahkan pilih metode pembayaran yang lain']);
+        }        
     }
 }

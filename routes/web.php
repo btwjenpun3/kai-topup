@@ -41,6 +41,7 @@ Route::prefix('/topup')
     ->group(function () {
         Route::get('/{slug}', 'index')->name('index');
         Route::post('/{slug}/process', 'process')->name('process');
+        Route::post('/check/pln/{id}', 'cekNomorPln')->name('pln');
     });
 
 Route::prefix('/invoice')
