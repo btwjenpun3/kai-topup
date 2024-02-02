@@ -296,7 +296,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="data-parent">
-                                <div class="main-border-button text-center">
+                                <div class="main-status-button text-center">
                                     <a href="#" id="checkout">Konfirmasi Top Up</a>
                                 </div>
                             </div>
