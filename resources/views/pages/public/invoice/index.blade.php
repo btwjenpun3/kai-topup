@@ -16,7 +16,7 @@
             {{ session('message') }}
         </div>
     @endif
-    <div class="featured-games">
+    <div class="invoice">
         <div class="col-lg-12">
             <div class="row">
                 <div class="col-md-9">
@@ -151,7 +151,7 @@
         </div>
     </div>
     @if ($invoice->status == 'PENDING')
-        <div class="featured-games mt-4">
+        <div class="invoice mt-4">
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-lg-12 col-12 text-center">
@@ -180,20 +180,24 @@
     @endif
     @if ($invoice->status == 'PAID' && $invoice->game->brand == 'PLN')
         @if (isset($invoice->digiflazz->sn))
-            <div class="va-info">
+            <div class="invoice">
                 <div class="col-lg-12">
                     <div class="row">
                         <div class="col-lg-12">
                             <h5 class="text-center">Kode Token Listrik Anda : </h5>
+                            <p class="text-light text-center">Kode listrik anda sebelum "/RUKO"</p>
                         </div>
-                        <div class="col-lg-12 mt-4">
-                            <h5 class="text-center">{{ $invoice->digiflazz->sn }}</h5>
+                        <div class="pln">
+                            <div class="col-lg-12">
+                                <h5 class="text-center text-light">
+                                    {{ $invoice->digiflazz->sn }}</h5>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         @else
-            <div class="va-info">
+            <div class="invoice">
                 <div class="col-lg-12">
                     <div class="row">
                         <div class="col-lg-12">
@@ -214,7 +218,7 @@
     @elseif($invoice->status == 'PAID')
     @else
         @if ($invoice->payment->payment_type == 'EWALLET')
-            <div class="game-details">
+            <div class="invoice">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="content">
@@ -451,6 +455,7 @@
 @endsection
 
 @section('css')
+    <link rel="stylesheet" href="/assets/css/invoice.css">
     <link rel="stylesheet" href="/assets/css/invoice_countdown.css">
     <style>
         #stickyAlert {

@@ -1817,6 +1817,16 @@ body {
     font-size: 14px;
     font-weight: 400;
   }
+
+  .va-info .pln {    
+    width:100%;
+    white-space: nowrap;
+    overflow-x: scroll;
+    background-color: transparent;
+  }
+  .va-info .pln h5 {
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 992px) {
@@ -1970,4 +1980,14 @@ body {
 .va-info .owl-nav .owl-next span:hover {
   opacity: 1;
   color: #ec6090;
+}
+
+.va-info .pln {
+  background-color:#4e4c4c; 
+  }
+
+.va-info .pln h5 {
+  padding:10px; 
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 }
