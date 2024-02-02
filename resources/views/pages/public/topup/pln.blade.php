@@ -122,17 +122,6 @@
                                         <input id="userIdInput" type="text" placeholder="Masukkan Nomor PLN" required />
                                     </div>
                                 </div>
-                                <div class="col-md-12 col-sm-12">
-                                    <div class="data-input">
-                                        <div class="main-status-button text-center">
-                                            <form action="{{ route('topup.pln', ['id' => '86235292892']) }}"
-                                                method="post">
-                                                @csrf
-                                                <button type="submit" id="cekPln">Cek Nomor PLN</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

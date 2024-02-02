@@ -220,14 +220,14 @@ p {
 }
 
 .main-status-button a {
-  font-size: 14px;
+  font-size: 16px;
   color: #ffffff;
   background-color: #35be40;
   border: 1px solid #35be40;
   padding: 12px 30px;
   display: inline-block;
   border-radius: 25px;
-  font-weight: 400;
+  font-weight: 700;
   text-transform: capitalize;
   letter-spacing: 0.5px;
   transition: all .3s;
@@ -1811,6 +1811,11 @@ body {
   }
   .most-popular .item h4 {
     font-size: 11px;
+  }
+
+  .va-info h6 {
+    font-size: 14px;
+    font-weight: 400;
   }
 }
 
