@@ -72,6 +72,7 @@ class SetHargaController extends Controller
         try {
             $validation = $request->validate([
                 'edit_nama_produk' => 'required',
+                'edit_tipe' => 'required',
                 'edit_kode_produk' => 'required',
                 'edit_modal' => 'required|integer',
                 'edit_harga_jual' => 'required|integer',
@@ -81,6 +82,7 @@ class SetHargaController extends Controller
                 $profit = $request->edit_harga_jual - $request->edit_modal;                
                 Harga::where('id', $request->id)->update([
                     'nama_produk' => $request->edit_nama_produk,
+                    'tipe' => $request->edit_tipe,
                     'kode_produk' => $request->edit_kode_produk,
                     'modal' => $request->edit_modal,
                     'harga_jual' => $request->edit_harga_jual,

@@ -197,7 +197,8 @@
   
 
   @media (max-width: 767px) {
-    .glowing-txt {
-        font-size: 21px;
+    .glowing-btn span {
+        font-size: 16px;        
+        font-weight: 700;
       }  
   }

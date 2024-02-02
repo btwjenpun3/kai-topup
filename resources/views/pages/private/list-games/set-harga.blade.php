@@ -311,6 +311,21 @@
                         </div>
                     </div>
                     <div class="row mb-3 align-items-end">
+                        <label class="form-label" for="nama_produk">Tipe</label>
+                        <div class="input-group mb-3">
+                            <select class="form-select" id="edit_tipe">
+                                <optgroup label="LifeAfter">
+                                    <option value="LifeAfter A">LifeAfter A</option>
+                                    <option value="LifeAfter B">LifeAfter B</option>
+                                </optgroup>
+                                <optgroup label="Umum">
+                                    <option value="Umum">Umum</option>
+                                    <option value="Membership">Membership</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3 align-items-end">
                         <label class="form-label" for="kode_produk">Kode Produk</label>
                         <div class="input-group mb-3">
                             <input type="text" name="kode_produk" id="edit_kode_produk" class="form-control"
@@ -499,6 +514,7 @@
                 var formData = new FormData($('#myForm')[0]);
 
                 formData.append('edit_nama_produk', $('#edit_nama_produk').val());
+                formData.append('edit_tipe', $('#edit_tipe').val());
                 formData.append('edit_kode_produk', $('#edit_kode_produk').val());
                 formData.append('edit_modal', $('#edit_modal').val());
                 formData.append('edit_gambar', editGambar);
