@@ -96,7 +96,7 @@
                                             <td><span class="badge bg-danger me-1"></span></td>
                                         @endif
                                         <td><img src="{{ asset(Storage::url($h->gambar)) }}"></td>
-                                        <td>{{ $h->nama_produk }}</td>
+                                        <td><b>{{ $h->nama_produk }}</b></td>
                                         <td>{{ $h->tipe }}</td>
                                         <td>{{ $h->kode_produk }}</td>
                                         <td>{{ $h->seller_name }}</td>
