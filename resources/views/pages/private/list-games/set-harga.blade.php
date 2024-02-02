@@ -78,6 +78,7 @@
                                     <th>Nama Produk</th>
                                     <th>Tipe</th>
                                     <th>Kode Produk</th>
+                                    <th>Seller</th>
                                     <th>Modal</th>
                                     <th>Harga Jual</th>
                                     <th>Profit</th>
@@ -98,6 +99,7 @@
                                         <td>{{ $h->nama_produk }}</td>
                                         <td>{{ $h->tipe }}</td>
                                         <td>{{ $h->kode_produk }}</td>
+                                        <td>{{ $h->seller_name }}</td>
                                         <td>Rp. {{ number_format($h->modal, 0, ',', '.') }}</td>
                                         @if (isset($h->flashsale->final_price))
                                             <td><s class="text-danger">Rp.
