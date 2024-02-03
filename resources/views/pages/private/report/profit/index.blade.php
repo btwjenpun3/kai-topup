@@ -96,7 +96,15 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script>
-        $('input[name="range-tanggal"]').daterangepicker();
+        $('input[name="range-tanggal"]').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 1, // Menit antara setiap jam
+            locale: {
+                format: 'YYYY-MM-DD HH:mm:ss'
+            },
+            startDate: moment().startOf('day'), // Mengatur waktu awal ke 00:00:00 hari ini
+            endDate: moment().endOf('day') // Mengatur waktu akhir ke 23:59:59 hari ini
+        });
 
         var totalHargaModal = 0;
         var totalProfit = 0;
