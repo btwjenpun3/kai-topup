@@ -43,7 +43,7 @@
                         <div class="card card-md">
                             <div class="card-body">
                                 <h2 class="h2 text-center mb-4">Login ke akunmu</h2>
-                                <form action="{{ route('auth.process') }}" method="post" autocomplete="off" novalidate>
+                                <form action="{{ route('auth.process') }}" method="post" autocomplete="off">
                                     @csrf
                                     <div class="mb-3">
                                         <label class="form-label">Email</label>

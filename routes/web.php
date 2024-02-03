@@ -8,6 +8,7 @@ use App\Http\Controllers\Private\ListGames\ListGamesController;
 use App\Http\Controllers\Private\ListGames\SetHargaController;
 use App\Http\Controllers\Private\Payment\PaymentController;
 use App\Http\Controllers\Private\Product\ProductController;
+use App\Http\Controllers\Private\Report\ProfitReportController;
 use App\Http\Controllers\Private\Testing\TestingController;
 use App\Http\Controllers\Private\Transaction\TransactionController;
 use App\Http\Controllers\Public\Home\HomeController;
@@ -148,11 +149,14 @@ Route::prefix('/realm/flashsale')
         Route::delete('/destroy/{id}', 'destroy')->name('destroy');
     });
 
-Route::prefix('/realm/testing')
-    ->name('testing.')
-    ->controller(TestingController::class)
+
+Route::prefix('/realm/report')
+    ->name('report.')
+    ->controller(ProfitReportController::class)
     ->middleware('auth')
     ->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/shopeepay', 'testShopeePay')->name('shopeePay');
-    });   
+        Route::get('/profit', 'indexProfit')->name('index.profit');
+        Route::get('/profit/generate', 'generateProfit')->name('generate.profit');
+    });
+
+

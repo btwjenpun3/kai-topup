@@ -224,7 +224,7 @@ class TopUpController extends Controller
                                 'total' => $total,
                                 'status' => 'PENDING',                                
                                 'expired_at' => $expiredAt,
-                            ]);                             
+                            ]);                                                       
                             return response()->json(['redirect' => route('invoice.index', ['id' => $invoiceNumber])], 200);
                         } elseif($payment->payment_type == 'QRIS') {
                             $response = Http::withHeaders([

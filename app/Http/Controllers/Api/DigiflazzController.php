@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Invoice;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
 
 class DigiflazzController extends Controller
 {
@@ -24,6 +25,12 @@ class DigiflazzController extends Controller
                             'message' => $payload['data']['message'],
                             'sn' => $payload['data']['sn'],
                             'status' => $payload['data']['status']
+                        ]);
+                        $response = Http::withHeaders([
+                            'Authorization' => env('FONNTE_TOKEN'),
+                        ])->post('https://api.fonnte.com/send', [
+                            'target' => $invoice->phone,
+                            'message' => 'Hai terimakasih telah melakukan Topup di Fumola Store ^^'
                         ]);
                         return response()->json(200);
                     }
