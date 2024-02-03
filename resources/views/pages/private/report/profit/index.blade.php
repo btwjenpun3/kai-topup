@@ -119,7 +119,7 @@
                     $.each(response.data, function(index, item) {
                         var row = '<tr>' +
                             '<td>' + item.nomor_invoice + '</td>' +
-                            '<td>Rp. ' + formatRupiah(item.harga.nama_produk) + '</td>' +
+                            '<td>' + item.harga.nama_produk + '</td>' +
                             '<td>Rp. ' + formatRupiah(item.harga.harga_jual) + '</td>' +
                             '<td>Rp. ' + formatRupiah(item.harga.modal) + '</td>' +
                             '<td>Rp. ' + formatRupiah(item.harga.profit) + '</td>' +
