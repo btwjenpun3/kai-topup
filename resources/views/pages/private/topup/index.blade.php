@@ -38,7 +38,7 @@
                                     @foreach ($produk as $p)
                                         <option value="{{ $p->kode_produk }}"
                                             @if ($p->status === 0 || $p->harga_jual <= 0) disabled @endif>
-                                            {{ $p->nama_produk }} (Rp. {{ $p->harga_jual }})
+                                            {{ $p->nama_produk }} (Rp. {{ number_format($p->harga_jual, 0, ',', '.') }})
                                         </option>
                                     @endforeach
                                 </select>
