@@ -90,7 +90,7 @@ class PrivateTopUpController extends Controller
                             'server_id' => $request->serverid,
                             'customer' => $customer_no,
                             'phone' => $user->phone,
-                            'game_id' => $data->game->slug,
+                            'game_id' => $data->game->id,
                             'harga_id' => $data->id, 
                             'profit' => $data->profit,
                             'total' => $data->harga_jual,
