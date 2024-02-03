@@ -25,13 +25,7 @@ class DigiflazzController extends Controller
                             'message' => $payload['data']['message'],
                             'sn' => $payload['data']['sn'],
                             'status' => $payload['data']['status']
-                        ]);
-                        $response = Http::withHeaders([
-                            'Authorization' => env('FONNTE_TOKEN'),
-                        ])->post('https://api.fonnte.com/send', [
-                            'target' => $invoice->phone,
-                            'message' => 'Hai terimakasih telah melakukan Topup di Fumola Store ^^'
-                        ]);
+                        ]);                        
                         return response()->json(200);
                     }
                 } else if ($payload['data']['status'] == 'Pending') {
