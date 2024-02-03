@@ -92,6 +92,7 @@ class PrivateTopUpController extends Controller
                             'phone' => $user->phone,
                             'game_id' => $data->game->id,
                             'harga_id' => $data->id, 
+                            'payment_id' => 99,
                             'profit' => $data->profit,
                             'total' => $data->harga_jual,
                             'status' => 'PAID',      
