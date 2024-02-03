@@ -323,6 +323,7 @@
                                 <optgroup label="Umum">
                                     <option value="Umum">Umum</option>
                                     <option value="Membership">Membership</option>
+                                    <option value="Event">Event</option>
                                 </optgroup>
                             </select>
                         </div>
