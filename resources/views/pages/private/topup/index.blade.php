@@ -208,7 +208,7 @@
             $('#btn-text').hide();
             $('#loading').show();
             $('#btn-beli').attr('disabled', true);
-            serveridVal: $('#serverid').val() || null;
+            serveridVal: $('#serverid').val() || '';
             $.ajax({
                 url: "/realm/topup/process",
                 method: "POST",
