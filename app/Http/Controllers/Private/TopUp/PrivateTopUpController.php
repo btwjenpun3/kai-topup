@@ -107,28 +107,21 @@ class PrivateTopUpController extends Controller
                                 'customer_no' => $customer_no,
                                 'ref_id' => $invoiceNumber,
                                 'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . $invoiceNumber)
-                            ]);
-                            if($response) {
-                                $digiflazz = Digiflazz::create([
-                                    'saldo_terakhir' => $response['data']['buyer_last_saldo'],
-                                    'saldo_terpotong' => $response['data']['price'],
-                                    'message' => $response['data']['message'],
-                                    'seller_telegram' => $response['data']['tele'],
-                                    'seller_whatsapp' => $response['data']['wa'],
-                                    'status' => $response['data']['status']
-                                ]);   
-                                $createInvoice->update([
-                                    'digiflazz_id' => $digiflazz->id
-                                ]);                                                         
-                                return response()->json([
-                                    'succes' => 'Produk berhasil di beli dengan nomor Invoice ' . $invoiceNumber
-                                ],200);
-                            } else {
-                                Log::channel('digiflazz')->error('Gagal:' . json_decode($response->getBody()->getContents(), true));
-                                return response()->json([
-                                    'unaccepted' => 'Terdapat kesalahan saat membeli produk'
-                                ]);
-                            }
+                            ]);                            
+                            $digiflazz = Digiflazz::create([
+                                'saldo_terakhir' => $response['data']['buyer_last_saldo'],
+                                'saldo_terpotong' => $response['data']['price'],
+                                'message' => $response['data']['message'],
+                                'seller_telegram' => $response['data']['tele'],
+                                'seller_whatsapp' => $response['data']['wa'],
+                                'status' => $response['data']['status']
+                            ]);   
+                            $createInvoice->update([
+                                'digiflazz_id' => $digiflazz->id
+                            ]);                                                         
+                            return response()->json([
+                                'succes' => 'Produk berhasil di beli dengan nomor Invoice ' . $invoiceNumber
+                            ],200);                            
                         } else {
                             return response()->json([
                                 'unaccepted' => 'Terdapat kesalahan saat membuat Invoice'
