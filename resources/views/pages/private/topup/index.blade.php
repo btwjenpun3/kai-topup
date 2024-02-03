@@ -160,8 +160,8 @@
                     _token: '{{ csrf_token() }}'
                 },
                 success: function(response) {
-                    if (response.success) {
-                        successAlert(response.success);
+                    if (response.berhasil) {
+                        successAlert(response.berhasil);
                     } else {
                         failedAlert(response.unaccepted);
                     }
