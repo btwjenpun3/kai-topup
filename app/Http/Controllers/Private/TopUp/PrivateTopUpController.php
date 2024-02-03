@@ -94,7 +94,7 @@ class PrivateTopUpController extends Controller
                             'harga_id' => $data->id, 
                             'profit' => $data->profit,
                             'total' => $data->harga_jual,
-                            'status' => 'PENDING',      
+                            'status' => 'PAID',      
                             'via' => $via,                          
                             'expired_at' => $expiredAt,
                         ]);
