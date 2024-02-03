@@ -11,7 +11,7 @@
 @endsection
 
 @section('slider')
-    <div class="main-banner">
+    <div class="main-banner text-center">
         <img src="/img/slider.webp" class="img-fluid">
     </div>
 @endsection

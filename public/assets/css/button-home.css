@@ -3,8 +3,7 @@
   }
 
 .glowing-btn {
-    align-items: center;
-    justify-content: center;    
+    align-items: center;    
     position: relative;
     width: 100%;    
     color: var(--glow-color);
@@ -30,7 +29,7 @@
   
   .glowing-txt {
     float: center;
-    margin-right: -0.8em;
+    padding:0;
     -webkit-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3),
       0 0 0.45em var(--glow-color);
     -moz-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3),
@@ -198,7 +197,8 @@
 
   @media (max-width: 767px) {
     .glowing-btn span {
-        font-size: 16px;        
+        font-size: 19px;        
         font-weight: 700;
+        padding:0;
       }  
   }

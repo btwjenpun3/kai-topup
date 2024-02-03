@@ -24,7 +24,7 @@
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-md-3">
-                        <img src="{{ asset(Storage::url($game->url_gambar)) }}" class="img-fluid">
+                        <img src="{{ asset(Storage::url($game->url_gambar)) }}">
                     </div>
                     <div class="col-md-9">
                         <div class="heading-section text-center">

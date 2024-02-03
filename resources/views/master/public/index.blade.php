@@ -37,14 +37,15 @@
     @include('partials.public.navbar')
     <!-- ***** Navbar Area End ***** -->
     @yield('loading')
+
+    <!-- ***** Slider Start ***** -->
+    @yield('slider')
+    <!-- ***** Slider End ***** -->
+
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="page-content">
-
-                    <!-- ***** Slider Start ***** -->
-                    @yield('slider')
-                    <!-- ***** Slider End ***** -->
 
                     <!-- ***** Content Start ***** -->
                     @yield('content')

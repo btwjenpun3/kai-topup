@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-lg bg-custom" style="background-color: rgba(38, 72, 97, 0.5);">
+<nav class="navbar navbar-expand-lg bg-custom"
+    style="background-color: #577A97;box-shadow: 0px 15px 10px rgba(0, 0, 0, 0.1);">
     <div class="container">
         <a class="navbar-brand" href="#">
             <img src="/img/logo.png" width="50" height="30" alt="">

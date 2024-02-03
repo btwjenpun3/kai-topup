@@ -8,8 +8,7 @@
     box-sizing: border-box;
     flex: calc(20% - 10px); /* Adjusted width calculation */
     max-width: 20%; /* Adjusted max-width calculation */
-    background-color: #e6eeee;
-    box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.6);
+    background-color: #061b29;
     padding: 15px;
     border-radius: 23px;
     margin-bottom: 30px;
