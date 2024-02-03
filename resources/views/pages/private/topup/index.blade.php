@@ -180,6 +180,7 @@
 @section('js')
     <script src="/dist/libs/tom-select/dist/js/tom-select.base.min.js?1684106062" defer></script>
     <script>
+        serveridVal: $('#serverid').val() || '';
         document.addEventListener("DOMContentLoaded", function() {
             var el;
             var tomSelect = new TomSelect(el = document.getElementById('product'), {
@@ -208,7 +209,6 @@
             $('#btn-text').hide();
             $('#loading').show();
             $('#btn-beli').attr('disabled', true);
-            serveridVal: $('#serverid').val() || '';
             $.ajax({
                 url: "/realm/topup/process",
                 method: "POST",
