@@ -108,15 +108,18 @@ class PrivateTopUpController extends Controller
                                 'ref_id' => $invoiceNumber,
                                 'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . $invoiceNumber)
                             ]);
-                            if($response->successful()) {
-                                Digiflazz::create([
+                            if($response) {
+                                $digiflazz = Digiflazz::create([
                                     'saldo_terakhir' => $response['data']['buyer_last_saldo'],
                                     'saldo_terpotong' => $response['data']['price'],
                                     'message' => $response['data']['message'],
                                     'seller_telegram' => $response['data']['tele'],
                                     'seller_whatsapp' => $response['data']['wa'],
                                     'status' => $response['data']['status']
-                                ]);                                                            
+                                ]);   
+                                $createInvoice->update([
+                                    'digiflazz_id' => $digiflazz->id
+                                ]);                                                         
                                 return response()->json([
                                     'succes' => 'Produk berhasil di beli dengan nomor Invoice ' . $invoiceNumber
                                 ],200);
