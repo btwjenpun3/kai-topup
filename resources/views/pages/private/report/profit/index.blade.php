@@ -139,11 +139,15 @@
                             totalProfit / 2)) +
                         '</td>' +
                         '</tr>';
+
                     $('#result-hasil').append(row2);
 
                     $('#btn-text').show();
                     $('#loading').hide();
                     $('.btn').attr('disabled', false);
+
+                    totalHargaModal = 0;
+                    totalProfit = 0;
                 },
                 error: function(xhr, status, error) {}
             });
