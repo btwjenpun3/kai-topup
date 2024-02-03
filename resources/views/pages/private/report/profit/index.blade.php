@@ -114,6 +114,7 @@
                 },
                 success: function(response) {
                     $('#result-profit').empty();
+                    $('#result-hasil').empty();
                     $('#profit-table').show();
 
                     $.each(response.data, function(index, item) {
