@@ -131,6 +131,8 @@ class TopUpController extends Controller
                     }
                 } 
 
+                $via = 'WEB';
+
                 /**
                  * Cek Seller, ini berlaku jika customer_no butuh format khusus 
                  */  
@@ -222,7 +224,8 @@ class TopUpController extends Controller
                                 'xendit_e_wallet_id' => $eWalletCreate['id'],
                                 'profit' => $data->profit,
                                 'total' => $total,
-                                'status' => 'PENDING',                                
+                                'status' => 'PENDING',      
+                                'via' => $via,                          
                                 'expired_at' => $expiredAt,
                             ]);                                                       
                             return response()->json(['redirect' => route('invoice.index', ['id' => $invoiceNumber])], 200);
@@ -255,7 +258,8 @@ class TopUpController extends Controller
                                 'xendit_qr_id' => $QrCreate['id'],
                                 'profit' => $data->profit,
                                 'total' => $total,
-                                'status' => 'PENDING',                                
+                                'status' => 'PENDING',
+                                'via' => $via,                                 
                                 'expired_at' => $expiredAt,
                             ]);
                             return response()->json(['redirect' => route('invoice.index', ['id' => $invoiceNumber])], 200);
@@ -289,7 +293,8 @@ class TopUpController extends Controller
                                     'xendit_va_id' => $VaCreate['id'],
                                     'profit' => $data->profit,
                                     'total' => $total,
-                                    'status' => 'PENDING',                                
+                                    'status' => 'PENDING', 
+                                    'via' => $via,                                
                                     'expired_at' => $expiredAt,
                                 ]);
                                 return response()->json(['redirect' => route('invoice.index', ['id' => $invoiceNumber])], 200);
@@ -328,7 +333,8 @@ class TopUpController extends Controller
                                     'xendit_outlet_id' => $OutletCreate['id'],
                                     'profit' => $data->profit,
                                     'total' => $total,
-                                    'status' => 'PENDING',                                
+                                    'status' => 'PENDING', 
+                                    'via' => $via,                                
                                     'expired_at' => $expiredAt,
                                 ]);
                                 return response()->json(['redirect' => route('invoice.index', ['id' => $invoiceNumber])], 200);

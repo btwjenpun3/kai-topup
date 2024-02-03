@@ -9,7 +9,7 @@ use App\Http\Controllers\Private\ListGames\SetHargaController;
 use App\Http\Controllers\Private\Payment\PaymentController;
 use App\Http\Controllers\Private\Product\ProductController;
 use App\Http\Controllers\Private\Report\ProfitReportController;
-use App\Http\Controllers\Private\Testing\TestingController;
+use App\Http\Controllers\Private\TopUp\PrivateTopUpController;
 use App\Http\Controllers\Private\Transaction\TransactionController;
 use App\Http\Controllers\Public\Home\HomeController;
 use App\Http\Controllers\Public\Invoice\InvoiceController;
@@ -109,6 +109,15 @@ Route::prefix('/realm/set-harga')
         Route::post('/update/{gameId}/{id}', 'update')->name('update');
         Route::delete('/{id}', 'destroy')->name('destroy');
     });
+
+    Route::prefix('/realm/topup')
+    ->name('topup.')
+    ->controller(PrivateTopUpController::class)
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('/{slug}', 'indexMobileLegend')->name('mobile.legend');
+        Route::post('/process', 'process')->name('process');
+    });    
 
 
 Route::prefix('/realm/invoice')

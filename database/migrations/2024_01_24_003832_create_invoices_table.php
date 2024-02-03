@@ -18,10 +18,10 @@ return new class extends Migration
             $table->string('server_id')->nullable();
             $table->string('customer');  
             $table->string('phone');          
-            $table->string('xendit_invoice_id');
+            $table->string('xendit_invoice_id')->nullable();
             $table->foreignId('game_id')->constrained();
             $table->foreignId('harga_id')->constrained();
-            $table->foreignId('payment_id')->constrained();   
+            $table->foreignId('payment_id')->nullable()->constrained();   
             $table->foreignId('digiflazz_id')->nullable()->constrained();  
             $table->foreignId('xendit_e_wallet_id')->nullable()->constrained(); 
             $table->foreignId('xendit_qr_id')->nullable()->constrained();
@@ -30,6 +30,7 @@ return new class extends Migration
             $table->integer('profit')->nullable();
             $table->integer('total');
             $table->string('status');
+            $table->string('via')->nullable();
             $table->string('webhook_id')->nullable()->unique();
             $table->string('expired_at')->nullable();
             $table->timestamps();
