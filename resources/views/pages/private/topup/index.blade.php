@@ -108,6 +108,12 @@
                                             </optgroup>
                                         </select>
                                     </div>
+                                @elseif($game->slug == 'pubg')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID Kamu --" required>
+                                    </div>
                                 @else
                                 @endif
                                 <div class="col-md-12">

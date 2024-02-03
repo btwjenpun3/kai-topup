@@ -86,6 +86,10 @@
                                         href="{{ route('realm.topup.index', ['slug' => 'undawn']) }}">
                                         Undawn
                                     </a>
+                                    <a class="dropdown-item"
+                                        href="{{ route('realm.topup.index', ['slug' => 'pubg']) }}">
+                                        PUBG Mobile Indonesia
+                                    </a>
                                 </div>
                             </div>
                         </div>

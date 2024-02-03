@@ -69,6 +69,15 @@ class DatabaseSeeder extends Seeder
             'url_gambar' => 'games/pln.webp',
             'slug' => 'pln'
         ]);
+
+        \App\Models\Game::create([
+            'nama' => 'PUBG Mobile Indonesia',
+            'kode' => 'pubg',
+            'kategori' => 'Games',
+            'brand' => 'PUBG MOBILE',
+            'url_gambar' => 'games/pubg.webp',
+            'slug' => 'pubg'
+        ]);
         
         // \App\Models\Harga::create([
         //     'game_id' => 1,
@@ -213,6 +222,15 @@ class DatabaseSeeder extends Seeder
             'admin_fee_fixed' => 5550,
             'image' => 'payment/indomaret.webp',
             'status' => 1
+        ]);
+
+        \App\Models\Payment::create([
+            'name' => 'Realm',
+            'payment_type' => 'REALM',
+            'payment_method' => 'REALM',
+            'admin_fee_fixed' => 0,
+            'image' => 'payment/indomaret.webp',
+            'status' => 0
         ]);
     }
 }
