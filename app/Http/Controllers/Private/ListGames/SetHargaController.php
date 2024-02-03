@@ -122,7 +122,7 @@ class SetHargaController extends Controller
                     $produk = Harga::where('game_id', $data->id)->get();
                     foreach ($jsonDecode['data'] as $item) {
                         if ($item['brand'] == $data->brand) {
-                            if($produk->contains('kode_produk', $item['buyer_sku_code']) && $item['buyer_product_status'] === true) {
+                            if($produk->contains('kode_produk', $item['buyer_sku_code']) && $item['buyer_product_status'] === true && $item['seller_product_status'] === true) {
                                 Harga::where('kode_produk', $item['buyer_sku_code'])->update([
                                     'game_id' => $data->id,                                   
                                     'seller_name' => $item['seller_name'],
@@ -133,7 +133,29 @@ class SetHargaController extends Controller
                                     'end_cut_off' => $item['end_cut_off'],
                                     'status' => 1
                                 ]);
-                            } else if ($produk->contains('kode_produk', $item['buyer_sku_code']) && $item['buyer_product_status'] === false) {
+                            } else if ($produk->contains('kode_produk', $item['buyer_sku_code']) && $item['buyer_product_status'] === true && $item['seller_product_status'] === false) {
+                                Harga::where('kode_produk', $item['buyer_sku_code'])->update([
+                                    'game_id' => $data->id,                                   
+                                    'seller_name' => $item['seller_name'],
+                                    'kode_produk' => $item['buyer_sku_code'],
+                                    'deskripsi' => $item['desc'],
+                                    'modal' => $item['price'],
+                                    'start_cut_off' => $item['start_cut_off'],
+                                    'end_cut_off' => $item['end_cut_off'],
+                                    'status' => 0
+                                ]);
+                            } else if ($produk->contains('kode_produk', $item['buyer_sku_code']) && $item['buyer_product_status'] === false && $item['seller_product_status'] === true) {
+                                Harga::where('kode_produk', $item['buyer_sku_code'])->update([
+                                    'game_id' => $data->id,                                   
+                                    'seller_name' => $item['seller_name'],
+                                    'kode_produk' => $item['buyer_sku_code'],
+                                    'deskripsi' => $item['desc'],
+                                    'modal' => $item['price'],
+                                    'start_cut_off' => $item['start_cut_off'],
+                                    'end_cut_off' => $item['end_cut_off'],
+                                    'status' => 0
+                                ]);
+                            } else if ($produk->contains('kode_produk', $item['buyer_sku_code']) && $item['buyer_product_status'] === false && $item['seller_product_status'] === false) {
                                 Harga::where('kode_produk', $item['buyer_sku_code'])->update([
                                     'game_id' => $data->id,                                   
                                     'seller_name' => $item['seller_name'],
