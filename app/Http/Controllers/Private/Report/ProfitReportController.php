@@ -20,7 +20,10 @@ class ProfitReportController extends Controller
             $explode = explode('-', $dateRange);
             $startDate = date('Y-m-d', strtotime($explode[0]));
             $endDate = date('Y-m-d', strtotime($explode[1]));
-            $result = Invoice::with('harga')->whereBetween('created_at', [$startDate, $endDate])->where('status', 'PAID')->get();
+            $result = Invoice::whereDate('created_at', '>=', $startDate)
+            ->whereDate('created_at', '<=', $endDate)
+            ->where('status', 'PAID')
+            ->get();
             return response()->json(['data' => $result]);
         } catch (\Exception $e) {
 
