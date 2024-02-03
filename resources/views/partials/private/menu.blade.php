@@ -90,6 +90,10 @@
                                         href="{{ route('realm.topup.index', ['slug' => 'pubg']) }}">
                                         PUBG Mobile Indonesia
                                     </a>
+                                    <a class="dropdown-item"
+                                        href="{{ route('realm.topup.index', ['slug' => 'hago']) }}">
+                                        HAGO
+                                    </a>
                                 </div>
                             </div>
                         </div>
