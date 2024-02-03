@@ -62,42 +62,38 @@
                                 <h5>💰 Fed Credits (A)</h5>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="flex-row">
                             @foreach ($harga as $h)
                                 @if ($h->status == 1 && $h->tipe == 'LifeAfter A')
                                     @php
                                         $flashsale = $h->flashsale;
                                     @endphp
                                     @if ($flashsale && $flashsale->status == 1 && $flashsale->stock > 0 && $flashsale->expired_at > $now)
-                                        <div class="col-lg-2 col-sm-6 col-md-4 col-6">
-                                            <div class="item text-center clickable-item">
-                                                <img src="{{ asset(Storage::url($h->gambar)) }}" class="img-fluid">
-                                                <h4 class="text-md">{{ $h->nama_produk }}</h4>
-                                                <span class="text-danger"><s>Rp.
-                                                        {{ number_format($h->harga_jual, 0, ',', '.') }}</s></span>
-                                                <span>Rp.
-                                                    {{ number_format($h->flashsale->final_price, 0, ',', '.') }}</span>
-                                                <input id="getItemId-{{ $h->id }}" type="hidden"
-                                                    value="{{ $h->id }}" />
-                                                <input id="getItemPrice-{{ $h->id }}" type="hidden"
-                                                    value="{{ $h->flashsale->final_price }}" />
-                                                <input id="getItemName-{{ $h->id }}" type="hidden"
-                                                    value="{{ $h->nama_produk }}" />
-                                            </div>
+                                        <div class="flex-column item text-center clickable-item">
+                                            <img src="{{ asset(Storage::url($h->gambar)) }}" class="img-fluid">
+                                            <h4 class="text-md">{{ $h->nama_produk }}</h4>
+                                            <span class="text-danger"><s>Rp.
+                                                    {{ number_format($h->harga_jual, 0, ',', '.') }}</s></span>
+                                            <span>Rp.
+                                                {{ number_format($h->flashsale->final_price, 0, ',', '.') }}</span>
+                                            <input id="getItemId-{{ $h->id }}" type="hidden"
+                                                value="{{ $h->id }}" />
+                                            <input id="getItemPrice-{{ $h->id }}" type="hidden"
+                                                value="{{ $h->flashsale->final_price }}" />
+                                            <input id="getItemName-{{ $h->id }}" type="hidden"
+                                                value="{{ $h->nama_produk }}" />
                                         </div>
                                     @else
-                                        <div class="col-lg-2 col-sm-6 col-md-4 col-6">
-                                            <div class="item text-center clickable-item">
-                                                <img src="{{ asset(Storage::url($h->gambar)) }}" class="img-fluid">
-                                                <h4 class="text-md">{{ $h->nama_produk }}</h4>
-                                                <span>Rp. {{ number_format($h->harga_jual, 0, ',', '.') }}</span>
-                                                <input id="getItemId-{{ $h->id }}" type="hidden"
-                                                    value="{{ $h->id }}" />
-                                                <input id="getItemPrice-{{ $h->id }}" type="hidden"
-                                                    value="{{ $h->harga_jual }}" />
-                                                <input id="getItemName-{{ $h->id }}" type="hidden"
-                                                    value="{{ $h->nama_produk }}" />
-                                            </div>
+                                        <div class=" flex-column item text-center clickable-item">
+                                            <img src="{{ asset(Storage::url($h->gambar)) }}" class="img-fluid">
+                                            <h4 class="text-md">{{ $h->nama_produk }}</h4>
+                                            <span>Rp. {{ number_format($h->harga_jual, 0, ',', '.') }}</span>
+                                            <input id="getItemId-{{ $h->id }}" type="hidden"
+                                                value="{{ $h->id }}" />
+                                            <input id="getItemPrice-{{ $h->id }}" type="hidden"
+                                                value="{{ $h->harga_jual }}" />
+                                            <input id="getItemName-{{ $h->id }}" type="hidden"
+                                                value="{{ $h->nama_produk }}" />
                                         </div>
                                     @endif
                                 @endif
@@ -112,42 +108,38 @@
                                 <h5>💰 Fed Credits (B)</h5>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="flex-row">
                             @foreach ($harga as $h)
                                 @if ($h->status == 1 && $h->tipe == 'LifeAfter B')
                                     @php
                                         $flashsale = $h->flashsale;
                                     @endphp
                                     @if ($flashsale && $flashsale->status == 1 && $flashsale->stock > 0 && $flashsale->expired_at > $now)
-                                        <div class="col-lg-2 col-sm-6 col-md-4 col-6">
-                                            <div class="item text-center clickable-item">
-                                                <img src="{{ asset(Storage::url($h->gambar)) }}" class="img-fluid">
-                                                <h4 class="text-md">{{ $h->nama_produk }}</h4>
-                                                <span class="text-danger"><s>Rp.
-                                                        {{ number_format($h->harga_jual, 0, ',', '.') }}</s></span>
-                                                <span>Rp.
-                                                    {{ number_format($h->flashsale->final_price, 0, ',', '.') }}</span>
-                                                <input id="getItemId-{{ $h->id }}" type="hidden"
-                                                    value="{{ $h->id }}" />
-                                                <input id="getItemPrice-{{ $h->id }}" type="hidden"
-                                                    value="{{ $h->flashsale->final_price }}" />
-                                                <input id="getItemName-{{ $h->id }}" type="hidden"
-                                                    value="{{ $h->nama_produk }}" />
-                                            </div>
+                                        <div class="flex-column item text-center clickable-item">
+                                            <img src="{{ asset(Storage::url($h->gambar)) }}" class="img-fluid">
+                                            <h4 class="text-md">{{ $h->nama_produk }}</h4>
+                                            <span class="text-danger"><s>Rp.
+                                                    {{ number_format($h->harga_jual, 0, ',', '.') }}</s></span>
+                                            <span>Rp.
+                                                {{ number_format($h->flashsale->final_price, 0, ',', '.') }}</span>
+                                            <input id="getItemId-{{ $h->id }}" type="hidden"
+                                                value="{{ $h->id }}" />
+                                            <input id="getItemPrice-{{ $h->id }}" type="hidden"
+                                                value="{{ $h->flashsale->final_price }}" />
+                                            <input id="getItemName-{{ $h->id }}" type="hidden"
+                                                value="{{ $h->nama_produk }}" />
                                         </div>
                                     @else
-                                        <div class="col-lg-2 col-sm-6 col-md-4 col-6">
-                                            <div class="item text-center clickable-item">
-                                                <img src="{{ asset(Storage::url($h->gambar)) }}" class="img-fluid">
-                                                <h4 class="text-md">{{ $h->nama_produk }}</h4>
-                                                <span>Rp. {{ number_format($h->harga_jual, 0, ',', '.') }}</span>
-                                                <input id="getItemId-{{ $h->id }}" type="hidden"
-                                                    value="{{ $h->id }}" />
-                                                <input id="getItemPrice-{{ $h->id }}" type="hidden"
-                                                    value="{{ $h->harga_jual }}" />
-                                                <input id="getItemName-{{ $h->id }}" type="hidden"
-                                                    value="{{ $h->nama_produk }}" />
-                                            </div>
+                                        <div class="flex-column item text-center clickable-item">
+                                            <img src="{{ asset(Storage::url($h->gambar)) }}" class="img-fluid">
+                                            <h4 class="text-md">{{ $h->nama_produk }}</h4>
+                                            <span>Rp. {{ number_format($h->harga_jual, 0, ',', '.') }}</span>
+                                            <input id="getItemId-{{ $h->id }}" type="hidden"
+                                                value="{{ $h->id }}" />
+                                            <input id="getItemPrice-{{ $h->id }}" type="hidden"
+                                                value="{{ $h->harga_jual }}" />
+                                            <input id="getItemName-{{ $h->id }}" type="hidden"
+                                                value="{{ $h->nama_produk }}" />
                                         </div>
                                     @endif
                                 @endif

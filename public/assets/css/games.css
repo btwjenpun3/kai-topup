@@ -4,13 +4,13 @@
     background: transparent;   
   }
   
-  .games .item {
+  /* .games .flex-container .item {
     background-color: #e6eeee;
     box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.6);
     padding: 15px 15px;
     border-radius: 23px;
     margin-bottom: 30px;
-  }
+  } */
   
   .games .heading-section h4 {
     border-radius: 23px;
@@ -42,25 +42,7 @@
     font-weight: 400;
   }
   
-  .games .item ul {
-    float: right;
-    margin-top: 20px;
-  }
-  
-  .games .item ul li {
-    text-align: right;
-    color: #fff;
-    font-size: 14px;
-  }
-  
-  .games .item ul li:first-child i {
-    color: yellow;
-  }
-  
-  .games .item ul li:last-child i {
-    color: #ec6090;
-  }
-  
+
   .games .main-button {
     text-align: center;
     margin-bottom: -53px;

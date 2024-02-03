@@ -53,47 +53,36 @@
         </div>
     @endif
 
+
     <div class="games">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="heading-section text-center">
-                    <h4>Games</h4>
+        <div class="heading-section text-center">
+            <h4>Games</h4>
+        </div>
+        <div class="flex-row">
+            @foreach ($games as $game)
+                <div class="flex-column item text-center">
+                    <a href="{{ route('topup.index', ['slug' => $game->slug]) }}">
+                        <img src="{{ asset(Storage::url($game->url_gambar)) }}" alt="">
+                        <h4 class="text-sm">{{ $game->nama }}</h4>
+                    </a>
                 </div>
-                <div class="row">
-                    @foreach ($games as $game)
-                        <div class="col-lg-2 col-sm-6 col-6 col-md-6">
-                            <div class="item text-center">
-                                <a href="{{ route('topup.index', ['slug' => $game->slug]) }}">
-                                    <img src="{{ asset(Storage::url($game->url_gambar)) }}" alt="">
-                                    <h4 class="text-sm">{{ $game->nama }}</h4>
-                                </a>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 
     <div class="games">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="heading-section text-center">
-                    <h4>Listrik</h4>
+        <div class="heading-section text-center">
+            <h4>Listrik</h4>
+        </div>
+        <div class="flex-row">
+            @foreach ($listriks as $listrik)
+                <div class="flex-column item text-center">
+                    <a href="{{ route('topup.index', ['slug' => $listrik->slug]) }}">
+                        <img src="{{ asset(Storage::url($listrik->url_gambar)) }}" alt="">
+                        <h4 class="text-sm">{{ $listrik->nama }}</h4>
+                    </a>
                 </div>
-                <div class="row">
-                    @foreach ($listriks as $listrik)
-                        <div class="col-lg-2 col-sm-6 col-6 col-md-6">
-                            <div class="item text-center">
-                                <a href="{{ route('topup.index', ['slug' => $listrik->slug]) }}">
-                                    <img src="{{ asset(Storage::url($listrik->url_gambar)) }}" alt="">
-                                    <h4 class="text-sm">{{ $listrik->nama }}</h4>
-                                </a>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 @endsection
