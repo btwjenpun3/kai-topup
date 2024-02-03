@@ -67,10 +67,10 @@
                                         <table class="table table-vcenter card-table table-striped">
                                             <thead>
                                                 <tr>
+                                                    <th>Total Harga Jual</th>
                                                     <th>Total Modal</th>
                                                     <th>Total Profit</th>
                                                     <th>Total Profit/2</th>
-                                                    <th>Total Keseluruhan</th>
                                                     <th>Total Transfer</th>
                                                 </tr>
                                             </thead>
@@ -131,10 +131,10 @@
                     });
 
                     var row2 = '<tr>' +
+                        '<td>Rp. ' + formatRupiah(totalHargaModal + totalProfit) + '</td>' +
                         '<td>Rp. ' + formatRupiah(totalHargaModal) + '</td>' +
                         '<td>Rp. ' + formatRupiah(totalProfit) + '</td>' +
-                        '<td>Rp. ' + formatRupiah(Math.round(totalProfit / 2)) + '</td>' +
-                        '<td>Rp. ' + formatRupiah(totalHargaModal + totalProfit) + '</td>' +
+                        '<td class="text-info">Rp. ' + formatRupiah(Math.round(totalProfit / 2)) + '</td>' +
                         '<td class="text-success">Rp. ' + formatRupiah(totalHargaModal + Math.round(
                             totalProfit / 2)) +
                         '</td>' +
