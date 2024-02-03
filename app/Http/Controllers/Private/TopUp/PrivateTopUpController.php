@@ -15,7 +15,7 @@ use Carbon\Carbon;
 
 class PrivateTopUpController extends Controller
 {
-    public function indexMobileLegend(Request $request)
+    public function index(Request $request)
     {
         $game = Game::where('slug', $request->slug)->first();
         $produk = Harga::where('game_id', $game->id)->orderBy('kode_produk', 'asc')->get();

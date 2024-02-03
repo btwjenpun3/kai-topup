@@ -110,12 +110,12 @@ Route::prefix('/realm/set-harga')
         Route::delete('/{id}', 'destroy')->name('destroy');
     });
 
-    Route::prefix('/realm/topup')
-    ->name('topup.')
+Route::prefix('/realm/topup')
+    ->name('realm.topup.')
     ->controller(PrivateTopUpController::class)
     ->middleware('auth')
     ->group(function () {
-        Route::get('/{slug}', 'indexMobileLegend')->name('mobile.legend');
+        Route::get('/{slug}', 'index')->name('index');
         Route::post('/process', 'process')->name('process');
     });    
 

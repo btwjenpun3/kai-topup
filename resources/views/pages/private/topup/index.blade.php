@@ -42,16 +42,74 @@
                                         </option>
                                     @endforeach
                                 </select>
-                                <div class="col-md-6">
-                                    <div class="form-label mt-3">Masukkan User ID</div>
-                                    <input type="text" id="userid" name="userid" class="form-control"
-                                        placeholder="-- User ID Kamu --" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-label mt-3">Masukkan Server ID</div>
-                                    <input type="text" id="serverid" name="serverid" class="form-control"
-                                        placeholder="-- Server ID Kamu --" required>
-                                </div>
+                                @if ($game->slug == 'mobile-legend')
+                                    <div class="col-md-6">
+                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID Kamu --" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-label mt-3">Masukkan Server ID</div>
+                                        <input type="text" id="serverid" name="serverid" class="form-control"
+                                            placeholder="-- Server ID Kamu --" required>
+                                    </div>
+                                @elseif($game->slug == 'free-fire')
+                                    <div class="col-md-6">
+                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID Kamu --" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-label mt-3">Masukkan Server ID</div>
+                                        <input type="text" id="serverid" name="serverid" class="form-control"
+                                            placeholder="-- Server ID Kamu --" required>
+                                    </div>
+                                @elseif($game->slug == 'undawn')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID Kamu --" required>
+                                    </div>
+                                @elseif($game->slug == 'lifeafter')
+                                    <div class="col-md-6">
+                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID Kamu --" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-label mt-3">Masukkan Server ID</div>
+                                        <select id="serverid" name="serverid" class="form-select" required>
+                                            <optgroup label="SEA">
+                                                <option value="520001">NancyCity (520001)</option>
+                                                <option value="520002">CharlesTown (520002)</option>
+                                                <option value="520003">SnowHighlands (520003)</option>
+                                                <option value="520004">Santopany (520004)</option>
+                                                <option value="520005">LevinCity (520005)</option>
+                                                <option value="520006">MileStone (520006)</option>
+                                                <option value="520007">ChaosCity (520007)</option>
+                                                <option value="520008">TwinIslands (520008)</option>
+                                                <option value="520009">HopeWall (520009)</option>
+                                                <option value="520010">LabyrinthSea (520010)</option>
+                                            </optgroup>
+                                            <optgroup label="NA">
+                                                <option value="500001">MiskaTown (500001)</option>
+                                                <option value="500002">SandCastle (500002)</option>
+                                                <option value="500003">MouthSwamp (500003)</option>
+                                                <option value="500004">RedwoodTown (500004)</option>
+                                                <option value="500005">Obelisk (500005)</option>
+                                                <option value="500006">NewLand (500006)</option>
+                                                <option value="500007">ChaosOutpost (500007)</option>
+                                                <option value="500008">IronStride (500008)</option>
+                                                <option value="500009">CrystalthornSea (500009)</option>
+                                            </optgroup>
+                                            <optgroup label="AU">
+                                                <option value="510001">FallForest (510001)</option>
+                                                <option value="510002">MountSnow (510002)</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                @else
+                                @endif
                                 <div class="col-md-12">
                                     <div class="form-label mt-3">Masukkan Password</div>
                                     <input type="password" id="password" name="password" class="form-control"
@@ -93,7 +151,8 @@
                         <path d="M12 17h.01" />
                     </svg>
                     <h3>Apa kamu yakin?</h3>
-                    <div class="text-muted">Pastikan data yang kamu isi sudah benar, karena kami belum memiliki sistem untuk
+                    <div class="text-muted">Pastikan data yang kamu isi sudah benar, karena kami belum memiliki sistem
+                        untuk
                         pengecekan UserID!</div>
                 </div>
                 <div class="modal-footer">
@@ -149,13 +208,14 @@
             $('#btn-text').hide();
             $('#loading').show();
             $('#btn-beli').attr('disabled', true);
+            serveridVal: $('#serverid').val() || null;
             $.ajax({
                 url: "/realm/topup/process",
                 method: "POST",
                 data: {
                     product: $('#product').val(),
                     userid: $('#userid').val(),
-                    serverid: $('#serverid').val(),
+                    serverid: serveridVal,
                     password: $('#password').val(),
                     _token: '{{ csrf_token() }}'
                 },
