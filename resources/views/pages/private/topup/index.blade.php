@@ -16,6 +16,7 @@
 @section('message')
     <div id="success"></div>
     <div id="failed"></div>
+    <div id="notification-container"></div>
 @endsection
 
 @section('content')
@@ -191,6 +192,19 @@
 
 @section('js')
     <script src="/dist/libs/tom-select/dist/js/tom-select.base.min.js?1684106062" defer></script>
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <script>
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('d4afa1b27ea54cbf1546', {
+            cluster: 'ap1'
+        });
+
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('App\\Events\\TopUpEvent', function(data) {
+            console.log(data);
+        });
+    </script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var el;

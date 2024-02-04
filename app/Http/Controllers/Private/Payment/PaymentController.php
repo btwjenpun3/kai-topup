@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Private\Payment;
 
+use App\Events\TopUpEvent;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Payment;
@@ -9,7 +10,8 @@ use App\Models\Payment;
 class PaymentController extends Controller
 {
     public function index()
-    {
+    {        
+        TopUpEvent::dispatch('halo');
         $data = Payment::get();
         return view('pages.private.payment.index', [
             'datas' => $data
@@ -18,7 +20,7 @@ class PaymentController extends Controller
 
     public function show(Request $request)
     {
-        try {
+        try {            
             $data = Payment::where('id', $request->id)->first();
             return response()->json($data);
         } catch (\Exception $e) {
@@ -28,7 +30,7 @@ class PaymentController extends Controller
 
     public function update(Request $request)
     {
-        try {
+        try {            
             $validation = $request->validate([
                 'status' => 'required|boolean'
             ]);

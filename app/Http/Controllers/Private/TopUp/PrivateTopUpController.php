@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Private\TopUp;
 
+use App\Events\TopUpEvent;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Harga;
@@ -16,14 +17,14 @@ use Carbon\Carbon;
 class PrivateTopUpController extends Controller
 {
     public function index(Request $request)
-    {
+    {           
         $game = Game::where('slug', $request->slug)->first();
         $produk = Harga::where('game_id', $game->id)->orderBy('kode_produk', 'asc')->get();
         return view('pages.private.topup.index', [
             'game' => $game,
             'produk' => $produk
         ]);
-    }
+    }   
 
     public function process(Request $request) 
     {
