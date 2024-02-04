@@ -32,6 +32,7 @@
                                     <th>Kode Produk</th>
                                     <th>Saldo Terakhir</th>
                                     <th>Saldo Terpotong</th>
+                                    <th>SN</th>
                                     <th>Tanggal</th>
                                 </tr>
                             </thead>
@@ -69,6 +70,11 @@
                                         @if (isset($data->digiflazz->saldo_terpotong))
                                             <td class="text-danger">Rp.
                                                 {{ number_format($data->digiflazz->saldo_terpotong, 0, ',', '.') }}</td>
+                                        @else
+                                            <td>-</td>
+                                        @endif
+                                        @if (isset($data->digiflazz->sn))
+                                            <td>{{ $data->digiflazz->sn }}</td>
                                         @else
                                             <td>-</td>
                                         @endif
