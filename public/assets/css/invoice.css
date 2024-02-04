@@ -20,22 +20,20 @@
     border-radius: 23px;
     padding:10px;
     background-color: #ffffff;
-    box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.6);
+    box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.3);
     color: #061b29;
     font-size: 34px;
     text-decoration: none;
-    margin-bottom: 30px;
   }
   
   .invoice .item h4 {
     font-size: 15px;
-    margin-top: 20px;
     margin-bottom: 0px;
     display: inline-block;
   }
   
 
-  @media (max-width: 767px) {
+@media (max-width: 767px) {
   .invoice .pln {    
     width:100%;
     white-space: nowrap;
@@ -49,7 +47,7 @@
   }
 
   .heading-top-section {      
-    padding-top:30px;
+    padding-top:10px;
   }
 
   .heading-top-section h4 {

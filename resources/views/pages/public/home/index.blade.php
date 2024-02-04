@@ -8,11 +8,29 @@
     <link rel="stylesheet" href="/assets/css/flashsale.css">
     <link rel="stylesheet" href="/assets/css/games.css">
     <link rel="stylesheet" href="/assets/css/button-home.css">
+    <link rel="stylesheet" href="/assets/css/hero.css">
 @endsection
 
 @section('slider')
     <div class="main-banner text-center">
-        <img src="/img/slider.webp" class="img-fluid">
+        <div id="main-slider" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="5000">
+                    <img src="{{ asset(Storage::url('banner/slider2.webp')) }}" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="5000">
+                    <img src="{{ asset(Storage::url('banner/slider.webp')) }}" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#main-slider" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#main-slider" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
     </div>
 @endsection
 
@@ -53,7 +71,6 @@
         </div>
     @endif
 
-
     <div class="games">
         <div class="heading-section text-center">
             <h4>Games</h4>
@@ -87,6 +104,116 @@
     </div>
 @endsection
 
+@section('hero')
+    <div class="hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="hero-title">
+                        <h5>Di Percaya oleh Ribuan User</h5>
+                    </div>
+                    <div class="hero-title">
+                        <h4>Fumola Store dipercaya oleh Para gamers profesional</h4>
+                    </div>
+                    <div class="hero-title">
+                        <p>Fumola Store menyediakan layanan Top up game dan Reseller Voucher Game termurah dan terpercaya di
+                            Indonesia.</p>
+                    </div>
+                    <div class="sales-container">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-6 col-6">
+                                <div class="sales-flex">
+                                    <div class="sales">
+                                        <h4>157+</h4>
+                                        <h5>Pengguna</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 col-6">
+                                <div class="sales-flex">
+                                    <div class="sales">
+                                        <h4>73+</h4>
+                                        <h5>Games</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 col-6">
+                                <div class="sales-flex">
+                                    <div class="sales">
+                                        <h4>567+</h4>
+                                        <h5>Produk</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 col-6">
+                                <div class="sales-flex">
+                                    <div class="sales">
+                                        <h4>1179+</h4>
+                                        <h5>Transaksi</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="sales-review-container">
+                        <div class="owl-carousel owl-theme">
+                            <div class="item" style="width:250px">
+                                <div class="sales-review">
+                                    <img src="{{ asset(Storage::url('banner/5stars.png')) }}">
+                                    <h5>Undawn</h5>
+                                    <div class="sales-review-p">
+                                        <p>Mantab</p>
+                                    </div>
+                                    <div class="sales-user-p">
+                                        <p>Pengguna</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item" style="width:250px">
+                                <div class="sales-review">
+                                    <img src="{{ asset(Storage::url('banner/5stars.png')) }}">
+                                    <h5>LifeAfter</h5>
+                                    <div class="sales-review-p">
+                                        <p>Mantab</p>
+                                    </div>
+                                    <div class="sales-user-p">
+                                        <p>Pengguna</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item" style="width:250px">
+                                <div class="sales-review">
+                                    <img src="{{ asset(Storage::url('banner/5stars.png')) }}">
+                                    <h5>Mobile Legend</h5>
+                                    <div class="sales-review-p">
+                                        <p>Mantab</p>
+                                    </div>
+                                    <div class="sales-user-p">
+                                        <p>Pengguna</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
 @section('js')
-    <script></script>
+    <script>
+        $(document).ready(function() {
+            $(".owl-carousel").owlCarousel({
+                items: 3, // Jumlah item per slide
+                loop: true, // Putar secara terus menerus
+                autoWidth: true,
+                loop: true,
+                autoplay: true,
+                autoplayTimeout: 2000,
+            });
+        });
+    </script>
 @endsection

@@ -55,6 +55,9 @@
             </div>
         </div>
     </div>
+
+    @yield('hero')
+
     @yield('message')
     @yield('modal')
     @include('partials.public.footer')
@@ -69,14 +72,7 @@
     <script src="/assets/js/tabs.js"></script>
     <script src="/assets/js/popup.js"></script>
     <script src="/assets/js/custom.js"></script>
-    <script>
-        var linkElements = document.querySelectorAll('a[href="#"]');
-        linkElements.forEach(function(link) {
-            link.addEventListener('click', function(event) {
-                event.preventDefault();
-            });
-        });
-    </script>
+    <script></script>
     @yield('js')
 </body>
 

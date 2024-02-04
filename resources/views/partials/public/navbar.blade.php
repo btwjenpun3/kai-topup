@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg bg-custom"
-    style="background-color: #577A97;box-shadow: 0px 15px 10px rgba(0, 0, 0, 0.1);">
+    style="background-color: #1D2434;box-shadow: 0px 15px 10px rgba(0, 0, 0, 0.1);border-bottom:5px solid white">
     <div class="container">
         <a class="navbar-brand" href="#">
             <img src="/img/logo.png" width="50" height="30" alt="">
@@ -8,7 +8,7 @@
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('home') }}">Home</a>
