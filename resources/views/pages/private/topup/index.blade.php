@@ -286,7 +286,6 @@
             var successAlert = '<div class="alert alert-success alert-dismissible" role="alert">' +
                 '<div class="d-flex">' +
                 '<div>' +
-                '<h4 class="alert-title">Success!</h4>' +
                 '<div class="text-secondary">' + message + '</div>' +
                 '</div>' +
                 '</div>' +
