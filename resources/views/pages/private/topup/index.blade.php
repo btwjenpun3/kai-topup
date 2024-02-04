@@ -201,7 +201,7 @@
         });
 
         var channel = pusher.subscribe('my-channel');
-        channel.bind('App\\Events\\TopUpEvent', function(data) {
+        channel.bind('TopUpEvent', function(data) {
             console.log(data);
         });
     </script>
