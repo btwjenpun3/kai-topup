@@ -574,7 +574,7 @@
         }
 
         .products .item.clicked {
-            background-color: #28a745;
+            background-color: #92f7aa;
             color: #fff;
         }
 
@@ -583,7 +583,7 @@
         }
 
         .payments .clickable-payment.clicked {
-            background-color: #28a745;
+            background-color: #92f7aa;
             color: #fff;
         }
 

@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/assets/css/owl.css">
     <link rel="stylesheet" href="/assets/css/animate.css">
     <link rel="stylesheet" href="/assets/css/flexbox.css">
+    <link rel="stylesheet" href="/assets/css/slider-background.css">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 </head>
 
@@ -42,6 +43,18 @@
     <!-- ***** Slider Start ***** -->
     @yield('slider')
     <!-- ***** Slider End ***** -->
+    <ul class="background">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
 
     <div class="container">
         <div class="row">

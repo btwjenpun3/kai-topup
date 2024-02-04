@@ -15,9 +15,8 @@
   .games .heading-section h4 {
     border-radius: 23px;
       padding:10px;
-      background-color: #061b29;
-      box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.3);
-      color: #ffffff;
+      background-color: #ffffff;
+      color: #061b29;
       font-size: 34px;
       text-decoration: none;
       margin-bottom: 30px;
@@ -28,7 +27,7 @@
   }  
   
   .games .item h4 {
-    color: #ffffff;
+    color: #061b29;
     font-size: 16px;
     margin-top: 20px;
     margin-bottom: 0px;
