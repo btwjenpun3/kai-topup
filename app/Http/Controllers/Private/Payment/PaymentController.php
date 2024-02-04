@@ -11,7 +11,7 @@ class PaymentController extends Controller
 {
     public function index()
     {        
-        TopUpEvent::dispatch('halo');
+        event(new TopUpEvent('hello world'));
         $data = Payment::get();
         return view('pages.private.payment.index', [
             'datas' => $data
