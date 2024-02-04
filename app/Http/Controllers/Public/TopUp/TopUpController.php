@@ -117,7 +117,7 @@ class TopUpController extends Controller
                 /**
                  * Validasi terlebih dahulu apakah itemId dan itemPrice cocok dengan Database
                  */
-                $data = Harga::where('id', $request->itemId)->first();
+                $data = Harga::where('id', $request->itemId)->first();                          
 
                 /**
                  * Cek saldo Digiflazz terlebih dahulu

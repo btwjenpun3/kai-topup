@@ -20,6 +20,10 @@
     margin-bottom: 30px;
 }
 
+.products .offline {
+  filter: grayscale(100%);
+}
+
 .products .item img {
   border-radius: 23px;
 }

@@ -92,6 +92,8 @@
                                     <tr @if ($h->harga_jual <= '0') class="bg-danger text-light" @else @endif>
                                         @if ($h->status == 1)
                                             <td> <span class="badge bg-success me-1"></span></td>
+                                        @elseif ($h->status == 3)
+                                            <td> <span class="badge bg-secondary me-1"></span></td>
                                         @else
                                             <td><span class="badge bg-danger me-1"></span></td>
                                         @endif
@@ -378,6 +380,7 @@
                             <select class="form-select" name="edit_status" id="edit_status">
                                 <option value="1">Aktif</option>
                                 <option value="0">Tidak Aktif</option>
+                                <option value="3">Offline</option>
                             </select>
                         </div>
                     </div>
