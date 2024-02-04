@@ -226,8 +226,8 @@
 
             var channel = pusher.subscribe('my-channel');
             channel.bind('TopUpEvent', function(data) {
-                alert((data));
-                $('#failed').html(asdasd);
+                alert((data['message']));
+                $('#failed').html(data['message']);
             });
         });
 
