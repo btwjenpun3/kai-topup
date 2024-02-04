@@ -122,7 +122,7 @@ class PrivateTopUpController extends Controller
                                 'digiflazz_id' => $digiflazz->id
                             ]);                                                         
                             return response()->json([
-                                'berhasil' => 'Produk berhasil di beli dengan nomor Invoice ' . $invoiceNumber
+                                'berhasil' => 'Invoice berhasil di buat dengan nomor Invoice ' . $invoiceNumber
                             ],200);                            
                         } else {
                             return response()->json([
