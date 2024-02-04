@@ -1,7 +1,7 @@
 @extends('master.public.index')
 
 @section('title')
-    <title>Kai Top Up - {{ $game->nama }}</title>
+    <title>Fumola Store - {{ $game->nama }}</title>
 @endsection
 
 @section('message')

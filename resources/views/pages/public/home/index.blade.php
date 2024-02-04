@@ -1,7 +1,7 @@
 @extends('master.public.index')
 
 @section('title')
-    <title>Kai Top Up</title>
+    <title>Fumola Store - Beranda</title>
 @endsection
 
 @section('css')

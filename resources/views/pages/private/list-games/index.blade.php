@@ -1,7 +1,7 @@
 @extends('master.private.index')
 
 @section('title')
-    <title>Kai Admin - List Games</title>
+    <title>Fumola Realm - List Games</title>
 @endsection
 
 @section('header')

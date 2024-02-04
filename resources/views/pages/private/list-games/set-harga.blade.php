@@ -1,7 +1,7 @@
 @extends('master.private.index')
 
 @section('title')
-    <title>Kai Admin - Set Harga {{ $game->nama }}</title>
+    <title>Fumola Realm - Set Harga {{ $game->nama }}</title>
 @endsection
 
 @section('header')
