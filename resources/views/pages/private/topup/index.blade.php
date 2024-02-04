@@ -123,7 +123,7 @@
                                 @else
                                 @endif
                                 <div class="col-md-12">
-                                    <div class="form-label mt-3">Masukkan Password</div>
+                                    <div class="form-label mt-3">Masukkan Password Akun Realm Kamu</div>
                                     <input type="password" id="password" name="password" class="form-control"
                                         placeholder="-- Password Kamu --" required>
                                 </div>
