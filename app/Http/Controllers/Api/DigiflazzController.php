@@ -19,7 +19,7 @@ class DigiflazzController extends Controller
             $signature = hash_hmac('sha1', $request->getContent(), $secret);
             if ($request->header('X-Hub-Signature') == 'sha1=' . $signature) {
                 if($payload['data']['status'] == 'Sukses') {
-                    $invoice = Invoice::with('digiflazz')->where('nomor_invoice', $payload['data']['ref_id'])->first();
+                    $invoice = Invoice::with(['digiflazz', 'harga'])->where('nomor_invoice', $payload['data']['ref_id'])->first();
                     if ($invoice) {                        
                         $invoice->digiflazz->update([
                             'trx_id' => $payload['data']['trx_id'],
@@ -27,7 +27,7 @@ class DigiflazzController extends Controller
                             'sn' => $payload['data']['sn'],
                             'status' => $payload['data']['status']
                         ]);
-                        event(new TopUpEvent('Pembelian produk Digiflazz berhasil! (SN : ' . $payload['data']['sn'] . ')'));                        
+                        event(new TopUpEvent('Pembelian produk Digiflazz ' . $invoice->harga->nama_produk . ' berhasil! (SN : ' . $payload['data']['sn'] . ')'));                        
                         return response()->json(200);
                     }
                 } else if ($payload['data']['status'] == 'Pending') {
