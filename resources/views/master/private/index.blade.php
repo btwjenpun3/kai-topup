@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     @yield('title')
+    <link rel="icon" type="image/x-icon" href="{{ asset(Storage::url('assets/favicon.ico')) }}">
     <!-- CSS files -->
     <link href="/dist/css/tabler.min.css?1684106062" rel="stylesheet" />
     <link href="/dist/css/tabler-flags.min.css?1684106062" rel="stylesheet" />
