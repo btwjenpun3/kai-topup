@@ -27,7 +27,7 @@ class DigiflazzController extends Controller
                             'sn' => $payload['data']['sn'],
                             'status' => $payload['data']['status']
                         ]);
-                        event(new TopUpEvent('Pembelian produk Digiflazz ' . $invoice->harga->nama_produk . ' berhasil! (SN : ' . $payload['data']['sn'] . ')'));                        
+                        event(new TopUpEvent('Pembelian produk (' . $invoice->harga->nama_produk . ') berhasil! (SN : ' . $payload['data']['sn'] . ')'));                        
                         return response()->json(200);
                     }
                 } else if ($payload['data']['status'] == 'Pending') {
