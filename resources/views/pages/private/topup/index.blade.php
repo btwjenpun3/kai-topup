@@ -29,7 +29,7 @@
                         </div>
                         <div class="card-body">
                             <div class="row g-2 align-items-center">
-                                <span>Note : Jika produk <code>Tidak Aktif</code> atau <code>Harga Jual Rp. 0 atau
+                                <span>Note : Jika produk <code>Tidak Aktif / Offline</code> atau <code>Harga Jual Rp. 0 atau
                                         Kurang</code>, maka produk tidak
                                     bisa dipilih</span>
                                 <div class="form-label mt-3">Pilih Produk</div>
