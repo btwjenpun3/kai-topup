@@ -16,7 +16,7 @@
 @section('message')
     <div id="success"></div>
     <div id="failed"></div>
-    <div id="notification-container"></div>
+    <div id="notification"></div>
 @endsection
 
 @section('content')
@@ -193,7 +193,33 @@
 @section('js')
     <script src="/dist/libs/tom-select/dist/js/tom-select.base.min.js?1684106062" defer></script>
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-    <script></script>
+    <script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.11.2/dist/echo.iife.js"></script>
+    <script>
+        var pusher = new Pusher('d4afa1b27ea54cbf1546', {
+            cluster: 'ap1'
+        });
+
+        window.Echo = new Echo({
+            broadcaster: 'pusher',
+            key: 'd4afa1b27ea54cbf1546',
+            cluster: 'ap1',
+            encrypted: true
+        });
+        window.Echo.channel('my-channel')
+            .listen('TopUpEvent', (event) => {
+                var notificationAlert = '<div class="alert alert-success alert-dismissible" role="alert">' +
+                    '<div class="d-flex">' +
+                    '<div>' +
+                    '<h4 class="alert-title">Berhasil!</h4>' +
+                    '<div class="text-secondary"> ' + event.message + ' </div>' +
+                    '</div>' +
+                    '</div>' +
+                    '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
+                    '</div>';
+
+                $('#notification').html(notificationAlert);
+            });
+    </script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var el;
@@ -216,18 +242,6 @@
                         return '<div>' + escape(data.text) + '</div>';
                     },
                 },
-            });
-
-            Pusher.logToConsole = true;
-
-            var pusher = new Pusher('d4afa1b27ea54cbf1546', {
-                cluster: 'ap1'
-            });
-
-            var channel = pusher.subscribe('my-channel');
-            channel.bind('TopUpEvent', function(data) {
-                alert((data['message']));
-                $('#failed').html(data['message']);
             });
         });
 
