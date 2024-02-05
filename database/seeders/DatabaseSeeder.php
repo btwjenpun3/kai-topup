@@ -14,7 +14,13 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
+        \App\Models\Role::create([
+            'name' => 'admin',
+            'description' => 'Administrator'
+        ]);
+
         \App\Models\User::create([
+            'role_id' => 1,
             'name' => 'Muhamad Helmi',
             'email' => 'muhamadkelmi@gmail.com',
             'phone' => '6285740196222',
@@ -77,40 +83,7 @@ class DatabaseSeeder extends Seeder
             'brand' => 'PUBG MOBILE',
             'url_gambar' => 'games/pubg.webp',
             'slug' => 'pubg'
-        ]);
-        
-        // \App\Models\Harga::create([
-        //     'game_id' => 1,
-        //     'nama_produk' => '5 (5+0) Diamonds',
-        //     'kode_produk' => '0001',
-        //     'gambar' => 'produk/wb9lgambXZ-diamond.webp',
-        //     'modal' => 1250,
-        //     'harga_jual' => 1275,
-        //     'profit' => 25,
-        //     'status' => 1
-        // ]); 
-
-        // \App\Models\Harga::create([
-        //     'game_id' => 1,
-        //     'nama_produk' => '10 (9+1) Diamonds',
-        //     'kode_produk' => '0002',
-        //     'gambar' => 'produk/wb9lgambXZ-diamond.webp',
-        //     'modal' => 2250,
-        //     'harga_jual' => 2275,
-        //     'profit' => 25,
-        //     'status' => 1
-        // ]); 
-
-        // \App\Models\Harga::create([
-        //     'game_id' => 1,
-        //     'nama_produk' => '100 (95+5) Diamonds',
-        //     'kode_produk' => '0003',
-        //     'gambar' => 'produk/wb9lgambXZ-diamond.webp',
-        //     'modal' => 12250,
-        //     'harga_jual' => 12275,
-        //     'profit' => 25,
-        //     'status' => 1
-        // ]); 
+        ]);               
 
         /**
          * Payment
