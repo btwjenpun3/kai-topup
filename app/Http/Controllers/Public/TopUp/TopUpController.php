@@ -96,7 +96,7 @@ class TopUpController extends Controller
                 'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
                 'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
             ]);
-        } elseif($game->slug == 'coc') {
+        } elseif($game->slug == 'clash-of-clans') {
             return view('pages.public.topup.coc', [
                 'now' => $now,               
                 'game' => $game,

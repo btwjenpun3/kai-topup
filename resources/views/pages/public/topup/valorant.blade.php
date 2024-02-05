@@ -56,8 +56,6 @@
                 </div>
                 <div class="item-parent mb-4">
                     <div class="col-md-12">
-                        <img src="{{ asset(Storage::url('event/ml-event.webp')) }}" class="image-fluid"
-                            style="border-radius: 23px;">
                         <div class="flex-row mt-4">
                             @foreach ($harga as $h)
                                 @if ($h->status == 1 && $h->tipe == 'Event')
