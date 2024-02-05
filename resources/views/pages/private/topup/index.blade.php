@@ -158,6 +158,39 @@
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- Nomor Pelanggan --" required>
                                     </div>
+                                @elseif($game->slug == 'bigo-live')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan ID Pengguna</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- ID Pengguna --" required>
+                                    </div>
+                                @elseif($game->slug == 'genshin-impact')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID --" required>
+                                        <div class="form-label mt-3">Masukkan Server ID</div>
+                                        <select id="serverid" name="serverid" class="form-select" required>
+                                            <option value="os_asia">Asia</option>
+                                            <option value="os_usa">America</option>
+                                            <option value="os_euro">Europe</option>
+                                            <option value="os_cht">TW_HK_MO</option>
+                                        </select>
+                                    </div>
+                                @else
+                                @elseif($game->slug == 'honkai-star-rail')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID --" required>
+                                        <div class="form-label mt-3">Masukkan Server ID</div>
+                                        <select id="serverid" name="serverid" class="form-select" required>
+                                            <option value="os_asia">Asia</option>
+                                            <option value="os_usa">America</option>
+                                            <option value="os_euro">Europe</option>
+                                            <option value="os_cht">TW_HK_MO</option>
+                                        </select>
+                                    </div>
                                 @else
                                 @endif
                                 <div class="col-md-12">

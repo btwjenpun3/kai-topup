@@ -85,6 +85,10 @@
                                         Free Fire
                                     </a>
                                     <a class="dropdown-item"
+                                        href="{{ route('realm.topup.index', ['slug' => 'genshin-impact']) }}">
+                                        Genshin Impact
+                                    </a>
+                                    <a class="dropdown-item"
                                         href="{{ route('realm.topup.index', ['slug' => 'hago']) }}">
                                         HAGO
                                     </a>
