@@ -39,12 +39,11 @@ class PrivateTopUpController extends Controller
                 if($data) {
                     $user = auth()->user();
                     if(Hash::check($request->password, $user->password)) {
-
                         if($user->role->name == 'reseller') {
                             if($user->saldo <= $data->harga_jual_reseller ) {
                                 return response()->json([                          
                                     'unaccepted' => 'Saldo kamu kurang! Harap recharge saldo kamu lagi! (Error 506)'
-                                ], 400);
+                                ], 200);
                             }
                         }
 

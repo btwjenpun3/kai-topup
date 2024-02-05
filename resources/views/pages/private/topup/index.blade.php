@@ -279,7 +279,7 @@
                     if (error.unaccepted) {
                         failedAlert(xhr.responseJSON.unaccepted);
                     } else {
-                        failedAlert(xhr.responseJSON.message);
+                        failedAlert(xhr.responseJSON.unaccepted);
                     }
                 },
                 complete: function() {
