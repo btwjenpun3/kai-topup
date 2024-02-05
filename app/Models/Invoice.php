@@ -10,6 +10,11 @@ class Invoice extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'realm_user_id');
+    }
 
     public function harga()
     {

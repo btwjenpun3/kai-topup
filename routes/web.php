@@ -127,7 +127,8 @@ Route::prefix('/realm/invoice')
     ->controller(InvoiceRealmController::class)
     ->middleware('auth')
     ->group(function () {
-        Route::get('/', 'index')->name('index');
+        Route::get('/web', 'index')->name('index');
+        Route::get('/reseller', 'reseller')->name('reseller');
         Route::get('/show/{id}', 'show');
     });
 

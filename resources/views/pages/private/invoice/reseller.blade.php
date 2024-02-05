@@ -47,6 +47,7 @@
                                     <th>Tanggal</th>
                                     <th>Profit</th>
                                     <th>Total</th>
+                                    <th>User</th>
                                     <th class="w-1"></th>
                                 </tr>
                             </thead>
@@ -75,6 +76,11 @@
                                             <td>-</td>
                                         @endif
                                         <td>Rp. {{ number_format($invoice->total, 0, ',', '.') }}</td>
+                                        @if (isset($invoice->realm_user_id))
+                                            <td>{{ $invoice->user->name }}</td>
+                                        @else
+                                            <td>-</td>
+                                        @endif
                                         <td> <button class="btn btn-md" data-bs-toggle="modal"
                                                 data-bs-target="#modal-detail"
                                                 onclick="lihat('{{ $invoice->nomor_invoice }}')">Detail</button> </td>

@@ -79,12 +79,14 @@
                                     <th>Tipe</th>
                                     <th>Kode Produk</th>
                                     <th>Seller</th>
-                                    <th>Modal</th>
-                                    <th>Harga Jual</th>
-                                    <th>Profit</th>
+                                    <th class="bg-info text-light">Modal</th>
+                                    <th class="bg-success text-light">Harga Jual</th>
+                                    <th class="bg-success text-light">Profit</th>
+                                    <th class="bg-warning text-light">Harga Jual Reseller</th>
+                                    <th class="bg-warning text-light">Profit Reseller</th>
                                     <th>Start Cut Off</th>
                                     <th>End Cut Off</th>
-                                    <th class="w-1"></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -143,27 +145,35 @@
                                                 </td>
                                             @endif
                                         @endif
+                                        <td>Rp.
+                                            {{ number_format($h->harga_jual_reseller, 0, ',', '.') }}</td>
+                                        @if ($h->profit_reseller > 0)
+                                            <td class="text-success">Rp.
+                                                {{ number_format($h->profit_reseller, 0, ',', '.') }}
+                                            </td>
+                                        @elseif($h->profit_reseller < 0)
+                                            <td class="text-danger">Rp.
+                                                {{ number_format($h->profit_reseller, 0, ',', '.') }}
+                                            </td>
+                                        @else
+                                            <td class="text-secondary">Rp.
+                                                {{ number_format($h->profit_reseller, 0, ',', '.') }}
+                                            </td>
+                                        @endif
                                         <td>{{ \Carbon\Carbon::parse($h->start_cut_off)->format('H:i') }} WIB</td>
                                         <td>{{ \Carbon\Carbon::parse($h->end_cut_off)->format('H:i') }} WIB</td>
                                         <td>
-                                            <div class="dropdown">
-                                                <button class="btn dropdown-toggle align-text-top"
-                                                    data-bs-toggle="dropdown">
-                                                    Actions
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-end">
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                        data-bs-target="#modal-edit"
-                                                        data-option-value="{{ $h->tipe }}"
-                                                        onclick="show({{ $h->id }})">
-                                                        Edit </a>
-                                                    <a class="dropdown-item
+
+                                            <a class="btn" href="#" data-bs-toggle="modal"
+                                                data-bs-target="#modal-edit" data-option-value="{{ $h->tipe }}"
+                                                onclick="show({{ $h->id }})">
+                                                Edit </a>
+                                            {{-- <a class="dropdown-item
                                                         text-danger"
                                                         href="#" data-bs-toggle="modal" data-bs-target="#modal-hapus"
                                                         onclick="hapus({{ $h->id }})">
-                                                        Hapus </a>
-                                                </div>
-                                            </div>
+                                                        Hapus </a> --}}
+
                                         </td>
                                     </tr>
                                 @endforeach
@@ -337,8 +347,8 @@
                                 placeholder="Misal '00001'" disabled />
                         </div>
                     </div>
-                    <div class="row mb-3 align-items-end">
-                        <label class="form-label" for="modal">Modal</label>
+                    <div class="row mb-3 align-items-end bg-info">
+                        <label class="form-label text-light" for="modal">Modal</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="modal_prepend">Rp.</span>
@@ -347,8 +357,8 @@
                                 placeholder="Misal '15000'" aria-describedby="modal_prepend" disabled />
                         </div>
                     </div>
-                    <div class="row mb-3 align-items-end">
-                        <label class="form-label" for="harga_jual">Harga Jual</label>
+                    <div class="row mb-3 align-items-end bg-success">
+                        <label class="form-label text-light" for="harga_jual">Harga Jual</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="modal_prepend">Rp.</span>
@@ -357,13 +367,33 @@
                                 placeholder="Misal '16500'" aria-describedby="modal_prepend" required />
                         </div>
                     </div>
-                    <div class="row mb-3 align-items-end">
-                        <label class="form-label" for="profit">Profit</label>
+                    <div class="row mb-3 align-items-end bg-success">
+                        <label class="form-label text-light" for="profit">Profit</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="modal_prepend">Rp.</span>
                             </div>
                             <input type="text" name="profit" id="edit_profit" class="form-control"
+                                aria-describedby="modal_prepend" disabled />
+                        </div>
+                    </div>
+                    <div class="row mb-3 align-items-end bg-warning">
+                        <label class="form-label text-light" for="harga_jual">Harga Jual Reseller</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="reseller_prepend">Rp.</span>
+                            </div>
+                            <input type="text" name="harga_jual_reseller" id="edit_harga_jual_reseller"
+                                class="form-control" aria-describedby="reseller_prepend" required />
+                        </div>
+                    </div>
+                    <div class="row mb-3 align-items-end bg-warning">
+                        <label class="form-label text-light" for="profit">Profit Reseller</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="modal_prepend">Rp.</span>
+                            </div>
+                            <input type="text" name="profit_reseller" id="edit_profit_reseller" class="form-control"
                                 aria-describedby="modal_prepend" disabled />
                         </div>
                     </div>
@@ -479,7 +509,7 @@
         function hitungProfit() {
             var modal = parseFloat(document.getElementById('modal').value) || 0;
             var hargaJual = parseFloat(document.getElementById('harga_jual').value) || 0;
-            var profit = hargaJual - modal;
+            var profit = hargaJualReseller - modal;
             document.getElementById('profit').value = profit;
         }
         document.getElementById('modal').addEventListener('input', hitungProfit);
@@ -489,11 +519,15 @@
         function hitungProfitEdit() {
             var modal = parseFloat(document.getElementById('edit_modal').value) || 0;
             var hargaJual = parseFloat(document.getElementById('edit_harga_jual').value) || 0;
+            var hargaJualReseller = parseFloat(document.getElementById('edit_harga_jual_reseller').value) || 0;
             var profit = hargaJual - modal;
+            var profitReseller = hargaJualReseller - modal;
             document.getElementById('edit_profit').value = profit;
+            document.getElementById('edit_profit_reseller').value = profitReseller;
         }
         document.getElementById('edit_modal').addEventListener('input', hitungProfitEdit);
         document.getElementById('edit_harga_jual').addEventListener('input', hitungProfitEdit);
+        document.getElementById('edit_harga_jual_reseller').addEventListener('input', hitungProfitEdit);
 
         //Fungsi untuk melihat data yang akan di edit
         function show(id) {
@@ -526,6 +560,7 @@
                 formData.append('edit_modal', $('#edit_modal').val());
                 formData.append('edit_gambar', editGambar);
                 formData.append('edit_harga_jual', $('#edit_harga_jual').val());
+                formData.append('edit_harga_jual_reseller', $('#edit_harga_jual_reseller').val());
                 formData.append('edit_status', $('#edit_status').val());
                 formData.append('_token', '{{ csrf_token() }}');
 
@@ -582,7 +617,7 @@
                         "div");
                     errorMessage.className =
                         "alert alert-danger";
-                    errorMessage.textContent = xhr.responseJSON.message;
+                    errorMessage.textContent = xhr.responseJSON.unaccepted;
                     $('#import-gagal').html(errorMessage);
                     $('#import_loading').hide();
                     $('#import').show();

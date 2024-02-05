@@ -76,17 +76,21 @@ class SetHargaController extends Controller
                 'edit_kode_produk' => 'required',
                 'edit_modal' => 'required|integer',
                 'edit_harga_jual' => 'required|integer',
+                'edit_harga_jual_reseller' => 'required|integer',
                 'edit_status' => 'required'
             ]);
             if($validation) {
-                $profit = $request->edit_harga_jual - $request->edit_modal;                
+                $profit = $request->edit_harga_jual - $request->edit_modal;   
+                $profitReseller = $request->edit_harga_jual_reseller - $request->edit_modal;               
                 Harga::where('id', $request->id)->update([
                     'nama_produk' => $request->edit_nama_produk,
                     'tipe' => $request->edit_tipe,
                     'kode_produk' => $request->edit_kode_produk,
                     'modal' => $request->edit_modal,
                     'harga_jual' => $request->edit_harga_jual,
+                    'harga_jual_reseller' => $request->edit_harga_jual_reseller,
                     'profit' => $profit,
+                    'profit_reseller' => $profitReseller,
                     'status' => $request->edit_status 
                 ]);
                 if ($request->hasFile('edit_gambar')) {
@@ -190,17 +194,17 @@ class SetHargaController extends Controller
                     ]);
                 } else {
                     return response()->json([
-                        'error' => 'Terdapat masalah saat import data'
+                        'unaccepted' => 'Terdapat masalah saat import data'
                     ]);
                 }
             } else {
                 return response()->json([
-                    'error' => 'Game tidak ditemukan'
+                    'unaccepted' => 'Game tidak ditemukan'
                 ]);
             }
         } catch (\Exception $e) {
             Log::channel('product-import')->error('Error occurred: ' . $e->getMessage());            
-            return response()->json(['error' => 'Unknown error'], 400);
+            return response()->json(['unaccepted' => 'Unknown error'], 400);
         }
     }
 

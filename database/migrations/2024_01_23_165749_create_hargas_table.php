@@ -22,7 +22,9 @@ return new class extends Migration
             $table->string('gambar');
             $table->integer('modal');
             $table->integer('harga_jual');
+            $table->integer('harga_jual_reseller');
             $table->integer('profit');
+            $table->integer('profit_reseller');
             $table->string('start_cut_off');
             $table->string('end_cut_off');
             $table->boolean('status');

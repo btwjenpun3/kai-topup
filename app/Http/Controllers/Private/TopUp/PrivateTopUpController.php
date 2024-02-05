@@ -40,6 +40,14 @@ class PrivateTopUpController extends Controller
                     $user = auth()->user();
                     if(Hash::check($request->password, $user->password)) {
 
+                        if($user->role->name == 'reseller') {
+                            if($user->saldo <= $data->harga_jual_reseller ) {
+                                return response()->json([                          
+                                    'unaccepted' => 'Saldo kamu kurang! Harap recharge saldo kamu lagi! (Error 506)'
+                                ], 400);
+                            }
+                        }
+
                         $saldo = Http::withHeaders([
                             'Content-Type' => 'application/json',
                         ])->post('https://api.digiflazz.com/v1/cek-saldo', [
@@ -51,7 +59,7 @@ class PrivateTopUpController extends Controller
                         if($saldo['data']['deposit'] <= $data->modal) {
                             Log::channel('digiflazz')->error('Saldo kurang! Kamu butuh Rp. ' . $data->modal . ' dan saldo kamu sisa Rp. ' . $saldo['data']['deposit']);
                             return response()->json([                          
-                                'unaccepted' => 'Saldo kamu kurang!'
+                                'unaccepted' => 'Terdapat error! Harap hubungi Admin! (Error 505)'
                             ], 200);
                         }
 
@@ -91,6 +99,7 @@ class PrivateTopUpController extends Controller
                             'server_id' => $request->serverid,
                             'customer' => $customer_no,
                             'phone' => $user->phone,
+                            'realm_user_id' => auth()->id(),
                             'game_id' => $data->game->id,
                             'harga_id' => $data->id, 
                             'payment_id' => 99,

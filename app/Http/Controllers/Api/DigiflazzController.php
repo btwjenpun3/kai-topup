@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Invoice;
 use App\Events\TopUpEvent;
+use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
 
@@ -27,7 +28,13 @@ class DigiflazzController extends Controller
                             'sn' => $payload['data']['sn'],
                             'status' => $payload['data']['status']
                         ]);
-                        event(new TopUpEvent('Pembelian produk (' . $invoice->harga->nama_produk . ') berhasil! (SN : ' . $payload['data']['sn'] . ')'));                        
+                        event(new TopUpEvent('Pembelian produk (' . $invoice->harga->nama_produk . ') berhasil! (SN : ' . $payload['data']['sn'] . ')'));
+                        if($invoice->user->role_id == 2) {
+                            $potongSaldo = $invoice->user->saldo - $invoice->harga->harga_jual_reseller;
+                            User::where('id', $invoice->realm_user_id)->update([
+                                'saldo' => $potongSaldo
+                            ]); 
+                        }                                               
                         return response()->json(200);
                     }
                 } else if ($payload['data']['status'] == 'Pending') {

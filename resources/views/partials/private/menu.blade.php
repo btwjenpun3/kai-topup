@@ -117,9 +117,11 @@
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('invoice.realm.index') }}">
-                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
+                            data-bs-auto-close="outside" role="button" aria-expanded="false">
+                            <span
+                                class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                     class="icon icon-tabler icon-tabler-file-invoice" width="24" height="24"
                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -136,6 +138,19 @@
                                 Invoices
                             </span>
                         </a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-menu-columns">
+                                <div class="dropdown-menu-column">
+                                    <a class="dropdown-item" href="{{ route('invoice.realm.index') }}">
+                                        Invoice Web
+                                    </a>
+                                    <a class="dropdown-item"
+                                        href="{{ route('invoice.realm.reseller', ['id' => auth()->id()]) }}">
+                                        Invoice Admin & Reseller
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('transaksi.index') }}">
