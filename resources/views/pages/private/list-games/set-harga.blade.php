@@ -542,6 +542,8 @@
                     document.getElementById('edit_modal').value = response.modal;
                     document.getElementById('edit_harga_jual').value = response.harga_jual;
                     document.getElementById('edit_profit').value = response.profit;
+                    document.getElementById('edit_harga_jual_reseller').value = response.harga_jual_reseller;
+                    document.getElementById('edit_profit_reseller').value = response.profit_reseller;
                     document.getElementById('edit_gambar').value = null;
                 },
                 error: function(xhr, error, status) {}
