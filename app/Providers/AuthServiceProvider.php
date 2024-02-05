@@ -23,7 +23,11 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::define('admin', function() {
-            return auth()->user()->email == 'muhamadkelmi@gmail.com';
+            return auth()->user()->role->name == 'admin';
+        });
+
+        Gate::define('reseller', function() {
+            return auth()->user()->role->name == 'reseller';
         });
     }
 }
