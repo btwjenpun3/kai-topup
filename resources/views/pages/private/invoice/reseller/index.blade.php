@@ -6,7 +6,7 @@
 
 @section('header')
     <h2 class="page-title">
-        List Invoice
+        List Invoice - Realm (Reseller)
     </h2>
 @endsection
 
@@ -40,7 +40,6 @@
                             <thead>
                                 <tr>
                                     <th class="w-1"></th>
-                                    <th class="w-7"></th>
                                     <th></th>
                                     <th>Produk</th>
                                     <th>Nomor Invoice</th>
@@ -59,7 +58,6 @@
                                         @elseif ($invoice->status == 'EXPIRED')
                                             <td class="text-danger"><span class="badge bg-danger me-1"></span></td>
                                         @endif
-                                        <td><img src="{{ asset(Storage::url($invoice->game->url_gambar)) }}"></td>
                                         <td>{{ $invoice->game->nama }}</td>
                                         <td>{{ $invoice->harga->nama_produk }}</td>
                                         <td><a href="{{ route('invoice.index', ['id' => $invoice->nomor_invoice]) }}"
@@ -189,6 +187,18 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="container-xl mt-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="datagrid">
+                                        <div class="datagrid-item">
+                                            <div class="datagrid-title">SERIAL NUMBER</div>
+                                            <div class="datagrid-content" id="serial-number"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -243,6 +253,7 @@
                     }
                     document.getElementById('total').innerHTML = 'Rp. ' + formatRupiah(response.harga
                         .harga_jual_reseller);
+                    document.getElementById('serial-number').innerHTML = response.digiflazz.sn;
                     $('#invoice-content').show();
                     $('#loading').hide();
                 },

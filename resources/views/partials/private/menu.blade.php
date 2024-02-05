@@ -73,37 +73,39 @@
                             <div class="dropdown-menu-columns">
                                 <div class="dropdown-menu-column">
                                     <a class="dropdown-item"
-                                        href="{{ route('realm.topup.index', ['slug' => 'mobile-legend']) }}">
-                                        Mobile Legend
+                                        href="{{ route('realm.topup.index', ['slug' => 'clash-of-clans']) }}">
+                                        Clash of Clans
                                     </a>
                                     <a class="dropdown-item"
                                         href="{{ route('realm.topup.index', ['slug' => 'free-fire']) }}">
                                         Free Fire
                                     </a>
                                     <a class="dropdown-item"
+                                        href="{{ route('realm.topup.index', ['slug' => 'hago']) }}">
+                                        HAGO
+                                    </a>
+                                    <a class="dropdown-item"
                                         href="{{ route('realm.topup.index', ['slug' => 'lifeafter']) }}">
                                         LifeAfter
                                     </a>
                                     <a class="dropdown-item"
-                                        href="{{ route('realm.topup.index', ['slug' => 'undawn']) }}">
-                                        Undawn
+                                        href="{{ route('realm.topup.index', ['slug' => 'mobile-legend']) }}">
+                                        Mobile Legend
                                     </a>
                                     <a class="dropdown-item"
                                         href="{{ route('realm.topup.index', ['slug' => 'pubg']) }}">
                                         PUBG Mobile Indonesia
                                     </a>
                                     <a class="dropdown-item"
-                                        href="{{ route('realm.topup.index', ['slug' => 'hago']) }}">
-                                        HAGO
+                                        href="{{ route('realm.topup.index', ['slug' => 'undawn']) }}">
+                                        Undawn
                                     </a>
                                     <a class="dropdown-item"
                                         href="{{ route('realm.topup.index', ['slug' => 'valorant']) }}">
                                         Valorant
                                     </a>
-                                    <a class="dropdown-item"
-                                        href="{{ route('realm.topup.index', ['slug' => 'clash-of-clans']) }}">
-                                        Clash of Clans
-                                    </a>
+                                </div>
+                                <div class="dropdown-menu-column">
                                     <a class="dropdown-item"
                                         href="{{ route('realm.topup.index', ['slug' => 'pln']) }}">
                                         Token Listrik
