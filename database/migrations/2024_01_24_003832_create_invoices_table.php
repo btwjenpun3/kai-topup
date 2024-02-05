@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('customer');  
             $table->string('phone');          
             $table->string('xendit_invoice_id')->nullable();
+            $table->foreignId('realm_user_id')->nullable()->constrained('users');
             $table->foreignId('game_id')->constrained();
             $table->foreignId('harga_id')->constrained();
             $table->foreignId('payment_id')->nullable()->constrained();   
