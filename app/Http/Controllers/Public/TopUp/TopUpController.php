@@ -116,6 +116,36 @@ class TopUpController extends Controller
                 'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
                 'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
             ]);        
+        } elseif($game->slug == 'bigo-live') {
+            return view('pages.public.topup.bigo-live', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);        
+        } elseif($game->slug == 'honkai-star-rail') {
+            return view('pages.public.topup.honkai-star-rail', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);        
+        } elseif($game->slug == 'genshin-impact') {
+            return view('pages.public.topup.genshin-impact', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);        
         } else {
             abort(404);
         }       
@@ -177,14 +207,60 @@ class TopUpController extends Controller
                  */  
                 if ($data->seller_name == 'BANGJEFF' && $data->game->brand == 'LifeAfter Credits') {
                     $customer_no = $request->userId . ',' . $request->serverId;
+
+                } elseif ($data->game->brand == 'Honkai Star Rail') {
+                    if($data->seller_name == 'HOPE') {
+                        $customer_no = $request->userId . '|' . $request->serverId;
+                    } elseif ($data->seller_name == 'VocaGame') {
+                        if($request->serverId == 'os_asia') {
+                            $serverId = 'prod_official_asia';
+                        } elseif($request->serverId == 'os_usa') {
+                            $serverId = 'prod_official_usa';
+                        } elseif($request->serverId == 'os_euro') {
+                            $serverId = 'prod_official_eur';
+                        } else {
+                            return response()->json([
+                                'unaccepted' => 'Produk ini dengan Server TW_HK_MO tidak support! Harap pilih denom yang lain'
+                            ]);
+                        }
+                        $customer_no = $request->userId . '|' . $serverId;
+                    } elseif($data->seller_name == 'YinYangStoreid') {
+                        $customer_no = $request->userId . '|' . $request->serverId;
+                    }
+                
+                } elseif($data->game->brand == 'Genshin Impact') {    
+                    if($data->seller_name == 'HOPE') {
+                        $customer_no = $request->userId . '|' . $request->serverId;
+                    } elseif($data->seller_name == 'lapakgamingcom') {
+                        if($request->serverId == 'os_asia') {
+                            $serverId = '001';
+                        } elseif($request->serverId == 'os_usa') {
+                            $serverId = '002';
+                        } elseif($request->serverId == 'os_euro') {
+                            $serverId = '003';
+                        } elseif($request->serverId == 'os_cht') {
+                            $serverId = '004';
+                        } else {
+                            return response()->json([
+                                'unaccepted' => 'Produk ini dengan Server TW_HK_MO tidak support! Harap pilih denom yang lain'
+                            ]);
+                        }
+                        $customer_no = $serverId . $request->userId;
+                    }
+                    
                 } elseif ($data->game->brand == 'Clash of Clans') {
                     $customer_no = '#' . $request->userId;
+
                 } elseif ($data->game->brand == 'Valorant') {
-                    $customer_no = $request->userId . '#' . $request->serverId;                
+                    $customer_no = $request->userId . '#' . $request->serverId;    
+
                 } else {
                     $customer_no = $request->userId . $request->serverId;
                 }
 
+                /**
+                 * GAS PROSES!!
+                 */
                 if($data) {
                     if($request->price == $data->harga_jual) {
                         $game = $data->game->where('slug', $request->slug)->first();
