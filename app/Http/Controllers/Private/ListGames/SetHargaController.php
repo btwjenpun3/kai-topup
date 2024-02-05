@@ -11,15 +11,20 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Gate;
 
 class SetHargaController extends Controller
 {
     public function index(Request $request)
     {
-        return view('pages.private.list-games.set-harga', [
-            'game' => Game::where('id', $request->id)->first(),
-            'harga' => Harga::orderBy('kode_produk', 'asc')->where('game_id', $request->id)->paginate(10)
-        ]);
+        if(Gate::allows('admin')) {
+            return view('pages.private.list-games.set-harga', [
+                'game' => Game::where('id', $request->id)->first(),
+                'harga' => Harga::orderBy('kode_produk', 'asc')->where('game_id', $request->id)->paginate(10)
+            ]);
+        } else {
+            abort(404);
+        }
     }
 
     public function store(Request $request)

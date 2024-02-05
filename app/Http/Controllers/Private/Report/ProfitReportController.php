@@ -5,12 +5,17 @@ namespace App\Http\Controllers\Private\Report;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Invoice;
+use Illuminate\Support\Facades\Gate;
 
 class ProfitReportController extends Controller
 {
     public function indexProfit()
     {
-        return view('pages.private.report.profit.index');
+        if(Gate::allows('admin')) { 
+            return view('pages.private.report.profit.index');
+        } else {
+            abort(404);
+        }
     }
 
     public function generateProfit(Request $request)

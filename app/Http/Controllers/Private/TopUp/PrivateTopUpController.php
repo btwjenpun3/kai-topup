@@ -73,12 +73,16 @@ class PrivateTopUpController extends Controller
                             }
                         } 
         
-                        $via = 'REALM';
+                        $via = 'REALM';                        
 
-                        if($data->seller_name == 'BANGJEFF' && $data->game->brand == 'LifeAfter Credits') {
-                            $customer_no = $request->userid . ',' . $request->serverid;
+                        if ($data->seller_name == 'BANGJEFF' && $data->game->brand == 'LifeAfter Credits') {
+                            $customer_no = $request->userId . ',' . $request->serverId;
+                        } elseif ($data->game->brand == 'Clash of Clans') {
+                            $customer_no = '#' . $request->userId;
+                        } elseif ($data->game->brand == 'Valorant') {
+                            $customer_no = $request->userId . '#' . $request->serverId;                
                         } else {
-                            $customer_no = $request->userid . $request->serverid;
+                            $customer_no = $request->userId . $request->serverId;
                         }
 
                         $datePart = now()->format('Ymd');

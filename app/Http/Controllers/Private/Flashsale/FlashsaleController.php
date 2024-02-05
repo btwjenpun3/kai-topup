@@ -6,17 +6,22 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Flashsale;
 use App\Models\Harga;
+use Illuminate\Support\Facades\Gate;
 
 class FlashsaleController extends Controller
 {
     public function index()
     {
-        $hargas = Harga::all();
-        $flashsales = Flashsale::all();
-        return view('pages.private.flashsale.index', [
-            'hargas' => $hargas,
-            'flashsales' => $flashsales
-        ]);
+        if(Gate::allows('admin')) {
+            $hargas = Harga::all();
+            $flashsales = Flashsale::all();
+            return view('pages.private.flashsale.index', [
+                'hargas' => $hargas,
+                'flashsales' => $flashsales
+            ]);
+        } else {
+            abort(404);
+        }
     }
 
     public function store(Request $request)

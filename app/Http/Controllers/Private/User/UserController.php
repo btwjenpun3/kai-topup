@@ -5,15 +5,20 @@ namespace App\Http\Controllers\Private\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('id', 'asc')->paginate(10);
-        return view('pages.private.user.index', [
-            'users' => $users
-        ]);
+        if(Gate::allows('admin')) { 
+            $users = User::orderBy('id', 'asc')->paginate(10);
+            return view('pages.private.user.index', [
+                'users' => $users
+            ]);
+        } else {
+            abort(404);
+        }
     }
 
     public function store(Request $request)

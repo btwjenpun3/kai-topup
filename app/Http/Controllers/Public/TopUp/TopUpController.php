@@ -96,6 +96,26 @@ class TopUpController extends Controller
                 'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
                 'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
             ]);
+        } elseif($game->slug == 'coc') {
+            return view('pages.public.topup.coc', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);        
+        } elseif($game->slug == 'valorant') {
+            return view('pages.public.topup.valorant', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);        
         } else {
             abort(404);
         }       
@@ -155,8 +175,12 @@ class TopUpController extends Controller
                 /**
                  * Cek Seller, ini berlaku jika customer_no butuh format khusus 
                  */  
-                if($data->seller_name == 'BANGJEFF' && $data->game->brand == 'LifeAfter Credits') {
+                if ($data->seller_name == 'BANGJEFF' && $data->game->brand == 'LifeAfter Credits') {
                     $customer_no = $request->userId . ',' . $request->serverId;
+                } elseif ($data->game->brand == 'Clash of Clans') {
+                    $customer_no = '#' . $request->userId;
+                } elseif ($data->game->brand == 'Valorant') {
+                    $customer_no = $request->userId . '#' . $request->serverId;                
                 } else {
                     $customer_no = $request->userId . $request->serverId;
                 }
