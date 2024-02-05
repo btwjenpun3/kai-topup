@@ -177,7 +177,6 @@
                                             <option value="os_cht">TW_HK_MO</option>
                                         </select>
                                     </div>
-                                @else
                                 @elseif($game->slug == 'honkai-star-rail')
                                     <div class="col-md-12">
                                         <div class="form-label mt-3">Masukkan User ID</div>
