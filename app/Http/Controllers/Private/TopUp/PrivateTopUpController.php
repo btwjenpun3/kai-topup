@@ -153,7 +153,7 @@ class PrivateTopUpController extends Controller
         } catch (\Exception $e) {
             Log::channel('invoice')->error('Error occurred: ' . $e->getMessage());  
             return response()->json([
-                'unaccepted' => $e->getMessage()
+                'unaccepted' => 'Terdapat error pada sistem! Harap hubungi Admin! (Error 500)'
             ]);
         }
     }

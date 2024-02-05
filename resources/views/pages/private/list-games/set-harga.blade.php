@@ -82,8 +82,8 @@
                                     <th class="bg-info text-light">Modal</th>
                                     <th class="bg-success text-light">Harga Jual</th>
                                     <th class="bg-success text-light">Profit</th>
-                                    <th class="bg-warning text-light">Harga Jual Reseller</th>
-                                    <th class="bg-warning text-light">Profit Reseller</th>
+                                    <th class="bg-warning text-light">Harga Jual ke Reseller</th>
+                                    <th class="bg-warning text-light">Profit dari Reseller</th>
                                     <th>Start Cut Off</th>
                                     <th>End Cut Off</th>
                                     <th></th>
@@ -378,7 +378,7 @@
                         </div>
                     </div>
                     <div class="row mb-3 align-items-end bg-warning">
-                        <label class="form-label text-light" for="harga_jual">Harga Jual Reseller</label>
+                        <label class="form-label text-light" for="harga_jual">Harga Jual ke Reseller</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="reseller_prepend">Rp.</span>
@@ -388,7 +388,7 @@
                         </div>
                     </div>
                     <div class="row mb-3 align-items-end bg-warning">
-                        <label class="form-label text-light" for="profit">Profit Reseller</label>
+                        <label class="form-label text-light" for="profit">Profit dari Reseller</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="modal_prepend">Rp.</span>

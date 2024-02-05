@@ -30,10 +30,15 @@
                         </div>
                         <div class="card-body">
                             <div class="row g-2 align-items-center">
+                                @if (auth()->user()->role->name == 'reseller')
+                                    <h4>Saldo : Rp. {{ number_format(auth()->user()->saldo, 0, ',', '.') }}</h4>
+                                @endif
                                 <span>Note : Jika produk <code>Tidak Aktif / Offline</code> atau <code>Harga Jual Rp. 0 atau
                                         Kurang</code>, maka produk tidak
                                     bisa dipilih</span>
-                                <div class="form-label mt-3">Pilih Produk</div>
+                                <span>Jika kamu Reseller maka harap hubungi Admin jika kamu ingin menyalakan produk yang
+                                    ingin kamu beli.</span>
+                                <div class="form-label mt-5">Pilih Produk</div>
                                 <select class="form-select" id="product" name="product" required>
                                     <option value="" selected>-- Pilih Produk --</option>
                                     @foreach ($produk as $p)
