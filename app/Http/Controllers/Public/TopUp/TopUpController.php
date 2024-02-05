@@ -226,8 +226,9 @@ class TopUpController extends Controller
                         $customer_no = $request->userId . '|' . $serverId;
                     } elseif($data->seller_name == 'YinYangStoreid') {
                         $customer_no = $request->userId . '|' . $request->serverId;
-                    }
-                
+                    } elseif($data->seller_name == 'LUQMANTRONIK') {
+                        $customer_no = $request->userId . $request->serverId;
+                    }                
                 } elseif($data->game->brand == 'Genshin Impact') {    
                     if($data->seller_name == 'HOPE') {
                         $customer_no = $request->userId . '|' . $request->serverId;
