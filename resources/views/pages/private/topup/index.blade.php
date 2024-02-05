@@ -18,16 +18,6 @@
     <div id="failed"></div>
     <div id="notification"></div>
     <div id="notification-failed"></div>
-    <div class="alert alert-success" role="alert">
-        <div class="d-flex justify-content-between">
-            <div class="text-secondary">Mohon tunggu</div>
-            <span>
-                <div class="spinner-grow" role="status">
-                    <span class="sr-only"></span>
-                </div>
-            </span>
-        </div>
-    </div>
 @endsection
 
 @section('content')
