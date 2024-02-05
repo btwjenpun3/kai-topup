@@ -198,7 +198,7 @@ class SetHargaController extends Controller
                                     'profit' => 0,
                                     'start_cut_off' => $item['start_cut_off'],
                                     'end_cut_off' => $item['end_cut_off'],
-                                    'status' => 1
+                                    'status' => 0
                                 ]);
                             }                            
                         }
