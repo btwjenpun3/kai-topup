@@ -11,6 +11,7 @@ use App\Http\Controllers\Private\Product\ProductController;
 use App\Http\Controllers\Private\Report\ProfitReportController;
 use App\Http\Controllers\Private\TopUp\PrivateTopUpController;
 use App\Http\Controllers\Private\Transaction\TransactionController;
+use App\Http\Controllers\Private\User\UserController;
 use App\Http\Controllers\Public\Home\HomeController;
 use App\Http\Controllers\Public\Invoice\InvoiceController;
 use App\Http\Controllers\Public\Simulate\SimulateController;
@@ -168,5 +169,14 @@ Route::prefix('/realm/report')
         Route::get('/profit', 'indexProfit')->name('index.profit');
         Route::get('/profit/generate', 'generateProfit')->name('generate.profit');
     });
+
+Route::prefix('/realm/user')
+    ->name('user.')
+    ->controller(UserController::class)
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/', 'store')->name('store');
+    });    
 
 
