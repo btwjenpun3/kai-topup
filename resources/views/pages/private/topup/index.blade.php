@@ -61,35 +61,35 @@
                                     <div class="col-md-6">
                                         <div class="form-label mt-3">Masukkan User ID</div>
                                         <input type="text" id="userid" name="userid" class="form-control"
-                                            placeholder="-- User ID Kamu --" required>
+                                            placeholder="-- User ID --" required>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-label mt-3">Masukkan Server ID</div>
                                         <input type="text" id="serverid" name="serverid" class="form-control"
-                                            placeholder="-- Server ID Kamu --" required>
+                                            placeholder="-- Server ID --" required>
                                     </div>
                                 @elseif($game->slug == 'free-fire')
                                     <div class="col-md-6">
                                         <div class="form-label mt-3">Masukkan User ID</div>
                                         <input type="text" id="userid" name="userid" class="form-control"
-                                            placeholder="-- User ID Kamu --" required>
+                                            placeholder="-- User ID --" required>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-label mt-3">Masukkan Server ID</div>
                                         <input type="text" id="serverid" name="serverid" class="form-control"
-                                            placeholder="-- Server ID Kamu --" required>
+                                            placeholder="-- Server ID --" required>
                                     </div>
                                 @elseif($game->slug == 'undawn')
                                     <div class="col-md-12">
                                         <div class="form-label mt-3">Masukkan User ID</div>
                                         <input type="text" id="userid" name="userid" class="form-control"
-                                            placeholder="-- User ID Kamu --" required>
+                                            placeholder="-- User ID --" required>
                                     </div>
                                 @elseif($game->slug == 'lifeafter')
                                     <div class="col-md-6">
                                         <div class="form-label mt-3">Masukkan User ID</div>
                                         <input type="text" id="userid" name="userid" class="form-control"
-                                            placeholder="-- User ID Kamu --" required>
+                                            placeholder="-- User ID --" required>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-label mt-3">Masukkan Server ID</div>
@@ -127,13 +127,36 @@
                                     <div class="col-md-12">
                                         <div class="form-label mt-3">Masukkan User ID</div>
                                         <input type="text" id="userid" name="userid" class="form-control"
-                                            placeholder="-- User ID Kamu --" required>
+                                            placeholder="-- User ID --" required>
                                     </div>
                                 @elseif($game->slug == 'hago')
                                     <div class="col-md-12">
                                         <div class="form-label mt-3">Masukkan User ID</div>
                                         <input type="text" id="userid" name="userid" class="form-control"
-                                            placeholder="-- User ID Kamu --" required>
+                                            placeholder="-- User ID --" required>
+                                    </div>
+                                @elseif($game->slug == 'valorant')
+                                    <div class="col-md-6">
+                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID --" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-label mt-3">Masukkan Tag (Tanpa #)</div>
+                                        <input type="text" id="serverid" name="serverid" class="form-control"
+                                            placeholder="-- Server ID Kamu --" required>
+                                    </div>
+                                @elseif($game->slug == 'clash-of-clans')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID --" required>
+                                    </div>
+                                @elseif($game->slug == 'pln')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan Nomor Pelanggan</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- Nomor Pelanggan --" required>
                                     </div>
                                 @else
                                 @endif

@@ -96,6 +96,18 @@
                                         href="{{ route('realm.topup.index', ['slug' => 'hago']) }}">
                                         HAGO
                                     </a>
+                                    <a class="dropdown-item"
+                                        href="{{ route('realm.topup.index', ['slug' => 'valorant']) }}">
+                                        Valorant
+                                    </a>
+                                    <a class="dropdown-item"
+                                        href="{{ route('realm.topup.index', ['slug' => 'clash-of-clans']) }}">
+                                        Clash of Clans
+                                    </a>
+                                    <a class="dropdown-item"
+                                        href="{{ route('realm.topup.index', ['slug' => 'pln']) }}">
+                                        Token Listrik
+                                    </a>
                                 </div>
                             </div>
                         </div>
