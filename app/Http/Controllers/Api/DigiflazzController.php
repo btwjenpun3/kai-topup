@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Invoice;
 use App\Events\TopUpEvent;
+use App\Events\TopUpFailEvent;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
@@ -55,7 +56,7 @@ class DigiflazzController extends Controller
                             'message' => $payload['data']['message'],
                             'status' => $payload['data']['status']
                         ]);
-                        event(new TopUpEvent('Pembelian produk (' . $invoice->harga->nama_produk . ') gagal! Saldo kamu tidak terpotong.'));
+                        event(new TopUpFailEvent('Pembelian produk (' . $invoice->harga->nama_produk . ') gagal! Saldo kamu tidak terpotong.'));
                         return response()->json(200);
                     }
                 }                

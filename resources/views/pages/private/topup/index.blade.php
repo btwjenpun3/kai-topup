@@ -18,6 +18,16 @@
     <div id="failed"></div>
     <div id="notification"></div>
     <div id="notification-failed"></div>
+    <div class="alert alert-success" role="alert">
+        <div class="d-flex justify-content-between">
+            <div class="text-secondary">Mohon tunggu</div>
+            <span>
+                <div class="spinner-grow" role="status">
+                    <span class="sr-only"></span>
+                </div>
+            </span>
+        </div>
+    </div>
 @endsection
 
 @section('content')
@@ -221,6 +231,7 @@
         });
         window.Echo.channel('my-channel')
             .listen('TopUpEvent', (event) => {
+                $('#success').hide();
                 var notificationAlert = '<div class="alert alert-success alert-dismissible" role="alert">' +
                     '<div class="d-flex">' +
                     '<div>' +
@@ -234,8 +245,9 @@
                 $('#notification').html(notificationAlert);
             });
 
-        window.Echo.channel('my-channel')
-            .listen('TopUpEvent', (event) => {
+        window.Echo.channel('top-up-fail')
+            .listen('TopUpFailEvent', (event) => {
+                $('#success').hide();
                 var notificationAlert = '<div class="alert alert-danger alert-dismissible" role="alert">' +
                     '<div class="d-flex">' +
                     '<div>' +
@@ -312,13 +324,15 @@
         }
 
         function successAlert(message) {
-            var successAlert = '<div class="alert alert-success alert-dismissible" role="alert">' +
+            var successAlert = '<div class="alert alert-success" role="alert">' +
                 '<div class="d-flex">' +
-                '<div>' +
                 '<div class="text-secondary">' + message + '</div>' +
+                '<span>' +
+                '<div class="spinner-grow" role="status">' +
+                '<span class="sr-only"></span>' +
                 '</div>' +
+                '</span>' +
                 '</div>' +
-                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
                 '</div>';
 
             $('#success').html(successAlert);
