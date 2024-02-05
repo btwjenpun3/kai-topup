@@ -17,6 +17,7 @@
     <div id="success"></div>
     <div id="failed"></div>
     <div id="notification"></div>
+    <div id="notification-failed"></div>
 @endsection
 
 @section('content')
@@ -231,6 +232,21 @@
                     '</div>';
 
                 $('#notification').html(notificationAlert);
+            });
+
+        window.Echo.channel('my-channel')
+            .listen('TopUpEvent', (event) => {
+                var notificationAlert = '<div class="alert alert-danger alert-dismissible" role="alert">' +
+                    '<div class="d-flex">' +
+                    '<div>' +
+                    '<h4 class="alert-title">Gagal!</h4>' +
+                    '<div class="text-secondary"> ' + event.message + ' </div>' +
+                    '</div>' +
+                    '</div>' +
+                    '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
+                    '</div>';
+
+                $('#notification-failed').html(notificationAlert);
             });
     </script>
     <script>

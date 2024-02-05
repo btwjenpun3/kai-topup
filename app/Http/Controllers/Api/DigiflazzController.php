@@ -55,6 +55,7 @@ class DigiflazzController extends Controller
                             'message' => $payload['data']['message'],
                             'status' => $payload['data']['status']
                         ]);
+                        event(new TopUpEvent('Pembelian produk (' . $invoice->harga->nama_produk . ') gagal! Saldo kamu tidak terpotong.'));
                         return response()->json(200);
                     }
                 }                
