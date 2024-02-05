@@ -315,7 +315,7 @@
 
         function successAlert(message) {
             var successAlert = '<div class="alert alert-success" role="alert">' +
-                '<div class="d-flex">' +
+                '<div class="d-flex justify-content-center">' +
                 '<div class="text-secondary">' + message + '</div>' +
                 '<span>' +
                 '<div class="spinner-grow" role="status">' +
