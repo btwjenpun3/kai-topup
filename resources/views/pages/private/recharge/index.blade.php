@@ -37,7 +37,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="nominal">Rp.</span>
                                     </div>
-                                    <input type="text" name="nominal" class="form-control" placeholder="Misal '200000'"
+                                    <input type="number" name="nominal" class="form-control" placeholder="Misal '200000'"
                                         aria-label="Username" aria-describedby="nominal" required />
                                 </div>
                             </div>
