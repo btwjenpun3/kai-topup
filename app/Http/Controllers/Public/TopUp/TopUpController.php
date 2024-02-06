@@ -152,7 +152,10 @@ class TopUpController extends Controller
     }
 
     public function process(Request $request)
-    {        
+    {     
+        return response()->json([                          
+            'unaccepted' => 'Payment Gateway sedang proses aktifasi'
+        ], 200);   
         try {
             $validation = $request->validate([
                 'price' => 'required',
