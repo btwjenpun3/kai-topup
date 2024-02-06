@@ -15,7 +15,7 @@ class ListGamesController extends Controller
     {
         if(Gate::allows('admin')) {
             return view('pages.private.list-games.index', [
-                'games' => Game::all()
+                'games' => Game::orderBy('nama', 'asc')->get()
             ]);
         } else {
             abort(404);

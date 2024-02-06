@@ -10,6 +10,7 @@ use App\Http\Controllers\Private\Payment\PaymentController;
 use App\Http\Controllers\Private\Product\ProductController;
 use App\Http\Controllers\Private\Recharge\RechargeController;
 use App\Http\Controllers\Private\Report\ProfitReportController;
+use App\Http\Controllers\Private\Reseller\ResellerSaldoController;
 use App\Http\Controllers\Private\TopUp\PrivateTopUpController;
 use App\Http\Controllers\Private\Transaction\TransactionController;
 use App\Http\Controllers\Private\User\UserController;
@@ -190,6 +191,16 @@ Route::prefix('/realm/user')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/', 'store')->name('store');
-    });    
+        Route::get('/show/{id}', 'show');
+        Route::post('/tambah/{id}', 'tambahSaldo');
+    });   
+    
+Route::prefix('/realm/isi-saldo')
+    ->name('isi.saldo.')
+    ->controller(ResellerSaldoController::class)
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');        
+    });  
 
 

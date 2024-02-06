@@ -44,8 +44,8 @@
                                     <th>Produk</th>
                                     <th>Nomor Invoice</th>
                                     <th>Tanggal</th>
+                                    <th>Harga Jual + Admin</th>
                                     <th>Profit</th>
-                                    <th>Total</th>
                                     <th class="w-1"></th>
                                 </tr>
                             </thead>
@@ -66,13 +66,13 @@
                                         <td>{{ \Carbon\Carbon::parse($invoice->created_at)->isoFormat('dddd, D MMMM YYYY, HH:mm:ss') }}
                                             WIB
                                         </td>
+                                        <td>Rp. {{ number_format($invoice->total, 0, ',', '.') }}</td>
                                         @if ($invoice->status == 'PAID')
                                             <td class="text-success">Rp. {{ number_format($invoice->profit, 0, ',', '.') }}
                                             </td>
                                         @else
                                             <td>-</td>
                                         @endif
-                                        <td>Rp. {{ number_format($invoice->total, 0, ',', '.') }}</td>
                                         <td> <button class="btn btn-md" data-bs-toggle="modal"
                                                 data-bs-target="#modal-detail"
                                                 onclick="lihat('{{ $invoice->nomor_invoice }}')">Detail</button> </td>
