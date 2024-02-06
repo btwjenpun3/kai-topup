@@ -37,10 +37,12 @@ class RechargeController extends Controller
                 'nama' => 'required'
             ]);
             if($validation) {
-                $response = Http::post('https://api.digiflazz.com/v1/deposit', [
+                $response = Http::withHeaders([
+                    'Content-Type' => 'application/json',
+                ])->post('https://api.digiflazz.com/v1/deposit', [
                     'username' => env('DIGIFLAZZ_USERNAME'),
                     'amount' => $request->nominal,
-                    'Bank' => $request->bank,
+                    'bank' => $request->bank,
                     'owner_name' => $request->nama,
                     'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . 'deposit')
                 ]);
