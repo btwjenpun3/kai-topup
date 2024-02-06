@@ -41,9 +41,9 @@ class RechargeController extends Controller
                     'Content-Type' => 'application/json',
                 ])->post('https://api.digiflazz.com/v1/deposit', [
                     'username' => env('DIGIFLAZZ_USERNAME'),
-                    'amount' => $request->nominal,
-                    'bank' => $request->bank,
-                    'owner_name' => $request->nama,
+                    'amount' => 200000,
+                    'Bank' => 'BCA',
+                    'owner_name' => 'Muhamad Helmi',
                     'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . 'deposit')
                 ]);
                 if($response->successful()) {
