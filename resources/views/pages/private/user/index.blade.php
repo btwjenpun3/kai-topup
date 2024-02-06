@@ -52,6 +52,7 @@
                                 <th>Email</th>
                                 <th>Telepon</th>
                                 <th>Role</th>
+                                <th>Saldo</th>
                                 <th class="w-1"></th>
                             </tr>
                         </thead>
@@ -62,6 +63,7 @@
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->phone }}</td>
                                     <td>{{ $user->role->description }}</td>
+                                    <td>Rp. {{ number_format($user->saldo, 0, ',', '.') }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

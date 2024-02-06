@@ -8,6 +8,7 @@ use App\Http\Controllers\Private\ListGames\ListGamesController;
 use App\Http\Controllers\Private\ListGames\SetHargaController;
 use App\Http\Controllers\Private\Payment\PaymentController;
 use App\Http\Controllers\Private\Product\ProductController;
+use App\Http\Controllers\Private\Recharge\RechargeController;
 use App\Http\Controllers\Private\Report\ProfitReportController;
 use App\Http\Controllers\Private\TopUp\PrivateTopUpController;
 use App\Http\Controllers\Private\Transaction\TransactionController;
@@ -79,6 +80,16 @@ Route::prefix('/realm/dashboard')
     ->middleware('auth')
     ->group(function () {
         Route::get('/', 'index')->name('index');
+    });
+
+Route::prefix('/realm/recharge')
+    ->name('recharge.')
+    ->controller(RechargeController::class)
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/result/{id}', 'indexResult')->name('index.result');
+        Route::post('/', 'proses')->name('proses');
     });
 
 Route::prefix('/realm/products')
