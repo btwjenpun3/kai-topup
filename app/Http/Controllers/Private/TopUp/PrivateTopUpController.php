@@ -76,53 +76,53 @@ class PrivateTopUpController extends Controller
                         $via = 'REALM';                        
 
                         if ($data->seller_name == 'BANGJEFF' && $data->game->brand == 'LifeAfter Credits') {
-                            $customer_no = $request->userId . ',' . $request->serverId;        
+                            $customer_no = $request->userid . ',' . $request->serverid;        
                         } elseif ($data->game->brand == 'Honkai Star Rail') {
                             if($data->seller_name == 'HOPE') {
-                                $customer_no = $request->userId . '|' . $request->serverId;
+                                $customer_no = $request->userid . '|' . $request->serverid;
                             } elseif ($data->seller_name == 'VocaGame') {
-                                if($request->serverId == 'os_asia') {
-                                    $serverId = 'prod_official_asia';
-                                } elseif($request->serverId == 'os_usa') {
-                                    $serverId = 'prod_official_usa';
-                                } elseif($request->serverId == 'os_euro') {
-                                    $serverId = 'prod_official_eur';
+                                if($request->serverid == 'os_asia') {
+                                    $serverid = 'prod_official_asia';
+                                } elseif($request->serverid == 'os_usa') {
+                                    $serverid = 'prod_official_usa';
+                                } elseif($request->serverid == 'os_euro') {
+                                    $serverid = 'prod_official_eur';
                                 } else {
                                     return response()->json([
                                         'unaccepted' => 'Produk ini dengan Server TW_HK_MO tidak support! Harap pilih denom yang lain'
                                     ]);
                                 }
-                                $customer_no = $request->userId . '|' . $serverId;
+                                $customer_no = $request->userid . '|' . $serverid;
                             } elseif($data->seller_name == 'YinYangStoreid') {
-                                $customer_no = $request->userId . '|' . $request->serverId;
+                                $customer_no = $request->userid . '|' . $request->serverid;
                             } elseif($data->seller_name == 'LUQMANTRONIK') {
-                                $customer_no = $request->userId . $request->serverId;
+                                $customer_no = $request->userid . $request->serverid;
                             }                       
                         } elseif($data->game->brand == 'Genshin Impact') {    
                             if($data->seller_name == 'HOPE') {
-                                $customer_no = $request->userId . '|' . $request->serverId;
+                                $customer_no = $request->userid . '|' . $request->serverid;
                             } elseif($data->seller_name == 'lapakgamingcom') {
-                                if($request->serverId == 'os_asia') {
-                                    $serverId = '001';
-                                } elseif($request->serverId == 'os_usa') {
-                                    $serverId = '002';
-                                } elseif($request->serverId == 'os_euro') {
-                                    $serverId = '003';
-                                } elseif($request->serverId == 'os_cht') {
-                                    $serverId = '004';
+                                if($request->serverid == 'os_asia') {
+                                    $serverid = '001';
+                                } elseif($request->serverid == 'os_usa') {
+                                    $serverid = '002';
+                                } elseif($request->serverid == 'os_euro') {
+                                    $serverid = '003';
+                                } elseif($request->serverid == 'os_cht') {
+                                    $serverid = '004';
                                 } else {
                                     return response()->json([
                                         'unaccepted' => 'Produk ini dengan Server TW_HK_MO tidak support! Harap pilih denom yang lain'
                                     ]);
                                 }
-                                $customer_no = $serverId . $request->userId;
+                                $customer_no = $serverid . $request->userid;
                             }                            
                         } elseif ($data->game->brand == 'Clash of Clans') {
-                            $customer_no = '#' . $request->userId;        
+                            $customer_no = '#' . $request->userid;        
                         } elseif ($data->game->brand == 'Valorant') {
-                            $customer_no = $request->userId . '#' . $request->serverId; 
+                            $customer_no = $request->userid . '#' . $request->serverid; 
                         } else {
-                            $customer_no = $request->userId . $request->serverId;
+                            $customer_no = $request->userid . $request->serverid;
                         }
 
                         $datePart = now()->format('Ymd');
