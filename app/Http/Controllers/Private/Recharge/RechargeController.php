@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Recharge;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class RechargeController extends Controller
 {
@@ -56,6 +57,7 @@ class RechargeController extends Controller
                     ]);
                     return redirect()->route('recharge.index.result', ['id' => $result['id']]);
                 } else {
+                    Log::error('Pesan Error: ' . $response);
                     return redirect()->back()->with('error', 'Permintaan Deposit Gagal! Harap hubungi Admin!');
                 }                
             }
