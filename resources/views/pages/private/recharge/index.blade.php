@@ -28,7 +28,8 @@
                 <div class="card-body">
                     <span>Ini adalah menu yang digunakan untuk mengisi ulang saldo Digiflazz tanpa harus login ke akun
                         Digiflazz kamu. <code>Minimal Rp. 200.000</code></span>
-                    <form action="" method="post">
+                    <form action="{{ route('recharge.proses') }}" method="post">
+                        @csrf
                         <div class="row mb-3 align-items-end mt-4">
                             <div class="col-md-6">
                                 <label class="form-label">Nominal</label>
