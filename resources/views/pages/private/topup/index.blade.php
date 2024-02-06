@@ -61,7 +61,7 @@
                                     <div class="col-md-6">
                                         <div class="form-label mt-3">Masukkan User ID</div>
                                         <input type="text" id="userid" name="userid" class="form-control"
-                                            placeholder="-- User ID --" required>
+                                            placeholder="-- User ID --" autocomplete="off" required>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-label mt-3">Masukkan Server ID</div>
