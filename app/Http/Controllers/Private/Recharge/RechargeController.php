@@ -41,7 +41,7 @@ class RechargeController extends Controller
                     'Content-Type' => 'application/json',
                 ])->post('https://api.digiflazz.com/v1/deposit', [
                     'username' => env('DIGIFLAZZ_USERNAME'),
-                    'amount' => $request->nominal,
+                    'amount' => integerValue($request->nominal),
                     'Bank' => $request->bank,
                     'owner_name' => $request->nama,
                     'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . 'deposit')
@@ -58,7 +58,7 @@ class RechargeController extends Controller
                     return redirect()->route('recharge.index.result', ['id' => $result['id']]);
                 } else {
                     Log::error('Pesan Error: ' . $response);
-                    return redirect()->back()->with('error', 'Permintaan Deposit Gagal! Harap hubungi Admin!');
+                    return redirect()->back()->with('error', 'Permintaan Deposit Gagal! Harap hubungi Admin! (' . $response['data']['message'] . ')');
                 }                
             }
         } catch (\Exception $e) {
