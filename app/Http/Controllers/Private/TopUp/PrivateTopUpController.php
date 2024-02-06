@@ -148,7 +148,7 @@ class PrivateTopUpController extends Controller
                             'payment_id' => 99,
                             'profit' => $data->profit,
                             'total' => $data->harga_jual,
-                            'status' => 'PAID',      
+                            'status' => 'PENDING',      
                             'via' => $via,                          
                             'expired_at' => $expiredAt,
                         ]);
@@ -161,7 +161,8 @@ class PrivateTopUpController extends Controller
                                 'customer_no' => $customer_no,
                                 'ref_id' => $invoiceNumber,
                                 'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . $invoiceNumber)
-                            ]);                            
+                            ]);      
+                            Log::channel('invoice')->error('Error occurred: ' . $response);                       
                             $digiflazz = Digiflazz::create([
                                 'saldo_terakhir' => $response['data']['buyer_last_saldo'],
                                 'saldo_terpotong' => $response['data']['price'],

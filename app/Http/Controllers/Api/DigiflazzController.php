@@ -30,6 +30,9 @@ class DigiflazzController extends Controller
                             'status' => $payload['data']['status']
                         ]);
                         if(isset($invoice->user->id)) {
+                            $invoice->update([
+                                'status' => 'PAID'
+                            ]);
                             event(new TopUpEvent('Pembelian produk (' . $invoice->harga->nama_produk . ') berhasil! (SN : ' . $payload['data']['sn'] . ')'));
                             if($invoice->user->role_id == 2) {
                                 $potongSaldo = $invoice->user->saldo - $invoice->harga->harga_jual_reseller;
