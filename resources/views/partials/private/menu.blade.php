@@ -110,50 +110,14 @@
                         <div class="dropdown-menu">
                             <div class="dropdown-menu-columns">
                                 <div class="dropdown-menu-column">
-                                    <a class="dropdown-item"
-                                        href="{{ route('realm.topup.index', ['slug' => 'bigo-live']) }}">
-                                        Bigo Live
-                                    </a>
-                                    <a class="dropdown-item"
-                                        href="{{ route('realm.topup.index', ['slug' => 'clash-of-clans']) }}">
-                                        Clash of Clans
-                                    </a>
-                                    <a class="dropdown-item"
-                                        href="{{ route('realm.topup.index', ['slug' => 'free-fire']) }}">
-                                        Free Fire
-                                    </a>
-                                    <a class="dropdown-item"
-                                        href="{{ route('realm.topup.index', ['slug' => 'genshin-impact']) }}">
-                                        Genshin Impact
-                                    </a>
-                                    <a class="dropdown-item"
-                                        href="{{ route('realm.topup.index', ['slug' => 'hago']) }}">
-                                        HAGO
-                                    </a>
-                                    <a class="dropdown-item"
-                                        href="{{ route('realm.topup.index', ['slug' => 'honkai-star-rail']) }}">
-                                        Honkai Star Rail
-                                    </a>
-                                    <a class="dropdown-item"
-                                        href="{{ route('realm.topup.index', ['slug' => 'lifeafter']) }}">
-                                        LifeAfter
-                                    </a>
-                                    <a class="dropdown-item"
-                                        href="{{ route('realm.topup.index', ['slug' => 'mobile-legend']) }}">
-                                        Mobile Legend
-                                    </a>
-                                    <a class="dropdown-item"
-                                        href="{{ route('realm.topup.index', ['slug' => 'pubg']) }}">
-                                        PUBG Mobile Indonesia
-                                    </a>
-                                    <a class="dropdown-item"
-                                        href="{{ route('realm.topup.index', ['slug' => 'undawn']) }}">
-                                        Undawn
-                                    </a>
-                                    <a class="dropdown-item"
-                                        href="{{ route('realm.topup.index', ['slug' => 'valorant']) }}">
-                                        Valorant
-                                    </a>
+                                    @foreach ($menus as $menu)
+                                        @if ($menu->kategori == 'Games')
+                                            <a class="dropdown-item"
+                                                href="{{ route('realm.topup.index', ['slug' => $menu->slug]) }}">
+                                                {{ $menu->nama }}
+                                            </a>
+                                        @endif
+                                    @endforeach
                                 </div>
                                 <div class="dropdown-menu-column">
                                     <a class="dropdown-item"
