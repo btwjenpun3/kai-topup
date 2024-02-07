@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('kode')->unique();
             $table->string('url_gambar')->unique();
             $table->string('slug')->unique();
+            $table->boolean('status');
             $table->timestamps();
         });
     }

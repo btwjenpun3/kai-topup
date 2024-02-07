@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $menus = Game::orderBy('nama', 'asc')->get();
+        $menus = Game::orderBy('nama', 'asc')->where('status', 1)->get();
         view()->share('menus', $menus);
     }
 }
