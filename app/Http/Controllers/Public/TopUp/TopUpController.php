@@ -56,6 +56,16 @@ class TopUpController extends Controller
                 'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
                 'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
             ]);
+        }  elseif($game->slug == 'undawn-all-bind') {
+            return view('pages.public.topup.undawn', [   
+                'now' => $now,            
+                'game' => $game,
+                'harga' => Harga::where('kode_produk', 'LIKE', 'UDRC%')->get(),
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);
         } elseif($game->slug == 'lifeafter') {
             return view('pages.public.topup.lifeafter', [
                 'now' => $now,               
