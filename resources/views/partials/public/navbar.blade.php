@@ -13,8 +13,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('home') }}">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Games</a>
+                <li class="nav-item" style="background-color: rgb(28, 148, 28)">
+                    <a class="nav-link" href="{{ route('auth.index') }}">Login Reseller</a>
                 </li>
             </ul>
         </div>

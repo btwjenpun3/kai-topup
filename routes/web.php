@@ -70,7 +70,7 @@ Route::prefix('/realm/auth')
     ->name('auth.')
     ->controller(AuthController::class)
     ->group(function () {
-        Route::get('/', 'index')->name('index');
+        Route::get('/', 'index')->name('index')->middleware('guest');
         Route::post('/', 'auth')->name('process');
         Route::post('/logout', 'logout')->name('logout');
     });
