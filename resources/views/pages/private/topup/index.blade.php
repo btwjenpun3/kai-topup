@@ -86,6 +86,12 @@
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- User ID --" required>
                                     </div>
+                                @elseif($game->slug == 'undawn-all-bind')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID --" required>
+                                    </div>
                                 @elseif($game->slug == 'lifeafter')
                                     <div class="col-md-6">
                                         <div class="form-label mt-3">Masukkan User ID</div>
