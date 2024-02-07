@@ -20,6 +20,9 @@
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                        <a href="{{ route('home') }}" target="_blank">
+                            <button class="btn btn-link" class="dropdown-item">Website</button>
+                        </a>
                         <form action="{{ route('auth.logout') }}" method="POST">
                             @csrf
                             <button class="btn btn-link" type="submit" class="dropdown-item">Logout</button>
