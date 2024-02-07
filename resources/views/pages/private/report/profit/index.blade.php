@@ -63,11 +63,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row g-2 align-items-center">
+                            <div class="row g-2 align-items-center text-center">
                                 <h3 class="mt-4 text-center">Result</h3>
                                 <div class="col-12">
                                     <div class="table-responsive">
-                                        <table class="table table-vcenter card-table table-striped w-100">
+                                        <table class="table table-vcenter table-hover card-table table-striped">
                                             <thead>
                                                 <tr>
                                                     <th>Total Harga Jual</th>
@@ -88,7 +88,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 @endsection
 
