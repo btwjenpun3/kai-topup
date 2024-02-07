@@ -21,7 +21,7 @@ class PrivateTopUpController extends Controller
         $game = Game::where('slug', $request->slug)->first();
 
         if ($game->slug == 'undawn-all-bind') {
-            $produk = Harga::where('game_id', $game->id)->where('kode_produk', 'LIKE', 'UGRC%')->orderBy('kode_produk', 'asc')->get();
+            $produk = Harga::where('game_id', 3)->where('kode_produk', 'LIKE', 'UGRC%')->orderBy('kode_produk', 'asc')->get();
         } elseif ($game->slug == 'undawn') {
             $produk = Harga::where('game_id', $game->id)->where('kode_produk', 'NOT LIKE', 'UGRC%')->orderBy('kode_produk', 'asc')->get();
         } else {
