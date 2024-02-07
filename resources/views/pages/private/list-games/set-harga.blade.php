@@ -28,17 +28,31 @@
                 </svg>
                 Tambah Produk
             </a>
-            <a href="#" class="btn btn-info d-none d-sm-inline-block" data-bs-toggle="modal"
-                data-bs-target="#modal-import">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24"
-                    height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
-                    <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
-                </svg>
-                Sync
-            </a>
+            @if ($game->nama == 'Undawn - All Bind')
+                <a href="#" class="btn btn-info d-none d-sm-inline-block" data-bs-toggle="modal"
+                    data-bs-target="#modal-import-undawn-all-bind">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24"
+                        height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
+                        <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
+                    </svg>
+                    Sync
+                </a>
+            @else
+                <a href="#" class="btn btn-info d-none d-sm-inline-block" data-bs-toggle="modal"
+                    data-bs-target="#modal-import">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24"
+                        height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
+                        <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
+                    </svg>
+                    Sync
+                </a>
+            @endif
         </div>
     </div>
 @endsection
@@ -423,36 +437,41 @@
         </div>
     </div>
 
-    <div class="modal modal-blur fade" id="modal-import" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                <div class="modal-status bg-info"></div>
-                <div class="modal-body text-center py-4">
-                    <div id="import_loading" style="display: none;">
-                        <div class="text-muted mb-3">Data sedang di sinkronisasi</div>
-                        <div class="progress progress-sm">
-                            <div class="progress-bar progress-bar-indeterminate"></div>
+    @if ($game->nama == 'Undawn - All Bind')
+        <div class="modal modal-blur fade" id="modal-import-undawn-all-bind" tabindex="-1" role="dialog"
+            aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-status bg-info"></div>
+                    <div class="modal-body text-center py-4">
+                        <div id="import_loading" style="display: none;">
+                            <div class="text-muted mb-3">Data sedang di sinkronisasi</div>
+                            <div class="progress progress-sm">
+                                <div class="progress-bar progress-bar-indeterminate"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div id="import">
-                    <div class="modal-body text-center py-4">
-                        <div class="text-muted">Kamu yakin ingin sinkronisasi data game dari Digiflazz ?</div>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="w-100">
-                            <div class="row">
-                                <div class="col">
-                                    <a href="#" class="btn w-100" data-bs-dismiss="modal">
-                                        Batal
-                                    </a>
-                                </div>
-                                <div class="col">
-                                    <a href="#" id="btn-import" class="btn btn-success w-100"
-                                        onclick="importHarga({{ $game->id }})">
-                                        Iya
-                                    </a>
+                    <div id="import">
+                        <div class="modal-body text-center py-4">
+                            <div class="text-muted">Kamu yakin ingin sinkronisasi data game <b>Undawn All Bind </b> dari
+                                Digiflazz ?
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="w-100">
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="#" class="btn w-100" data-bs-dismiss="modal">
+                                            Batal
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="#" id="btn-import" class="btn btn-success w-100"
+                                            onclick="importHargaUndawnAllBind({{ $game->id }})">
+                                            Iya
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -460,7 +479,46 @@
                 </div>
             </div>
         </div>
-    </div>
+    @else
+        <div class="modal modal-blur fade" id="modal-import" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-status bg-info"></div>
+                    <div class="modal-body text-center py-4">
+                        <div id="import_loading" style="display: none;">
+                            <div class="text-muted mb-3">Data sedang di sinkronisasi</div>
+                            <div class="progress progress-sm">
+                                <div class="progress-bar progress-bar-indeterminate"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="import">
+                        <div class="modal-body text-center py-4">
+                            <div class="text-muted">Kamu yakin ingin sinkronisasi data game dari Digiflazz ?</div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="w-100">
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="#" class="btn w-100" data-bs-dismiss="modal">
+                                            Batal
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="#" id="btn-import" class="btn btn-success w-100"
+                                            onclick="importHarga({{ $game->id }})">
+                                            Iya
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 
     <div class="modal modal-blur fade" id="modal-hapus" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
@@ -624,6 +682,41 @@
                     $('#import_loading').hide();
                     $('#import').show();
                     $('#modal-import').modal('hide');
+                }
+            });
+        }
+
+        function importHargaUndawnAllBind(id) {
+            $('#import_loading').show();
+            $('#import').hide();
+            $.ajax({
+                type: 'POST',
+                url: '/realm/set-harga/import/undawn/' + id,
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                },
+                success: function(response) {
+                    var successMessage = document.createElement(
+                        "div");
+                    successMessage.className =
+                        "alert alert-success";
+                    successMessage.textContent = response.success;
+                    $('#import-berhasil').html(successMessage);
+                    $('#import_loading').hide();
+                    $('#modal-import-undawn-all-bind').modal('hide');
+                    $('#import').show();
+                    $("#table-harga").load(location.href + " #table-harga");
+                },
+                error: function(xhr, status, error) {
+                    var errorMessage = document.createElement(
+                        "div");
+                    errorMessage.className =
+                        "alert alert-danger";
+                    errorMessage.textContent = xhr.responseJSON.unaccepted;
+                    $('#import-gagal').html(errorMessage);
+                    $('#import_loading').hide();
+                    $('#import').show();
+                    $('#modal-import-undawn-all-bind').modal('hide');
                 }
             });
         }

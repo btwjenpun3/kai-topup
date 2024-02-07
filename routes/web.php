@@ -118,6 +118,7 @@ Route::prefix('/realm/set-harga')
         Route::get('/{id}', 'index')->name('index');
         Route::post('/{id}', 'store')->name('store');
         Route::post('/import/{id}', 'import');
+        Route::post('/import/undawn/{id}', 'importUndawnAllBind');
         Route::get('/show/{id}', 'show')->name('show');
         Route::post('/update/{gameId}/{id}', 'update')->name('update');
         Route::delete('/{id}', 'destroy')->name('destroy');

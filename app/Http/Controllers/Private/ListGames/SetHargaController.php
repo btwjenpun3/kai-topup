@@ -128,11 +128,11 @@ class SetHargaController extends Controller
                 ]);
                 if($response->successful()) {
                     $jsonDecode = json_decode($response, true);
-                    $produk = Harga::where('game_id', $data->id)->get();
+                    $produk = Harga::where('game_id', $data->id)->get();                    
                     foreach ($jsonDecode['data'] as $item) {
                         $harga = Harga::where('kode_produk', $item['buyer_sku_code'])->first();
                         if ($item['brand'] == $data->brand) {
-                            if($produk->contains('kode_produk', $item['buyer_sku_code']) && $item['buyer_product_status'] === true && $item['seller_product_status'] === true) {                                
+                            if($produk->contains('kode_produk', $item['buyer_sku_code']) && $item['buyer_product_status'] === true && $item['seller_product_status'] === true) {                               
                                 Harga::where('kode_produk', $item['buyer_sku_code'])->update([
                                     'game_id' => $data->id,                                   
                                     'seller_name' => $item['seller_name'],
@@ -184,7 +184,7 @@ class SetHargaController extends Controller
                                     'end_cut_off' => $item['end_cut_off'],
                                     'status' => 3
                                 ]);
-                            } else {
+                            } else {                                
                                 Harga::create([
                                     'game_id' => $data->id,
                                     'nama_produk' => $item['product_name'],
@@ -215,6 +215,67 @@ class SetHargaController extends Controller
                 return response()->json([
                     'unaccepted' => 'Game tidak ditemukan'
                 ]);
+            }
+        } catch (\Exception $e) {
+            Log::channel('product-import')->error('Error occurred: ' . $e->getMessage());            
+            return response()->json(['unaccepted' => 'Unknown error'], 400);
+        }
+    }
+
+    public function importUndawnAllBind(Request $request)
+    {
+        try {
+            $data = Game::where('id', $request->id)->first();
+            if(isset($data)){
+                $response = Http::withHeaders([
+                    'Content-Type' => 'application/json',
+                ])->post('https://api.digiflazz.com/v1/price-list', [
+                    'cmd' => 'prepaid',
+                    'username' => env('DIGIFLAZZ_USERNAME'),
+                    'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . 'pricelist')
+                ]);
+
+                if($response->successful()) {
+                    $jsonDecode = $response->json();
+                    $items = collect($jsonDecode['data']);
+
+                    // Filter item-item yang buyer_sku_code nya berawalan dengan "UGRC"
+                    $filteredItems = $items->filter(function ($item) {
+                        return Str::startsWith($item['buyer_sku_code'], 'UGRC');
+                    });
+
+                    // Lakukan iterasi pada item-item yang telah difilter
+                    $filteredItems->each(function ($item) use ($data) {
+                        $harga = Harga::where('kode_produk', $item['buyer_sku_code'])->first();                        
+                        if ($harga) {
+                            $harga->update([
+                                'game_id' => $data->id,                                   
+                                'seller_name' => $item['seller_name'],
+                                'kode_produk' => $item['buyer_sku_code'],
+                                'deskripsi' => $item['desc'],
+                                'modal' => $item['price'],
+                                'profit' => $harga->harga_jual - $item['price'],
+                                'profit_reseller' => $harga->harga_jual_reseller - $item['price'],
+                                'start_cut_off' => $item['start_cut_off'],
+                                'end_cut_off' => $item['end_cut_off'],
+                                'status' => 1
+                            ]);
+                        } else {
+                            Harga::create([
+                                'game_id' => $data->id,
+                                'seller_name' => $item['seller_name'],
+                                'kode_produk' => $item['buyer_sku_code'],
+                                'deskripsi' => $item['desc'],
+                                'modal' => $item['price'],
+                                'profit' => 0, // Atau logika sesuai kebutuhan Anda
+                                'profit_reseller' => 0, // Atau logika sesuai kebutuhan Anda
+                                'start_cut_off' => $item['start_cut_off'],
+                                'end_cut_off' => $item['end_cut_off'],
+                                'status' => 1 // Atau logika sesuai kebutuhan Anda
+                            ]);
+                        }
+                    });
+                }
             }
         } catch (\Exception $e) {
             Log::channel('product-import')->error('Error occurred: ' . $e->getMessage());            
