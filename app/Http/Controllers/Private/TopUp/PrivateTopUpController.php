@@ -19,7 +19,15 @@ class PrivateTopUpController extends Controller
     public function index(Request $request)
     {           
         $game = Game::where('slug', $request->slug)->first();
-        $produk = Harga::where('game_id', $game->id)->orderBy('kode_produk', 'asc')->get();
+
+        if ($game->slug == 'undawn-all-bind') {
+            $produk = Harga::where('game_id', $game->id)->where('kode_produk', 'LIKE', 'UGRC%')->orderBy('kode_produk', 'asc')->get();
+        } elseif ($game->slug == 'undawn') {
+            $produk = Harga::where('game_id', $game->id)->where('kode_produk', 'NOT LIKE', 'UGRC%')->orderBy('kode_produk', 'asc')->get();
+        } else {
+            $produk = Harga::where('game_id', $game->id)->orderBy('kode_produk', 'asc')->get();
+        }
+
         return view('pages.private.topup.index', [
             'game' => $game,
             'produk' => $produk
