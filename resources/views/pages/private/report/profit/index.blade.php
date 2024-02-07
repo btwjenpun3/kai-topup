@@ -46,9 +46,10 @@
                             <div class="row g-2 align-items-center">
                                 <div class="col-12">
                                     <div class="table-responsive">
-                                        <table class="table table-vcenter card-table table-striped">
+                                        <table class="table table-vcenter table-hover card-table table-striped">
                                             <thead>
                                                 <tr>
+                                                    <th>Pembelian dari Reseller ?</th>
                                                     <th>Nomor Invoice</th>
                                                     <th>Produk</th>
                                                     <th>Harga Jual</th>
@@ -61,10 +62,12 @@
                                         </table>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row g-2 align-items-center">
                                 <h3 class="mt-4 text-center">Result</h3>
                                 <div class="col-12">
                                     <div class="table-responsive">
-                                        <table class="table table-vcenter card-table table-striped">
+                                        <table class="table table-vcenter card-table table-striped w-100">
                                             <thead>
                                                 <tr>
                                                     <th>Total Harga Jual</th>
@@ -85,6 +88,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection
 
@@ -108,6 +112,7 @@
 
         var totalHargaModal = 0;
         var totalProfit = 0;
+        var totalProfitReseller = 0;
 
         function generate() {
             $('#profit-table').hide();
@@ -124,27 +129,48 @@
                     $('#result-profit').empty();
                     $('#result-hasil').empty();
                     $('#profit-table').show();
-
+                    console.log(response);
                     $.each(response.data, function(index, item) {
-                        var row = '<tr>' +
-                            '<td>' + item.nomor_invoice + '</td>' +
-                            '<td>' + item.harga.nama_produk + '</td>' +
-                            '<td>Rp. ' + formatRupiah(item.harga.harga_jual) + '</td>' +
-                            '<td>Rp. ' + formatRupiah(item.harga.modal) + '</td>' +
-                            '<td>Rp. ' + formatRupiah(item.harga.profit) + '</td>' +
-                            '</tr>';
+                        var row = '<tr>';
+
+                        if (item.user.role.name == 'reseller') {
+                            row += '<td>Ya</td>';
+                        } else {
+                            row += '<td>-</td>';
+                        }
+
+                        row += '<td>' + item.nomor_invoice + '</td>' +
+                            '<td>' + item.harga.nama_produk + '</td>';
+
+                        if (item.user.role.name == 'reseller') {
+                            row += '<td>Rp. ' + formatRupiah(item.harga.harga_jual_reseller) + '</td>' +
+                                '<td>Rp. ' + formatRupiah(item.harga.modal) + '</td>' +
+                                '<td>Rp. ' + formatRupiah(item.harga.profit_reseller) + '</td>' +
+                                '</tr>';
+                            totalProfitReseller += parseFloat(item.harga.profit_reseller) || 0;
+                        } else {
+                            row += '<td>Rp. ' + formatRupiah(item.harga.harga_jual) + '</td>' +
+                                '<td>Rp. ' + formatRupiah(item.harga.modal) + '</td>' +
+                                '<td>Rp. ' + formatRupiah(item.harga.profit) + '</td>' +
+                                '</tr>';
+                            totalProfit += parseFloat(item.harga.profit);
+                        };
+
                         $('#result-profit').append(row);
+
                         totalHargaModal += parseFloat(item.harga.modal);
-                        totalProfit += parseFloat(item.harga.profit);
+
                     });
 
                     var row2 = '<tr>' +
-                        '<td>Rp. ' + formatRupiah(totalHargaModal + totalProfit) + '</td>' +
+                        '<td>Rp. ' + formatRupiah(totalHargaModal + totalProfit + totalProfitReseller) +
+                        '</td>' +
                         '<td>Rp. ' + formatRupiah(totalHargaModal) + '</td>' +
-                        '<td>Rp. ' + formatRupiah(totalProfit) + '</td>' +
-                        '<td class="text-info">Rp. ' + formatRupiah(Math.round(totalProfit / 2)) + '</td>' +
+                        '<td>Rp. ' + formatRupiah(totalProfit + totalProfitReseller) + '</td>' +
+                        '<td class="text-info">Rp. ' + formatRupiah(Math.round((totalProfit +
+                            totalProfitReseller) / 2)) + '</td>' +
                         '<td class="text-success">Rp. ' + formatRupiah(totalHargaModal + Math.round(
-                            totalProfit / 2)) +
+                            (totalProfit + totalProfitReseller) / 2)) +
                         '</td>' +
                         '</tr>';
 
