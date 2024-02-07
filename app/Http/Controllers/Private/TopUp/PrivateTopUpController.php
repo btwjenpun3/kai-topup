@@ -161,8 +161,8 @@ class PrivateTopUpController extends Controller
 
                         $createInvoice = Invoice::create([                                                   
                             'nomor_invoice' => $invoiceNumber,                                
-                            'user_id' => $request->userid,
-                            'server_id' => $request->serverid,
+                            'user_id' => $request->userId,
+                            'server_id' => $request->serverId,
                             'customer' => $customer_no,
                             'phone' => $user->phone,
                             'realm_user_id' => auth()->id(),
