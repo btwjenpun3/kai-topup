@@ -146,6 +146,106 @@ class TopUpController extends Controller
                 'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
                 'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
             ]);        
+        } elseif($game->slug == 'hay-day') {
+            return view('pages.public.topup.hay-day', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);        
+        } elseif($game->slug == 'sausage-man') {
+            return view('pages.public.topup.sausage-man', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);        
+        } elseif($game->slug == 'league-of-legends-wild-rift') {
+            return view('pages.public.topup.league-of-legend', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);        
+        } elseif($game->slug == 'ragnarok-origin') {
+            return view('pages.public.topup.ragnarok-origin', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);        
+        } elseif($game->slug == 'call-of-duty-mobile') {
+            return view('pages.public.topup.call-of-duty-mobile', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);        
+        } elseif($game->slug == 'lita') {
+            return view('pages.public.topup.lita', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);        
+        } elseif($game->slug == 'metal-slug-awakening') {
+            return view('pages.public.topup.metal-slug-awakening', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);        
+        } elseif($game->slug == 'ludo-club') {
+            return view('pages.public.topup.ludo-club', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);        
+        } elseif($game->slug == 'dragon-raja-sea') {
+            return view('pages.public.topup.dragon-raja-sea', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);        
+        } elseif($game->slug == 'zepeto') {
+            return view('pages.public.topup.zepeto', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);        
         } else {
             abort(404);
         }       
@@ -255,8 +355,27 @@ class TopUpController extends Controller
                 } elseif ($data->game->brand == 'Clash of Clans') {
                     $customer_no = '#' . $request->userId;
 
+                } elseif ($data->game->brand == 'Hay Day') {
+                    $customer_no = '#' . $request->userId;
+
+                } elseif ($data->game->brand == 'League of Legends Wild Rift') {
+                    $customer_no = $request->userId . '#' . $request->userId;
+
                 } elseif ($data->game->brand == 'Valorant') {
-                    $customer_no = $request->userId . '#' . $request->serverId;    
+                    $customer_no = $request->userId . '#' . $request->serverId;   
+                    
+                } elseif ($data->game->brand == 'Ragnarok Origin') {
+                    if($data->seller_name == 'BANGJEFF') {
+                        $customer_no = $request->userId . ',' . $request->userNickname . ',' . $request->serverId;
+                    } else {
+                        Log::error('Error occurred: Format customer_no dengan seller ' . $data->seller_name . ' belum di setting!');
+                                return response()->json([
+                                    'unaccepted' => 'Produk ini sedang Offline. (Error 600)'
+                                ]);
+                        return response()->json([
+                            'unaccepted' => 'Produk ini sedang Offline.'
+                        ]);
+                    }                   
 
                 } else {
                     $customer_no = $request->userId . $request->serverId;

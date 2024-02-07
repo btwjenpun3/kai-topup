@@ -142,15 +142,25 @@
                                             placeholder="-- User ID --" required>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="form-label mt-3">Masukkan Tag (Tanpa #)</div>
-                                        <input type="text" id="serverid" name="serverid" class="form-control"
-                                            placeholder="-- Server ID Kamu --" required>
+                                        <div class="form-label mt-3">Masukkan TAG (Tanpa #)</div>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">#</span>
+                                            </div>
+                                            <input type="text" id="serverid" name="serverid" class="form-control"
+                                                placeholder="-- User TAG --" required>
+                                        </div>
                                     </div>
                                 @elseif($game->slug == 'clash-of-clans')
                                     <div class="col-md-12">
-                                        <div class="form-label mt-3">Masukkan User ID</div>
-                                        <input type="text" id="userid" name="userid" class="form-control"
-                                            placeholder="-- User ID --" required>
+                                        <div class="form-label mt-3">Masukkan User TAG (Tanpa #)</div>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">#</span>
+                                            </div>
+                                            <input type="text" id="userid" name="userid" class="form-control"
+                                                placeholder="-- User TAG --" required>
+                                        </div>
                                     </div>
                                 @elseif($game->slug == 'pln')
                                     <div class="col-md-12">
@@ -193,6 +203,159 @@
                                             <option value="os_euro">Europe</option>
                                             <option value="os_cht">TW_HK_MO</option>
                                         </select>
+                                    </div>
+                                @elseif($game->slug == 'hay-day')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan User TAG (Tanpa #)</div>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">#</span>
+                                            </div>
+                                            <input type="text" id="userid" name="userid" class="form-control"
+                                                placeholder="-- User TAG --" required>
+                                        </div>
+                                    </div>
+                                @elseif($game->slug == 'sausage-man')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID --" required>
+                                    </div>
+                                @elseif($game->slug == 'league-of-legends-wild-rift')
+                                    <div class="col-md-6">
+                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID --" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-label mt-3">Masukkan TAG (Tanpa #)</div>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">#</span>
+                                            </div>
+                                            <input type="text" id="serverid" name="serverid" class="form-control"
+                                                placeholder="-- User TAG --" required>
+                                        </div>
+                                    </div>
+                                @elseif($game->slug == 'ragnarok-origin')
+                                    <div class="col-md-4">
+                                        <div class="form-label mt-3">Masukkan Secret Code</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- Secret Code --" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-label mt-3">Masukkan Nickname</div>
+                                        <input type="text" id="usernickname" name="usernickname" class="form-control"
+                                            placeholder="-- User Nickname --" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-label mt-3">Pilih Server</div>
+                                        <select id="serverid" name="serverid" class="form-select" required>
+                                            <optgroup label="Prontera">
+                                                @for ($i = 1; $i <= 10; $i++)
+                                                    <option value="{{ $i }}">Server ID : ({{ $i }})
+                                                        Prontera-{{ $i }}
+                                                    </option>
+                                                @endfor
+                                            </optgroup>
+                                            <optgroup label="Izlude">
+                                                @for ($i = 1; $i <= 10; $i++)
+                                                    <option value="{{ $i + 10 }}">Server ID : ({{ $i + 10 }})
+                                                        Izlude-{{ $i }}
+                                                    </option>
+                                                @endfor
+                                            </optgroup>
+                                            <optgroup label="Morroc">
+                                                @for ($i = 1; $i <= 10; $i++)
+                                                    <option value="{{ $i + 20 }}">Server ID : ({{ $i + 20 }})
+                                                        Morroc-{{ $i }}
+                                                    </option>
+                                                @endfor
+                                            </optgroup>
+                                            <optgroup label="Geffen">
+                                                @for ($i = 1; $i <= 10; $i++)
+                                                    <option value="{{ $i + 30 }}">Server ID : ({{ $i + 30 }})
+                                                        Geffen-{{ $i }}
+                                                    </option>
+                                                @endfor
+                                            </optgroup>
+                                            <optgroup label="Payon">
+                                                @for ($i = 1; $i <= 10; $i++)
+                                                    <option value="{{ $i + 40 }}">Server ID : ({{ $i + 40 }})
+                                                        Payon-{{ $i }}
+                                                    </option>
+                                                @endfor
+                                            </optgroup>
+                                            <optgroup label="Poring Island">
+                                                @for ($i = 1; $i <= 10; $i++)
+                                                    <option value="{{ $i + 50 }}">Server ID : ({{ $i + 50 }})
+                                                        Poring Island-{{ $i }}
+                                                    </option>
+                                                @endfor
+                                            </optgroup>
+                                            <optgroup label="Orc Village">
+                                                @for ($i = 1; $i <= 10; $i++)
+                                                    <option value="{{ $i + 60 }}">Server ID : ({{ $i + 60 }})
+                                                        Orc Village-{{ $i }}
+                                                    </option>
+                                                @endfor
+                                            </optgroup>
+                                            <optgroup label="Shipwreck">
+                                                @for ($i = 1; $i <= 10; $i++)
+                                                    <option value="{{ $i + 70 }}">Server ID : ({{ $i + 70 }})
+                                                        Shipwreck-{{ $i }}
+                                                    </option>
+                                                @endfor
+                                            </optgroup>
+                                            <optgroup label="Ant-Hell">
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    <option value="{{ $i + 80 }}">Server ID : ({{ $i + 80 }})
+                                                        Ant-Hell-{{ $i }}
+                                                    </option>
+                                                @endfor
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                @elseif($game->slug == 'call-of-duty-mobile')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan Player ID</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- Player ID --" required>
+                                    </div>
+                                @elseif($game->slug == 'lita')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan User ID LITA</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID LITA --" required>
+                                    </div>
+                                @elseif($game->slug == 'metal-slug-awakening')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID --" required>
+                                    </div>
+                                @elseif($game->slug == 'ludo-club')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan Player ID</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- Player ID --" required>
+                                    </div>
+                                @elseif($game->slug == 'dragon-raja-sea')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan Player ID</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- Player ID --" required>
+                                    </div>
+                                @elseif($game->slug == 'zepeto')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan Username (Tanpa @)</div>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">@</span>
+                                            </div>
+                                            <input type="text" id="userid" name="userid" class="form-control"
+                                                placeholder="-- Username --" required>
+                                        </div>
                                     </div>
                                 @else
                                 @endif
@@ -340,13 +503,15 @@
             $('#loading').show();
             $('#btn-beli').attr('disabled', true);
             var serveridVal = $('#serverid').val() || '';
+            var usernickname = $('#usernickname').val() || '';
             $.ajax({
                 url: "/realm/topup/process",
                 method: "POST",
                 data: {
                     product: $('#product').val(),
-                    userid: $('#userid').val(),
-                    serverid: serveridVal,
+                    userId: $('#userid').val(),
+                    serverId: serveridVal,
+                    userNickname: usernickname,
                     password: $('#password').val(),
                     _token: '{{ csrf_token() }}'
                 },

@@ -54,16 +54,11 @@
                 <div class="heading-section text-center">
                     <h4>Pilih Produk dan Nominal</h4>
                 </div>
-                <div class="alert-undawn">
-                    <div class="alert alert-warning text-center" role="alert">
-                        <h6 class="text-dark">Hanya untuk akun Region Indonesia!</span>
-                    </div>
-                </div>
                 <div class="item-parent mb-4">
                     <div class="col-md-12">
                         <div class="row align-items-center mb-4">
                             <div class="col">
-                                <h5>💰 UC</h5>
+                                <h5>🍒 Nyan Berry</h5>
                             </div>
                         </div>
                         <div class="flex-row">
@@ -72,49 +67,6 @@
                                     @php
                                         $flashsale = $h->flashsale;
                                     @endphp
-                                    @if ($flashsale && $flashsale->status == 1 && $flashsale->stock > 0 && $flashsale->expired_at > $now)
-                                        <div class="flex-column item text-center clickable-item">
-                                            <img src="{{ asset(Storage::url($h->gambar)) }}">
-                                            <h4 class="text-md">{{ $h->nama_produk }}</h4>
-                                            <span class="text-danger"><s>Rp.
-                                                    {{ number_format($h->harga_jual, 0, ',', '.') }}</s></span>
-                                            <span>Rp.
-                                                {{ number_format($h->flashsale->final_price, 0, ',', '.') }}</span>
-                                            <input id="getItemId-{{ $h->id }}" type="hidden"
-                                                value="{{ $h->id }}" />
-                                            <input id="getItemPrice-{{ $h->id }}" type="hidden"
-                                                value="{{ $h->flashsale->final_price }}" />
-                                            <input id="getItemName-{{ $h->id }}" type="hidden"
-                                                value="{{ $h->nama_produk }}" />
-                                        </div>
-                                    @else
-                                        <div class="flex-column item text-center clickable-item">
-                                            <img src="{{ asset(Storage::url($h->gambar)) }}">
-                                            <h4 class="text-md">{{ $h->nama_produk }}</h4>
-                                            <span>Rp. {{ number_format($h->harga_jual, 0, ',', '.') }}</span>
-                                            <input id="getItemId-{{ $h->id }}" type="hidden"
-                                                value="{{ $h->id }}" />
-                                            <input id="getItemPrice-{{ $h->id }}" type="hidden"
-                                                value="{{ $h->harga_jual }}" />
-                                            <input id="getItemName-{{ $h->id }}" type="hidden"
-                                                value="{{ $h->nama_produk }}" />
-                                        </div>
-                                    @endif
-                                @endif
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-                <div class="item-parent">
-                    <div class="col-md-12">
-                        <div class="row align-items-center mb-4">
-                            <div class="col">
-                                <h5>✨ Pass</h5>
-                            </div>
-                        </div>
-                        <div class="flex-row">
-                            @foreach ($harga as $h)
-                                @if ($h->status == 1 && $h->tipe == 'Membership')
                                     @if ($flashsale && $flashsale->status == 1 && $flashsale->stock > 0 && $flashsale->expired_at > $now)
                                         <div class="flex-column item text-center clickable-item">
                                             <img src="{{ asset(Storage::url($h->gambar)) }}" class="img-fluid">
@@ -131,7 +83,7 @@
                                                 value="{{ $h->nama_produk }}" />
                                         </div>
                                     @else
-                                        <div class="flex-column item text-center clickable-item">
+                                        <div class=" flex-column item text-center clickable-item">
                                             <img src="{{ asset(Storage::url($h->gambar)) }}" class="img-fluid">
                                             <h4 class="text-md">{{ $h->nama_produk }}</h4>
                                             <span>Rp. {{ number_format($h->harga_jual, 0, ',', '.') }}</span>
@@ -161,9 +113,85 @@
                     <div class="data-parent">
                         <div class="col-md-12">
                             <div class="row">
-                                <div class="col-md-12 col-sm-12">
+                                <div class="col-md-4 col-sm-12">
                                     <div class="data-input">
-                                        <input id="userIdInput" type="text" placeholder="Masukkan User ID" required />
+                                        <input id="userIdInput" type="text" placeholder="Masukkan Secret Code"
+                                            required />
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="data-input">
+                                        <input id="userNicknameInput" type="text" placeholder="Masukkan Nickname"
+                                            required />
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="data-input">
+                                        <select id="serverIdInput" class="form-select" required>
+                                            <optgroup label="Prontera">
+                                                @for ($i = 1; $i <= 10; $i++)
+                                                    <option value="{{ $i }}">Server ID : ({{ $i }})
+                                                        Prontera-{{ $i }}
+                                                    </option>
+                                                @endfor
+                                            </optgroup>
+                                            <optgroup label="Izlude">
+                                                @for ($i = 1; $i <= 10; $i++)
+                                                    <option value="{{ $i + 10 }}">Server ID : ({{ $i + 10 }})
+                                                        Izlude-{{ $i }}
+                                                    </option>
+                                                @endfor
+                                            </optgroup>
+                                            <optgroup label="Morroc">
+                                                @for ($i = 1; $i <= 10; $i++)
+                                                    <option value="{{ $i + 20 }}">Server ID : ({{ $i + 20 }})
+                                                        Morroc-{{ $i }}
+                                                    </option>
+                                                @endfor
+                                            </optgroup>
+                                            <optgroup label="Geffen">
+                                                @for ($i = 1; $i <= 10; $i++)
+                                                    <option value="{{ $i + 30 }}">Server ID : ({{ $i + 30 }})
+                                                        Geffen-{{ $i }}
+                                                    </option>
+                                                @endfor
+                                            </optgroup>
+                                            <optgroup label="Payon">
+                                                @for ($i = 1; $i <= 10; $i++)
+                                                    <option value="{{ $i + 40 }}">Server ID : ({{ $i + 40 }})
+                                                        Payon-{{ $i }}
+                                                    </option>
+                                                @endfor
+                                            </optgroup>
+                                            <optgroup label="Poring Island">
+                                                @for ($i = 1; $i <= 10; $i++)
+                                                    <option value="{{ $i + 50 }}">Server ID : ({{ $i + 50 }})
+                                                        Poring Island-{{ $i }}
+                                                    </option>
+                                                @endfor
+                                            </optgroup>
+                                            <optgroup label="Orc Village">
+                                                @for ($i = 1; $i <= 10; $i++)
+                                                    <option value="{{ $i + 60 }}">Server ID : ({{ $i + 60 }})
+                                                        Orc Village-{{ $i }}
+                                                    </option>
+                                                @endfor
+                                            </optgroup>
+                                            <optgroup label="Shipwreck">
+                                                @for ($i = 1; $i <= 10; $i++)
+                                                    <option value="{{ $i + 70 }}">Server ID : ({{ $i + 70 }})
+                                                        Shipwreck-{{ $i }}
+                                                    </option>
+                                                @endfor
+                                            </optgroup>
+                                            <optgroup label="Ant-Hell">
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    <option value="{{ $i + 80 }}">Server ID : ({{ $i + 80 }})
+                                                        Ant-Hell-{{ $i }}
+                                                    </option>
+                                                @endfor
+                                            </optgroup>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -229,8 +257,16 @@
                             <hr class="new1">
                         </div>
                         <div class="d-flex justify-content-between">
-                            <small>User ID</small>
+                            <small>Secret Code</small>
                             <small><span id="userId"></span></small>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <small>Nickname</small>
+                            <small><span id="userNickname"></span></small>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <small>Server ID</small>
+                            <small><span id="serverId"></span></small>
                         </div>
                         <div class="d-flex justify-content-between">
                             <small>Telepon</small>
@@ -329,9 +365,11 @@
 
             $('#checkout').click(function() {
                 var userIdInputValue = $('#userIdInput').val();
+                var serverIdInputValue = $('#serverIdInput').val();
+                var nicknameInputValue = $('#userNicknameInput').val();
                 var userPhoneInputValue = $('#userPhoneInput').val();
 
-                if (userIdInputValue.trim() === '') {
+                if (userIdInputValue.trim() === '' || serverIdInputValue.trim() === '') {
                     showError('Harap isi semua Data kamu!');
                     return;
                 }
@@ -352,6 +390,8 @@
                     $('#itemPrice').text('Rp. ' + formatRupiah(selectedPrice));
                     $('#itemId').val(selectedItemId);
                     $('#userId').text(userIdInputValue);
+                    $('#userNickname').text(nicknameInputValue);
+                    $('#serverId').text(serverIdInputValue);
                     $('#paymentType').text(paymentTypeValue);
                     $('#paymentMethod').text(getPaymentMethodValue);
 
@@ -370,6 +410,8 @@
                         price: selectedPrice,
                         itemName: selectedItemName,
                         userId: $('#userId').text(),
+                        userNickname: $('#userNickname').text(),
+                        serverId: $('#serverId').text(),
                         userPhone: $('#userPhoneInput').val(),
                         itemId: selectedItemId,
                         paymentType: paymentTypeValue,

@@ -24,7 +24,7 @@
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-md-3">
-                        <img src="{{ asset(Storage::url($game->url_gambar)) }}" class="img-fluid">
+                        <img src="{{ asset(Storage::url($game->url_gambar)) }}">
                     </div>
                     <div class="col-md-9">
                         <div class="heading-section text-center">
@@ -54,16 +54,11 @@
                 <div class="heading-section text-center">
                     <h4>Pilih Produk dan Nominal</h4>
                 </div>
-                <div class="alert-undawn">
-                    <div class="alert alert-warning text-center" role="alert">
-                        <h6 class="text-dark">Hanya untuk akun Region Indonesia!</span>
-                    </div>
-                </div>
                 <div class="item-parent mb-4">
                     <div class="col-md-12">
                         <div class="row align-items-center mb-4">
                             <div class="col">
-                                <h5>💰 UC</h5>
+                                <h5>✨ Wild Cores</h5>
                             </div>
                         </div>
                         <div class="flex-row">
@@ -74,49 +69,6 @@
                                     @endphp
                                     @if ($flashsale && $flashsale->status == 1 && $flashsale->stock > 0 && $flashsale->expired_at > $now)
                                         <div class="flex-column item text-center clickable-item">
-                                            <img src="{{ asset(Storage::url($h->gambar)) }}">
-                                            <h4 class="text-md">{{ $h->nama_produk }}</h4>
-                                            <span class="text-danger"><s>Rp.
-                                                    {{ number_format($h->harga_jual, 0, ',', '.') }}</s></span>
-                                            <span>Rp.
-                                                {{ number_format($h->flashsale->final_price, 0, ',', '.') }}</span>
-                                            <input id="getItemId-{{ $h->id }}" type="hidden"
-                                                value="{{ $h->id }}" />
-                                            <input id="getItemPrice-{{ $h->id }}" type="hidden"
-                                                value="{{ $h->flashsale->final_price }}" />
-                                            <input id="getItemName-{{ $h->id }}" type="hidden"
-                                                value="{{ $h->nama_produk }}" />
-                                        </div>
-                                    @else
-                                        <div class="flex-column item text-center clickable-item">
-                                            <img src="{{ asset(Storage::url($h->gambar)) }}">
-                                            <h4 class="text-md">{{ $h->nama_produk }}</h4>
-                                            <span>Rp. {{ number_format($h->harga_jual, 0, ',', '.') }}</span>
-                                            <input id="getItemId-{{ $h->id }}" type="hidden"
-                                                value="{{ $h->id }}" />
-                                            <input id="getItemPrice-{{ $h->id }}" type="hidden"
-                                                value="{{ $h->harga_jual }}" />
-                                            <input id="getItemName-{{ $h->id }}" type="hidden"
-                                                value="{{ $h->nama_produk }}" />
-                                        </div>
-                                    @endif
-                                @endif
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-                <div class="item-parent">
-                    <div class="col-md-12">
-                        <div class="row align-items-center mb-4">
-                            <div class="col">
-                                <h5>✨ Pass</h5>
-                            </div>
-                        </div>
-                        <div class="flex-row">
-                            @foreach ($harga as $h)
-                                @if ($h->status == 1 && $h->tipe == 'Membership')
-                                    @if ($flashsale && $flashsale->status == 1 && $flashsale->stock > 0 && $flashsale->expired_at > $now)
-                                        <div class="flex-column item text-center clickable-item">
                                             <img src="{{ asset(Storage::url($h->gambar)) }}" class="img-fluid">
                                             <h4 class="text-md">{{ $h->nama_produk }}</h4>
                                             <span class="text-danger"><s>Rp.
@@ -143,6 +95,12 @@
                                                 value="{{ $h->nama_produk }}" />
                                         </div>
                                     @endif
+                                @elseif($h->status == 3 && $h->tipe == 'Umum')
+                                    <div class="flex-column item text-center offline">
+                                        <img src="{{ asset(Storage::url($h->gambar)) }}" class="img-fluid">
+                                        <h4 class="text-md">{{ $h->nama_produk }}</h4>
+                                        <span>Rp. {{ number_format($h->harga_jual, 0, ',', '.') }}</span>
+                                    </div>
                                 @endif
                             @endforeach
                         </div>
@@ -161,9 +119,15 @@
                     <div class="data-parent">
                         <div class="col-md-12">
                             <div class="row">
-                                <div class="col-md-12 col-sm-12">
+                                <div class="col-md-6 col-sm-12">
                                     <div class="data-input">
                                         <input id="userIdInput" type="text" placeholder="Masukkan User ID" required />
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="data-input">
+                                        <input id="serverIdInput" type="text" placeholder="Masukkan TAG (Tanpa #)"
+                                            required />
                                     </div>
                                 </div>
                             </div>
@@ -187,8 +151,7 @@
                         <div class="row">
                             <div class="col-md-12 col-sm-12">
                                 <div class="data-input">
-                                    <input id="userPhoneInput" type="text"
-                                        placeholder="62857xxx (Tanpa Tanda Plus)" />
+                                    <input id="userPhoneInput" type="text" placeholder="62857xxx (Tanpa Tanda Plus)" />
                                 </div>
                             </div>
                         </div>
@@ -231,6 +194,10 @@
                         <div class="d-flex justify-content-between">
                             <small>User ID</small>
                             <small><span id="userId"></span></small>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <small>Server ID</small>
+                            <small><span id="serverId"></span></small>
                         </div>
                         <div class="d-flex justify-content-between">
                             <small>Telepon</small>
@@ -329,9 +296,10 @@
 
             $('#checkout').click(function() {
                 var userIdInputValue = $('#userIdInput').val();
+                var serverIdInputValue = $('#serverIdInput').val();
                 var userPhoneInputValue = $('#userPhoneInput').val();
 
-                if (userIdInputValue.trim() === '') {
+                if (userIdInputValue.trim() === '' || serverIdInputValue.trim() === '') {
                     showError('Harap isi semua Data kamu!');
                     return;
                 }
@@ -352,6 +320,7 @@
                     $('#itemPrice').text('Rp. ' + formatRupiah(selectedPrice));
                     $('#itemId').val(selectedItemId);
                     $('#userId').text(userIdInputValue);
+                    $('#serverId').text(serverIdInputValue);
                     $('#paymentType').text(paymentTypeValue);
                     $('#paymentMethod').text(getPaymentMethodValue);
 
@@ -370,6 +339,7 @@
                         price: selectedPrice,
                         itemName: selectedItemName,
                         userId: $('#userId').text(),
+                        serverId: $('#serverId').text(),
                         userPhone: $('#userPhoneInput').val(),
                         itemId: selectedItemId,
                         paymentType: paymentTypeValue,

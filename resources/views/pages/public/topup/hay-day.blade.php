@@ -56,14 +56,15 @@
                 </div>
                 <div class="alert-undawn">
                     <div class="alert alert-warning text-center" role="alert">
-                        <h6 class="text-dark">Hanya untuk akun Region Indonesia!</span>
+                        <h6 class="text-dark">Hanya untuk akun yang <b>SUDAH</b> bind Supercell ID!</h6>
+                        <span>Kesalahan karena hal ini bukan tanggung jawab kami</span>
                     </div>
                 </div>
                 <div class="item-parent mb-4">
                     <div class="col-md-12">
                         <div class="row align-items-center mb-4">
                             <div class="col">
-                                <h5>💰 UC</h5>
+                                <h5>💎 Diamonds</h5>
                             </div>
                         </div>
                         <div class="flex-row">
@@ -74,7 +75,7 @@
                                     @endphp
                                     @if ($flashsale && $flashsale->status == 1 && $flashsale->stock > 0 && $flashsale->expired_at > $now)
                                         <div class="flex-column item text-center clickable-item">
-                                            <img src="{{ asset(Storage::url($h->gambar)) }}">
+                                            <img src="{{ asset(Storage::url($h->gambar)) }}" class="img-fluid">
                                             <h4 class="text-md">{{ $h->nama_produk }}</h4>
                                             <span class="text-danger"><s>Rp.
                                                     {{ number_format($h->harga_jual, 0, ',', '.') }}</s></span>
@@ -89,7 +90,7 @@
                                         </div>
                                     @else
                                         <div class="flex-column item text-center clickable-item">
-                                            <img src="{{ asset(Storage::url($h->gambar)) }}">
+                                            <img src="{{ asset(Storage::url($h->gambar)) }}" class="img-fluid">
                                             <h4 class="text-md">{{ $h->nama_produk }}</h4>
                                             <span>Rp. {{ number_format($h->harga_jual, 0, ',', '.') }}</span>
                                             <input id="getItemId-{{ $h->id }}" type="hidden"
@@ -163,7 +164,8 @@
                             <div class="row">
                                 <div class="col-md-12 col-sm-12">
                                     <div class="data-input">
-                                        <input id="userIdInput" type="text" placeholder="Masukkan User ID" required />
+                                        <input id="userIdInput" type="text" placeholder="Masukkan User TAG (Tanpa #)"
+                                            required />
                                     </div>
                                 </div>
                             </div>
