@@ -41,18 +41,24 @@
 
 .products .item h4 {
     color: #082538;
-    font-size: 13px;
+    font-size: 16px;
     margin-top: 10px;
     margin-bottom: 0px;
     display: inline-block;
 }
 
-.products .item span {
-    color: #1a5277;
-    font-size: 14px;
-    display: block;
-    font-weight: 400;
+.products .alert span {
+  color: #082538;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: block;
 }
+
+.products .alert span a {
+  color: #0b8de4;
+}
+
 
 .products .item ul {
   float: right;
@@ -99,7 +105,11 @@
         display: inline-block;
       }
 
+      .products .alert-undawn h4 {        
+        font-size: 16px;
+      }
+
       .products .alert-undawn span {        
-        font-size: 12px;
+        font-size: 16px;
       }
   }

@@ -56,8 +56,13 @@
                 </div>
                 <div class="alert-undawn">
                     <div class="alert alert-warning text-center" role="alert">
-                        <h6 class="text-dark">Hanya untuk akun yang <b>BELUM</b> bind Garena!</h6>
-                        <span>Kesalahan karena hal ini bukan tanggung jawab kami</span>
+                        <h6 class="text-dark">⚠️ Hanya untuk akun yang <b>BELUM</b> bind Garena! </h6>
+                        <span class="undawn">Silahkan menuju ke <a
+                                href="{{ route('topup.index', ['slug' => 'undawn-all-bind']) }}"><b>Undawn - All
+                                    Bind</b></a> jika kamu ingin mengisi akun yang
+                            ter-bind dengan
+                            Garena.</span>
+                        <p>Kesalahan karena hal ini bukan tanggung jawab kami</p>
                     </div>
                 </div>
                 <div class="item-parent mb-4">
