@@ -110,11 +110,11 @@
             endDate: moment().endOf('day') // Mengatur waktu akhir ke 23:59:59 hari ini
         });
 
-        var totalHargaModal = 0;
-        var totalProfit = 0;
-        var totalProfitReseller = 0;
-
         function generate() {
+            var totalHargaModal = 0;
+            var totalProfit = 0;
+            var totalProfitReseller = 0;
+
             $('#profit-table').hide();
             $('#btn-text').hide();
             $('#loading').show();
@@ -147,7 +147,7 @@
                                 '<td>Rp. ' + formatRupiah(item.harga.modal) + '</td>' +
                                 '<td>Rp. ' + formatRupiah(item.harga.profit_reseller) + '</td>' +
                                 '</tr>';
-                            totalProfitReseller += parseFloat(item.harga.profit_reseller) || 0;
+                            totalProfitReseller += parseFloat(item.harga.profit_reseller);
                         } else {
                             row += '<td>Rp. ' + formatRupiah(item.harga.harga_jual) + '</td>' +
                                 '<td>Rp. ' + formatRupiah(item.harga.modal) + '</td>' +
@@ -179,9 +179,6 @@
                     $('#btn-text').show();
                     $('#loading').hide();
                     $('.btn').attr('disabled', false);
-
-                    totalHargaModal = 0;
-                    totalProfit = 0;
                 },
                 error: function(xhr, status, error) {}
             });
