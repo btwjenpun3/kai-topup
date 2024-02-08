@@ -438,7 +438,10 @@ class TopUpController extends Controller
                     $customer_no = $request->userId . '#' . $request->userId;
 
                 } elseif ($data->game->brand == 'Valorant') {
-                    $customer_no = $request->userId . '#' . $request->serverId;   
+                    $customer_no = $request->userId . '#' . $request->serverId;  
+                    
+                } elseif ($data->game->brand == 'Tower of Fantasy') {
+                    $customer_no = $request->userId . ',' . $request->serverId; 
                     
                 } elseif ($data->game->brand == 'Ragnarok Origin') {
                     if($data->seller_name == 'BANGJEFF') {
