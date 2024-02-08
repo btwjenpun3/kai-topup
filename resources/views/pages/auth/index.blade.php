@@ -76,4 +76,7 @@
     <div class="text-center text-muted mt-3">
         Belum punya akun ? <a href="{{ route('auth.register') }}" tabindex="-1">Daftar</a>
     </div>
+    <div class="text-center text-muted mt-3">
+        <a href="{{ route('home') }}" tabindex="-1">Kembali ke Web</a>
+    </div>
 @endsection
