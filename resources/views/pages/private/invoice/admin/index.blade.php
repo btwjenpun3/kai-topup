@@ -278,7 +278,12 @@
                             ' WIB';
                         document.getElementById('di-bayar').innerHTML = '-';
                     }
-                    document.getElementById('total').innerHTML = 'Rp. ' + formatRupiah(response.total);
+                    if (response.user.role.name == 'reseller') {
+                        document.getElementById('total').innerHTML = 'Rp. ' + formatRupiah(response.harga
+                            .harga_jual_reseller);
+                    } else {
+                        document.getElementById('total').innerHTML = 'Rp. ' + formatRupiah(response.total);
+                    }
                     document.getElementById('serial-number').innerHTML = response.digiflazz.sn;
                     $('#invoice-content').show();
                     $('#loading').hide();

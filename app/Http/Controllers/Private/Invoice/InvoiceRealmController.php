@@ -42,7 +42,7 @@ class InvoiceRealmController extends Controller
     }
 
     public function show(Request $request) {
-        $invoices = Invoice::with(['game', 'harga', 'payment', 'digiflazz'])->where('nomor_invoice', $request->id)->first();
+        $invoices = Invoice::with(['game', 'harga', 'payment', 'digiflazz', 'user.role'])->where('nomor_invoice', $request->id)->first();
         return response()->json($invoices);
     }
 }
