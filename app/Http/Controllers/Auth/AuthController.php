@@ -66,6 +66,11 @@ class AuthController extends Controller
         }
     }
 
+    public function privacy()
+    {
+        return view('master.private.privacy-policy');
+    }
+
     public function redirectToGoogle()
     {
         return Socialite::driver('google')->redirect();

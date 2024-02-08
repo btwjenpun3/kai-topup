@@ -78,6 +78,7 @@ Route::prefix('/realm/auth')
         Route::get('/daftar/google/callback', 'handleGoogleCallback');
         Route::post('/', 'auth')->name('process')->middleware('guest');
         Route::post('/logout', 'logout')->name('logout');
+        Route::get('/privacy-policy', 'privacy')->name('privacy');
     });
 
 Route::prefix('/realm/dashboard')
