@@ -26,15 +26,22 @@
                             <h4>Kode Reseller</h4>
                             <h1>{{ $user->kode_reseller }}</h1>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <h4>Bagaimana cara mengisi saldo ?</h4>
                             <ul>
-                                <li>Silahkan Transfer ke BCA : <b> 013 2020 220 (Muhamad Helmi)</b> dengan nominal
-                                    minimal Rp. 50.000</li>
+                                <li>Silahkan Transfer ke BCA :
+                                    <div class="row mt-3 mb-3">
+                                        <div class="col-md-6">
+                                            <b id="copy">4381443927</b> (MONICA ODILLA)
+                                        </div>
+                                        <span><small>Klik nomor untuk menyalin</small>
+                                    </div>
+                                </li>
+                                <li class="text-warning">Nominal minimal Isi Saldo adalah Rp. 50.000</li>
                                 <li>Kontak kami melalui WhatsApp melalui link ini <a
-                                        href="https://wa.me/6285740196222/?text=Halo, saya {{ $user->name }} ingin melakukan Deposit dengan kode Reseller {{ $user->kode_reseller }}"
-                                        target="_blank">Klik Disini</a></li>
-                                <li>Silahkan kirim bukti transfer kamu beserta Kode Reseller kamu</li>
+                                        href="https://wa.me/6281223864722/?text=Halo, saya {{ $user->name }} ingin melakukan Deposit dengan kode Reseller {{ $user->kode_reseller }}"
+                                        target="_blank">KLIK DISINI</a></li>
+                                <li>Silahkan kirim bukti transfer kamu</li>
                                 <li>Harap tunggu beberapa saat hingga CS kami melakukan pengecekan</li>
                                 <li>Apabila pengecekan sudah dilakukan maka saldo kamu akan kami tambah </li>
                             </ul>
@@ -43,10 +50,23 @@
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection
 
-    @section('modal')
-    @endsection
+@section('modal')
+@endsection
 
-    @section('js')
-    @endsection
+@section('js')
+    <script>
+        $(document).ready(function() {
+            $('#copy').click(function() {
+                var textToCopy = $(this).text();
+                navigator.clipboard.writeText(textToCopy).then(function() {
+                    alert('Teks berhasil disalin ke clipboard: ' + textToCopy);
+                }, function(err) {
+                    alert('Gagal menyalin teks. Silakan coba lagi.');
+                });
+            });
+        });
+    </script>
+@endsection
