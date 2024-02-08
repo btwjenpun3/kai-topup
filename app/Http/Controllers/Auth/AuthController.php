@@ -76,7 +76,7 @@ class AuthController extends Controller
         $userFromGoogle = Socialite::driver('google')->user();
         $checkUser = User::where('email', $userFromGoogle->getEmail())->first();
         if($checkUser) {
-            if($checkUser->email == $userFromGoogle->getEmail()) {
+            if($checkUser->email == $userFromGoogle->getEmail() && !isset($checkUser->google)) {
                 return redirect()->route('auth.index')->with('error', 'Email ini sudah terdaftar tanpa Google! Silahkan login menggunakan form di bawah ini.');
             } else {
                 Auth::login($checkUser);
