@@ -332,8 +332,8 @@ class TopUpController extends Controller
                     'username' => env('DIGIFLAZZ_USERNAME'),
                     'code' => $data->kode_produk,
                     'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . 'pricelist')
-                ]);
-                if($cekOffline['data']['seller_product_status'] == 'false') {
+                ]);                        
+                if($cekOffline['data'][0]['seller_product_status'] == false) { 
                     $data->update([
                         'status' => 3
                     ]);
@@ -341,7 +341,6 @@ class TopUpController extends Controller
                         'unaccepted' => 'Denom ini sedang Offline, silahkan pilih denom yang lain'
                     ], 200);
                 }
-
                 /**
                  * Cek saldo Digiflazz terlebih dahulu
                  */
