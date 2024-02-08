@@ -16,10 +16,10 @@
         <div id="main-slider" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="5000">
-                    <img src="{{ asset(Storage::url('banner/slider2.webp')) }}" alt="...">
+                    <img src="{{ asset(Storage::url('banner/banner.webp')) }}" alt="...">
                 </div>
                 <div class="carousel-item" data-bs-interval="5000">
-                    <img src="{{ asset(Storage::url('banner/slider.webp')) }}" alt="...">
+                    <img src="{{ asset(Storage::url('banner/banner2.webp')) }}" alt="...">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#main-slider" data-bs-slide="prev">
