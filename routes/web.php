@@ -8,6 +8,7 @@ use App\Http\Controllers\Private\ListGames\ListGamesController;
 use App\Http\Controllers\Private\ListGames\SetHargaController;
 use App\Http\Controllers\Private\Payment\PaymentController;
 use App\Http\Controllers\Private\Product\ProductController;
+use App\Http\Controllers\Private\Profile\ProfileController;
 use App\Http\Controllers\Private\Recharge\RechargeController;
 use App\Http\Controllers\Private\Report\ProfitReportController;
 use App\Http\Controllers\Private\Reseller\ResellerSaldoController;
@@ -71,7 +72,11 @@ Route::prefix('/realm/auth')
     ->controller(AuthController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index')->middleware('guest');
-        Route::post('/', 'auth')->name('process');
+        Route::get('/daftar', 'register')->name('register')->middleware('guest');
+        Route::post('/daftar', 'registerProcess')->name('register.process')->middleware('guest');
+        Route::get('/daftar/google', 'redirectToGoogle')->name('register.google')->middleware('guest');
+        Route::get('/daftar/google/callback', 'handleGoogleCallback');
+        Route::post('/', 'auth')->name('process')->middleware('guest');
         Route::post('/logout', 'logout')->name('logout');
     });
 
@@ -193,7 +198,17 @@ Route::prefix('/realm/user')
         Route::post('/', 'store')->name('store');
         Route::get('/show/{id}', 'show');
         Route::post('/tambah/{id}', 'tambahSaldo');
-    });   
+    });
+    
+Route::prefix('/realm/profile')
+    ->name('profile.')
+    ->controller(ProfileController::class)
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/', 'update')->name('update');
+        Route::post('/password', 'updatePassword')->name('update.password');
+    }); 
     
 Route::prefix('/realm/isi-saldo')
     ->name('isi.saldo.')

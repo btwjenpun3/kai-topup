@@ -12,6 +12,12 @@
 
 @section('content')
     <div class="row row-deck row-cards">
+        @if (auth()->user()->phone == 62000000000 || auth()->user()->phone == null)
+            <div class="alert alert-warning" role="alert">
+                Kamu belum merubah nomor telepon kamu! Harap kamu ubah ke menu Profile atau klik <a
+                    href="{{ route('profile.index') }}">Disini</a>
+            </div>
+        @endif
         <div class="col-sm-6 col-lg-3">
             <div class="card">
                 <div class="card-body">

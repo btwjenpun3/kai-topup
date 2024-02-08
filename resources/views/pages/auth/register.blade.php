@@ -3,30 +3,40 @@
 @section('content')
     <div class="card card-md">
         <div class="card-body">
-            <h2 class="h2 text-center mb-4">Login ke akun kamu.</h2>
+            <h2 class="h2 text-center mb-4">Daftar Member.</h2>
             @if (session()->has('error'))
                 <div class="alert alert-danger" role="alert">
                     {{ session('error') }}
                 </div>
             @endif
-            @if (session()->has('success'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('success') }}
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
             @endif
-            <form action="{{ route('auth.process') }}" method="post">
+            <form action="{{ route('auth.register.process') }}" method="post">
                 @csrf
                 <div class="mb-3">
-                    <label class="form-label">Alamat Email</label>
-                    <input type="email" name="email" class="form-control" placeholder="-- Email --" required>
+                    <label class="form-label">Nama Lengkap</label>
+                    <input type="text" name="name" class="form-control" placeholder="-- Nama Lengkap --"
+                        value="{{ old('name') }}" required>
                 </div>
-                <div class="mb-2">
-                    <label class="form-label">
-                        Password
-                        <span class="form-label-description">
-                            <a href="/forgot-password.html">Lupa password</a>
-                        </span>
-                    </label>
+                <div class="mb-3">
+                    <label class="form-label">Telepon</label>
+                    <input type="number" name="phone" class="form-control" placeholder="-- Telepon --"
+                        value="{{ old('phone') }}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Alamat Email</label>
+                    <input type="email" name="email" class="form-control" placeholder="-- Email --"
+                        value="{{ old('email') }}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"> Password </label>
                     <div class="input-group input-group-flat">
                         <input type="password" name="password" class="form-control" placeholder="-- Password --" required>
                         <span class="input-group-text">
@@ -44,14 +54,28 @@
                         </span>
                     </div>
                 </div>
-                <div class="mb-2">
-                    <label class="form-check">
-                        <input type="checkbox" class="form-check-input" />
-                        <span class="form-check-label">Ingat saya</span>
-                    </label>
+                <div class="mb-3">
+                    <label class="form-label"> Verifikasi Password </label>
+                    <div class="input-group input-group-flat">
+                        <input type="password" name="password_confirmation" class="form-control"
+                            placeholder="-- Password --" required>
+                        <span class="input-group-text">
+                            <a href="#" class="link-secondary" title="Show password"
+                                data-bs-toggle="tooltip"><!-- Download SVG icon from http://tabler-icons.io/i/eye -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                                    <path
+                                        d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+                                </svg>
+                            </a>
+                        </span>
+                    </div>
                 </div>
                 <div class="form-footer">
-                    <button type="submit" class="btn btn-primary w-100">Masuk</button>
+                    <button type="submit" class="btn btn-primary w-100">Daftar</button>
                 </div>
             </form>
         </div>
@@ -74,6 +98,6 @@
         </div>
     </div>
     <div class="text-center text-muted mt-3">
-        Belum punya akun ? <a href="{{ route('auth.register') }}" tabindex="-1">Daftar</a>
+        Sudah punya akun ? <a href="{{ route('auth.index') }}" tabindex="-1">Masuk</a>
     </div>
 @endsection
