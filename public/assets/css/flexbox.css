@@ -30,6 +30,11 @@
   order: 3; /* Keep span at the bottom */
 }
 
+.flex-column p {
+  margin-top:10px;
+  order: 4; /* Keep span at the bottom */
+}
+
 
 
 @media (max-width: 767px) {
