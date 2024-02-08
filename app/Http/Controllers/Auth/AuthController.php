@@ -98,7 +98,7 @@ class AuthController extends Controller
                 'phone' => '62000000000',
                 'google_id' => $userFromGoogle->getId(),                
                 'password' => bcrypt($kodeReseller),
-                'password_changed' => 0
+                'password_changed' => '0'
             ]);
             if($createUser) {
                 Auth::login($createUser);
