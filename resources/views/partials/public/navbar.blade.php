@@ -13,9 +13,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('home') }}">Home</a>
                 </li>
-                <li class="nav-item" style="background-color: transparent">
-                    <a class="nav-link btn btn-outline-success text-success" href="{{ route('auth.index') }}"
-                        style="border-radius:23px;border:solid 4px;">Login Member</a>
+                <li class="nav-item" style="background-color: rgb(93, 212, 93)">
+                    <a class="nav-link" href="{{ route('auth.index') }}">Login Member</a>
                 </li>
             </ul>
         </div>
