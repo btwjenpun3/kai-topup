@@ -62,8 +62,9 @@ class PrivateTopUpController extends Controller
                             'username' => env('DIGIFLAZZ_USERNAME'),
                             'code' => $data->kode_produk,
                             'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . 'pricelist')
-                        ]);
-                        if($cekOffline['data']['seller_product_status'] == 'false') { 
+                        ]);                        
+                        Log::channel('invoice')->error('Error occurred: ' . $cekOffline); 
+                        if($cekOffline['data']['seller_product_status'] == false) { 
                             $data->update([
                                 'status' => 3
                             ]);
