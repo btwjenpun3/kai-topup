@@ -555,6 +555,12 @@
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- Nomor Telepon --" required>
                                     </div>
+                                @elseif($game->slug == 'indosat')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan Nomor Telepon</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- Nomor Telepon --" required>
+                                    </div>
                                 @else
                                 @endif
                                 <div class="col-md-12">
