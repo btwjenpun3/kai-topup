@@ -276,6 +276,16 @@ class TopUpController extends Controller
                 'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
                 'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
             ]);        
+        } elseif($game->slug == 'eggy-party') {
+            return view('pages.public.topup.eggy-party', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);        
         } else {
             abort(404);
         }       
