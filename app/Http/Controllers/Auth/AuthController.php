@@ -88,15 +88,17 @@ class AuthController extends Controller
                 $request->session()->regenerate(); 
                 return redirect()->route('dashboard.index'); 
             }                   
-        } else {            
+        } else {          
+            $kodeReseller = 'fumola-' . Str::random(10);
             $createUser = User::create([
                 'role_id' => 2,
-                'kode_reseller' => 'fumola-' . Str::random(10),
+                'kode_reseller' => $kodeReseller,
                 'name' => $userFromGoogle->getName(),
                 'email' => $userFromGoogle->getEmail(),
                 'phone' => '62000000000',
-                'google_id' => $userFromGoogle->getId(),
-                'password' => bcrypt(Str::random(30))
+                'google_id' => $userFromGoogle->getId(),                
+                'password' => bcrypt($kodeReseller),
+                'password_changed' => 0
             ]);
             if($createUser) {
                 Auth::login($createUser);

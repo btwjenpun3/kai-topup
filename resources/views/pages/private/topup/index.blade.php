@@ -385,9 +385,30 @@
                                 @else
                                 @endif
                                 <div class="col-md-12">
-                                    <div class="form-label mt-3">Masukkan Password Akun Realm Kamu</div>
-                                    <input type="password" id="password" name="password" class="form-control"
-                                        placeholder="-- Password Kamu --" required>
+                                    @if (isset(auth()->user()->google_id) && auth()->user()->password_changed == 0)
+                                        <div class="form-label mt-3">Masukkan Password Akun Realm Kamu </div>
+                                        <p>
+                                            <small>(Khusus untuk pengguna Google) Password kamu adalah Kode Reseller kamu.
+                                                Jika kamu
+                                                ingin merubah Password ini silahkan menuju ke halaman
+                                                Profile.
+                                            </small>
+                                        </p>
+                                        <p>
+                                            <small>
+                                                Jika kamu belum merubah password kamu, maka password di bawah ini sudah
+                                                otomatis terisi dan bisa langsung melakukan Top Up
+                                            </small>
+                                        </p>
+                                        <input type="password" id="password" name="password" class="form-control"
+                                            placeholder="-- Password Kamu --" value="{{ auth()->user()->kode_reseller }}"
+                                            disabled>
+                                    @else
+                                        <div class="form-label mt-3">Masukkan Password Akun Realm Kamu</div>
+                                        <input type="password" id="password" name="password" class="form-control"
+                                            placeholder="-- Password Kamu --" required>
+                                    @endif
+
                                 </div>
                                 <div class="col-md-12 mt-3">
                                     <button id="btn-beli" class="btn btn-primary form-control" data-bs-toggle="modal"

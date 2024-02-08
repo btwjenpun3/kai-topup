@@ -59,13 +59,17 @@
                         <form action="{{ route('profile.update.password') }}" method="post">
                             @csrf
                             <div class="col-md-12 mt-4">
-                                <div class="alert alert-info" role="alert">
-                                    Apabila kamu mendaftar menggunakan akun Google, harap hubungi Admin untuk merubah
-                                    Password kamu!
-                                </div>
-                                <div class="form-label">Password Lama</div>
-                                <input class="form-control" type="password" name="old_password" placeholder="-- Password --"
-                                    required>
+                                @if (isset(auth()->user()->google_id) && auth()->user()->password_changed == 0)
+                                    <div class="alert alert-info" role="alert">
+                                        Kamu masuk menggunakan Google, silahkan masukkan Password Baru kamu
+                                    </div>
+                                    <input class="form-control" type="hidden" name="old_password"
+                                        placeholder="-- Password --" value="{{ auth()->user()->kode_reseller }}" required>
+                                @else
+                                    <div class="form-label">Password Lama</div>
+                                    <input class="form-control" type="password" name="old_password"
+                                        placeholder="-- Password --" required>
+                                @endif
                             </div>
                             <div class="col-md-12">
                                 <div class="row">

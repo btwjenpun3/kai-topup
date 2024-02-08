@@ -52,6 +52,7 @@ class UserController extends Controller
                         'saldo' => 0,
                         'password' => bcrypt($request->password),
                         'phone' => $request->phone,
+                        'password_changed' => 0
                     ]);
                     return redirect()->route('user.index')->with('success', 'User baru berhasil di tambah');
                 }
