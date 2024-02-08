@@ -92,6 +92,22 @@
             <h4>Listrik</h4>
         </div>
         <div class="flex-row">
+            @foreach ($pulsas as $pulsa)
+                <div class="flex-column item text-center">
+                    <a href="{{ route('topup.index', ['slug' => $pulsa->slug]) }}">
+                        <img src="{{ asset(Storage::url($pulsa->url_gambar)) }}" alt="">
+                        <h4 class="text-sm">{{ $pulsa->nama }}</h4>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    </div>
+
+    <div class="games">
+        <div class="heading-section text-center">
+            <h4>Listrik</h4>
+        </div>
+        <div class="flex-row">
             @foreach ($listriks as $listrik)
                 <div class="flex-column item text-center">
                     <a href="{{ route('topup.index', ['slug' => $listrik->slug]) }}">

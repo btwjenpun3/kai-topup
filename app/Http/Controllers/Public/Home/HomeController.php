@@ -17,7 +17,8 @@ class HomeController extends Controller
         return view('pages.public.home.index', [
             'flashsales' => $flashsales,
             'games' => Game::where('kategori', 'Games')->orderBy('nama', 'asc')->where('status', 1)->get(),
-            'listriks' => Game::where('kategori', 'Listrik')->get()
+            'listriks' => Game::where('kategori', 'Listrik')->get(),
+            'pulsas' => Game::where('kategori', 'Pulsa')->get()
         ]);
     }
 }
