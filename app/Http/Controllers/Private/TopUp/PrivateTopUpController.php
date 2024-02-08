@@ -55,6 +55,23 @@ class PrivateTopUpController extends Controller
                             }
                         }
 
+                        $cekOffline = Http::withHeaders([
+                            'Content-Type' => 'application/json',
+                        ])->post('https://api.digiflazz.com/v1/price-list', [
+                            'cmd' => 'prepaid',
+                            'username' => env('DIGIFLAZZ_USERNAME'),
+                            'code' => $data->kode_produk,
+                            'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . 'pricelist')
+                        ]);
+                        if($cekOffline['data']['seller_product_status'] == false) {
+                            $data->update([
+                                'status' => 3
+                            ]);
+                            return response()->json([                          
+                                'unaccepted' => 'Denom ini sedang Offline, silahkan pilih denom yang lain'
+                            ], 200);
+                        }
+
                         $saldo = Http::withHeaders([
                             'Content-Type' => 'application/json',
                         ])->post('https://api.digiflazz.com/v1/cek-saldo', [

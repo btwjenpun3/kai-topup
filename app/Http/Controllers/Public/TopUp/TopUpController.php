@@ -320,7 +320,27 @@ class TopUpController extends Controller
                 /**
                  * Validasi terlebih dahulu apakah itemId dan itemPrice cocok dengan Database
                  */
-                $data = Harga::where('id', $request->itemId)->first();                          
+                $data = Harga::where('id', $request->itemId)->first();      
+                
+                /**
+                 * Cek apakah produk Seller Digiflazz online atau tidak
+                 */
+                $cekOffline = Http::withHeaders([
+                    'Content-Type' => 'application/json',
+                ])->post('https://api.digiflazz.com/v1/price-list', [
+                    'cmd' => 'prepaid',
+                    'username' => env('DIGIFLAZZ_USERNAME'),
+                    'code' => $data->kode_produk,
+                    'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . 'pricelist')
+                ]);
+                if($cekOffline['data']['seller_product_status'] == false) {
+                    $data->update([
+                        'status' => 3
+                    ]);
+                    return response()->json([                          
+                        'unaccepted' => 'Denom ini sedang Offline, silahkan pilih denom yang lain'
+                    ], 200);
+                }
 
                 /**
                  * Cek saldo Digiflazz terlebih dahulu

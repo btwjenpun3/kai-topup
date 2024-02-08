@@ -17,6 +17,7 @@ class ProductController extends Controller
             ])->post('https://api.digiflazz.com/v1/price-list', [
                 'cmd' => 'prepaid',
                 'username' => env('DIGIFLAZZ_USERNAME'),
+                'code' => 'MSAR0001',
                 'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . 'pricelist')
             ]);
             return view('pages.private.product.index', [
