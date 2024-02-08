@@ -89,7 +89,7 @@
 
     <div class="games">
         <div class="heading-section text-center">
-            <h4>Listrik</h4>
+            <h4>Pulsa & Paket Data</h4>
         </div>
         <div class="flex-row">
             @foreach ($pulsas as $pulsa)

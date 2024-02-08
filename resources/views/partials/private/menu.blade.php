@@ -120,6 +120,14 @@
                                     @endforeach
                                 </div>
                                 <div class="dropdown-menu-column">
+                                    @foreach ($menus as $menu)
+                                        @if ($menu->kategori == 'Pulsa')
+                                            <a class="dropdown-item"
+                                                href="{{ route('realm.topup.index', ['slug' => $menu->slug]) }}">
+                                                {{ $menu->nama }}
+                                            </a>
+                                        @endif
+                                    @endforeach
                                     <a class="dropdown-item"
                                         href="{{ route('realm.topup.index', ['slug' => 'pln']) }}">
                                         Token Listrik
