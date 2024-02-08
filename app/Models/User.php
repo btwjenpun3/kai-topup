@@ -26,6 +26,7 @@ class User extends Authenticatable
         'saldo',
         'google_id',
         'password',
+        'password_changed'
     ];
 
     /**
