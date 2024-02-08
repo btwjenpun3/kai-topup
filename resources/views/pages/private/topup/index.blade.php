@@ -44,17 +44,30 @@
                                     <option value="" selected>-- Pilih Produk --</option>
                                     @foreach ($produk as $p)
                                         @if (auth()->user()->role->name == 'admin')
-                                            <option value="{{ $p->kode_produk }}"
-                                                @if ($p->status == 0 || $p->status == 3 || $p->harga_jual <= 0) disabled @endif>
-                                                {{ $p->nama_produk }} (Rp.
-                                                {{ number_format($p->harga_jual, 0, ',', '.') }})
-                                            </option>
+                                            @if ($p->status == 0 || $p->status == 3 || $p->harga_jual <= 0)
+                                                <option disabled>
+                                                    (OFFLINE)
+                                                    {{ $p->nama_produk }} (Rp.
+                                                    {{ number_format($p->harga_jual, 0, ',', '.') }})
+                                                </option>
+                                            @else
+                                                <option value="{{ $p->kode_produk }}">
+                                                    {{ $p->nama_produk }} (Rp.
+                                                    {{ number_format($p->harga_jual, 0, ',', '.') }})
+                                                </option>
+                                            @endif
                                         @elseif(auth()->user()->role->name == 'reseller')
-                                            <option value="{{ $p->kode_produk }}"
-                                                @if ($p->status == 0 || $p->status == 3 || $p->harga_jual_reseller <= 0) disabled @endif>
-                                                {{ $p->nama_produk }} (Rp.
-                                                {{ number_format($p->harga_jual_reseller, 0, ',', '.') }})
-                                            </option>
+                                            @if ($p->status == 0 || $p->status == 3 || $p->harga_jual_reseller <= 0)
+                                                <option disabled>
+                                                    (OFFLINE) {{ $p->nama_produk }} (Rp.
+                                                    {{ number_format($p->harga_jual_reseller, 0, ',', '.') }})
+                                                </option>
+                                            @else
+                                                <option value="{{ $p->kode_produk }}">
+                                                    {{ $p->nama_produk }} (Rp.
+                                                    {{ number_format($p->harga_jual_reseller, 0, ',', '.') }})
+                                                </option>
+                                            @endif
                                         @endif
                                     @endforeach
                                 </select>
