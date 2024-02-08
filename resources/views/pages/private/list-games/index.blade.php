@@ -48,25 +48,20 @@
                         @if (isset($games) && count($games) > 0)
                             <thead>
                                 <tr>
+                                    <th class="w-7"></th>
                                     <th>Nama</th>
                                     <th>Kode</th>
                                     <th>Brand</th>
-                                    <th>URL Gambar</th>
                                     <th class="w-1"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($games as $game)
                                     <tr>
+                                        <td><img src="{{ asset(Storage::url($game->url_gambar)) }}"></td>
                                         <td>{{ $game->nama }}</td>
                                         <td class="text-muted"> {{ $game->kode }} </td>
                                         <td> {{ $game->brand }} </td>
-                                        <td>
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#modal-gambar-game"
-                                                onclick="tampilkanGambar('{{ asset(Storage::url($game->url_gambar)) }}')">
-                                                {{ str_replace('games/', '', $game->url_gambar) }}
-                                            </a>
-                                        </td>
                                         <td>
                                             <div class="dropdown">
                                                 <button class="btn dropdown-toggle align-text-top"
