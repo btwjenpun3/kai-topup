@@ -58,7 +58,7 @@ class ProfileController extends Controller
                 $user = auth()->user();
                 if(Hash::check($request->old_password, $user->password)) {
                     User::where('id', auth()->id())->update([
-                        'password' => $request->password,
+                        'password' => bcrypt($request->password),
                         'password_changed' => 1
                     ]);
                     return redirect()->route('profile.index')->with('success', 'Password berhasil di ubah');
