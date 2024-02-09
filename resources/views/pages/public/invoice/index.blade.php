@@ -188,7 +188,7 @@
                     <div class="col-lg-12">
                         <div class="row">
                             <div class="col-lg-12">
-                                <h5 class="text-center">Kode Token Listrik Anda : </h5>
+                                <h5 class="text-center">Kode Token Listrik Anda </h5>
                                 <p class="text-light text-center">Kode listrik anda sebelum "/"</p>
                             </div>
                             <div class="pln">

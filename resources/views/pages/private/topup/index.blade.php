@@ -708,7 +708,7 @@
             cluster: 'ap1',
             encrypted: true
         });
-        window.Echo.channel('my-channel')
+        window.Echo.channel('my-channel' + '{{ auth()->id() }}')
             .listen('TopUpEvent', (event) => {
                 $('#success').hide();
                 var notificationAlert = '<div class="alert alert-success alert-dismissible" role="alert">' +
@@ -724,7 +724,7 @@
                 $('#notification').html(notificationAlert);
             });
 
-        window.Echo.channel('top-up-fail')
+        window.Echo.channel('top-up-fail' + '{{ auth()->id() }}')
             .listen('TopUpFailEvent', (event) => {
                 $('#success').hide();
                 var notificationAlert = '<div class="alert alert-danger alert-dismissible" role="alert">' +

@@ -33,7 +33,7 @@ class TopUpEvent implements ShouldBroadcastNow
     public function broadcastOn()
     {
         return [
-            new Channel('my-channel')
+            new Channel('my-channel' . auth()->id())
         ];
     }       
 }
