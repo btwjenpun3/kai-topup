@@ -128,11 +128,10 @@
                     $('#result-profit').empty();
                     $('#result-hasil').empty();
                     $('#profit-table').show();
-                    console.log(response);
                     $.each(response.data, function(index, item) {
                         var row = '<tr>';
 
-                        if (item.user.role.name == 'reseller') {
+                        if (item.user.role.name && item.user.role.name == 'reseller') {
                             row += '<td>Ya</td>';
                         } else {
                             row += '<td>-</td>';
@@ -141,7 +140,7 @@
                         row += '<td>' + item.nomor_invoice + '</td>' +
                             '<td>' + item.harga.nama_produk + '</td>';
 
-                        if (item.user.role.name == 'reseller') {
+                        if (item.user.role.name && item.user.role.name == 'reseller') {
                             row += '<td>Rp. ' + formatRupiah(item.harga.harga_jual_reseller) + '</td>' +
                                 '<td>Rp. ' + formatRupiah(item.harga.modal) + '</td>' +
                                 '<td>Rp. ' + formatRupiah(item.harga.profit_reseller) + '</td>' +
