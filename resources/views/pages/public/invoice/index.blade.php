@@ -189,7 +189,47 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <h5 class="text-center">Kode Token Listrik Anda : </h5>
-                                <p class="text-light text-center">Kode listrik anda sebelum "/RUKO"</p>
+                                <p class="text-light text-center">Kode listrik anda sebelum "/"</p>
+                            </div>
+                            <div class="pln">
+                                <div class="col-lg-12">
+                                    <h5 class="text-center text-light">
+                                        {{ $invoice->digiflazz->sn }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @else
+            <div class="invoice">
+                <div class="invoice-pln-paid">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h6 class="text-center">Klik Tombol 'Muat Ulang' jika kamu belum menerima kode Token
+                                </h6>
+                            </div>
+                            <div class="col-lg-12 mt-4">
+                                <div class="main-status-button text-center">
+                                    <a href="#" style="width:100%;" onClick="window.location.reload();">
+                                        Muat Ulang
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+    @elseif($invoice->status == 'PAID' && $invoice->game->kategori == 'Voucher')
+        @if (isset($invoice->digiflazz->sn))
+            <div class="invoice">
+                <div class="invoice-pln-paid">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h5 class="text-center">Kode Voucher Anda : </h5>
                             </div>
                             <div class="pln">
                                 <div class="col-lg-12">
