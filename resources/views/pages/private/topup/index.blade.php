@@ -561,11 +561,47 @@
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- Nomor Telepon --" required>
                                     </div>
+                                @elseif($game->slug == 'axis')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan Nomor Telepon</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- Nomor Telepon --" required>
+                                    </div>
+                                @elseif($game->slug == 'smartfren')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan Nomor Telepon</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- Nomor Telepon --" required>
+                                    </div>
+                                @elseif($game->slug == 'xl')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan Nomor Telepon</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- Nomor Telepon --" required>
+                                    </div>
+                                @elseif($game->slug == 'tri')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan Nomor Telepon</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- Nomor Telepon --" required>
+                                    </div>
                                 @elseif($game->slug == 'razer-gold')
                                     <div class="col-md-12">
-                                        <div class="form-label mt-3">Masukkan Email</div>
-                                        <input type="text" id="userid" name="userid" class="form-control"
-                                            placeholder="-- Email --" required>
+                                        <div class="form-label mt-3">Masukkan Nomor Telepon</div>
+                                        <input type="number" id="userid" name="userid" class="form-control"
+                                            placeholder="-- Telepon --" required>
+                                    </div>
+                                @elseif($game->slug == 'garena-shell')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan Nomor Telepon</div>
+                                        <input type="number" id="userid" name="userid" class="form-control"
+                                            placeholder="-- Telepon --" required>
+                                    </div>
+                                @elseif($game->slug == 'unipin')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan Nomor Telepon</div>
+                                        <input type="number" id="userid" name="userid" class="form-control"
+                                            placeholder="-- Telepon --" required>
                                     </div>
                                 @else
                                 @endif

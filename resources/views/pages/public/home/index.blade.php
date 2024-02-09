@@ -89,6 +89,22 @@
 
     <div class="games">
         <div class="heading-section text-center">
+            <h4>Voucher</h4>
+        </div>
+        <div class="flex-row">
+            @foreach ($vouchers as $voucher)
+                <div class="flex-column item text-center">
+                    <a href="{{ route('topup.index', ['slug' => $voucher->slug]) }}">
+                        <img src="{{ asset(Storage::url($voucher->url_gambar)) }}" alt="">
+                        <h4 class="text-sm">{{ $voucher->nama }}</h4>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    </div>
+
+    <div class="games">
+        <div class="heading-section text-center">
             <h4>Pulsa & Paket Data</h4>
         </div>
         <div class="flex-row">

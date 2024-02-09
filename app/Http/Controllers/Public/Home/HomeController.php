@@ -18,6 +18,7 @@ class HomeController extends Controller
             'flashsales' => $flashsales,
             'games' => Game::where('kategori', 'Games')->orderBy('nama', 'asc')->where('status', 1)->get(),
             'listriks' => Game::where('kategori', 'Listrik')->get(),
+            'vouchers' => Game::where('kategori', 'Voucher')->get(),
             'pulsas' => Game::where('kategori', 'Pulsa')->get()
         ]);
     }
