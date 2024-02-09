@@ -33,7 +33,7 @@ class DigiflazzController extends Controller
                             $invoice->update([
                                 'status' => 'PAID'
                             ]);
-                            event(new TopUpEvent('Pembelian produk (' . $invoice->harga->nama_produk . ') berhasil! (SN : ' . $payload['data']['sn'] . ')'));
+                            event(new TopUpEvent('Pembelian produk (' . $invoice->harga->nama_produk . ') berhasil! (SN : ' . $payload['data']['sn'] . ')', $invoice->realm_user_id));
                             if($invoice->user->role_id == 2) {
                                 $potongSaldo = $invoice->user->saldo - $invoice->harga->harga_jual_reseller;
                                 User::where('id', $invoice->realm_user_id)->update([
@@ -65,7 +65,7 @@ class DigiflazzController extends Controller
                             $invoice->update([
                                 'status' => 'EXPIRED'
                             ]);
-                            event(new TopUpFailEvent('Pembelian produk (' . $invoice->harga->nama_produk . ') gagal! Saldo kamu tidak terpotong.'));
+                            event(new TopUpFailEvent('Pembelian produk (' . $invoice->harga->nama_produk . ') gagal! Saldo kamu tidak terpotong.', $invoice->realm_user_id));
                         }                        
                         return response()->json(200);
                     }

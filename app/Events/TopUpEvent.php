@@ -18,11 +18,13 @@ class TopUpEvent implements ShouldBroadcastNow
     /**
      * Create a new event instance.
      */
+    public $id;
     public $message;
 
-    public function __construct($message)
+    public function __construct($message, $id)
     {
         $this->message = $message;
+        $this->id = $id;
     }
 
     /**
@@ -33,7 +35,7 @@ class TopUpEvent implements ShouldBroadcastNow
     public function broadcastOn()
     {
         return [
-            new Channel('my-channel' . auth()->id())
+            new Channel('my-channel' . $this->id)
         ];
     }       
 }
