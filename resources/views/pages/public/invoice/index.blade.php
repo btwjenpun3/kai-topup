@@ -230,6 +230,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <h5 class="text-center">Kode Voucher Anda : </h5>
+                                <p class="text-light text-center">Pilih salah satu dari baris angka di bawah ini</p>
                             </div>
                             <div class="pln">
                                 <div class="col-lg-12">
