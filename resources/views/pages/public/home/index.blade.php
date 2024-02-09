@@ -21,6 +21,9 @@
                 <div class="carousel-item" data-bs-interval="5000">
                     <img src="{{ asset(Storage::url('banner/banner2.webp')) }}" alt="...">
                 </div>
+                <div class="carousel-item" data-bs-interval="5000">
+                    <img src="{{ asset(Storage::url('banner/banner3.webp')) }}" alt="...">
+                </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#main-slider" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
