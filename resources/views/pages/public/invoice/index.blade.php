@@ -33,6 +33,12 @@
                             <h4 class="text-success">PAID</h4>
                         </div>
                     </div>
+                @elseif ($invoice->status == 'EXPIRED')
+                    <div class="col-md-3 text-center">
+                        <div class="heading-section  text-end">
+                            <h4 class="text-danger">EXPIRED</h4>
+                        </div>
+                    </div>
                 @else
                     <div class="col-md-3 text-center">
                         <div class="heading-section  text-end">
@@ -263,7 +269,7 @@
                 </div>
             </div>
         @endif
-    @elseif($invoice->status == 'PAID')
+    @elseif($invoice->status == 'PAID' || $invoice->status == 'EXPIRED')
     @else
         @if ($invoice->payment->payment_type == 'EWALLET')
             <div class="invoice">
