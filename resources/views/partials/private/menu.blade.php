@@ -133,6 +133,16 @@
                                         Token Listrik
                                     </a>
                                 </div>
+                                <div class="dropdown-menu-column">
+                                    @foreach ($menus as $menu)
+                                        @if ($menu->kategori == 'Voucher')
+                                            <a class="dropdown-item"
+                                                href="{{ route('realm.topup.index', ['slug' => $menu->slug]) }}">
+                                                {{ $menu->nama }}
+                                            </a>
+                                        @endif
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                     </li>

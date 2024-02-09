@@ -561,6 +561,12 @@
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- Nomor Telepon --" required>
                                     </div>
+                                @elseif($game->slug == 'razer-gold')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan Email</div>
+                                        <input type="text" id="userid" name="userid" class="form-control"
+                                            placeholder="-- Email --" required>
+                                    </div>
                                 @else
                                 @endif
                                 <div class="col-md-12">
