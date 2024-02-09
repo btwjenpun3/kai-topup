@@ -36,7 +36,7 @@ class TopUpFailEvent implements ShouldBroadcastNow
     public function broadcastOn(): array
     {
         return [
-            new Channel('top-up-fail' . auth()->id())
+            new Channel('top-up-fail' . $this->id)
         ];
     }
 }
