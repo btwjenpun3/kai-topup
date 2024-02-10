@@ -60,7 +60,6 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="page-content">
-
                     <!-- ***** Content Start ***** -->
                     @yield('content')
                     <!-- ***** Content End ***** -->

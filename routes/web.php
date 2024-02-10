@@ -15,6 +15,7 @@ use App\Http\Controllers\Private\Reseller\ResellerSaldoController;
 use App\Http\Controllers\Private\TopUp\PrivateTopUpController;
 use App\Http\Controllers\Private\Transaction\TransactionController;
 use App\Http\Controllers\Private\User\UserController;
+use App\Http\Controllers\Public\Harga\HargaController;
 use App\Http\Controllers\Public\Home\HomeController;
 use App\Http\Controllers\Public\Invoice\InvoiceController;
 use App\Http\Controllers\Public\Simulate\SimulateController;
@@ -46,6 +47,13 @@ Route::prefix('/topup')
     ->group(function () {
         Route::get('/{slug}', 'index')->name('index');
         Route::post('/{slug}/process', 'process')->name('process');
+    });
+
+Route::prefix('/harga')
+    ->name('lihat.harga.')
+    ->controller(HargaController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
     });
 
 Route::prefix('/invoice')
