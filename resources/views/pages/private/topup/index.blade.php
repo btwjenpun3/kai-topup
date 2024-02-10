@@ -626,8 +626,12 @@
                                 <div class="col-md-12 mt-3">
                                     <input type="checkbox" id="customer_checkbox">
                                     <label for="customer">Simpan Data Customer</label>
-                                    <input type="text" id="customer" name="customer" class="form-control mt-3"
-                                        placeholder="-- Nama Customer --" style="display: none;">
+                                    <div id="customer_field" style="display: none;">
+                                        <input type="text" id="customer" name="customer" class="form-control mt-3"
+                                            placeholder="-- Nama Customer --">
+                                        <span><small>Data customer akan tersimpan saat pembelian di lakukan. Jika data
+                                                customer kamu belum muncul, harap refresh halaman ini.</small></span>
+                                    </div>
                                 </div>
                                 <div class="col-md-12">
                                     @if (isset(auth()->user()->google_id) && auth()->user()->password_changed == 0)
@@ -821,9 +825,9 @@
 
             $('#customer_checkbox').change(function() {
                 if ($(this).is(':checked')) {
-                    $('#customer').show();
+                    $('#customer_field').show();
                 } else {
-                    $('#customer').hide();
+                    $('#customer_field').hide();
                 }
             });
         });
