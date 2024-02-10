@@ -38,7 +38,8 @@
                                     </div>
                                 </li>
                                 <li class="text-warning">Nominal minimal Isi Saldo adalah Rp. 50.000</li>
-                                <li class="text-warning">Kami melayani pengisian saldo dari jam 07.00 - 22.00 WIB</li>
+                                <li class="text-warning">Kami melayani pengisian saldo dari jam 07.00 - 22.00 WIB. Di luar
+                                    jam tersebut akan kami layani ketika kami sudah online</li>
                                 <li>Kontak kami melalui WhatsApp melalui link ini <a
                                         href="https://wa.me/6281223864722/?text=Halo, saya {{ $user->name }} ingin melakukan Deposit dengan kode Reseller {{ $user->kode_reseller }}"
                                         target="_blank">KLIK DISINI</a></li>
