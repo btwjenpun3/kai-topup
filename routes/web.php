@@ -144,7 +144,7 @@ Route::prefix('/realm/topup')
     ->group(function () {
         Route::get('/{slug}', 'index')->name('index');
         Route::post('/process', 'process')->name('process');
-        Route::post('/testing', 'testing');
+        Route::get('/fill/{id}', 'fill');
     });    
 
 

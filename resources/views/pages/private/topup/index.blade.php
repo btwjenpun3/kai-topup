@@ -605,6 +605,30 @@
                                     </div>
                                 @else
                                 @endif
+                                <div class="col-md-12 mt-3">
+                                    <button class="btn btn-sm btn-outline-info" data-bs-toggle="modal"
+                                        data-bs-target="#modal-customer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-list"
+                                            width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+                                            stroke="currentColor" fill="none" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M9 6l11 0" />
+                                            <path d="M9 12l11 0" />
+                                            <path d="M9 18l11 0" />
+                                            <path d="M5 6l0 .01" />
+                                            <path d="M5 12l0 .01" />
+                                            <path d="M5 18l0 .01" />
+                                        </svg>
+                                        Daftar Customer
+                                    </button>
+                                </div>
+                                <div class="col-md-12 mt-3">
+                                    <input type="checkbox" id="customer_checkbox">
+                                    <label for="customer">Simpan Data Customer</label>
+                                    <input type="text" id="customer" name="customer" class="form-control mt-3"
+                                        placeholder="-- Nama Customer --" style="display: none;">
+                                </div>
                                 <div class="col-md-12">
                                     @if (isset(auth()->user()->google_id) && auth()->user()->password_changed == 0)
                                         <div class="form-label mt-3">Masukkan Password Akun Realm Kamu </div>
@@ -691,7 +715,38 @@
             </div>
         </div>
     </div>
+
+    <div class="modal modal-blur fade" id="modal-customer" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body py-4">
+                    <h3> Daftar Customer - {{ $game->nama }}</h3>
+                    <div class="table-responsive">
+                        <table class="table table-nowrap table-hover">
+                            <thead>
+                                <th>Nama</th>
+                                <th class="w-1"></th>
+                            </thead>
+                            @foreach ($customers as $customer)
+                                <tbody>
+                                    <td>{{ $customer->name }}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-success"
+                                            onclick="fill({{ $customer->id }})">
+                                            Pilih
+                                        </button>
+                                    </td>
+                                </tbody>
+                            @endforeach
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
+
 
 @section('js')
     <script src="/dist/libs/tom-select/dist/js/tom-select.base.min.js?1684106062" defer></script>
@@ -763,7 +818,35 @@
                     },
                 },
             });
+
+            $('#customer_checkbox').change(function() {
+                if ($(this).is(':checked')) {
+                    $('#customer').show();
+                } else {
+                    $('#customer').hide();
+                }
+            });
         });
+
+        function fill(id) {
+            $.ajax({
+                url: '/realm/topup/fill/' + id,
+                method: 'GET',
+                success: function(response) {
+                    $('#modal-customer').modal('hide');
+                    $('#userid').val(response.user);
+                    if (response.server) {
+                        $('#serverid').val(response.server);
+                    }
+                    if (response.nickname) {
+                        $('#usernickname').val(response.nickname);
+                    }
+                },
+                error: function(xhr, error) {
+
+                }
+            });
+        }
 
         function process() {
             $('#btn-text').hide();
@@ -771,6 +854,7 @@
             $('#btn-beli').attr('disabled', true);
             var serveridVal = $('#serverid').val() || '';
             var usernickname = $('#usernickname').val() || '';
+            var customer = $('#customer').val() || '';
             $.ajax({
                 url: "/realm/topup/process",
                 method: "POST",
@@ -779,6 +863,7 @@
                     userId: $('#userid').val(),
                     serverId: serveridVal,
                     userNickname: usernickname,
+                    customer: customer,
                     password: $('#password').val(),
                     _token: '{{ csrf_token() }}'
                 },

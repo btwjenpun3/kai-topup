@@ -9,6 +9,7 @@ use App\Models\Harga;
 use App\Models\Game;
 use App\Models\Invoice;
 use App\Models\Digiflazz;
+use App\Models\Customer;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -19,6 +20,7 @@ class PrivateTopUpController extends Controller
     public function index(Request $request)
     {           
         $game = Game::where('slug', $request->slug)->first();
+        $customers = $game->customer->where('user_id', auth()->id());
 
         if ($game->slug == 'undawn-all-bind') {
             $produk = Harga::where('game_id', 3)->where('kode_produk', 'LIKE', 'UGRC%')->orderBy('kode_produk', 'asc')->get();
@@ -30,9 +32,20 @@ class PrivateTopUpController extends Controller
 
         return view('pages.private.topup.index', [
             'game' => $game,
-            'produk' => $produk
+            'produk' => $produk,
+            'customers' => $customers
         ]);
     }   
+
+    public function fill(Request $request) 
+    {
+        try {
+            $customer = Customer::where('id', $request->id)->first();
+            return response()->json($customer);
+        } catch (\Exception $e) {
+            Log::error('Error saat Fill Customer: ' . $e->getMessage()); 
+        }
+    }
 
     public function process(Request $request) 
     {
@@ -53,6 +66,27 @@ class PrivateTopUpController extends Controller
                                     'unaccepted' => 'Saldo kamu kurang! Harap recharge saldo kamu lagi! (Error 506)'
                                 ], 200);
                             }
+                        }
+
+                        if(isset($request->customer)) {
+                            if(isset($request->serverId)) {
+                                $customer_server = $request->serverId;
+                            } else {
+                                $customer_server = null;
+                            }
+                            if (isset($request->userNickname)) {
+                                $customer_nickname = $request->userNickname;
+                            } else {
+                                $customer_nickname = null;
+                            }
+                            Customer::create([
+                                'game_id' => $data->game->id,
+                                'user_id' => auth()->id(),
+                                'name' => $request->customer,
+                                'user' => $request->userId,
+                                'server' => $customer_server,
+                                'nickname' => $customer_nickname
+                            ]);
                         }
 
                         $cekOffline = Http::withHeaders([
