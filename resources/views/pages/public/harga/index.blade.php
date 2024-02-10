@@ -62,19 +62,19 @@
                     <table class="table table-nowrap text-dark bg-light">
                         <thead>
                             <th>Produk</th>
-                            <th class="text-center">Harga Normal</th>
-                            <th class="text-center">Harga Member / Reseller</th>
-                            <th class="text-center">Keuntungan</th>
+                            <th>Harga Normal</th>
+                            <th>Harga Member / Reseller</th>
+                            <th>Keuntungan</th>
                         </thead>
                         @php
                             $harga = $game->harga;
                         @endphp
-                        @foreach ($harga as $h)
+                        @foreach ($harga->where('harga_jual', '>=', '0')->where('harga_jual_reseller', '>=', '0') as $h)
                             <tbody>
                                 <td>{{ $h->nama_produk }}</td>
-                                <td class="text-center">{{ $formatHarga->rupiah($h->harga_jual) }}</td>
-                                <td class="text-center">{{ $formatHarga->rupiah($h->harga_jual_reseller) }}</td>
-                                <td class="text-center text-success">
+                                <td>{{ $formatHarga->rupiah($h->harga_jual) }}</td>
+                                <td>{{ $formatHarga->rupiah($h->harga_jual_reseller) }}</td>
+                                <td class="text-success">
                                     {{ $formatHarga->rupiah($h->harga_jual - $h->harga_jual_reseller) }}</td>
                             </tbody>
                         @endforeach
