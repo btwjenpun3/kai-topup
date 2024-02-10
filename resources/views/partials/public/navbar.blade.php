@@ -14,10 +14,10 @@
                     <a class="nav-link" href="{{ route('home') }}">Home</a>
                 </li>
                 <li class="nav-item" style="background-color: rgb(9, 95, 153)">
-                    <a class="nav-link" href="{{ route('lihat.harga.index') }}">Daftar Harga</a>
+                    <a class="nav-link" href="{{ route('lihat.harga.index') }}">Harga</a>
                 </li>
                 <li class="nav-item" style="background-color: rgb(93, 212, 93)">
-                    <a class="nav-link" href="{{ route('auth.index') }}">Login Member</a>
+                    <a class="nav-link" href="{{ route('auth.index') }}">Daftar Member</a>
                 </li>
             </ul>
         </div>
