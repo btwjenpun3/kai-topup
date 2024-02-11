@@ -45,7 +45,8 @@ class XenditController extends Controller
                             ]);
                             $invoice->update([
                                 'digiflazz_id' => $updateDigiflazz->id
-                            ]);                             
+                            ]);     
+                            event(new TopUpEvent('Pembayaran Berhasil', $invoice->nomor_invoice));                        
                             return response()->json(200);
                         } else {
                             Log::channel('digiflazz')->error('Gagal:' . json_decode($digiflazz->getBody()->getContents(), true));
@@ -105,7 +106,8 @@ class XenditController extends Controller
                             ]);
                             $invoice->update([
                                 'digiflazz_id' => $updateDigiflazz->id
-                            ]);                             
+                            ]);   
+                            event(new TopUpEvent('Pembayaran Berhasil', $invoice->nomor_invoice));                          
                             return response()->json(200);
                         } else {
                             Log::channel('digiflazz')->error('Gagal:' . json_decode($digiflazz->getBody()->getContents(), true));
@@ -234,7 +236,8 @@ class XenditController extends Controller
                             ]);
                             $invoice->update([
                                 'digiflazz_id' => $updateDigiflazz->id
-                            ]);                             
+                            ]);    
+                            event(new TopUpEvent('Pembayaran Berhasil', $invoice->nomor_invoice));                         
                             return response()->json(200);
                         } else {
                             Log::channel('digiflazz')->error('Gagal:' . json_decode($digiflazz->getBody()->getContents(), true));
