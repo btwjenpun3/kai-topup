@@ -672,7 +672,7 @@ class TopUpController extends Controller
                                 ])->post('https://api.xendit.co/callback_virtual_accounts', [
                                     'external_id' => $invoiceNumber,
                                     'bank_code' => $payment->payment_method,
-                                    'name' => 'Muhamad Helmi',
+                                    'name' => 'Kaia',
                                     'is_closed' => true,
                                     'expected_amount' => $total,
                                     'expiration_date' => $expiredAt
