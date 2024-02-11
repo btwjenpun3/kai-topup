@@ -82,7 +82,8 @@
             @foreach ($games as $game)
                 <div class="flex-column item text-center">
                     <a href="{{ route('topup.index', ['slug' => $game->slug]) }}">
-                        <img src="{{ asset(Storage::url($game->url_gambar)) }}" alt="">
+                        <img src="{{ asset(Storage::url($game->url_gambar)) }}"
+                            alt="Top Up {{ $game->nama }} Termurah, Ternyaman, Tercepat dan Termudah">
                         <h4 class="text-sm">{{ $game->nama }}</h4>
                     </a>
                 </div>
@@ -98,7 +99,8 @@
             @foreach ($vouchers as $voucher)
                 <div class="flex-column item text-center">
                     <a href="{{ route('topup.index', ['slug' => $voucher->slug]) }}">
-                        <img src="{{ asset(Storage::url($voucher->url_gambar)) }}" alt="">
+                        <img src="{{ asset(Storage::url($voucher->url_gambar)) }}"
+                            alt="Isi Voucher {{ $game->nama }} Termurah, dan Ternyaman">
                         <h4 class="text-sm">{{ $voucher->nama }}</h4>
                     </a>
                 </div>
@@ -114,7 +116,8 @@
             @foreach ($pulsas as $pulsa)
                 <div class="flex-column item text-center">
                     <a href="{{ route('topup.index', ['slug' => $pulsa->slug]) }}">
-                        <img src="{{ asset(Storage::url($pulsa->url_gambar)) }}" alt="">
+                        <img src="{{ asset(Storage::url($pulsa->url_gambar)) }}"
+                            alt="Beli Pulsa dan Paket Data {{ $game->nama }} Termurah, Ternyaman, dan Tercepat">
                         <h4 class="text-sm">{{ $pulsa->nama }}</h4>
                     </a>
                 </div>
@@ -130,7 +133,8 @@
             @foreach ($listriks as $listrik)
                 <div class="flex-column item text-center">
                     <a href="{{ route('topup.index', ['slug' => $listrik->slug]) }}">
-                        <img src="{{ asset(Storage::url($listrik->url_gambar)) }}" alt="">
+                        <img src="{{ asset(Storage::url($listrik->url_gambar)) }}"
+                            alt="Beli {{ $game->nama }} Termurah, dan Ternyaman">
                         <h4 class="text-sm">{{ $listrik->nama }}</h4>
                     </a>
                 </div>
