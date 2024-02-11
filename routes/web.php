@@ -15,6 +15,7 @@ use App\Http\Controllers\Private\Reseller\ResellerSaldoController;
 use App\Http\Controllers\Private\TopUp\PrivateTopUpController;
 use App\Http\Controllers\Private\Transaction\TransactionController;
 use App\Http\Controllers\Private\User\UserController;
+use App\Http\Controllers\Public\AboutUs\AboutUsController;
 use App\Http\Controllers\Public\Harga\HargaController;
 use App\Http\Controllers\Public\Home\HomeController;
 use App\Http\Controllers\Public\Invoice\InvoiceController;
@@ -62,6 +63,13 @@ Route::prefix('/invoice')
     ->group(function () {
         Route::get('/{id}', 'index')->name('index');
         Route::get('/status/{id}', 'statusPembayaran')->name('status');
+    });
+
+Route::prefix('/tentang-kami')
+    ->name('about.')
+    ->controller(AboutUsController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
     });
 
 Route::prefix('/simulate')

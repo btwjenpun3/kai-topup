@@ -167,7 +167,7 @@ p {
 
 .navbar {  
   position: relative;
-  z-index: 1;
+  z-index: 2;
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
 }
@@ -183,9 +183,9 @@ p {
 
 
 .navbar ul li {  
-  margin:10px;
-  padding-right:10px;
-  padding-left:10px;
+  margin:5px;
+  padding-right:5px;
+  padding-left:5px;
   background-color: #111316;
   border-radius: 23px;
   border:3px solid white;
@@ -193,8 +193,9 @@ p {
 
 .navbar ul li a {  
   color:white;
-  font-weight: 700;
+  font-weight: 400;
 }
+
 
 .templatemo-item {
 	max-width: 80px; 
