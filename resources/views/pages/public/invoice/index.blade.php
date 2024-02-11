@@ -402,6 +402,27 @@
 @section('js')
     <script src="/assets/js/invoice_countdown.js"></script>
     <script>
+        var pusher = new Pusher('d4afa1b27ea54cbf1546', {
+            cluster: 'ap1'
+        });
+
+        window.Echo = new Echo({
+            broadcaster: 'pusher',
+            key: 'd4afa1b27ea54cbf1546',
+            cluster: 'ap1',
+            encrypted: true
+        });
+
+        window.Echo.channel('my-channel{{ $invoice->nomor_invoice }}')
+            .listen('TopUpEvent', (event) => {
+                $('#stickyAlert').addClass('alert-success');
+                showStatus('Pembayaran berhasil, harap tunggu kami akan memuat ulang halaman ini.');
+                setTimeout(function() {
+                    location.reload();
+                }, 3000);
+            });
+    </script>
+    <script>
         var targetDate = new Date("{{ $invoice->expired_at }}");
 
         function showStatus(message) {

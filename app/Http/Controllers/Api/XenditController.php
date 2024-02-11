@@ -8,6 +8,7 @@ use App\Models\Invoice;
 use App\Models\Digiflazz;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use App\Events\TopUpEvent;
 
 class XenditController extends Controller
 { 
@@ -166,7 +167,8 @@ class XenditController extends Controller
                             ]);
                             $invoice->update([
                                 'digiflazz_id' => $updateDigiflazz->id
-                            ]);                             
+                            ]); 
+                            event(new TopUpEvent('Pembayaran Berhasil', $invoice->nomor_invoice));                            
                             return response()->json(200);
                         } else {
                             Log::channel('digiflazz')->error('Gagal:' . json_decode($digiflazz->getBody()->getContents(), true));
@@ -221,7 +223,7 @@ class XenditController extends Controller
                             'ref_id' => $invoice->nomor_invoice,
                             'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . $invoice->nomor_invoice)
                         ]);
-                        if($digiflazz->successful()) {
+                        if($digiflazz->successful()) {                            
                             $updateDigiflazz = Digiflazz::create([
                                 'saldo_terakhir' => $digiflazz['data']['buyer_last_saldo'],
                                 'saldo_terpotong' => $digiflazz['data']['price'],
