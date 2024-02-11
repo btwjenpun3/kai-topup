@@ -12,7 +12,7 @@ class PaymentController extends Controller
     public function index()
     {   
         if(Gate::allows('admin')) {     
-            $data = Payment::get();
+            $data = Payment::where('payment_type', '!=', 'REALM')->get();
             return view('pages.private.payment.index', [
                 'datas' => $data
             ]);
