@@ -297,7 +297,7 @@
                 </div>
             </div>
         @elseif ($invoice->payment->payment_type == 'VA')
-            <div class="va-info">
+            <div class="invoice">
                 <div class="col-lg-12">
                     <div class="row">
                         <h5 class="text-info pt-4">Lakukan pembayaran ke :</h5>
