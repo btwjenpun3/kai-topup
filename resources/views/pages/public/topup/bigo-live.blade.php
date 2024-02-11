@@ -146,7 +146,7 @@
                         <div class="row">
                             <div class="col-md-12 col-sm-12">
                                 <div class="data-input">
-                                    <input id="userPhoneInput" type="text" placeholder="62857xxx (Tanpa Tanda Plus)" />
+                                    <input id="userPhoneInput" type="number" placeholder="62857xxx (Tanpa Tanda Plus)" />
                                 </div>
                             </div>
                         </div>
