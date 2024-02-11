@@ -44,7 +44,7 @@
                                     <option value="" selected>-- Pilih Produk --</option>
                                     @foreach ($produk as $p)
                                         @if (auth()->user()->role->name == 'admin')
-                                            @if ($p->status == 0 || $p->status == 3 || $p->harga_jual <= 0)
+                                            @if ($p->status == 0 || $p->status == 3 || $p->harga_jual <= 0 || $p->harga_jual <= $p->modal)
                                                 <option disabled>
                                                     (OFFLINE)
                                                     {{ $p->nama_produk }} (Rp.
@@ -57,7 +57,7 @@
                                                 </option>
                                             @endif
                                         @elseif(auth()->user()->role->name == 'reseller')
-                                            @if ($p->status == 0 || $p->status == 3 || $p->harga_jual_reseller <= 0)
+                                            @if ($p->status == 0 || $p->status == 3 || $p->harga_jual_reseller <= 0 || $p->harga_jual_reseller <= $p->modal)
                                                 <option disabled>
                                                     (OFFLINE) {{ $p->nama_produk }} (Rp.
                                                     {{ number_format($p->harga_jual_reseller, 0, ',', '.') }})
