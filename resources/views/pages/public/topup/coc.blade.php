@@ -32,13 +32,13 @@
                         </div>
                         <div class="col-md-12">
                             <div class="description">
-                                <p>Cara Top Up Mobile Legends Murah</p>
+                                <p>Cara Top Up {{ $game->nama }} Murah, Mudah, dan Nyaman</p>
                                 <ul>
-                                    <li>1. Masukkan ID(SERVER) </li>
-                                    <li>2. Pilih Jumlah Nominal Diamond</li>
+                                    <li>1. Pilih Jumlah Nominal Diamond</li>
+                                    <li>2. Masukkan User TAG (TANPA #) </li>
                                     <li>3. Pilih Metode Pembayaran</li>
-                                    <li>4. Masukkan Nomor Whatsapp </li>
-                                    <li>5. Klik Beli Sekarang & Melakukan Pembayaran </li>
+                                    <li>4. Masukkan Nomor Whatsapp atau Telepon Kamu </li>
+                                    <li>5. Klik Konfirmasi Top Up & Melakukan Pembayaran </li>
                                     <li>6. Tunggu Beberapa Saat Diamond Akan Otomatis Masuk Ke Akun Anda.</li>
                                 </ul>
                             </div>
@@ -101,6 +101,12 @@
                                                 value="{{ $h->nama_produk }}" />
                                         </div>
                                     @endif
+                                @elseif($h->status == 3 && $h->tipe == 'Umum')
+                                    <div class="flex-column item text-center offline">
+                                        <img src="{{ asset(Storage::url($h->gambar)) }}" class="img-fluid">
+                                        <h4 class="text-md">{{ $h->nama_produk }}</h4>
+                                        <span>Rp. {{ number_format($h->harga_jual, 0, ',', '.') }}</span>
+                                    </div>
                                 @endif
                             @endforeach
                         </div>
@@ -144,6 +150,12 @@
                                                 value="{{ $h->nama_produk }}" />
                                         </div>
                                     @endif
+                                @elseif($h->status == 3 && $h->tipe == 'Membership')
+                                    <div class="flex-column item text-center offline">
+                                        <img src="{{ asset(Storage::url($h->gambar)) }}" class="img-fluid">
+                                        <h4 class="text-md">{{ $h->nama_produk }}</h4>
+                                        <span>Rp. {{ number_format($h->harga_jual, 0, ',', '.') }}</span>
+                                    </div>
                                 @endif
                             @endforeach
                         </div>

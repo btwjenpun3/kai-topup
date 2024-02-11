@@ -32,14 +32,14 @@
                         </div>
                         <div class="col-md-12">
                             <div class="description">
-                                <p>Cara Top Up Mobile Legends Murah</p>
+                                <p>Cara Top Up {{ $game->nama }} Murah, Mudah, dan Nyaman</p>
                                 <ul>
-                                    <li>1. Masukkan ID(SERVER) </li>
-                                    <li>2. Pilih Jumlah Nominal Diamond</li>
+                                    <li>1. Pilih Produk yang Ingin di Beli</li>
+                                    <li>2. Masukkan User ID</li>
                                     <li>3. Pilih Metode Pembayaran</li>
-                                    <li>4. Masukkan Nomor Whatsapp </li>
-                                    <li>5. Klik Beli Sekarang & Melakukan Pembayaran </li>
-                                    <li>6. Tunggu Beberapa Saat Diamond Akan Otomatis Masuk Ke Akun Anda.</li>
+                                    <li>4. Masukkan Nomor Whatsapp atau Telepon Kamu </li>
+                                    <li>5. Klik Konfirmasi Top Up & Melakukan Pembayaran </li>
+                                    <li>6. Tunggu Beberapa Saat Produk Akan Otomatis Masuk Ke Akun Anda.</li>
                                 </ul>
                             </div>
                         </div>
