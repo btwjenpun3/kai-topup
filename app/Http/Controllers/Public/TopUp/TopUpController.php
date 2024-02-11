@@ -676,7 +676,8 @@ class TopUpController extends Controller
                                     'is_closed' => true,
                                     'expected_amount' => $total,
                                     'expiration_date' => $expiredAt
-                                ]);                                
+                                ]);       
+                                Log::channel('invoice')->error('Error occurred: ' . $response);                         
                                 $VaCreate = XenditVa::create([
                                     'xendit_va_name' => $response['name'],
                                     'xendit_va_number' => $response['account_number']
