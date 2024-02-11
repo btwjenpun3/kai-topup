@@ -175,7 +175,7 @@
                         <div class="row">
                             <div class="col-md-12 col-sm-12">
                                 <div class="data-input">
-                                    <input id="userPhoneInput" type="text" placeholder="Misal '0857xxxxx" />
+                                    <input id="userPhoneInput" type="number" placeholder="Misal '0857xxxxx" />
                                 </div>
                             </div>
                         </div>
