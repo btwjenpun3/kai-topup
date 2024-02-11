@@ -401,6 +401,8 @@
 
 @section('js')
     <script src="/assets/js/invoice_countdown.js"></script>
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.11.2/dist/echo.iife.js"></script>
     <script>
         var pusher = new Pusher('d4afa1b27ea54cbf1546', {
             cluster: 'ap1'
