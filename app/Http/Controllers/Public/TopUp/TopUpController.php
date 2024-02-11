@@ -671,7 +671,7 @@ class TopUpController extends Controller
                                     'Authorization' => 'Basic ' . base64_encode(env('XENDIT_SECRET_KEY') . ':'),
                                 ])->post('https://api.xendit.co/callback_virtual_accounts', [
                                     'external_id' => $invoiceNumber,
-                                    'bank_code' => $payment->payment_method,
+                                    'bank_code' => 'BRI',
                                     'name' => 'Kaia',
                                     'is_closed' => true,
                                     'expected_amount' => $total,
