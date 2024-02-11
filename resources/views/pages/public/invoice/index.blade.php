@@ -347,25 +347,6 @@
                     </div>
                 </div>
             </div>
-            <div class="game-details">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="content">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="main-border-button">
-                                        <a href="#" id="simulasiVa"
-                                            onclick="simulasiVa('{{ $invoice->nomor_invoice }}')"><span id="loadingIcon"
-                                                style="display: none;"><i class="fas fa-spinner fa-spin"></i></span>
-                                            Simulasi
-                                            Pembayaran</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         @elseif ($invoice->payment->payment_type == 'OUTLET')
             <div class="va-info">
                 <div class="col-lg-12">
