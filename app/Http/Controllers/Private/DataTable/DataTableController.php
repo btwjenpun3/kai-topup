@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Private\DataTable;
 use App\Http\Controllers\Controller;
 use DataTables;
 use App\Models\Invoice;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -34,6 +35,19 @@ class DataTableController extends Controller
     {
         if(Gate::allows('reseller')) {
             $data = Invoice::with(['harga', 'game', 'user.role'])->where('via', 'REALM')->where('realm_user_id', auth()->id())->get();
+            return DataTables::of($data)->toJson();
+        } else {
+            abort(404);
+        }
+    }
+
+    public function userReseller()
+    {
+        if(Gate::allows('admin')) {
+            $getData = User::with('role')->get();
+            $data = $getData->filter(function ($user) {
+                return $user->role->name === 'reseller';
+            });
             return DataTables::of($data)->toJson();
         } else {
             abort(404);

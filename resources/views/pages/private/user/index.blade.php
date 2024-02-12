@@ -50,6 +50,31 @@
                         <thead>
                             <tr>
                                 <th>User</th>
+                                <th>Email</th>
+                                <th>Telepon</th>
+                                <th>Role</th>
+                                <th class="w-1"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($users->where('role.name', 'admin') as $user)
+                                <tr>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->phone }}</td>
+                                    <td>{{ $user->role->description }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card mt-4">
+                <div class="table-responsive">
+                    <table id="reseller" class="table table-hover table-nowrap card-table table-striped">
+                        <thead>
+                            <tr>
+                                <th>User</th>
                                 <th>Kode Reseller</th>
                                 <th>Email</th>
                                 <th>Telepon</th>
@@ -58,59 +83,8 @@
                                 <th class="w-1"></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach ($users as $user)
-                                <tr>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->kode_reseller }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->phone }}</td>
-                                    <td class="text-info">Rp. {{ number_format($user->saldo, 0, ',', '.') }}</td>
-                                    <td>{{ $user->role->description }}</td>
-                                    @if ($user->role->name == 'reseller')
-                                        <td><button class="btn btn-sm btn-success" data-bs-toggle="modal"
-                                                data-bs-target="#modal-tambah-saldo"
-                                                onclick="tambah({{ $user->id }})">Tambah Saldo</button></td>
-                                    @endif
-                                </tr>
-                            @endforeach
-                        </tbody>
                     </table>
                 </div>
-                @if (count($users) > 10)
-                    <div class="pagination justify-content-end">
-                        <ul class="pagination m-3">
-                            <li class="page-item {{ $users->onFirstPage() ? 'disabled' : '' }}">
-                                <a class="page-link" href="{{ $users->previousPageUrl() }}" tabindex="-1"
-                                    aria-disabled="true">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M15 6l-6 6l6 6" />
-                                    </svg>
-                                    prev
-                                </a>
-                            </li>
-                            @for ($i = 1; $i <= $users->lastPage(); $i++)
-                                <li class="page-item {{ $users->currentPage() === $i ? 'active' : '' }}">
-                                    <a class="page-link" href="{{ $users->url($i) }}">{{ $i }}</a>
-                                </li>
-                            @endfor
-                            <li class="page-item {{ $users->hasMorePages() ? '' : 'disabled' }}">
-                                <a class="page-link" href="{{ $users->nextPageUrl() }}">
-                                    next
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M9 6l6 6l-6 6" />
-                                    </svg>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                @endif
             </div>
         </div>
     </div>
@@ -150,8 +124,8 @@
                         <div class="row mb-3 align-items-end">
                             <div class="col">
                                 <label class="form-label">Telepon</label>
-                                <input type="number" name="phone" class="form-control"
-                                    placeholder="Misal '628540000000" required />
+                                <input type="number" name="phone" class="form-control" placeholder="Misal '628540000000"
+                                    required />
                             </div>
                         </div>
                         <div class="row mb-3 align-items-end">
@@ -181,6 +155,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col text-center" style="">
+                            <h3 id="nama_reseller"></h3>
+                            <h3 id="kode_reseller"></h3>
+                        </div>
+                    </div>
                     <div class="row mb-3 align-items-end">
                         <div class="col">
                             <label class="form-label">Saldo Awal</label>
@@ -226,6 +206,55 @@
 @endsection
 
 @section('js')
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#reseller').DataTable({
+                processing: true,
+                serverSide: true,
+                lengthChange: false,
+                bInfo: false,
+                order: [
+                    [0, 'asc']
+                ],
+                ajax: '{{ route('datatable.user.reseller') }}',
+                columns: [{
+                        data: 'name'
+                    },
+                    {
+                        data: 'kode_reseller'
+                    },
+                    {
+                        data: 'email'
+                    },
+                    {
+                        data: 'phone'
+                    },
+                    {
+                        data: 'saldo',
+                        render: function(data, type, row) {
+                            if (data) {
+                                return '<div class="text-info">' + formatRupiah(data) + '</div>'
+                            } else {
+                                return '<div class="text-info">' + formatRupiah(0) + '</div>'
+                            }
+                        }
+                    },
+                    {
+                        data: 'role.description'
+                    },
+                    {
+                        data: 'id',
+                        render: function(data, type, row) {
+                            return '<button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modal-tambah-saldo" onclick = "tambah(' +
+                                data + ')"> Tambah Saldo </button>'
+                        }
+                    }
+                ],
+            });
+        });
+    </script>
     <script>
         var userId;
 
@@ -235,6 +264,8 @@
                 url: '/realm/user/show/' + userId,
                 type: 'GET',
                 success: function(response) {
+                    document.getElementById('nama_reseller').textContent = response.name;
+                    document.getElementById('kode_reseller').textContent = response.kode_reseller;
                     document.getElementById('saldo_awal').value = response.saldo;
                 },
             });
@@ -264,7 +295,7 @@
                     successMessage.textContent = response.success;
                     $('#modal-tambah-saldo').modal('hide');
                     $('#saldo').html(successMessage);
-                    $("#user-table").load(location.href + " #user-table");
+                    $('#reseller').DataTable().ajax.reload();
                 },
                 error: function(xhr, error) {
                     console.log(xhr);
@@ -278,5 +309,35 @@
                 }
             });
         });
+
+        function formatRupiah(angka) {
+            var number_string = angka.toString();
+            var split = number_string.split(',');
+            var sisa = split[0].length % 3;
+            var rupiah = split[0].substr(0, sisa);
+            var ribuan = split[0].substr(sisa).match(/\d{1,3}/gi);
+
+            if (ribuan) {
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
+            return 'Rp. ' + rupiah;
+        }
     </script>
+@endsection
+
+@section('css')
+    <style>
+        .dataTables_wrapper .dataTables_filter {
+            float: right;
+            margin: 10px;
+        }
+
+        .dataTables_wrapper .dataTables_paginate {
+            float: right;
+            margin: 10px;
+        }
+    </style>
 @endsection

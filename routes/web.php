@@ -244,6 +244,7 @@ Route::prefix('/realm/datatables')
     ->group(function () {
         Route::get('/invoice/web', 'invoiceWeb')->name('invoice.web'); 
         Route::get('/invoice/admin', 'invoiceAdmin')->name('invoice.admin');  
-        Route::get('/invoice/reseller', 'invoiceReseller')->name('invoice.reseller');       
+        Route::get('/invoice/reseller', 'invoiceReseller')->name('invoice.reseller');   
+        Route::get('/user/reseller', 'userReseller')->name('user.reseller');     
     }); 
 
