@@ -997,7 +997,7 @@
                 var image = '<img src="{{ asset(Storage::url('howto/mobile-legend.webp')) }}">';
             } else if (slug == 'free-fire') {
                 var image = '<img src="{{ asset(Storage::url('howto/free-fire.webp')) }}">';
-            } else if (slug == 'free-fire') {
+            } else if (slug == 'clash-of-clans') {
                 var image = '<img src="{{ asset(Storage::url('howto/clash-of-clans.gif')) }}">';
             } else if (slug == 'dragon-raja-sea') {
                 var image = '<img src="{{ asset(Storage::url('howto/dragon-raja-sea.webp')) }}">';
