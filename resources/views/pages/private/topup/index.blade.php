@@ -1000,7 +1000,7 @@
             } else if (slug == 'free-fire') {
                 var image = '<img src="{{ asset(Storage::url('howto/clash-of-clans.gif')) }}">';
             } else if (slug == 'dragon-raja-sea') {
-                var image = '<img src="{{ asset(Storage::url('howto/clash-of-clans.gif')) }}">';
+                var image = '<img src="{{ asset(Storage::url('howto/dragon-raja-sea.webp')) }}">';
             }
             $('#howto').html(image);
         }
