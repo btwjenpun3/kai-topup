@@ -195,13 +195,23 @@
                     {
                         data: 'harga.harga_jual',
                         render: function(data, type, row) {
-                            return formatRupiah(data)
+                            if (row.user.role.name == 'reseller') {
+                                return formatRupiah(row.harga.harga_jual_reseller)
+                            } else {
+                                return formatRupiah(data)
+                            }
                         }
                     },
                     {
                         data: 'harga.profit',
                         render: function(data, type, row) {
-                            return '<div class="text-success">' + formatRupiah(data) + "</div>";
+                            if (row.user.role.name == 'reseller') {
+                                return '<div class="text-success">' + formatRupiah(row.harga
+                                    .profit_reseller) + '</div>'
+                            } else {
+                                return '<div class="text-success">' + formatRupiah(data) +
+                                    '</div>'
+                            }
                         }
                     },
                     {
