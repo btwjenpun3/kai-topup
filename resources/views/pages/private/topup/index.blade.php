@@ -283,7 +283,15 @@
                                     </div>
                                 @elseif($game->slug == 'hay-day')
                                     <div class="col-md-12">
-                                        <div class="form-label mt-3">Masukkan User TAG (Tanpa #)</div>
+                                        <div class="form-label mt-3">
+                                            Masukkan User TAG (Tanpa #)
+                                            <span>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
+                                                    onclick="howto('{{ $game->slug }}')">
+                                                    (?)
+                                                </a>
+                                            </span>
+                                        </div>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">#</span>
@@ -1031,6 +1039,8 @@
                 var image = '<img src="{{ asset(Storage::url('howto/genshin-impact.webp')) }}">';
             } else if (slug == 'hago') {
                 var image = '<img src="{{ asset(Storage::url('howto/hago.webp')) }}">';
+            } else if (slug == 'hay-day') {
+                var image = '<img src="{{ asset(Storage::url('howto/hay-day.webp')) }}">';
             }
             $('#howto').html(image);
         }
