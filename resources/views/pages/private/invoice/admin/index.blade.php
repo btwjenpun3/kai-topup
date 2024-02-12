@@ -166,13 +166,13 @@
                 bInfo: false,
                 ajax: '{{ route('datatable.invoice.admin') }}',
                 columns: [{
-                        data: 'status',
+                        data: 'id',
                         render: function(data, type, row) {
-                            if (data == 'PAID') {
+                            if (row.status == 'PAID') {
                                 return '<span class="badge bg-success me-1"></span>';
-                            } else if (data == 'PENDING') {
+                            } else if (row.status == 'PENDING') {
                                 return '<span class="badge bg-warning me-1"></span>';
-                            } else if (data == 'EXPIRED') {
+                            } else if (row.status == 'EXPIRED') {
                                 return '<span class="badge bg-danger me-1"></span>';
                             }
                         }
