@@ -206,8 +206,12 @@
                     {
                         data: 'harga.profit',
                         render: function(data, type, row) {
-                            return '<div class="text-success">' + formatRupiah(data) +
-                                '</div>'
+                            if (row.status == 'PAID') {
+                                return '<div class="text-success">' + formatRupiah(data) +
+                                    '</div>'
+                            } else {
+                                return '-'
+                            }
                         }
                     },
                     {

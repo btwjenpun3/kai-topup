@@ -208,12 +208,14 @@
                     {
                         data: 'harga.profit',
                         render: function(data, type, row) {
-                            if (row.user.role.name == 'reseller') {
+                            if (row.user.role.name == 'reseller' && row.status == 'PAID') {
                                 return '<div class="text-success">' + formatRupiah(row.harga
                                     .profit_reseller) + '</div>'
-                            } else {
+                            } else if (row.user.role.name == 'admin' && row.status == 'PAID') {
                                 return '<div class="text-success">' + formatRupiah(data) +
                                     '</div>'
+                            } else {
+                                return '-'
                             }
                         }
                     },
