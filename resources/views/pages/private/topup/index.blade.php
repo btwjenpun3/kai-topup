@@ -92,6 +92,12 @@
                                 @if ($game->slug == 'mobile-legend')
                                     <div class="col-md-6">
                                         <div class="form-label mt-3">Masukkan User ID</div>
+                                        <span>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
+                                                onclick="howto('{{ $game->slug }}')">
+                                                (?)
+                                            </a>
+                                        </span>
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- User ID --" required>
                                     </div>
@@ -962,6 +968,8 @@
         function howto(slug) {
             if (slug == 'call-of-duty-mobile') {
                 var image = '<img src="{{ asset(Storage::url('howto/call-of-duty-mobile.webp')) }}">';
+            } else if (slug == 'mobile-legend') {
+                var image = '<img src="{{ asset(Storage::url('howto/mobile-legend.webp')) }}">';
             }
             $('#howto').html(image);
         }
