@@ -39,7 +39,25 @@
                                     bisa dipilih</span>
                                 <span>Jika kamu Reseller maka harap hubungi Admin jika kamu ingin menyalakan produk yang
                                     ingin kamu beli.</span>
-                                <div class="form-label mt-5">Pilih Produk</div>
+
+                                @if ($game->slug == 'call-of-duty-mobile')
+                                    <div class="alert alert-success mt-3 text-dark" role="alert">
+                                        <b>Support All Bind! ✅ Facebook | ✅ Garena</b>
+                                    </div>
+                                @elseif($game->slug == 'undawn')
+                                    <div class="alert alert-warning mt-3 text-dark" role="alert">
+                                        <b>Produk Ini Tidak Support Bind Garena!</b>
+                                        <p>Silahkan menuju halaman <a
+                                                href="{{ route('realm.topup.index', ['slug' => 'undawn-all-bind']) }}">DISINI</a>
+                                            jika ingin membeli yang support All Bind</p>
+                                    </div>
+                                @elseif($game->slug == 'undawn-all-bind')
+                                    <div class="alert alert-success mt-3 text-dark" role="alert">
+                                        <b>Support All Bind! ✅ Facebook | ✅ Garena | ✅ Google</b>
+                                    </div>
+                                @endif
+
+                                <div class="form-label mt-2 ">Pilih Produk</div>
                                 <select class="form-select" id="product" name="product" required>
                                     <option value="" selected>-- Pilih Produk --</option>
                                     @foreach ($produk as $p)
@@ -338,9 +356,17 @@
                                     </div>
                                 @elseif($game->slug == 'call-of-duty-mobile')
                                     <div class="col-md-12">
-                                        <div class="form-label mt-3">Masukkan Open ID</div>
+                                        <div class="form-label mt-3">
+                                            Masukkan Player ID
+                                            <span>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
+                                                    onclick="howto('{{ $game->slug }}')">
+                                                    (?)
+                                                </a>
+                                            </span>
+                                        </div>
                                         <input type="text" id="userid" name="userid" class="form-control"
-                                            placeholder="-- Open ID --" required>
+                                            placeholder="-- Player ID --" required>
                                     </div>
                                 @elseif($game->slug == 'lita')
                                     <div class="col-md-12">
@@ -749,6 +775,17 @@
             </div>
         </div>
     </div>
+
+    <div class="modal modal-blur fade" id="modal-image" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body py-4">
+                    <div id="howto"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 
@@ -920,6 +957,13 @@
                 '</div>';
 
             $('#failed').html(failedAlert);
+        }
+
+        function howto(slug) {
+            if (slug == 'call-of-duty-mobile') {
+                var image = '<img src="{{ asset(Storage::url('howto/call-of-duty-mobile.webp')) }}">';
+            }
+            $('#howto').html(image);
         }
     </script>
 @endsection
