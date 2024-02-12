@@ -61,13 +61,13 @@
                                         @endif
                                         <td>{{ $data->harga->nama_produk }}</td>
                                         <td>{{ $data->harga->kode_produk }}</td>
-                                        @if (isset($data->digiflazz->saldo_terakhir) && $data->status == 1)
+                                        @if (isset($data->digiflazz->saldo_terakhir) && $data->status == 'PAID')
                                             <td class="text-success">Rp.
                                                 {{ number_format($data->digiflazz->saldo_terakhir, 0, ',', '.') }}</td>
                                         @else
                                             <td>-</td>
                                         @endif
-                                        @if (isset($data->digiflazz->saldo_terpotong) && $data->status == 1)
+                                        @if (isset($data->digiflazz->saldo_terpotong) && $data->status == 'PAID')
                                             <td class="text-danger">Rp.
                                                 {{ number_format($data->digiflazz->saldo_terpotong, 0, ',', '.') }}</td>
                                         @else
