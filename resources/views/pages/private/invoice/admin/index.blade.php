@@ -164,6 +164,9 @@
                 serverSide: true,
                 lengthChange: false,
                 bInfo: false,
+                order: [
+                    [0, 'desc']
+                ],
                 ajax: '{{ route('datatable.invoice.admin') }}',
                 columns: [{
                         data: 'id',
