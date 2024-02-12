@@ -110,33 +110,26 @@
                                 prev
                             </a>
                         </li>
+
                         @php
                             $start = max(1, $datas->currentPage() - 4);
                             $end = min($datas->lastPage(), $start + 9);
                         @endphp
-                        @if ($end > 10)
-                            @if ($start > 1)
-                                <li class="page-item">
-                                    <a class="page-link" href="{{ $datas->url(1) }}">1</a>
-                                </li>
-                                <li class="page-item disabled">
-                                    <span class="page-link">...</span>
-                                </li>
-                            @endif
-                            @for ($i = $start; $i <= $end; $i++)
+
+                        @if ($datas->lastPage() > 10)
+                            @for ($i = 1; $i <= 4; $i++)
                                 <li class="page-item {{ $datas->currentPage() === $i ? 'active' : '' }}">
                                     <a class="page-link" href="{{ $datas->url($i) }}">{{ $i }}</a>
                                 </li>
                             @endfor
-                            @if ($end < $datas->lastPage())
-                                <li class="page-item disabled">
-                                    <span class="page-link">...</span>
+                            <li class="page-item disabled">
+                                <span class="page-link">...</span>
+                            </li>
+                            @for ($i = $end - 2; $i <= $end; $i++)
+                                <li class="page-item {{ $datas->currentPage() === $i ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ $datas->url($i) }}">{{ $i }}</a>
                                 </li>
-                                <li class="page-item">
-                                    <a class="page-link"
-                                        href="{{ $datas->url($datas->lastPage()) }}">{{ $datas->lastPage() }}</a>
-                                </li>
-                            @endif
+                            @endfor
                         @else
                             @for ($i = 1; $i <= $datas->lastPage(); $i++)
                                 <li class="page-item {{ $datas->currentPage() === $i ? 'active' : '' }}">
@@ -144,6 +137,7 @@
                                 </li>
                             @endfor
                         @endif
+
                         <li class="page-item {{ $datas->hasMorePages() ? '' : 'disabled' }}">
                             <a class="page-link" href="{{ $datas->nextPageUrl() }}">
                                 next
