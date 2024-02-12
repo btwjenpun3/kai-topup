@@ -55,6 +55,10 @@
                                     <div class="alert alert-success mt-3 text-dark" role="alert">
                                         <b>Support All Bind! ✅ Facebook | ✅ Garena | ✅ Google</b>
                                     </div>
+                                @elseif($game->slug == 'clash-of-clans')
+                                    <div class="alert alert-warning mt-3 text-dark" role="alert">
+                                        <b>Akun WAJIB terhubung ke Supercell ID</b>
+                                    </div>
                                 @endif
 
                                 <div class="form-label mt-2 ">Pilih Produk</div>
@@ -202,7 +206,15 @@
                                     </div>
                                 @elseif($game->slug == 'clash-of-clans')
                                     <div class="col-md-12">
-                                        <div class="form-label mt-3">Masukkan User TAG (Tanpa #)</div>
+                                        <div class="form-label mt-3">
+                                            Masukkan User TAG (Tanpa #)
+                                            <span>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
+                                                    onclick="howto('{{ $game->slug }}')">
+                                                    (?)
+                                                </a>
+                                            </span>
+                                        </div>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">#</span>
@@ -977,6 +989,8 @@
                 var image = '<img src="{{ asset(Storage::url('howto/mobile-legend.webp')) }}">';
             } else if (slug == 'free-fire') {
                 var image = '<img src="{{ asset(Storage::url('howto/free-fire.webp')) }}">';
+            } else if (slug == 'free-fire') {
+                var image = '<img src="{{ asset(Storage::url('howto/clash-of-clans.gif')) }}">';
             }
             $('#howto').html(image);
         }
