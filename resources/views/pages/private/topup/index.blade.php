@@ -110,7 +110,15 @@
                                     </div>
                                 @elseif($game->slug == 'free-fire')
                                     <div class="col-md-6">
-                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <div class="form-label mt-3">
+                                            Masukkan User ID
+                                            <span>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
+                                                    onclick="howto('{{ $game->slug }}')">
+                                                    (?)
+                                                </a>
+                                            </span>
+                                        </div>
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- User ID --" required>
                                     </div>
@@ -972,6 +980,8 @@
                 var image = '<img src="{{ asset(Storage::url('howto/call-of-duty-mobile.webp')) }}">';
             } else if (slug == 'mobile-legend') {
                 var image = '<img src="{{ asset(Storage::url('howto/mobile-legend.webp')) }}">';
+            } else if (slug == 'free-fire') {
+                var image = '<img src="{{ asset(Storage::url('howto/free-fire.webp')) }}">';
             }
             $('#howto').html(image);
         }
