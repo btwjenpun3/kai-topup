@@ -280,10 +280,10 @@
                         document.getElementById('di-bayar').innerHTML = '-';
                     }
                     if (response.user.role.name == 'reseller') {
-                        document.getElementById('total').innerHTML = 'Rp. ' + formatRupiah(response.harga
+                        document.getElementById('total').innerHTML = formatRupiah(response.harga
                             .harga_jual_reseller);
                     } else {
-                        document.getElementById('total').innerHTML = 'Rp. ' + formatRupiah(response.total);
+                        document.getElementById('total').innerHTML = formatRupiah(response.total);
                     }
                     document.getElementById('serial-number').innerHTML = response.digiflazz.sn;
                     $('#invoice-content').show();

@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\Gate;
 
 class DataTableController extends Controller
 {
+    public function invoiceWeb()
+    {
+        if(Gate::allows('admin')) {
+            $data = Invoice::with(['harga', 'game', 'user.role'])->where('via', 'WEB')->get();
+            return DataTables::of($data)->toJson();
+        } else {
+            abort(404);
+        }
+    }
+
     public function invoiceAdmin()
     {
         if(Gate::allows('admin')) {
