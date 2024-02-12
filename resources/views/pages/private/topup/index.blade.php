@@ -338,9 +338,9 @@
                                     </div>
                                 @elseif($game->slug == 'call-of-duty-mobile')
                                     <div class="col-md-12">
-                                        <div class="form-label mt-3">Masukkan Player ID</div>
+                                        <div class="form-label mt-3">Masukkan Open ID</div>
                                         <input type="text" id="userid" name="userid" class="form-control"
-                                            placeholder="-- Player ID --" required>
+                                            placeholder="-- Open ID --" required>
                                     </div>
                                 @elseif($game->slug == 'lita')
                                     <div class="col-md-12">
