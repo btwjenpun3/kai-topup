@@ -184,7 +184,15 @@
                                     </div>
                                 @elseif($game->slug == 'hago')
                                     <div class="col-md-12">
-                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <div class="form-label mt-3">
+                                            Masukkan User ID
+                                            <span>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
+                                                    onclick="howto('{{ $game->slug }}')">
+                                                    (?)
+                                                </a>
+                                            </span>
+                                        </div>
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- User ID --" required>
                                     </div>
@@ -237,7 +245,15 @@
                                     </div>
                                 @elseif($game->slug == 'genshin-impact')
                                     <div class="col-md-6">
-                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <div class="form-label mt-3">
+                                            Masukkan User ID
+                                            <span>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
+                                                    onclick="howto('{{ $game->slug }}')">
+                                                    (?)
+                                                </a>
+                                            </span>
+                                        </div>
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- User ID --" required>
                                     </div>
@@ -1011,6 +1027,10 @@
                 var image = '<img src="{{ asset(Storage::url('howto/dragon-raja-sea.webp')) }}">';
             } else if (slug == 'eggy-party') {
                 var image = '<img src="{{ asset(Storage::url('howto/eggy-party.webp')) }}">';
+            } else if (slug == 'genshin-impact') {
+                var image = '<img src="{{ asset(Storage::url('howto/genshin-impact.webp')) }}">';
+            } else if (slug == 'hago') {
+                var image = '<img src="{{ asset(Storage::url('howto/hago.webp')) }}">';
             }
             $('#howto').html(image);
         }
