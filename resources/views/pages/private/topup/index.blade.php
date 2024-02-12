@@ -57,7 +57,11 @@
                                     </div>
                                 @elseif($game->slug == 'clash-of-clans')
                                     <div class="alert alert-warning mt-3 text-dark" role="alert">
-                                        <b>Akun WAJIB terhubung ke Supercell ID</b>
+                                        <b>Akun WAJIB terhubung ke Supercell ID!</b>
+                                    </div>
+                                @elseif($game->slug == 'hay-day')
+                                    <div class="alert alert-warning mt-3 text-dark" role="alert">
+                                        <b>Akun WAJIB terhubung ke Supercell ID!</b>
                                     </div>
                                 @endif
 
