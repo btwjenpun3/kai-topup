@@ -109,7 +109,7 @@
                                             placeholder="-- Server ID --" required>
                                     </div>
                                 @elseif($game->slug == 'free-fire')
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-label mt-3">
                                             Masukkan User ID
                                             <span>
@@ -121,11 +121,6 @@
                                         </div>
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- User ID --" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-label mt-3">Masukkan Server ID</div>
-                                        <input type="text" id="serverid" name="serverid" class="form-control"
-                                            placeholder="-- Server ID --" required>
                                     </div>
                                 @elseif($game->slug == 'undawn')
                                     <div class="col-md-12">

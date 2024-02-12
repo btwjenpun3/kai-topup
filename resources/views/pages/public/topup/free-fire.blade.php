@@ -173,12 +173,6 @@
                                         <input id="userIdInput" type="text" placeholder="Masukkan User ID" required />
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="data-input">
-                                        <input id="serverIdInput" type="text"
-                                            placeholder="Masukkan Server ID / Zone ID" required />
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -346,10 +340,9 @@
 
             $('#checkout').click(function() {
                 var userIdInputValue = $('#userIdInput').val();
-                var serverIdInputValue = $('#serverIdInput').val();
                 var userPhoneInputValue = $('#userPhoneInput').val();
 
-                if (userIdInputValue.trim() === '' || serverIdInputValue.trim() === '') {
+                if (userIdInputValue.trim() === '') {
                     showError('Harap isi semua Data kamu!');
                     return;
                 }
@@ -370,7 +363,6 @@
                     $('#itemPrice').text('Rp. ' + formatRupiah(selectedPrice));
                     $('#itemId').val(selectedItemId);
                     $('#userId').text(userIdInputValue);
-                    $('#serverId').text(serverIdInputValue);
                     $('#paymentType').text(paymentTypeValue);
                     $('#paymentMethod').text(getPaymentMethodValue);
 
@@ -389,7 +381,6 @@
                         price: selectedPrice,
                         itemName: selectedItemName,
                         userId: $('#userId').text(),
-                        serverId: $('#serverId').text(),
                         userPhone: $('#userPhoneInput').val(),
                         itemId: selectedItemId,
                         paymentType: paymentTypeValue,
