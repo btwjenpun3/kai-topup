@@ -13,7 +13,7 @@ class DataTableController extends Controller
     public function invoiceAdmin()
     {
         if(Gate::allows('admin')) {
-            $data = Invoice::with(['harga', 'game', 'user.role'])->where('via', 'REALM')->orderBy('id', 'desc')->get();
+            $data = Invoice::with(['harga', 'game', 'user.role'])->where('via', 'REALM')->orderBy('id', 'asc')->get();
             return DataTables::of($data)->toJson();
         } else {
             abort(404);
