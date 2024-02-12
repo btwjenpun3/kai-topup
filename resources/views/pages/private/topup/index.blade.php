@@ -91,13 +91,15 @@
                                 </select>
                                 @if ($game->slug == 'mobile-legend')
                                     <div class="col-md-6">
-                                        <div class="form-label mt-3">Masukkan User ID</div>
-                                        <span>
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
-                                                onclick="howto('{{ $game->slug }}')">
-                                                (?)
-                                            </a>
-                                        </span>
+                                        <div class="form-label mt-3">
+                                            Masukkan User ID
+                                            <span>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
+                                                    onclick="howto('{{ $game->slug }}')">
+                                                    (?)
+                                                </a>
+                                            </span>
+                                        </div>
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- User ID --" required>
                                     </div>
