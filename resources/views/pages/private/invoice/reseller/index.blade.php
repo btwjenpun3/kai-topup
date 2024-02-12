@@ -35,7 +35,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="table-responsive">
-                    <table class="table table-hover table-vcenter card-table table-striped table-nowrap">
+                    <table id="invoices" class="table table-hover table-vcenter card-table table-striped table-nowrap">
                         @if (isset($invoices) && count($invoices) > 0)
                             <thead>
                                 <tr>
@@ -48,31 +48,6 @@
                                     <th class="w-1"></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($invoices as $invoice)
-                                    <tr>
-                                        @if ($invoice->status == 'PENDING')
-                                            <td class="text-warning"><span class="badge bg-warning me-1"></span></td>
-                                        @elseif ($invoice->status == 'PAID')
-                                            <td class="text-success"><span class="badge bg-success me-1"></span></td>
-                                        @elseif ($invoice->status == 'EXPIRED')
-                                            <td class="text-danger"><span class="badge bg-danger me-1"></span></td>
-                                        @endif
-                                        <td>{{ $invoice->game->nama }}</td>
-                                        <td>{{ $invoice->harga->nama_produk }}</td>
-                                        <td><a href="{{ route('invoice.index', ['id' => $invoice->nomor_invoice]) }}"
-                                                target="_blank">{{ $invoice->nomor_invoice }}</a></td>
-                                        <td>{{ \Carbon\Carbon::parse($invoice->created_at)->isoFormat('dddd, D MMMM YYYY, HH:mm:ss') }}
-                                            WIB
-                                        </td>
-                                        <td class="text-success">Rp.
-                                            {{ number_format($invoice->harga->harga_jual_reseller, 0, ',', '.') }}</td>
-                                        <td> <button class="btn btn-md" data-bs-toggle="modal"
-                                                data-bs-target="#modal-detail"
-                                                onclick="lihat('{{ $invoice->nomor_invoice }}')">Detail</button> </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
                         @else
                             <tbody>
                                 <tr>
@@ -83,40 +58,6 @@
                         @endif
                     </table>
                 </div>
-                @if (count($invoices) > 10)
-                    <div class="pagination justify-content-end">
-                        <ul class="pagination m-3">
-                            <li class="page-item {{ $invoices->onFirstPage() ? 'disabled' : '' }}">
-                                <a class="page-link" href="{{ $invoices->previousPageUrl() }}" tabindex="-1"
-                                    aria-disabled="true">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M15 6l-6 6l6 6" />
-                                    </svg>
-                                    prev
-                                </a>
-                            </li>
-                            @for ($i = 1; $i <= $invoices->lastPage(); $i++)
-                                <li class="page-item {{ $invoices->currentPage() === $i ? 'active' : '' }}">
-                                    <a class="page-link" href="{{ $invoices->url($i) }}">{{ $i }}</a>
-                                </li>
-                            @endfor
-                            <li class="page-item {{ $invoices->hasMorePages() ? '' : 'disabled' }}">
-                                <a class="page-link" href="{{ $invoices->nextPageUrl() }}">
-                                    next
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M9 6l6 6l-6 6" />
-                                    </svg>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                @endif
             </div>
         </div>
     </div>
@@ -212,6 +153,64 @@
 @endsection
 
 @section('js')
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#invoices').DataTable({
+                processing: true,
+                serverSide: true,
+                lengthChange: false,
+                bInfo: false,
+                order: [
+                    [0, 'desc']
+                ],
+                ajax: '{{ route('datatable.invoice.reseller') }}',
+                columns: [{
+                        data: 'id',
+                        render: function(data, type, row) {
+                            if (row.status == 'PAID') {
+                                return '<span class="badge bg-success me-1"></span>';
+                            } else if (row.status == 'PENDING') {
+                                return '<span class="badge bg-warning me-1"></span>';
+                            } else if (row.status == 'EXPIRED') {
+                                return '<span class="badge bg-danger me-1"></span>';
+                            }
+                        }
+                    },
+                    {
+                        data: 'game.nama'
+                    },
+                    {
+                        data: 'harga.nama_produk'
+                    },
+                    {
+                        data: 'nomor_invoice'
+                    },
+                    {
+                        data: 'created_at',
+                        render: function(data, type, row) {
+                            return konversiTanggal(data)
+                        }
+                    },
+                    {
+                        data: 'harga.harga_jual',
+                        render: function(data, type, row) {
+                            return '<div class="text-success">' + formatRupiah(row.harga
+                                .harga_jual_reseller) + '</div>'
+                        }
+                    },
+                    {
+                        data: 'nomor_invoice',
+                        render: function(data, type, row) {
+                            return '<button class="btn btn-md" data-bs-toggle="modal" data-bs-target="#modal-detail" onclick="lihat(`' +
+                            row.nomor_invoice + '`)">Detail</button>';
+                        }
+                    }
+                ],
+            });
+        });
+    </script>
     <script>
         var invoiceId;
 
@@ -253,9 +252,13 @@
                             ' WIB';
                         document.getElementById('di-bayar').innerHTML = '-';
                     }
-                    document.getElementById('total').innerHTML = 'Rp. ' + formatRupiah(response.harga
+                    document.getElementById('total').innerHTML = formatRupiah(response.harga
                         .harga_jual_reseller);
-                    document.getElementById('serial-number').innerHTML = response.digiflazz.sn;
+                    if (response.digiflazz && response.digiflazz.sn) {
+                        document.getElementById('serial-number').innerHTML = response.digiflazz.sn;
+                    } else {
+                        document.getElementById('serial-number').innerHTML = 'Data SN tidak di temukan';
+                    }
                     $('#invoice-content').show();
                     $('#loading').hide();
                 },
@@ -284,7 +287,21 @@
             }
 
             rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
-            return rupiah;
+            return 'Rp. ' + rupiah;
         }
     </script>
+@endsection
+
+@section('css')
+    <style>
+        .dataTables_wrapper .dataTables_filter {
+            float: right;
+            margin: 10px;
+        }
+
+        .dataTables_wrapper .dataTables_paginate {
+            float: right;
+            margin: 10px;
+        }
+    </style>
 @endsection

@@ -29,4 +29,14 @@ class DataTableController extends Controller
             abort(404);
         }
     }
+
+    public function invoiceReseller()
+    {
+        if(Gate::allows('reseller')) {
+            $data = Invoice::with(['harga', 'game', 'user.role'])->where('via', 'REALM')->where('realm_user_id', auth()->id())->get();
+            return DataTables::of($data)->toJson();
+        } else {
+            abort(404);
+        }
+    }
 }

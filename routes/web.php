@@ -243,6 +243,7 @@ Route::prefix('/realm/datatables')
     ->middleware('auth')
     ->group(function () {
         Route::get('/invoice/web', 'invoiceWeb')->name('invoice.web'); 
-        Route::get('/invoice/admin', 'invoiceAdmin')->name('invoice.admin');        
+        Route::get('/invoice/admin', 'invoiceAdmin')->name('invoice.admin');  
+        Route::get('/invoice/reseller', 'invoiceReseller')->name('invoice.reseller');       
     }); 
 

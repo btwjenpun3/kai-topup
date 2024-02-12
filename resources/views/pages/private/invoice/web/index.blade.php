@@ -263,7 +263,11 @@
                         document.getElementById('di-bayar').innerHTML = '-';
                     }
                     document.getElementById('total').innerHTML = formatRupiah(response.total);
-                    document.getElementById('serial-number').innerHTML = response.digiflazz.sn;
+                    if (response.digiflazz && response.digiflazz.sn) {
+                        document.getElementById('serial-number').innerHTML = response.digiflazz.sn;
+                    } else {
+                        document.getElementById('serial-number').innerHTML = 'Data SN tidak di temukan';
+                    }
                     $('#invoice-content').show();
                     $('#loading').hide();
                 },
