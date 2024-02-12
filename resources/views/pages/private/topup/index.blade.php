@@ -442,7 +442,15 @@
                                     </div>
                                 @elseif($game->slug == 'eggy-party')
                                     <div class="col-md-12">
-                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <div class="form-label mt-3">
+                                            Masukkan User ID
+                                            <span>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
+                                                    onclick="howto('{{ $game->slug }}')">
+                                                    (?)
+                                                </a>
+                                            </span>
+                                        </div>
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- User ID --" required>
                                     </div>
@@ -1001,6 +1009,8 @@
                 var image = '<img src="{{ asset(Storage::url('howto/clash-of-clans.gif')) }}">';
             } else if (slug == 'dragon-raja-sea') {
                 var image = '<img src="{{ asset(Storage::url('howto/dragon-raja-sea.webp')) }}">';
+            } else if (slug == 'eggy-party') {
+                var image = '<img src="{{ asset(Storage::url('howto/eggy-party.webp')) }}">';
             }
             $('#howto').html(image);
         }
