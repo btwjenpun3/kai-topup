@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Private\Dashboard\DashboardContoller;
+use App\Http\Controllers\Private\DataTable\DataTableController;
 use App\Http\Controllers\Private\Flashsale\FlashsaleController;
 use App\Http\Controllers\Private\Invoice\InvoiceRealmController;
 use App\Http\Controllers\Private\ListGames\ListGamesController;
@@ -23,6 +24,7 @@ use App\Http\Controllers\Public\Simulate\SimulateController;
 use App\Http\Controllers\Public\TopUp\TopUpController;
 use App\Models\Flashsale;
 use Illuminate\Support\Facades\Route;
+use Yajra\DataTables\Contracts\DataTable;
 
 /*
 |--------------------------------------------------------------------------
@@ -235,4 +237,11 @@ Route::prefix('/realm/isi-saldo')
         Route::get('/', 'index')->name('index');        
     });  
 
+Route::prefix('/realm/datatables')
+    ->name('datatable.')
+    ->controller(DataTableController::class)
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('/invoice/admin', 'invoiceAdmin')->name('invoice.admin');        
+    }); 
 
