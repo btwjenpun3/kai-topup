@@ -216,7 +216,7 @@
                 lengthChange: false,
                 bInfo: false,
                 order: [
-                    [0, 'asc']
+                    [6, 'asc']
                 ],
                 ajax: '{{ route('datatable.user.reseller') }}',
                 columns: [{
