@@ -40,6 +40,12 @@
                                 <span>Jika kamu Reseller maka harap hubungi Admin jika kamu ingin menyalakan produk yang
                                     ingin kamu beli.</span>
 
+                                @if ($game->kategori == 'Voucher')
+                                    <div class="alert alert-info mt-3 text-dark" role="alert">
+                                        <b>Kode Voucher akan tercetak pada SN di Invoice</b>
+                                    </div>
+                                @endif
+
                                 @if ($game->slug == 'call-of-duty-mobile')
                                     <div class="alert alert-success mt-3 text-dark" role="alert">
                                         <b>Support All Bind! ✅ Facebook | ✅ Garena</b>
