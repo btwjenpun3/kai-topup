@@ -111,6 +111,7 @@
 
         function generate() {
             var totalHargaModal = 0;
+            var totalHargaJual = 0;
             var totalProfit = 0;
             var totalProfitReseller = 0;
 
