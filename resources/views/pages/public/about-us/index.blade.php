@@ -33,7 +33,7 @@
             <h4 class="mt-4 mb-3">Kontak Kami</h4>
             <ul class="text-light" style="line-height: 30px">
                 <li><b>Nomor Kontak :</b> 081223864722 (WhatsApp Only) </li>
-                <li><b>Email :</b> muhamadkelmi@gmail.com </li>
+                <li><b>Email :</b> helmibussiness@gmail.com </li>
                 <li><b>Alamat :</b> Bumi Panyileukan J4 No. 7, RT 002 RW 009, Panyileukan, Cipadung Kidul, Kota Bandung</li>
             </ul>
         </div>
