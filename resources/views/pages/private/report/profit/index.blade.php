@@ -156,12 +156,13 @@
 
                         $('#result-profit').append(row);
 
-                        totalHargaModal += parseFloat(item.total);
+                        totalHargaModal += parseFloat(item.modal);
+                        totalHargaJual += parseFloat(item.total);
 
                     });
 
                     var row2 = '<tr>' +
-                        '<td>Rp. ' + formatRupiah(totalHargaModal + totalProfit + totalProfitReseller) +
+                        '<td>Rp. ' + formatRupiah(totalHargaJual) +
                         '</td>' +
                         '<td>Rp. ' + formatRupiah(totalHargaModal) + '</td>' +
                         '<td>Rp. ' + formatRupiah(totalProfit + totalProfitReseller) + '</td>' +
