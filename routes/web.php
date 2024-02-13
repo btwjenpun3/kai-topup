@@ -20,6 +20,7 @@ use App\Http\Controllers\Public\AboutUs\AboutUsController;
 use App\Http\Controllers\Public\Harga\HargaController;
 use App\Http\Controllers\Public\Home\HomeController;
 use App\Http\Controllers\Public\Invoice\InvoiceController;
+use App\Http\Controllers\Public\Pencarian\PencarianController;
 use App\Http\Controllers\Public\Simulate\SimulateController;
 use App\Http\Controllers\Public\TopUp\TopUpController;
 use App\Models\Flashsale;
@@ -43,6 +44,13 @@ use Yajra\DataTables\Contracts\DataTable;
  */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::prefix('/pencarian')
+    ->name('pencarian.')
+    ->controller(PencarianController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+    });
 
 Route::prefix('/topup')
     ->name('topup.')
@@ -74,12 +82,6 @@ Route::prefix('/tentang-kami')
         Route::get('/', 'index')->name('index');
     });
 
-Route::prefix('/simulate')
-    ->name('simulate.')
-    ->controller(SimulateController::class)
-    ->group(function () {
-        Route::post('/va/{id}', 'simulateVa');
-    });
 
 /**
  * Private Route Start Here
