@@ -132,19 +132,43 @@
                                     </div>
                                 @elseif($game->slug == 'undawn')
                                     <div class="col-md-12">
-                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <div class="form-label mt-3">
+                                            Masukkan User ID
+                                            <span>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
+                                                    onclick="howto('{{ $game->slug }}')">
+                                                    (?)
+                                                </a>
+                                            </span>
+                                        </div>
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- User ID --" required>
                                     </div>
                                 @elseif($game->slug == 'undawn-all-bind')
                                     <div class="col-md-12">
-                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <div class="form-label mt-3">
+                                            Masukkan User ID
+                                            <span>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
+                                                    onclick="howto('{{ $game->slug }}')">
+                                                    (?)
+                                                </a>
+                                            </span>
+                                        </div>
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- User ID --" required>
                                     </div>
                                 @elseif($game->slug == 'lifeafter')
                                     <div class="col-md-6">
-                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <div class="form-label mt-3">
+                                            Masukkan User ID
+                                            <span>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
+                                                    onclick="howto('{{ $game->slug }}')">
+                                                    (?)
+                                                </a>
+                                            </span>
+                                        </div>
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- User ID --" required>
                                     </div>
@@ -182,7 +206,15 @@
                                     </div>
                                 @elseif($game->slug == 'pubg')
                                     <div class="col-md-12">
-                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <div class="form-label mt-3">
+                                            Masukkan User ID
+                                            <span>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
+                                                    onclick="howto('{{ $game->slug }}')">
+                                                    (?)
+                                                </a>
+                                            </span>
+                                        </div>
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- User ID --" required>
                                     </div>
@@ -202,7 +234,15 @@
                                     </div>
                                 @elseif($game->slug == 'valorant')
                                     <div class="col-md-6">
-                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <div class="form-label mt-3">
+                                            Masukkan User ID
+                                            <span>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
+                                                    onclick="howto('{{ $game->slug }}')">
+                                                    (?)
+                                                </a>
+                                            </span>
+                                        </div>
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- User ID --" required>
                                     </div>
@@ -272,7 +312,15 @@
                                     </div>
                                 @elseif($game->slug == 'honkai-star-rail')
                                     <div class="col-md-6">
-                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <div class="form-label mt-3">
+                                            Masukkan User ID
+                                            <span>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
+                                                    onclick="howto('{{ $game->slug }}')">
+                                                    (?)
+                                                </a>
+                                            </span>
+                                        </div>
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- User ID --" required>
                                     </div>
@@ -306,13 +354,29 @@
                                     </div>
                                 @elseif($game->slug == 'sausage-man')
                                     <div class="col-md-12">
-                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <div class="form-label mt-3">
+                                            Masukkan User ID
+                                            <span>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
+                                                    onclick="howto('{{ $game->slug }}')">
+                                                    (?)
+                                                </a>
+                                            </span>
+                                        </div>
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- User ID --" required>
                                     </div>
                                 @elseif($game->slug == 'league-of-legends-wild-rift')
                                     <div class="col-md-6">
-                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <div class="form-label mt-3">
+                                            Masukkan User ID
+                                            <span>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
+                                                    onclick="howto('{{ $game->slug }}')">
+                                                    (?)
+                                                </a>
+                                            </span>
+                                        </div>
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- User ID --" required>
                                     </div>
@@ -328,7 +392,15 @@
                                     </div>
                                 @elseif($game->slug == 'ragnarok-origin')
                                     <div class="col-md-4">
-                                        <div class="form-label mt-3">Masukkan Secret Code</div>
+                                        <div class="form-label mt-3">
+                                            Masukkan Secret Code
+                                            <span>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
+                                                    onclick="howto('{{ $game->slug }}')">
+                                                    (?)
+                                                </a>
+                                            </span>
+                                        </div>
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- Secret Code --" required>
                                     </div>
@@ -421,19 +493,43 @@
                                     </div>
                                 @elseif($game->slug == 'lita')
                                     <div class="col-md-12">
-                                        <div class="form-label mt-3">Masukkan User ID LITA</div>
+                                        <div class="form-label mt-3">
+                                            Masukkan User ID LITA
+                                            <span>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
+                                                    onclick="howto('{{ $game->slug }}')">
+                                                    (?)
+                                                </a>
+                                            </span>
+                                        </div>
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- User ID LITA --" required>
                                     </div>
                                 @elseif($game->slug == 'metal-slug-awakening')
                                     <div class="col-md-12">
-                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <div class="form-label mt-3">
+                                            Masukkan User ID
+                                            <span>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
+                                                    onclick="howto('{{ $game->slug }}')">
+                                                    (?)
+                                                </a>
+                                            </span>
+                                        </div>
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- User ID --" required>
                                     </div>
                                 @elseif($game->slug == 'ludo-club')
                                     <div class="col-md-12">
-                                        <div class="form-label mt-3">Masukkan Player ID</div>
+                                        <div class="form-label mt-3">
+                                            Masukkan Player ID
+                                            <span>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
+                                                    onclick="howto('{{ $game->slug }}')">
+                                                    (?)
+                                                </a>
+                                            </span>
+                                        </div>
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- Player ID --" required>
                                     </div>
@@ -453,7 +549,15 @@
                                     </div>
                                 @elseif($game->slug == 'zepeto')
                                     <div class="col-md-12">
-                                        <div class="form-label mt-3">Masukkan Username (Tanpa @)</div>
+                                        <div class="form-label mt-3">
+                                            Masukkan Username (Tanpa @)
+                                            <span>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
+                                                    onclick="howto('{{ $game->slug }}')">
+                                                    (?)
+                                                </a>
+                                            </span>
+                                        </div>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">@</span>
@@ -464,7 +568,15 @@
                                     </div>
                                 @elseif($game->slug == 'love-nikki')
                                     <div class="col-md-12">
-                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <div class="form-label mt-3">
+                                            Masukkan User ID
+                                            <span>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
+                                                    onclick="howto('{{ $game->slug }}')">
+                                                    (?)
+                                                </a>
+                                            </span>
+                                        </div>
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- User ID --" required>
                                     </div>
@@ -484,13 +596,29 @@
                                     </div>
                                 @elseif($game->slug == 'stumble-guys')
                                     <div class="col-md-12">
-                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <div class="form-label mt-3">
+                                            Masukkan User ID
+                                            <span>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
+                                                    onclick="howto('{{ $game->slug }}')">
+                                                    (?)
+                                                </a>
+                                            </span>
+                                        </div>
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- User ID --" required>
                                     </div>
                                 @elseif($game->slug == 'tower-of-fantasy')
                                     <div class="col-md-6">
-                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <div class="form-label mt-3">
+                                            Masukkan User ID
+                                            <span>
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#modal-image"
+                                                    onclick="howto('{{ $game->slug }}')">
+                                                    (?)
+                                                </a>
+                                            </span>
+                                        </div>
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- User ID --" required>
                                     </div>
@@ -1045,6 +1173,36 @@
                 var image = '<img src="{{ asset(Storage::url('howto/hago.webp')) }}">';
             } else if (slug == 'hay-day') {
                 var image = '<img src="{{ asset(Storage::url('howto/hay-day.webp')) }}">';
+            } else if (slug == 'honkai-star-rail') {
+                var image = '<img src="{{ asset(Storage::url('howto/honkai-star-rail.webp')) }}">';
+            } else if (slug == 'league-of-legends-wild-rift') {
+                var image = '<img src="{{ asset(Storage::url('howto/league-of-legends-wild-rift.webp')) }}">';
+            } else if (slug == 'lifeafter') {
+                var image = '<img src="{{ asset(Storage::url('howto/lifeafter.webp')) }}">';
+            } else if (slug == 'lita') {
+                var image = '<img src="{{ asset(Storage::url('howto/lita.webp')) }}">';
+            } else if (slug == 'love-nikki') {
+                var image = '<img src="{{ asset(Storage::url('howto/love-nikki.webp')) }}">';
+            } else if (slug == 'ludo-club') {
+                var image = '<img src="{{ asset(Storage::url('howto/ludo-club.webp')) }}">';
+            } else if (slug == 'metal-slug-awakening') {
+                var image = '<img src="{{ asset(Storage::url('howto/metal-slug-awakening.webp')) }}">';
+            } else if (slug == 'pubg') {
+                var image = '<img src="{{ asset(Storage::url('howto/pubg.webp')) }}">';
+            } else if (slug == 'ragnarok-origin') {
+                var image = '<img src="{{ asset(Storage::url('howto/ragnarok-origin.webp')) }}">';
+            } else if (slug == 'sausage-man') {
+                var image = '<img src="{{ asset(Storage::url('howto/sausage-man.webp')) }}">';
+            } else if (slug == 'stumble-guys') {
+                var image = '<img src="{{ asset(Storage::url('howto/stumble-guys.gif')) }}">';
+            } else if (slug == 'tower-of-fantasy') {
+                var image = '<img src="{{ asset(Storage::url('howto/tower-of-fantasy.webp')) }}">';
+            } else if (slug == 'undawn' || slug == 'undawn-all-bind') {
+                var image = '<img src="{{ asset(Storage::url('howto/undawn.webp')) }}">';
+            } else if (slug == 'valorant') {
+                var image = '<img src="{{ asset(Storage::url('howto/valorant.webp')) }}">';
+            } else if (slug == 'zepeto') {
+                var image = '<img src="{{ asset(Storage::url('howto/zepeto.webp')) }}">';
             }
             $('#howto').html(image);
         }
