@@ -137,6 +137,7 @@
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- User ID --" required>
                                     </div>
+                                    @include('pages.private.topup.button_check_id')
                                 @elseif($game->slug == 'undawn')
                                     <div class="col-md-12">
                                         <div class="form-label mt-3">
@@ -397,6 +398,7 @@
                                                 placeholder="-- User TAG --" required>
                                         </div>
                                     </div>
+                                    @include('pages.private.topup.button_check_id')
                                 @elseif($game->slug == 'ragnarok-origin')
                                     <div class="col-md-4">
                                         <div class="form-label mt-3">
@@ -588,6 +590,7 @@
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- User ID --" required>
                                     </div>
+                                    @include('pages.private.topup.button_check_id')
                                 @elseif($game->slug == 'eggy-party')
                                     <div class="col-md-12">
                                         <div class="form-label mt-3">
@@ -844,7 +847,7 @@
                                 </div>
 
 
-                                <div class="col-md-12 mt-3">
+                                <div class="col-md-12">
                                     <button class="btn btn-sm btn-outline-info" data-bs-toggle="modal"
                                         data-bs-target="#modal-customer">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-list"

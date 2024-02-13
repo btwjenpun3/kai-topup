@@ -221,6 +221,13 @@ class PrivateTopUpController extends Controller
                         $expiredTime = $currentTime->addHours(17);
                         $expiredAt = $expiredTime->format('Y-m-d\TH:i:s.u\Z');
 
+                        if($user->role->name == 'reseller') {
+                            $profit = $data->profit_reseller;
+                            $total = $data->harga_jual_reseller;
+                        } else {
+                            $profit = $data->profit;
+                            $total = $data->harga_jual;
+                        }
 
                         $createInvoice = Invoice::create([                                                   
                             'nomor_invoice' => $invoiceNumber,                                
@@ -232,8 +239,8 @@ class PrivateTopUpController extends Controller
                             'game_id' => $data->game->id,
                             'harga_id' => $data->id, 
                             'payment_id' => 99,
-                            'profit' => $data->profit,
-                            'total' => $data->harga_jual,
+                            'profit' => $profit,
+                            'total' => $total,
                             'status' => 'PENDING',      
                             'via' => $via,                          
                             'expired_at' => $expiredAt,
