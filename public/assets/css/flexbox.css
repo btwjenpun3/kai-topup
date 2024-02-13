@@ -21,7 +21,7 @@
   order: 1; /* Move image to the bottom */
 }
 
-.flex-column h4 {
+.flex-column h3 {
   order: 2; /* Move heading to the top */
 }
 
