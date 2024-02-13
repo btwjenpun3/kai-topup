@@ -156,7 +156,7 @@
 
                         $('#result-profit').append(row);
 
-                        totalHargaModal += parseFloat(item.modal);
+                        totalHargaModal += parseFloat(item.total);
 
                     });
 
