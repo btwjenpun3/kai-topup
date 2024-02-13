@@ -107,6 +107,7 @@ class PrivateTopUpController extends Controller
                             ], 200);
                         }
 
+
                         $saldo = Http::withHeaders([
                             'Content-Type' => 'application/json',
                         ])->post('https://api.digiflazz.com/v1/cek-saldo', [
@@ -239,6 +240,7 @@ class PrivateTopUpController extends Controller
                             'game_id' => $data->game->id,
                             'harga_id' => $data->id, 
                             'payment_id' => 99,
+                            'modal' => $data->modal,
                             'profit' => $profit,
                             'total' => $total,
                             'status' => 'PENDING',      

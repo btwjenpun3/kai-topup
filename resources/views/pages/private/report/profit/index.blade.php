@@ -141,22 +141,22 @@
                             '<td>' + item.harga.nama_produk + '</td>';
 
                         if (item.realm_user_id && item.user.role.name == 'reseller') {
-                            row += '<td>Rp. ' + formatRupiah(item.harga.harga_jual_reseller) + '</td>' +
-                                '<td>Rp. ' + formatRupiah(item.harga.modal) + '</td>' +
-                                '<td>Rp. ' + formatRupiah(item.harga.profit_reseller) + '</td>' +
+                            row += '<td>Rp. ' + formatRupiah(item.total) + '</td>' +
+                                '<td>Rp. ' + formatRupiah(item.modal) + '</td>' +
+                                '<td>Rp. ' + formatRupiah(item.profit) + '</td>' +
                                 '</tr>';
-                            totalProfitReseller += parseFloat(item.harga.profit_reseller);
+                            totalProfitReseller += parseFloat(item.profit);
                         } else {
-                            row += '<td>Rp. ' + formatRupiah(item.harga.harga_jual) + '</td>' +
-                                '<td>Rp. ' + formatRupiah(item.harga.modal) + '</td>' +
-                                '<td>Rp. ' + formatRupiah(item.harga.profit) + '</td>' +
+                            row += '<td>Rp. ' + formatRupiah(item.total) + '</td>' +
+                                '<td>Rp. ' + formatRupiah(item.modal) + '</td>' +
+                                '<td>Rp. ' + formatRupiah(item.profit) + '</td>' +
                                 '</tr>';
-                            totalProfit += parseFloat(item.harga.profit);
+                            totalProfit += parseFloat(item.profit);
                         };
 
                         $('#result-profit').append(row);
 
-                        totalHargaModal += parseFloat(item.harga.modal);
+                        totalHargaModal += parseFloat(item.modal);
 
                     });
 

@@ -27,6 +27,7 @@ return new class extends Migration
             $table->foreignId('xendit_qr_id')->nullable()->constrained();
             $table->foreignId('xendit_va_id')->nullable()->constrained();
             $table->foreignId('xendit_outlet_id')->nullable()->constrained();
+            $table->integer('modal')->nullable();
             $table->integer('profit')->nullable();
             $table->integer('total');
             $table->string('status');
