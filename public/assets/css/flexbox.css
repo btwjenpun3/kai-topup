@@ -25,6 +25,10 @@
   order: 2; /* Move heading to the top */
 }
 
+.flex-column h4 {
+  order: 2; /* Move heading to the top */
+}
+
 .flex-column span {
   margin-top:10px;
   order: 3; /* Keep span at the bottom */
