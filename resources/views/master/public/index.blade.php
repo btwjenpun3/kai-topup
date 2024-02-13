@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/assets/css/fontawesome.css">
     <link rel="stylesheet" href="/assets/css/templatemo-cyborg-gaming.css">
     <link rel="stylesheet" href="/assets/css/owl.css">
-    <link rel="stylesheet" href="/assets/css/animate.css">
+    {{-- <link rel="stylesheet" href="/assets/css/animate.css"> --}}
     <link rel="stylesheet" href="/assets/css/flexbox.css">
     <link rel="stylesheet" href="/assets/css/slider-background.css">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
@@ -68,6 +68,10 @@
         </div>
     </div>
 
+    <a href="https://wa.me/6281223864722/" class="float" target="_blank">
+        <i class="fa-brands fa-whatsapp my-float"></i>
+    </a>
+
     @yield('hero')
 
     @yield('message')
@@ -84,10 +88,10 @@
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
     </script>
 
-    <script src="/assets/js/isotope.min.js"></script>
+    {{-- <script src="/assets/js/isotope.min.js"></script> --}}
     <script src="/assets/js/owl-carousel.js"></script>
-    <script src="/assets/js/tabs.js"></script>
-    <script src="/assets/js/popup.js"></script>
+    {{-- <script src="/assets/js/tabs.js"></script>
+    <script src="/assets/js/popup.js"></script> --}}
     <script src="/assets/js/custom.js"></script>
     <script></script>
     @yield('js')

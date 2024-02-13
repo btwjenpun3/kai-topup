@@ -159,6 +159,11 @@
             </div>
         </div>
     </div>
+    <div class="text-center mt-4">
+        <p>Terdapat masalah ? Hubungi kami melalui <a
+                href="https://wa.me/6281223864722/?text=Saya memiliki masalah dengan Invoice {{ $invoice->nomor_invoice }} dan Nomor Telepon {{ $invoice->phone }} dan Status Invoice {{ $invoice->status }}">WhatsApp</a>
+        </p>
+    </div>
     @if ($invoice->status == 'PENDING')
         <div class="invoice mt-4">
             <div class="col-lg-12">
