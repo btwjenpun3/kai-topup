@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+        content="Selamat datang di Fumola Store, tujuan utama Anda untuk top up game dengan harga murah. Dapatkan pengalaman top up yang nyaman, cepat, dan aman bersama kami. Jelajahi koleksi kami dan nikmati harga yang tak tertandingi, layanan yang ramah, serta proses pembayaran yang cepat dan aman." />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     @yield('title')

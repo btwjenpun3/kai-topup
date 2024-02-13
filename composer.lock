@@ -4,8 +4,55 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4ea017168f3d84d307cc09dd3c77b2e6",
+    "content-hash": "d74246f922f5307d117f72c1825dd115",
     "packages": [
+        {
+            "name": "aditamagf/check-ign",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aditamagf/check-ign.git",
+                "reference": "cf8e56a2950c72e876164a491d8fc15f3dba8884"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aditamagf/check-ign/zipball/cf8e56a2950c72e876164a491d8fc15f3dba8884",
+                "reference": "cf8e56a2950c72e876164a491d8fc15f3dba8884",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Aditdev\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "aditamagf",
+                    "email": "business@aditdev.id"
+                }
+            ],
+            "description": "Un-official API to Check Username Game By Account ID",
+            "support": {
+                "issues": "https://github.com/aditamagf/check-ign/issues",
+                "source": "https://github.com/aditamagf/check-ign/tree/1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://trakteer.id/aditamagf/tip",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://ko-fi.com/aditamagf",
+                    "type": "ko_fi"
+                }
+            ],
+            "time": "2023-10-02T16:13:10+00:00"
+        },
         {
             "name": "bacon/bacon-qr-code",
             "version": "2.0.8",

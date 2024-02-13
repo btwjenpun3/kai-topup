@@ -122,6 +122,7 @@
                                         <input type="text" id="serverid" name="serverid" class="form-control"
                                             placeholder="-- Server ID --" required>
                                     </div>
+                                    @include('pages.private.topup.button_check_id')
                                 @elseif($game->slug == 'free-fire')
                                     <div class="col-md-12">
                                         <div class="form-label mt-3">
@@ -497,6 +498,7 @@
                                         <input type="text" id="userid" name="userid" class="form-control"
                                             placeholder="-- Player ID --" required>
                                     </div>
+                                    @include('pages.private.topup.button_check_id')
                                 @elseif($game->slug == 'lita')
                                     <div class="col-md-12">
                                         <div class="form-label mt-3">
@@ -832,6 +834,16 @@
                                     </div>
                                 @else
                                 @endif
+
+
+                                <div id="username_alert" class="alert alert-dismissible fade show" role="alert"
+                                    style="display:none;">
+                                    <div class="d-flex">
+                                        <div id="username_result"></div>
+                                    </div>
+                                </div>
+
+
                                 <div class="col-md-12 mt-3">
                                     <button class="btn btn-sm btn-outline-info" data-bs-toggle="modal"
                                         data-bs-target="#modal-customer">
@@ -1211,6 +1223,48 @@
                 var image = '<img src="{{ asset(Storage::url('howto/zepeto.webp')) }}">';
             }
             $('#howto').html(image);
+        }
+
+        function checkId(slug) {
+            $('#username_check_button').attr('disabled', true);
+            $('#nickname_text').hide();
+            $('#username_loading').show();
+            $('#username_alert').hide();
+            resetClass();
+            var serveridVal = $('#serverid').val() || '';
+            var usernickname = $('#usernickname').val() || '';
+            $.ajax({
+                url: "/global/check-id/" + slug,
+                method: "GET",
+                dataType: 'json',
+                data: {
+                    userId: $('#userid').val(),
+                    serverId: serveridVal,
+                    userNickname: usernickname,
+                },
+                success: function(response) {
+                    if (response.status != '400') {
+                        $('#username_alert').addClass('alert-success');
+                        $('#username_result').text('Nickname : ' + response.nickname)
+                    } else {
+                        $('#username_alert').addClass('alert-danger');
+                        $('#username_result').text('Player Not Found!');
+                    }
+                },
+                error: function(xhr, status, error) {
+
+                },
+                complete: function() {
+                    $('#username_loading').hide();
+                    $('#nickname_text').show();
+                    $('#username_alert').show();
+                    $('#username_check_button').attr('disabled', false);
+                }
+            });
+        }
+
+        function resetClass() {
+            $('#username_alert').attr('class', 'alert');
         }
     </script>
 @endsection

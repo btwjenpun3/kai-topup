@@ -1,7 +1,7 @@
 @extends('master.public.index')
 
 @section('title')
-    <title>Fumola Store - Beranda</title>
+    <title>Fumola Store - Tempat Untuk Top Up Murah, Cepat, Aman dan Nyaman</title>
 @endsection
 
 @section('css')
@@ -76,7 +76,7 @@
 
     <div class="games">
         <div class="heading-section text-center">
-            <h4>Games</h4>
+            <h2>Games</h2>
         </div>
         <div class="flex-row">
             @foreach ($games as $game)
@@ -84,7 +84,7 @@
                     <a href="{{ route('topup.index', ['slug' => $game->slug]) }}">
                         <img src="{{ asset(Storage::url($game->url_gambar)) }}"
                             alt="Top Up {{ $game->nama }} Termurah, Ternyaman, Tercepat dan Termudah">
-                        <h4 class="text-sm">{{ $game->nama }}</h4>
+                        <h3 class="text-sm">{{ $game->nama }}</h3>
                     </a>
                 </div>
             @endforeach
@@ -93,7 +93,7 @@
 
     <div class="games">
         <div class="heading-section text-center">
-            <h4>Voucher</h4>
+            <h2>Voucher</h2>
         </div>
         <div class="flex-row">
             @foreach ($vouchers as $voucher)
@@ -101,7 +101,7 @@
                     <a href="{{ route('topup.index', ['slug' => $voucher->slug]) }}">
                         <img src="{{ asset(Storage::url($voucher->url_gambar)) }}"
                             alt="Isi Voucher {{ $game->nama }} Termurah, dan Ternyaman">
-                        <h4 class="text-sm">{{ $voucher->nama }}</h4>
+                        <h3 class="text-sm">{{ $voucher->nama }}</h3>
                     </a>
                 </div>
             @endforeach
@@ -110,7 +110,7 @@
 
     <div class="games">
         <div class="heading-section text-center">
-            <h4>Pulsa & Paket Data</h4>
+            <h2>Pulsa & Paket Data</h2>
         </div>
         <div class="flex-row">
             @foreach ($pulsas as $pulsa)
@@ -118,7 +118,7 @@
                     <a href="{{ route('topup.index', ['slug' => $pulsa->slug]) }}">
                         <img src="{{ asset(Storage::url($pulsa->url_gambar)) }}"
                             alt="Beli Pulsa dan Paket Data {{ $game->nama }} Termurah, Ternyaman, dan Tercepat">
-                        <h4 class="text-sm">{{ $pulsa->nama }}</h4>
+                        <h3 class="text-sm">{{ $pulsa->nama }}</h3>
                     </a>
                 </div>
             @endforeach
@@ -127,7 +127,7 @@
 
     <div class="games">
         <div class="heading-section text-center">
-            <h4>Listrik</h4>
+            <h2>Listrik</h2>
         </div>
         <div class="flex-row">
             @foreach ($listriks as $listrik)
@@ -135,7 +135,7 @@
                     <a href="{{ route('topup.index', ['slug' => $listrik->slug]) }}">
                         <img src="{{ asset(Storage::url($listrik->url_gambar)) }}"
                             alt="Beli {{ $game->nama }} Termurah, dan Ternyaman">
-                        <h4 class="text-sm">{{ $listrik->nama }}</h4>
+                        <h3 class="text-sm">{{ $listrik->nama }}</h3>
                     </a>
                 </div>
             @endforeach
@@ -149,14 +149,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="hero-title">
-                        <h5>Di Percaya oleh Ribuan User</h5>
+                        <h2>Tempat Top Up Ternyaman</h2>
                     </div>
                     <div class="hero-title">
-                        <h4>Fumola Store dipercaya oleh Para gamers profesional</h4>
+                        <h3>Fumola Store dipercaya oleh para gamer sejak tahun 2019</h3>
                     </div>
                     <div class="hero-title">
-                        <p>Fumola Store menyediakan layanan Top up game dan Reseller Voucher Game termurah dan terpercaya di
-                            Indonesia.</p>
+                        <p>Fumola Store menyediakan layanan Top up game dan Reseller Voucher Game murah, cepat, aman, dan
+                            nyaman untuk seluruh Indonesia!</p>
                     </div>
                     <div class="sales-container">
                         <div class="row">

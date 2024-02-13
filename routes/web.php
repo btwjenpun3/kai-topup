@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Global\GlobalController;
 use App\Http\Controllers\Private\Dashboard\DashboardContoller;
 use App\Http\Controllers\Private\DataTable\DataTableController;
 use App\Http\Controllers\Private\Flashsale\FlashsaleController;
@@ -250,3 +251,13 @@ Route::prefix('/realm/datatables')
         Route::get('/user/reseller', 'userReseller')->name('user.reseller');     
     }); 
 
+    /**
+     * Global Route
+     */
+
+Route::prefix('/global')
+    ->name('global.')
+    ->controller(GlobalController::class)
+    ->group(function () {
+        Route::get('/check-id/{slug}', 'cekId')->name('check.id');   
+    }); 
