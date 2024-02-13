@@ -55,6 +55,11 @@
                     <h4>Pilih Produk dan Nominal</h4>
                 </div>
                 <div class="alert-undawn">
+                    <div class="alert alert-success text-center" role="alert">
+                        <h6 class="text-dark">Support <b>SEMUA</b> bind! Garena ✅ | Facebook ✅</h6>
+                    </div>
+                </div>
+                <div class="alert-undawn">
                     <div class="alert alert-warning text-center" role="alert">
                         <h6 class="text-dark">Hanya untuk akun yang <b>BELUM</b> bind Garena!</h6>
                         <span>Kesalahan karena hal ini bukan tanggung jawab kami</span>
