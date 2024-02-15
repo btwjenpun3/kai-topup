@@ -450,11 +450,8 @@ class TopUpController extends Controller
                  */
                 if(!($data->start_cut_off == $data->end_cut_off)) {
                     $waktuSekarang = Carbon::now();
-                    $mulaiCutOff = Carbon::createFromFormat('H:i', $data->start_cut_off);
-                    $selesaiCutOff = Carbon::createFromFormat('H:i', $data->end_cut_off);
-                    if ($selesaiCutOff->lessThan($mulaiCutOff)) {
-                        $selesaiCutOff->addDay();
-                    }
+                    $mulaiCutOff = Carbon::parse($data->start_cut_off);
+                    $selesaiCutOff = Carbon::parse($data->end_cut_off)->addDay();
                     if ($waktuSekarang->between($mulaiCutOff, $selesaiCutOff)) {                        
                         return response()->json([
                             'unaccepted' => 'Produk ini sedang Offline hingga pukul ' . $data->end_cut_off . ' WIB'

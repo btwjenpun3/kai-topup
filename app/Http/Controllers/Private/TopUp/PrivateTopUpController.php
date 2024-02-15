@@ -123,31 +123,16 @@ class PrivateTopUpController extends Controller
                             ], 200);
                         }
 
-                        $waktuSekarang = Carbon::now();
-                        $mulaiCutOff = Carbon::createFromFormat('H:i', $data->start_cut_off);
-                        $selesaiCutOff = Carbon::createFromFormat('H:i', $data->end_cut_off);
-
-                        // Tambahkan nol di depan digit tunggal untuk menit jika perlu
-                        if (strpos($data->start_cut_off, ':') !== false && strlen(explode(':', $data->start_cut_off)[1]) == 1) {
-                            $data->start_cut_off = substr($data->start_cut_off, 0, -1) . '0' . substr($data->start_cut_off, -1);
-                        }
-                        if (strpos($data->end_cut_off, ':') !== false && strlen(explode(':', $data->end_cut_off)[1]) == 1) {
-                            $data->end_cut_off = substr($data->end_cut_off, 0, -1) . '0' . substr($data->end_cut_off, -1);
-                        }
-
-                        $mulaiCutOff = Carbon::createFromFormat('H:i', $data->start_cut_off);
-                        $selesaiCutOff = Carbon::createFromFormat('H:i', $data->end_cut_off);
-
-                        // Penanganan khusus jika end_cut_off < start_cut_off
-                        if ($selesaiCutOff->lessThan($mulaiCutOff)) {
-                            $selesaiCutOff->addDay();
-                        }
-
-                        if ($waktuSekarang->between($mulaiCutOff, $selesaiCutOff)) {                        
-                            return response()->json([
-                                'unaccepted' => 'Produk ini sedang Offline hingga pukul ' . $data->end_cut_off . ' WIB'
-                            ]);
-                        }
+                        if(!($data->start_cut_off == $data->end_cut_off)) {
+                            $waktuSekarang = Carbon::now();
+                            $mulaiCutOff = Carbon::parse($data->start_cut_off);
+                            $selesaiCutOff = Carbon::parse($data->end_cut_off)->addDay();
+                            if ($waktuSekarang->between($mulaiCutOff, $selesaiCutOff)) {                        
+                                return response()->json([
+                                    'unaccepted' => 'Produk ini sedang Offline hingga pukul ' . $data->end_cut_off . ' WIB'
+                                ]);
+                            }
+                        } 
         
                         $via = 'REALM';                        
 
