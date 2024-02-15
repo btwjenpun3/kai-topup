@@ -20,7 +20,7 @@
                         <a href="{{ route('topup.index', ['slug' => $game->slug]) }}">
                             <img src="{{ asset(Storage::url($game->url_gambar)) }}"
                                 alt="Top Up {{ $game->nama }} Termurah, Ternyaman, Tercepat dan Termudah">
-                            <h4 class="text-sm">{{ $game->nama }}</h4>
+                            <h3 class="text-sm">{{ $game->nama }}</h3>
                         </a>
                     </div>
                 @endforeach
