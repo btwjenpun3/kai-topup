@@ -164,10 +164,7 @@ class PrivateTopUpController extends Controller
                         }
 
                         if($user->role->name == 'reseller') {
-                            if($data->harga_jual_reseller < $hargaModal) {
-                                $data->update([
-                                    'status' => 3
-                                ]);
+                            if($data->harga_jual_reseller < $hargaModal) {                                
                                 return response()->json([                          
                                     'unaccepted' => 'Harga denom ini tidak sesuai dengan harga Provider. Harap hubungi Admin!'
                                 ], 200);
