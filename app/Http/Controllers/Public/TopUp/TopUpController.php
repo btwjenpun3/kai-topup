@@ -577,7 +577,7 @@ class TopUpController extends Controller
                  * GAS PROSES!!
                  */
                 if($data) {
-                    if($request->price == $data->harga_jual) {
+                    if($data->harga_jual) {
                         $game = $data->game->where('slug', $request->slug)->first();
                         $payment = Payment::where('payment_method', $request->paymentMethod)->first();
                         /**
