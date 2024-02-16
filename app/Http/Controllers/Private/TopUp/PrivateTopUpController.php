@@ -132,7 +132,7 @@ class PrivateTopUpController extends Controller
                             }
                             if ($waktuSekarang->between($mulaiCutOff, $selesaiCutOff)) {                        
                                 return response()->json([
-                                    'unaccepted' => 'Produk ini sedang Offline hingga pukul ' . $data->end_cut_off . ' WIB'
+                                    'unaccepted' => 'Produk ini sedang Offline hingga pukul ' . $data->end_cut_off . ' WIB' . $selesaiCutOff . $mulaiCutOff
                                 ]);
                             }
                         } 
