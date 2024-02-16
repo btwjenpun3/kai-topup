@@ -128,13 +128,19 @@ class PrivateTopUpController extends Controller
                             $mulaiCutOff = Carbon::parse($data->start_cut_off);
                             $selesaiCutOff = Carbon::parse($data->end_cut_off)->addDay();
                             if($mulaiCutOff->isSameDay($selesaiCutOff)) {
-                                $selesaiCutOff = Carbon::parse($data->end_cut_off);
-                            }
-                            if ($waktuSekarang->between($mulaiCutOff, $selesaiCutOff)) {                        
-                                return response()->json([
-                                    'unaccepted' => 'Produk ini sedang Offline hingga pukul ' . $data->end_cut_off . ' WIB' . $selesaiCutOff . $mulaiCutOff
-                                ]);
-                            }
+                                $selesaiCutOffSameDay = Carbon::parse($data->end_cut_off);
+                                if ($waktuSekarang->between($mulaiCutOff, $selesaiCutOffSameDay)) {                        
+                                    return response()->json([
+                                        'unaccepted' => 'Produk ini sedang Offline hingga pukul ' . $data->end_cut_off . ' WIB' . $selesaiCutOff . $mulaiCutOff
+                                    ]);
+                                }
+                            } else {
+                                if ($waktuSekarang->between($mulaiCutOff, $selesaiCutOff)) {                        
+                                    return response()->json([
+                                        'unaccepted' => 'Produk ini sedang Offline hingga pukul ' . $data->end_cut_off . ' WIB' . $selesaiCutOff . $mulaiCutOff
+                                    ]);
+                                }
+                            }                            
                         } 
         
                         $via = 'REALM';                        
