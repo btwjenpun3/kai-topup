@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Global;
 
 use App\Http\Controllers\Controller;
 use Aditdev\ApiGames;
+use App\Models\Log;
 use Illuminate\Http\Request;
 
 class GlobalController extends Controller
@@ -35,5 +36,35 @@ class GlobalController extends Controller
         }       
 
         return json_decode($result);
+    }
+
+    public function logCreate($message)
+    {
+        Log::create([
+            'action' => 'store',
+            'content' => $message
+        ]);
+
+        return true;
+    }
+
+    public function logUpdate($message)
+    {
+        Log::create([
+            'action' => 'update',
+            'content' => $message
+        ]);
+
+        return true;
+    }
+
+    public function logError($message)
+    {
+        Log::create([
+            'action' => 'error',
+            'content' => $message
+        ]);
+
+        return true;
     }
 }

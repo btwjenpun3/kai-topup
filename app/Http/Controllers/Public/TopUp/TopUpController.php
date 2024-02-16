@@ -14,6 +14,7 @@ use App\Models\XenditOutlet;
 use App\Models\XenditQr;
 use App\Models\XenditVa;
 use Carbon\Carbon;
+use App\Http\Controllers\Global\GlobalController;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 
@@ -428,6 +429,31 @@ class TopUpController extends Controller
                         'unaccepted' => 'Denom ini sedang Offline, silahkan pilih denom yang lain'
                     ], 200);
                 }
+
+                /**
+                 * Cek Apakah Harga Modal Mengalami Perubahan ? 
+                 */
+                if($data->modal != $cekOffline['data'][0]['price']) {                                                        
+                    $hargaModal = $cekOffline['data'][0]['price'];
+                    $log = new GlobalController;
+                    $log->logUpdate('Denom ' . $data->nama_produk . ' mengalami perubahan harga dari Rp. ' . $data->modal . ' menjadi Rp. ' . $cekOffline['data'][0]['price']);
+                    $data->update([
+                        'modal' => $cekOffline['data'][0]['price'],
+                        'profit' => $data->harga_jual - $cekOffline['data'][0]['price'],
+                        'profit_reseller' => $data->harga_jual_reseller - $cekOffline['data'][0]['price']
+                    ]);                        
+                } else {
+                    $hargaModal = $data->modal;
+                }
+
+                if($data->harga_jual < $cekOffline['data'][0]['price']) {
+                    $data->update([
+                        'status' => 3
+                    ]);
+                    return response()->json([                          
+                        'unaccepted' => 'Denom ini sedang Offline, silahkan pilih denom yang lain'
+                    ], 200);
+                }
                 /**
                  * Cek saldo Digiflazz terlebih dahulu
                  */
@@ -440,6 +466,8 @@ class TopUpController extends Controller
                 ]);
                 if($saldo['data']['deposit'] <= $data->modal) {
                     Log::channel('digiflazz')->error('Saldo kurang! Kamu butuh Rp. ' . $data->modal . ' dan saldo kamu sisa Rp. ' . $saldo['data']['deposit']);
+                    $log = new GlobalController;
+                    $log->logError('Pembelian ' . $data->nama_produk . ' Error di karenakan saldo Digiflazz kurang!' . ' [WEB]');
                     return response()->json([                          
                         'unaccepted' => 'Produk ini sedang Offline, silahkan pilih produk yang lain'
                     ], 200);
@@ -450,8 +478,13 @@ class TopUpController extends Controller
                  */
                 if(!($data->start_cut_off == $data->end_cut_off)) {
                     $waktuSekarang = Carbon::now();
-                    $mulaiCutOff = Carbon::parse($data->start_cut_off);
-                    $selesaiCutOff = Carbon::parse($data->end_cut_off)->addDay();
+                    $mulaiCutOff = Carbon::parse($data->start_cut_off); // 00:00. 23:50
+                    $selesaiCutOff = Carbon::parse($data->end_cut_off); // 08:00, 01:00
+                    if($selesaiCutOff->lt($mulaiCutOff)) {
+                        $selesaiCutOff = Carbon::parse($data->end_cut_off)->addDay();
+                    } else {
+                        $selesaiCutOff = Carbon::parse($data->end_cut_off);
+                    }
                     if ($waktuSekarang->between($mulaiCutOff, $selesaiCutOff)) {                        
                         return response()->json([
                             'unaccepted' => 'Produk ini sedang Offline hingga pukul ' . $data->end_cut_off . ' WIB'
@@ -623,7 +656,7 @@ class TopUpController extends Controller
                                 'payment_id' => $payment->id,
                                 'xendit_invoice_id' => $response['id'],
                                 'xendit_e_wallet_id' => $eWalletCreate['id'],
-                                'modal' => $data->modal,
+                                'modal' => $hargaModal,
                                 'profit' => $data->profit,
                                 'total' => $total,
                                 'status' => 'PENDING',      
@@ -658,7 +691,7 @@ class TopUpController extends Controller
                                 'payment_id' => $payment->id,
                                 'xendit_invoice_id' => $response['id'],
                                 'xendit_qr_id' => $QrCreate['id'],
-                                'modal' => $data->modal,
+                                'modal' => $hargaModal,
                                 'profit' => $data->profit,
                                 'total' => $total,
                                 'status' => 'PENDING',
@@ -694,7 +727,7 @@ class TopUpController extends Controller
                                     'payment_id' => $payment->id,
                                     'xendit_invoice_id' => $response['id'],
                                     'xendit_va_id' => $VaCreate['id'],
-                                    'modal' => $data->modal,
+                                    'modal' => $hargaModal,
                                     'profit' => $data->profit,
                                     'total' => $total,
                                     'status' => 'PENDING', 
@@ -735,7 +768,7 @@ class TopUpController extends Controller
                                     'payment_id' => $payment->id,
                                     'xendit_invoice_id' => $response['id'],
                                     'xendit_outlet_id' => $OutletCreate['id'],
-                                    'modal' => $data->modal,
+                                    'modal' => $hargaModal,
                                     'profit' => $data->profit,
                                     'total' => $total,
                                     'status' => 'PENDING', 

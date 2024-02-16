@@ -3,7 +3,7 @@
         <div class="navbar">
             <div class="container-xl">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
+                    <li class="nav-item @if (Request::is('*/dashboard')) active @endif">
                         <a class="nav-link" href="{{ route('dashboard.index') }}">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -21,7 +21,7 @@
                         </a>
                     </li>
                     @can('admin')
-                        <li class="nav-item">
+                        <li class="nav-item @if (Request::is('*/recharge')) active @endif">
                             <a class="nav-link" href="{{ route('recharge.index') }}">
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pig-money"
@@ -41,7 +41,7 @@
                         </li>
                     @endcan
                     @can('reseller')
-                        <li class="nav-item">
+                        <li class="nav-item @if (Request::is('*/isi-saldo')) active @endif">
                             <a class="nav-link" href="{{ route('isi.saldo.index') }}">
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +60,7 @@
                         </li>
                     @endcan
                     @can('admin')
-                        <li class="nav-item">
+                        <li class="nav-item @if (Request::is('*/list-games') || Request::is('*/set-harga/*')) active @endif">
                             <a class="nav-link" href="{{ route('games.index') }}">
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +82,7 @@
                             </a>
                         </li>
                     @endcan
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown @if (Request::is('*/topup/*')) active @endif">
                         <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
                             data-bs-auto-close="outside" role="button" aria-expanded="false">
                             <span
@@ -147,29 +147,7 @@
                         </div>
                     </li>
                     @can('admin')
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('flashsale.index') }}">
-                                <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                        class="icon icon-tabler icon-tabler-discount-2" width="24" height="24"
-                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M9 15l6 -6" />
-                                        <circle cx="9.5" cy="9.5" r=".5" fill="currentColor" />
-                                        <circle cx="14.5" cy="14.5" r=".5" fill="currentColor" />
-                                        <path
-                                            d="M5 7.2a2.2 2.2 0 0 1 2.2 -2.2h1a2.2 2.2 0 0 0 1.55 -.64l.7 -.7a2.2 2.2 0 0 1 3.12 0l.7 .7a2.2 2.2 0 0 0 1.55 .64h1a2.2 2.2 0 0 1 2.2 2.2v1a2.2 2.2 0 0 0 .64 1.55l.7 .7a2.2 2.2 0 0 1 0 3.12l-.7 .7a2.2 2.2 0 0 0 -.64 1.55v1a2.2 2.2 0 0 1 -2.2 2.2h-1a2.2 2.2 0 0 0 -1.55 .64l-.7 .7a2.2 2.2 0 0 1 -3.12 0l-.7 -.7a2.2 2.2 0 0 0 -1.55 -.64h-1a2.2 2.2 0 0 1 -2.2 -2.2v-1a2.2 2.2 0 0 0 -.64 -1.55l-.7 -.7a2.2 2.2 0 0 1 0 -3.12l.7 -.7a2.2 2.2 0 0 0 .64 -1.55v-1" />
-                                    </svg>
-                                </span>
-                                <span class="nav-link-title">
-                                    Flashsale
-                                </span>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('admin')
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown @if (Request::is('*/invoice/*')) active @endif">
                             <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
                                 data-bs-auto-close="outside" role="button" aria-expanded="false">
                                 <span
@@ -205,7 +183,7 @@
                         </li>
                     @endcan
                     @can('reseller')
-                        <li class="nav-item">
+                        <li class="nav-item @if (Request::is('*/invoice/*')) active @endif">
                             <a class="nav-link" href="{{ route('invoice.realm.reseller') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-invoice"
                                     width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
@@ -224,7 +202,7 @@
                         </li>
                     @endcan
                     @can('admin')
-                        <li class="nav-item">
+                        <li class="nav-item @if (Request::is('*/transaksi')) active @endif">
                             <a class="nav-link" href="{{ route('transaksi.index') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                     class="icon icon-tabler icon-tabler-transaction-dollar" width="24" height="24"
@@ -246,7 +224,7 @@
                         </li>
                     @endcan
                     @can('admin')
-                        <li class="nav-item">
+                        <li class="nav-item @if (Request::is('*/payment')) active @endif">
                             <a class="nav-link" href="{{ route('payment.index') }}">
                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-cash"
@@ -267,7 +245,7 @@
                         </li>
                     @endcan
                     @can('admin')
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown @if (Request::is('*/report/*')) active @endif">
                             <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
                                 data-bs-auto-close="outside" role="button" aria-expanded="false">
                                 <span
@@ -303,7 +281,7 @@
                         </li>
                     @endcan
                     @can('admin')
-                        <li class="nav-item">
+                        <li class="nav-item @if (Request::is('*/user')) active @endif">
                             <a class="nav-link" href="{{ route('user.index') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users-group"
                                     width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
@@ -322,7 +300,7 @@
                             </a>
                         </li>
                     @endcan
-                    <li class="nav-item">
+                    <li class="nav-item @if (Request::is('*/profile')) active @endif">
                         <a class="nav-link" href="{{ route('profile.index') }}">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-circle"
                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
@@ -337,6 +315,23 @@
                             </span>
                         </a>
                     </li>
+                    @can('admin')
+                        <li class="nav-item @if (Request::is('*/log')) active @endif">
+                            <a class="nav-link" href="{{ route('log.index') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-alert-circle"
+                                    width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+                                    <path d="M12 8v4" />
+                                    <path d="M12 16h.01" />
+                                </svg>
+                                <span class="nav-link-title">
+                                    Log
+                                </span>
+                            </a>
+                        </li>
+                    @endcan
                 </ul>
             </div>
         </div>

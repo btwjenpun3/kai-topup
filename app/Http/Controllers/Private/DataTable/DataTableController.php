@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use DataTables;
 use App\Models\Invoice;
 use App\Models\User;
+use App\Models\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -48,6 +49,16 @@ class DataTableController extends Controller
             $data = $getData->filter(function ($user) {
                 return $user->role->name === 'reseller';
             });
+            return DataTables::of($data)->toJson();
+        } else {
+            abort(404);
+        }
+    }
+
+    public function log()
+    {
+        if(Gate::allows('admin')) {
+            $data = Log::all();
             return DataTables::of($data)->toJson();
         } else {
             abort(404);

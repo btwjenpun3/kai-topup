@@ -8,6 +8,7 @@ use App\Http\Controllers\Private\Flashsale\FlashsaleController;
 use App\Http\Controllers\Private\Invoice\InvoiceRealmController;
 use App\Http\Controllers\Private\ListGames\ListGamesController;
 use App\Http\Controllers\Private\ListGames\SetHargaController;
+use App\Http\Controllers\Private\Log\LogController;
 use App\Http\Controllers\Private\Payment\PaymentController;
 use App\Http\Controllers\Private\Product\ProductController;
 use App\Http\Controllers\Private\Profile\ProfileController;
@@ -238,7 +239,15 @@ Route::prefix('/realm/isi-saldo')
     ->middleware('auth')
     ->group(function () {
         Route::get('/', 'index')->name('index');        
-    });  
+    }); 
+    
+Route::prefix('/realm/log')
+    ->name('log.')
+    ->controller(LogController::class)
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');        
+    }); 
 
 Route::prefix('/realm/datatables')
     ->name('datatable.')
@@ -248,7 +257,8 @@ Route::prefix('/realm/datatables')
         Route::get('/invoice/web', 'invoiceWeb')->name('invoice.web'); 
         Route::get('/invoice/admin', 'invoiceAdmin')->name('invoice.admin');  
         Route::get('/invoice/reseller', 'invoiceReseller')->name('invoice.reseller');   
-        Route::get('/user/reseller', 'userReseller')->name('user.reseller');     
+        Route::get('/user/reseller', 'userReseller')->name('user.reseller');
+        Route::get('/log', 'log')->name('log');     
     }); 
 
     /**

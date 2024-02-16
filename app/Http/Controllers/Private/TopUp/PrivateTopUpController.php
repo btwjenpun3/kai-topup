@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Private\TopUp;
 
 use App\Events\TopUpEvent;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Global\GlobalController;
 use Illuminate\Http\Request;
 use App\Models\Harga;
 use App\Models\Game;
 use App\Models\Invoice;
 use App\Models\Digiflazz;
 use App\Models\Customer;
+use App\Models\Log as ActivityLog;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -58,7 +60,7 @@ class PrivateTopUpController extends Controller
             ]);
             if($validation) {
                 $data = Harga::where('kode_produk', $request->product)->first();
-                if($data) {
+                if($data && $data->status == '1') {
                     $user = auth()->user();
                     if(Hash::check($request->password, $user->password)) {
                         if($user->role->name == 'reseller') {
@@ -80,7 +82,7 @@ class PrivateTopUpController extends Controller
                             } else {
                                 $customer_nickname = null;
                             }
-                            Customer::create([
+                            $createCustomer = Customer::create([
                                 'game_id' => $data->game->id,
                                 'user_id' => auth()->id(),
                                 'name' => $request->customer,
@@ -88,39 +90,10 @@ class PrivateTopUpController extends Controller
                                 'server' => $customer_server,
                                 'nickname' => $customer_nickname
                             ]);
-                        }
-
-                        $cekOffline = Http::withHeaders([
-                            'Content-Type' => 'application/json',
-                        ])->post('https://api.digiflazz.com/v1/price-list', [
-                            'cmd' => 'prepaid',
-                            'username' => env('DIGIFLAZZ_USERNAME'),
-                            'code' => $data->kode_produk,
-                            'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . 'pricelist')
-                        ]);                        
-                        if($cekOffline['data'][0]['seller_product_status'] == false) { 
-                            $data->update([
-                                'status' => 3
-                            ]);
-                            return response()->json([                          
-                                'unaccepted' => 'Denom ini sedang Offline, silahkan pilih denom yang lain'
-                            ], 200);
-                        }
-
-
-                        $saldo = Http::withHeaders([
-                            'Content-Type' => 'application/json',
-                        ])->post('https://api.digiflazz.com/v1/cek-saldo', [
-                            'cmd' => 'deposit',
-                            'username' => env('DIGIFLAZZ_USERNAME'),
-                            'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . 'depo')
-                        ]);
-
-                        if($saldo['data']['deposit'] <= $data->modal) {
-                            Log::channel('digiflazz')->error('Saldo kurang! Kamu butuh Rp. ' . $data->modal . ' dan saldo kamu sisa Rp. ' . $saldo['data']['deposit']);
-                            return response()->json([                          
-                                'unaccepted' => 'Terdapat error! Harap hubungi Admin! (Error 505)'
-                            ], 200);
+                            if($createCustomer) {
+                                $log = new GlobalController;
+                                $log->logCreate($user->name . ' berhasil menyimpan Customer dengan Nama = ' . $request->customer);
+                            }
                         }
 
                         if(!($data->start_cut_off == $data->end_cut_off)) {
@@ -138,6 +111,102 @@ class PrivateTopUpController extends Controller
                                 ]);
                             }
                         } 
+
+                        $cekOffline = Http::withHeaders([
+                            'Content-Type' => 'application/json',
+                        ])->post('https://api.digiflazz.com/v1/price-list', [
+                            'cmd' => 'prepaid',
+                            'username' => env('DIGIFLAZZ_USERNAME'),
+                            'code' => $data->kode_produk,
+                            'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . 'pricelist')
+                        ]);                        
+                        if($cekOffline['data'][0]['seller_product_status'] == false) {                            
+                            $data->update([
+                                'status' => 3
+                            ]);
+                            $log = new GlobalController;
+                            $log->logUpdate('Perubahan status denom ' . $data->nama_produk . ' menjadi Offline dikarenakan seller sedang offline.');
+                            return response()->json([                          
+                                'unaccepted' => 'Denom ini sedang Offline, silahkan pilih denom yang lain'
+                            ], 200);
+                        }
+
+                        if($data->modal != $cekOffline['data'][0]['price']) {                                                        
+                            $hargaModal = $cekOffline['data'][0]['price'];
+                            $log = new GlobalController;
+                            $log->logUpdate('Denom ' . $data->nama_produk . ' mengalami perubahan harga dari Rp. ' . $data->modal . ' menjadi Rp. ' . $cekOffline['data'][0]['price']);
+                            $data->update([
+                                'modal' => $cekOffline['data'][0]['price'],
+                                'profit' => $data->harga_jual - $cekOffline['data'][0]['price'],
+                                'profit_reseller' => $data->harga_jual_reseller - $cekOffline['data'][0]['price']
+                            ]);
+                            if(auth()->user()->role->name == 'admin') {
+                                if($data->harga_jual < $cekOffline['data'][0]['price']) {
+                                    $data->update([
+                                        'status' => 3
+                                    ]);
+                                    return response()->json([                          
+                                        'unaccepted' => 'Harga Jual di bawah Harga Modal! Harap ubah Harga Jual! Transaksi di batalkan'
+                                    ], 200);
+                                }
+                            } else if(auth()->user()->role->name == 'reseller') {
+                                if($data->harga_jual_reseller < $cekOffline['data'][0]['price']) {
+                                    $data->update([
+                                        'status' => 3
+                                    ]);
+                                    return response()->json([                          
+                                        'unaccepted' => 'Harga denom ini tidak sesuai dengan harga Provider. Harap hubungi Admin!'
+                                    ], 200);
+                                }
+                            }                           
+                        } else {
+                            $hargaModal = $data->modal;
+                        }
+
+                        if($user->role->name == 'reseller') {
+                            if($data->harga_jual_reseller < $hargaModal) {
+                                $data->update([
+                                    'status' => 3
+                                ]);
+                                return response()->json([                          
+                                    'unaccepted' => 'Harga denom ini tidak sesuai dengan harga Provider. Harap hubungi Admin!'
+                                ], 200);
+                            }                        
+                        } elseif($user->role->name == 'admin') {
+                            if($data->harga_jual < $hargaModal) {
+                                $data->update([
+                                    'status' => 3
+                                ]);
+                                return response()->json([                          
+                                    'unaccepted' => 'Harga Jual di bawah Harga Modal! Harap ubah Harga Jual! Transaksi di batalkan'
+                                ], 200);
+                            }  
+                        }
+
+                        if($user->role->name == 'reseller') {
+                            $profit = $data->profit_reseller;
+                            $total = $data->harga_jual_reseller;
+                        } else {
+                            $profit = $data->profit;
+                            $total = $data->harga_jual;
+                        }
+
+                        $saldo = Http::withHeaders([
+                            'Content-Type' => 'application/json',
+                        ])->post('https://api.digiflazz.com/v1/cek-saldo', [
+                            'cmd' => 'deposit',
+                            'username' => env('DIGIFLAZZ_USERNAME'),
+                            'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . 'depo')
+                        ]);
+
+                        if($saldo['data']['deposit'] <= $data->modal) {
+                            Log::channel('digiflazz')->error('Saldo kurang! Kamu butuh Rp. ' . $data->modal . ' dan saldo kamu sisa Rp. ' . $saldo['data']['deposit']);
+                            $log = new GlobalController;
+                            $log->logError('Pembelian ' . $data->nama_produk . ' Error di karenakan saldo Digiflazz kurang!' . ' [' . $user->name . ']');
+                            return response()->json([                          
+                                'unaccepted' => 'Terdapat error! Harap hubungi Admin! (Error 505)'
+                            ], 200);
+                        }                        
         
                         $via = 'REALM';                        
 
@@ -225,15 +294,7 @@ class PrivateTopUpController extends Controller
 
                         $currentTime = now();
                         $expiredTime = $currentTime->addHours(17);
-                        $expiredAt = $expiredTime->format('Y-m-d\TH:i:s.u\Z');
-
-                        if($user->role->name == 'reseller') {
-                            $profit = $data->profit_reseller;
-                            $total = $data->harga_jual_reseller;
-                        } else {
-                            $profit = $data->profit;
-                            $total = $data->harga_jual;
-                        }
+                        $expiredAt = $expiredTime->format('Y-m-d\TH:i:s.u\Z');                        
 
                         $createInvoice = Invoice::create([                                                   
                             'nomor_invoice' => $invoiceNumber,                                
@@ -245,7 +306,7 @@ class PrivateTopUpController extends Controller
                             'game_id' => $data->game->id,
                             'harga_id' => $data->id, 
                             'payment_id' => 99,
-                            'modal' => $data->modal,
+                            'modal' => $hargaModal,
                             'profit' => $profit,
                             'total' => $total,
                             'status' => 'PENDING',      
@@ -289,7 +350,7 @@ class PrivateTopUpController extends Controller
                     }                    
                 } else {
                     return response()->json([
-                        'unaccepted' => 'Produk dan harga tidak cocok!'
+                        'unaccepted' => 'Denom ini sedang Offline, silahkan pilih Denom lain'
                     ]);
                 }              
             } return response()->json([
