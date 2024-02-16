@@ -1023,6 +1023,9 @@
         window.Echo.channel('my-channel{{ auth()->id() }}')
             .listen('TopUpEvent', (event) => {
                 $('#success').hide();
+                $('#btn-text').show();
+                $('#loading').hide();
+                $('#btn-beli').attr('disabled', false);
                 var notificationAlert = '<div class="alert alert-success alert-dismissible" role="alert">' +
                     '<div class="d-flex">' +
                     '<div>' +
@@ -1039,6 +1042,9 @@
         window.Echo.channel('top-up-fail{{ auth()->id() }}')
             .listen('TopUpFailEvent', (event) => {
                 $('#success').hide();
+                $('#btn-text').show();
+                $('#loading').hide();
+                $('#btn-beli').attr('disabled', false);
                 var notificationAlert = '<div class="alert alert-danger alert-dismissible" role="alert">' +
                     '<div class="d-flex">' +
                     '<div>' +
@@ -1139,9 +1145,7 @@
                     }
                 },
                 complete: function() {
-                    $('#btn-text').show();
-                    $('#loading').hide();
-                    $('#btn-beli').attr('disabled', false);
+
                 }
             });
         }
