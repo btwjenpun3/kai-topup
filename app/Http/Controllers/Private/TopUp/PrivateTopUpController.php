@@ -129,7 +129,7 @@ class PrivateTopUpController extends Controller
                             $selesaiCutOff = Carbon::parse($data->end_cut_off)->addDay();
                             if ($waktuSekarang->between($mulaiCutOff, $selesaiCutOff)) {                        
                                 return response()->json([
-                                    'unaccepted' => 'Produk ini sedang Offline hingga pukul ' . $data->end_cut_off . ' WIB' . $waktuSekarang
+                                    'unaccepted' => 'Produk ini sedang Offline hingga pukul ' . $data->end_cut_off . ' WIB' . $waktuSekarang . 'Waktu :' . $mulaiCutOff
                                 ]);
                             }
                         } 
