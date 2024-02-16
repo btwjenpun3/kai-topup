@@ -90,7 +90,7 @@
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
     </script>
 
-    {{-- <script src="/assets/js/isotope.min.js"></script> --}}
+    <script src="/assets/js/isotope.min.js"></script>
     <script src="/assets/js/owl-carousel.js"></script>
     {{-- <script src="/assets/js/tabs.js"></script>
     <script src="/assets/js/popup.js"></script> --}}
