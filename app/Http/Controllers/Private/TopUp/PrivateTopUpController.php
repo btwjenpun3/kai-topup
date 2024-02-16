@@ -125,22 +125,18 @@ class PrivateTopUpController extends Controller
 
                         if(!($data->start_cut_off == $data->end_cut_off)) {
                             $waktuSekarang = Carbon::now();
-                            $mulaiCutOff = Carbon::parse($data->start_cut_off);
-                            $selesaiCutOff = Carbon::parse($data->end_cut_off)->addDay();
-                            if($mulaiCutOff->isSameDay($selesaiCutOff)) {
-                                $selesaiCutOffSameDay = Carbon::parse($data->end_cut_off);
-                                if ($waktuSekarang->between($mulaiCutOff, $selesaiCutOffSameDay)) {                        
-                                    return response()->json([
-                                        'unaccepted' => 'Produk ini sedang Offline hingga pukul ' . $data->end_cut_off . ' WIB' . $selesaiCutOff . $mulaiCutOff
-                                    ]);
-                                }
+                            $mulaiCutOff = Carbon::parse($data->start_cut_off); // 00:00. 23:50
+                            $selesaiCutOff = Carbon::parse($data->end_cut_off); // 08:00, 01:00
+                            if($selesaiCutOff->lt($mulaiCutOff)) {
+                                $selesaiCutOff = Carbon::parse($data->end_cut_off)->addDay();
                             } else {
-                                if ($waktuSekarang->between($mulaiCutOff, $selesaiCutOff)) {                        
-                                    return response()->json([
-                                        'unaccepted' => 'Produk ini sedang Offline hingga pukul ' . $data->end_cut_off . ' WIB' . $selesaiCutOff . $mulaiCutOff
-                                    ]);
-                                }
-                            }                            
+                                $selesaiCutOff = Carbon::parse($data->end_cut_off);
+                            }
+                            if ($waktuSekarang->between($mulaiCutOff, $selesaiCutOff)) {                        
+                                return response()->json([
+                                    'unaccepted' => 'Produk ini sedang Offline hingga pukul ' . $data->end_cut_off . ' WIB'
+                                ]);
+                            }
                         } 
         
                         $via = 'REALM';                        
