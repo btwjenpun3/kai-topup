@@ -148,7 +148,7 @@
                                         </td>
                                         <td></td>
                                         <td class="text-end">
-                                            <img src="data:image/png;base64, {{ base64_encode(QrCode::size(500)->format('png')->generate($invoice->qr->xendit_qr_string)) }}"
+                                            <img src="data:image/png;base64, {{ base64_encode(QrCode::size(300)->format('png')->generate($invoice->qr->xendit_qr_string)) }}"
                                                 class="rotate90">
                                         </td>
                                     </tr>
