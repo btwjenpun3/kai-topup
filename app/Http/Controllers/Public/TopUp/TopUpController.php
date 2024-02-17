@@ -612,24 +612,44 @@ class TopUpController extends Controller
                          * Setelah nomor invoice di buat, mari berlanjut ke Request POST untuk membuat Invoice
                          */
                         if($payment->payment_type == 'EWALLET') {
-                            $response = Http::withHeaders([
-                                'Content-Type' => 'application/json',
-                                'Authorization' => 'Basic ' . base64_encode(env('XENDIT_SECRET_KEY') . ':'),
-                            ])->post('https://api.xendit.co/ewallets/charges', [
-                                'reference_id' => $invoiceNumber,
-                                'currency' => 'IDR',
-                                'amount' => $total,
-                                'checkout_method' => 'ONE_TIME_PAYMENT',
-                                'channel_code' => $payment->payment_method,
-                                'channel_properties' => [
-                                    'success_redirect_url' => route('invoice.index', ['id' => $invoiceNumber]),
-                                    'failure_redirect_url' => route('invoice.index', ['id' => $invoiceNumber]),
-                                ],
-                                'metadata' => [
-                                    'branch_area' => 'PLUIT',
-                                    'branch_city' => 'JAKARTA',
-                                ],
-                            ]);
+                            if($payment->payment_method == 'ID_OVO') {
+                                $response = Http::withHeaders([
+                                    'Content-Type' => 'application/json',
+                                    'Authorization' => 'Basic ' . base64_encode(env('XENDIT_SECRET_KEY') . ':'),
+                                ])->post('https://api.xendit.co/ewallets/charges', [
+                                    'reference_id' => $invoiceNumber,
+                                    'currency' => 'IDR',
+                                    'amount' => $total,
+                                    'checkout_method' => 'ONE_TIME_PAYMENT',
+                                    'channel_code' => $payment->payment_method,
+                                    'channel_properties' => [
+                                        'mobile_number' => '+' . $request->userPhone,
+                                    ],
+                                    'metadata' => [
+                                        'branch_area' => 'PLUIT',
+                                        'branch_city' => 'JAKARTA',
+                                    ],
+                                ]);
+                            } else {
+                                $response = Http::withHeaders([
+                                    'Content-Type' => 'application/json',
+                                    'Authorization' => 'Basic ' . base64_encode(env('XENDIT_SECRET_KEY') . ':'),
+                                ])->post('https://api.xendit.co/ewallets/charges', [
+                                    'reference_id' => $invoiceNumber,
+                                    'currency' => 'IDR',
+                                    'amount' => $total,
+                                    'checkout_method' => 'ONE_TIME_PAYMENT',
+                                    'channel_code' => $payment->payment_method,
+                                    'channel_properties' => [
+                                        'success_redirect_url' => route('invoice.index', ['id' => $invoiceNumber]),
+                                        'failure_redirect_url' => route('invoice.index', ['id' => $invoiceNumber]),
+                                    ],
+                                    'metadata' => [
+                                        'branch_area' => 'PLUIT',
+                                        'branch_city' => 'JAKARTA',
+                                    ],
+                                ]);
+                            }                           
                             /**
                              * Cek Methode pembayaran untuk di masukkan URL nya ke Invoice
                              */
