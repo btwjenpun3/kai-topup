@@ -661,6 +661,8 @@ class TopUpController extends Controller
                                 $invoice_url = $response['actions']['mobile_web_checkout_url'];
                             } elseif ($payment->payment_method == 'ID_ASTRAPAY') {
                                 $invoice_url = $response['actions']['mobile_web_checkout_url'];
+                            } elseif ($payment->payment_method == 'ID_OVO') {
+                                $invoice_url = null;
                             }   
                             $eWalletCreate = XenditEWallet::create([
                                 'xendit_invoice_url' => $invoice_url
