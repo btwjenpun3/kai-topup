@@ -149,7 +149,7 @@
                                         <td></td>
                                         <td class="text-end">
                                             <img
-                                                src="data:image/png;base64, {{ base64_encode(QrCode::size(256)->format('svg')->generate($invoice->qr->xendit_qr_string)) }}">
+                                                src="data:image/svg+xml;base64,{{ base64_encode(QrCode::size(256)->format('svg')->generate($invoice->qr->xendit_qr_string)) }}">
                                         </td>
                                     </tr>
                                 @endif
