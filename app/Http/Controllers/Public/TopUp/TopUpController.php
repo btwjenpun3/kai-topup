@@ -613,6 +613,11 @@ class TopUpController extends Controller
                          */
                         if($payment->payment_type == 'EWALLET') {
                             if($payment->payment_method == 'ID_OVO') {
+                                if(strpos($request->userPhone, '0') === 0) {
+                                    $phoneNumber = '+62' . substr($request->userPhone, 1);
+                                } else if(strpos($request->userPhone, '62') === 0) {
+                                    $phoneNumber = '+' . $request->userPhone;
+                                }
                                 $response = Http::withHeaders([
                                     'Content-Type' => 'application/json',
                                     'Authorization' => 'Basic ' . base64_encode(env('XENDIT_SECRET_KEY') . ':'),
@@ -623,7 +628,7 @@ class TopUpController extends Controller
                                     'checkout_method' => 'ONE_TIME_PAYMENT',
                                     'channel_code' => $payment->payment_method,
                                     'channel_properties' => [
-                                        'mobile_number' => '+' . $request->userPhone,
+                                        'mobile_number' => $phoneNumber,
                                     ],
                                     'metadata' => [
                                         'branch_area' => 'PLUIT',
