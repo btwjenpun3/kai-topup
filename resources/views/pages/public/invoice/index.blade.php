@@ -144,9 +144,9 @@
                                 @else
                                     <tr class="qr">
                                         <td>
-                                            <h6 class="text-info">QR Code</h6>
+                                            <h6>QR Code</h6>
                                         </td>
-                                        <td class="text-center qr">
+                                        <td class="text-end">
                                             <img
                                                 src="data:image/svg+xml;base64,{{ base64_encode(QrCode::size(256)->format('svg')->generate($invoice->qr->xendit_qr_string)) }}">
                                         </td>
@@ -536,7 +536,7 @@
             /* Atur warna latar belakang halaman */
         }
 
-        td.qr {
+        tr.qr {
             background-color: white;
         }
     </style>
