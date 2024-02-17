@@ -149,7 +149,7 @@
                                         <td></td>
                                         <td class="text-end">
                                             <img
-                                                src="data:image/png;base64, {{ base64_encode(QrCode::size(256)->format('png')->generate($invoice->qr->xendit_qr_string)) }}">
+                                                src="data:image/png;base64, {{ base64_encode(QrCode::size(256)->format('svg')->generate($invoice->qr->xendit_qr_string)) }}">
                                         </td>
                                     </tr>
                                 @endif
@@ -535,11 +535,6 @@
         .barcode {
             background-color: white;
             /* Atur warna latar belakang halaman */
-        }
-
-        tr.qr {
-            background-color: black;
-            padding: 10px;
         }
     </style>
 @endsection
