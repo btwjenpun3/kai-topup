@@ -278,7 +278,7 @@
         @endif
     @elseif($invoice->status == 'PAID' || $invoice->status == 'EXPIRED')
     @else
-        @if ($invoice->payment->payment_type == 'EWALLET')
+        @if ($invoice->payment->payment_type == 'EWALLET' && $invoice->payment->payment_method != 'ID_OVO')
             <div class="invoice">
                 <div class="row">
                     <div class="col-lg-12">
