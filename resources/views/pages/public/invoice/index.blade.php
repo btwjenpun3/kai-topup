@@ -142,14 +142,14 @@
                             @if (isset($invoice->qr->xendit_qr_string))
                                 @if ($invoice->status == 'PAID')
                                 @else
-                                    <tr>
+                                    <tr class="qr">
                                         <td>
                                             <h6 class="text-info">QR Code</h6>
                                         </td>
                                         <td></td>
-                                        <td class="text-end qr">
-                                            <img src="data:image/png;base64, {{ base64_encode(QrCode::size(300)->format('png')->generate($invoice->qr->xendit_qr_string)) }}"
-                                                class="rotate90">
+                                        <td class="text-end">
+                                            <img
+                                                src="data:image/png;base64, {{ base64_encode(QrCode::size(300)->format('png')->generate($invoice->qr->xendit_qr_string)) }}">
                                         </td>
                                     </tr>
                                 @endif
@@ -537,13 +537,9 @@
             /* Atur warna latar belakang halaman */
         }
 
-        .qr {
+        tr.qr {
             background-color: black;
             padding: 10px;
-        }
-
-        .rotate90 {
-            transform: rotate(90deg);
         }
     </style>
 @endsection
