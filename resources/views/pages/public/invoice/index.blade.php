@@ -148,7 +148,8 @@
                                         </td>
                                         <td></td>
                                         <td class="text-end">
-                                            {{ QrCode::size(300)->format('png')->generate($invoice->qr->xendit_qr_string) }}
+                                            <img
+                                                src="data:image/png;base64, {{ QrCode::size(300)->format('png')->generate($invoice->qr->xendit_qr_string) }}">
                                         </td>
                                     </tr>
                                 @endif
