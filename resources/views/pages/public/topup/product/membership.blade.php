@@ -22,7 +22,7 @@
                     <img src="{{ asset(Storage::url($h->gambar)) }}" class="img-fluid">
                     <h4 class="text-md">{{ $h->nama_produk }}</h4>
                     <span>Rp. {{ number_format($h->harga_jual, 0, ',', '.') }}</span>
-                    @if ($game->kategori == 'Pulsa')
+                    @if ($game->kategori == 'Voucher')
                         <p>{{ $h->deskripsi }}</p>
                     @endif
                     <input id="getItemId-{{ $h->id }}" type="hidden" value="{{ $h->id }}" />
@@ -30,14 +30,12 @@
                     <input id="getItemName-{{ $h->id }}" type="hidden" value="{{ $h->nama_produk }}" />
                 </div>
             @endif
-        @elseif($h->status == 3 && $h->tipe == 'Membership')
-            @if ($h->harga_jual < $h->modal)
-                <div class="flex-column item text-center offline">
-                    <img src="{{ asset(Storage::url($h->gambar)) }}" class="img-fluid">
-                    <h4 class="text-md">{{ $h->nama_produk }}</h4>
-                    <span>Rp. {{ number_format($h->harga_jual, 0, ',', '.') }}</span>
-                </div>
-            @endif
+        @elseif(($h->harga_jual < $h->modal && $h->tipe == 'Membership') || ($h->status == 3 && $h->tipe == 'Membership'))
+            <div class="flex-column item text-center offline">
+                <img src="{{ asset(Storage::url($h->gambar)) }}" class="img-fluid">
+                <h4 class="text-md">{{ $h->nama_produk }}</h4>
+                <span>Rp. {{ number_format($h->harga_jual, 0, ',', '.') }}</span>
+            </div>
         @endif
     @endforeach
 </div>
