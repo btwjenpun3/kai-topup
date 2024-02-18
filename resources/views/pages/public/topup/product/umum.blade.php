@@ -1,6 +1,6 @@
 <div class="flex-row">
     @foreach ($harga as $h)
-        @if ($h->status == 1 && $h->tipe == 'Umum')
+        @if ($h->status == 1 && $h->tipe == 'Umum' && $h->harga_jual > $h->modal)
             @php
                 $flashsale = $h->flashsale;
             @endphp

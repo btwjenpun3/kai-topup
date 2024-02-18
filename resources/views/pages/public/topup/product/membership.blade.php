@@ -3,7 +3,7 @@
         @php
             $flashsale = $h->flashsale;
         @endphp
-        @if ($h->status == 1 && $h->tipe == 'Membership')
+        @if ($h->status == 1 && $h->tipe == 'Membership' && $h->harga_jual > $h->modal)
             @if ($flashsale && $flashsale->status == 1 && $flashsale->stock > 0 && $flashsale->expired_at > $now)
                 <div class="flex-column item text-center clickable-item">
                     <img src="{{ asset(Storage::url($h->gambar)) }}" class="img-fluid">
