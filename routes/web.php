@@ -24,6 +24,7 @@ use App\Http\Controllers\Public\Home\HomeController;
 use App\Http\Controllers\Public\Invoice\InvoiceController;
 use App\Http\Controllers\Public\Pencarian\PencarianController;
 use App\Http\Controllers\Public\Simulate\SimulateController;
+use App\Http\Controllers\Public\Sitemap\SitemapController;
 use App\Http\Controllers\Public\TopUp\TopUpController;
 use App\Models\Flashsale;
 use Illuminate\Support\Facades\Route;
@@ -80,6 +81,13 @@ Route::prefix('/invoice')
 Route::prefix('/tentang-kami')
     ->name('about.')
     ->controller(AboutUsController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+    });
+
+Route::prefix('/sitemap/generate')
+    ->name('sitemap.')
+    ->controller(SitemapController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
     });

@@ -16,6 +16,7 @@
         "milon/barcode": "^10.0",
         "pusher/pusher-php-server": "^7.2",
         "simplesoftwareio/simple-qrcode": "~4",
+        "spatie/laravel-sitemap": "^7.0",
         "yajra/laravel-datatables": "10.0"
     },
     "require-dev": {
