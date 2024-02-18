@@ -31,11 +31,13 @@
                 </div>
             @endif
         @elseif($h->status == 3 && $h->tipe == 'Membership')
-            <div class="flex-column item text-center offline">
-                <img src="{{ asset(Storage::url($h->gambar)) }}" class="img-fluid">
-                <h4 class="text-md">{{ $h->nama_produk }}</h4>
-                <span>Rp. {{ number_format($h->harga_jual, 0, ',', '.') }}</span>
-            </div>
+            @if ($h->harga_jual < $h->modal)
+                <div class="flex-column item text-center offline">
+                    <img src="{{ asset(Storage::url($h->gambar)) }}" class="img-fluid">
+                    <h4 class="text-md">{{ $h->nama_produk }}</h4>
+                    <span>Rp. {{ number_format($h->harga_jual, 0, ',', '.') }}</span>
+                </div>
+            @endif
         @endif
     @endforeach
 </div>
