@@ -395,7 +395,7 @@
                                 </table>
                                 <div style="background-color:white;padding:5px">
                                     <img class="barcode"
-                                        src="data:image/png;base64,{{ DNS1D::getBarcodePNG($invoice->outlet->payment_code, 'C39', 1000, 1000) }}"
+                                        src="data:image/png;base64,{{ DNS1D::getBarcodePNG($invoice->outlet->payment_code, 'C39', 3, 33) }}"
                                         alt="barcode" />
                                 </div>
                                 <p class="text-end">Atau gunakan Barcode ini untuk di Scan oleh petugas kasir</p>
