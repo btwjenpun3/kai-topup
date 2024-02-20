@@ -279,6 +279,15 @@ class PrivateTopUpController extends Controller
                                 ]);
                             }                   
         
+                        } elseif ($data->game->brand == 'One Punch Man') {
+                            if($data->seller_name == 'BANGJEFF') {
+                                $customer_no = $request->userId . ',' . $request->serverId; 
+                            } else {
+                                return response()->json([
+                                'unaccepted' => 'Produk ini sedang Offline.'
+                                ]);
+                            }
+        
                         } else {
                             $customer_no = $request->userId . $request->serverId;
                         }

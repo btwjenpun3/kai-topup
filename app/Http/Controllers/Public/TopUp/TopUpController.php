@@ -387,6 +387,36 @@ class TopUpController extends Controller
                 'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
                 'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
             ]);        
+        } elseif($game->slug == 'black-clover-m') {
+            return view('pages.public.topup.voucher.black-clover-m', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);        
+        } elseif($game->slug == 'one-punch-man-the-strongest') {
+            return view('pages.public.topup.voucher.one-punch-man-the-strongest', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);        
+        } elseif($game->slug == 'roblox-robux') {
+            return view('pages.public.topup.voucher.roblox-robux', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);        
         } else {
             abort(404);
         }       
@@ -568,6 +598,15 @@ class TopUpController extends Controller
                             'unaccepted' => 'Produk ini sedang Offline.'
                         ]);
                     }                   
+
+                } elseif ($data->game->brand == 'One Punch Man') {
+                    if($data->seller_name == 'BANGJEFF') {
+                        $customer_no = $request->userId . ',' . $request->serverId; 
+                    } else {
+                        return response()->json([
+                            'unaccepted' => 'Produk ini sedang Offline.'
+                        ]);
+                    }
 
                 } else {
                     $customer_no = $request->userId . $request->serverId;
