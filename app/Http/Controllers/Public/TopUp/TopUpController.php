@@ -775,7 +775,7 @@ class TopUpController extends Controller
                                 ])->post('https://api.xendit.co/fixed_payment_code', [
                                     'external_id' => $invoiceNumber,
                                     'retail_outlet_name' => $payment->payment_method,
-                                    'name' => 'Kai Top Up',
+                                    'name' => 'Fumola Store',
                                     'expected_amount' => $total,
                                     'expiration_date' => $expiredAt
                                 ]); 
