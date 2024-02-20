@@ -417,8 +417,8 @@ class TopUpController extends Controller
                 'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
                 'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
             ]);        
-        } elseif($game->slug == 'a2-mobile') {
-            return view('pages.public.topup.a2-mobile', [
+        } elseif($game->slug == 'au2-mobile') {
+            return view('pages.public.topup.au2-mobile', [
                 'now' => $now,               
                 'game' => $game,
                 'harga' => $harga,
