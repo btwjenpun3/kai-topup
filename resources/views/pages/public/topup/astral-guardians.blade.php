@@ -54,35 +54,14 @@
                 <div class="heading-section text-center">
                     <h4>Pilih Produk dan Nominal</h4>
                 </div>
-                <div class="alert-undawn">
-                    <div class="alert alert-warning text-center" role="alert">
-                        <h6 class="text-dark">⚠️ Hanya untuk akun yang <b>TIDAK</b> bind Garena <b>Di Awal</b>! </h6>
-                        <span class="undawn">Silahkan menuju ke <a
-                                href="{{ route('topup.index', ['slug' => 'undawn-all-bind']) }}"><b>Undawn - All
-                                    Bind</b></a> jika kamu ingin mengisi akun yang
-                            ter-bind dengan
-                            Garena di awal.</span>
-                        <p>Kesalahan karena hal ini bukan tanggung jawab kami</p>
-                    </div>
-                </div>
                 <div class="item-parent mb-4">
                     <div class="col-md-12">
                         <div class="row align-items-center mb-4">
                             <div class="col">
-                                <h5>💰 Raven Credits</h5>
+                                <h5>💎 Diamonds</h5>
                             </div>
                         </div>
                         @include('pages.public.topup.product.umum')
-                    </div>
-                </div>
-                <div class="item-parent">
-                    <div class="col-md-12">
-                        <div class="row align-items-center mb-4">
-                            <div class="col">
-                                <h5>✨ Membership</h5>
-                            </div>
-                        </div>
-                        @include('pages.public.topup.product.membership')
                     </div>
                 </div>
             </div>
