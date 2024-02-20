@@ -388,7 +388,7 @@ class TopUpController extends Controller
                 'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
             ]);        
         } elseif($game->slug == 'black-clover-m') {
-            return view('pages.public.topup.voucher.black-clover-m', [
+            return view('pages.public.topup.black-clover-m', [
                 'now' => $now,               
                 'game' => $game,
                 'harga' => $harga,
@@ -398,7 +398,7 @@ class TopUpController extends Controller
                 'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
             ]);        
         } elseif($game->slug == 'one-punch-man-the-strongest') {
-            return view('pages.public.topup.voucher.one-punch-man-the-strongest', [
+            return view('pages.public.topup.one-punch-man-the-strongest', [
                 'now' => $now,               
                 'game' => $game,
                 'harga' => $harga,
