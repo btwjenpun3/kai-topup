@@ -393,7 +393,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <div style="background-color:white;padding:10px">
+                                <div style="background-color:white;padding:5px">
                                     <img class="barcode"
                                         src="data:image/png;base64,{{ DNS1D::getBarcodePNG($invoice->outlet->payment_code, 'C39') }}"
                                         alt="barcode" />
