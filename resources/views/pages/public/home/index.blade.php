@@ -16,13 +16,16 @@
         <div id="main-slider" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="5000">
-                    <img src="{{ asset(Storage::url('banner/banner.webp')) }}" alt="Top Up Game Termurah" loading="lazy">
+                    <img src="{{ asset(Storage::url('banner/banner.webp')) }}" alt="Top Up Game Termurah" loading="lazy"
+                        style="max-width: 100%;">
                 </div>
                 <div class="carousel-item" data-bs-interval="5000">
-                    <img src="{{ asset(Storage::url('banner/banner2.webp')) }}" alt="Top Up Game Termurah" loading="lazy">
+                    <img src="{{ asset(Storage::url('banner/banner2.webp')) }}" alt="Top Up Game Termurah" loading="lazy"
+                        style="max-width: 100%;">
                 </div>
                 <div class="carousel-item" data-bs-interval="5000">
-                    <img src="{{ asset(Storage::url('banner/banner3.webp')) }}" alt="Top Up Game Termurah" loading="lazy">
+                    <img src="{{ asset(Storage::url('banner/banner3.webp')) }}" alt="Top Up Game Termurah" loading="lazy"
+                        style="max-width: 100%;">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#main-slider" data-bs-slide="prev">
@@ -58,7 +61,8 @@
                             <div class="col-lg-2 col-sm-6 col-6 col-md-6">
                                 <div class="item text-center">
                                     <a href="{{ route('topup.index', ['slug' => $flashsale->harga->game->slug]) }}">
-                                        <img src="{{ asset(Storage::url($flashsale->harga->gambar)) }}" loading="lazy">
+                                        <img src="{{ asset(Storage::url($flashsale->harga->gambar)) }}" loading="lazy"
+                                            style="max-width: 100%;">
                                         <h4>{{ $flashsale->harga->nama_produk }}</h4>
                                         <span class="text-danger"><s>Rp.
                                                 {{ number_format($flashsale->harga->harga_jual, 0, ',', '.') }}</s></span>
@@ -100,7 +104,8 @@
                 <div class="flex-column item text-center">
                     <a href="{{ route('topup.index', ['slug' => $voucher->slug]) }}">
                         <img src="{{ asset(Storage::url($voucher->url_gambar)) }}"
-                            alt="Isi Voucher {{ $game->nama }} Termurah, dan Ternyaman" loading="lazy">
+                            alt="Isi Voucher {{ $game->nama }} Termurah, dan Ternyaman" loading="lazy"
+                            style="max-width: 100%;">
                         <h3 class="text-sm">{{ $voucher->nama }}</h3>
                     </a>
                 </div>
@@ -118,7 +123,7 @@
                     <a href="{{ route('topup.index', ['slug' => $pulsa->slug]) }}">
                         <img src="{{ asset(Storage::url($pulsa->url_gambar)) }}"
                             alt="Beli Pulsa dan Paket Data {{ $game->nama }} Termurah, Ternyaman, dan Tercepat"
-                            loading="lazy">
+                            loading="lazy" style="max-width: 100%;">
                         <h3 class="text-sm">{{ $pulsa->nama }}</h3>
                     </a>
                 </div>
@@ -135,7 +140,8 @@
                 <div class="flex-column item text-center">
                     <a href="{{ route('topup.index', ['slug' => $listrik->slug]) }}">
                         <img src="{{ asset(Storage::url($listrik->url_gambar)) }}"
-                            alt="Beli {{ $game->nama }} Termurah, dan Ternyaman" loading="lazy">
+                            alt="Beli {{ $game->nama }} Termurah, dan Ternyaman" loading="lazy"
+                            style="max-width: 100%;">
                         <h3 class="text-sm">{{ $listrik->nama }}</h3>
                     </a>
                 </div>

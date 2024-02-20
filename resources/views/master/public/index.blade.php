@@ -92,8 +92,6 @@
 
     <script src="/assets/js/isotope.min.js"></script>
     <script src="/assets/js/owl-carousel.js"></script>
-    <script src="/assets/js/tabs.js"></script>
-    <script src="/assets/js/popup.js"></script>
     <script src="/assets/js/custom.js"></script>
     <script></script>
     @yield('js')
