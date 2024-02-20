@@ -32,6 +32,7 @@
                                     <th>Kode Produk</th>
                                     <th>Saldo Terakhir</th>
                                     <th>Saldo Terpotong</th>
+                                    <th>Seller</th>
                                     <th>SN</th>
                                     <th>Tanggal</th>
                                 </tr>
@@ -73,6 +74,7 @@
                                         @else
                                             <td>-</td>
                                         @endif
+                                        <td>{{ $data->harga->seller_name }}</td>
                                         @if (isset($data->digiflazz->sn))
                                             <td>{{ $data->digiflazz->sn }}</td>
                                         @else
@@ -100,7 +102,8 @@
                 <div class="pagination justify-content-end">
                     <ul class="pagination m-3">
                         <li class="page-item {{ $datas->onFirstPage() ? 'disabled' : '' }}">
-                            <a class="page-link" href="{{ $datas->previousPageUrl() }}" tabindex="-1" aria-disabled="true">
+                            <a class="page-link" href="{{ $datas->previousPageUrl() }}" tabindex="-1"
+                                aria-disabled="true">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                     stroke-linecap="round" stroke-linejoin="round">
