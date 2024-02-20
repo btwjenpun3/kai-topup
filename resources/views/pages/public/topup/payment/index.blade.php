@@ -84,6 +84,8 @@
                                                         <img src="{{ asset(Storage::url($outlet->image)) }}"
                                                             class="img-fluid">
                                                         <h4 class="text-sm">{{ $outlet->name }}</h4>
+                                                        <span class="text-sm">Biaya Admin Rp.
+                                                            {{ number_format($va->admin_fee_fixed, 0, ',', '.') }}</span>
                                                         <input id="{{ $outlet->payment_method }}" type="hidden"
                                                             value="{{ $outlet->payment_method }}">
                                                         <input class="getPaymentType" type="hidden"
