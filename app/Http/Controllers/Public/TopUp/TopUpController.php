@@ -590,7 +590,8 @@ class TopUpController extends Controller
                             $adminFee = $payment->admin_fee_fixed;
                             $total = $data->harga_jual + $adminFee;
                         } elseif ($payment->payment_type == 'OUTLET') {
-                            $total = $data->harga_jual;
+                            $adminFee = $payment->admin_fee_fixed;
+                            $total = $data->harga_jual + $adminFee;
                         }                        
                                                     
                         /**
