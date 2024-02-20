@@ -388,7 +388,7 @@
                                             <td class="text-end">
                                                 <h6 class="text-info">Rp.
                                                     {{ number_format($invoice->total, 0, ',', '.') }}</h6>
-                                                <p>Belum termasuk biaya Admin</p>
+                                                <p>Sudah termasuk biaya Admin</p>
                                             </td>
                                         </tr>
                                     </tbody>
