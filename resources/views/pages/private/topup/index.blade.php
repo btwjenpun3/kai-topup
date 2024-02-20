@@ -835,6 +835,53 @@
                                         <input type="number" id="userid" name="userid" class="form-control"
                                             placeholder="-- Telepon --" required>
                                     </div>
+                                @elseif($game->slug == 'ace-racer')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <input type="number" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID --" required>
+                                    </div>
+                                @elseif($game->slug == 'astral-guardians')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <input type="number" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID --" required>
+                                    </div>
+                                @elseif($game->slug == 'au2-mobile')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <input type="number" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID --" required>
+                                    </div>
+                                @elseif($game->slug == 'sky-children-of-the-light')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <input type="number" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID --" required>
+                                    </div>
+                                @elseif($game->slug == 'black-clover-m')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <input type="number" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID --" required>
+                                    </div>
+                                @elseif($game->slug == 'one-punch-man-the-strongest')
+                                    <div class="col-md-6">
+                                        <div class="form-label mt-3">Masukkan UID</div>
+                                        <input type="number" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID --" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-label mt-3">Masukkan SID</div>
+                                        <input type="text" id="serverid" name="serverid" class="form-control"
+                                            placeholder="-- Server ID --" required>
+                                    </div>
+                                @elseif($game->slug == 'roblox-robux')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan Nomor Telepon</div>
+                                        <input type="number" id="userid" name="userid" class="form-control"
+                                            placeholder="-- Telepon --" required>
+                                    </div>
                                 @else
                                 @endif
 
