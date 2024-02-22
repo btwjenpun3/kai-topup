@@ -2,21 +2,57 @@
     position: relative;
     z-index: 1;
     background-color: #061b29;
-    margin-top: 60px;
-    margin-bottom: 60px;
     padding-top: 30px;
     padding-bottom: 60px;
 }
-
 
 .hero .hero-title h2 {
     margin-top:30px;
     color:rgb(245, 142, 9);
 }
 
+.hero .additional-title h2 {
+    font-size: 24px;
+    margin-top:30px;
+    margin-bottom:20px;
+    color:rgb(255, 255, 255);
+}
+
+.hero .additional-title h3 {
+    font-size: 16px;
+    margin-top:30px;
+    margin-bottom:20px;
+    color:rgb(255, 255, 255);
+}
+
+.hero .additional-title ul li {
+    color:rgb(192, 185, 185);
+    margin-top:8px;
+    font-size: 14px;
+}
+
+.hero .additional-title ol li {
+    color:rgb(192, 185, 185);
+    margin-top:8px;
+    font-size: 14px;
+}
+
+
 .hero .hero-title h3 {
     margin-top:15px;
     font-size: 16px;
+}
+
+.hero .additional-title p {
+    color:rgb(192, 185, 185);
+    margin-top:15px;
+    font-size: 14px;
+}
+
+.hero .additional-title mark {
+    color:rgb(2, 0, 0);
+    margin-top:15px;
+    font-size: 14px;
 }
 
 .hero .hero-title p {
