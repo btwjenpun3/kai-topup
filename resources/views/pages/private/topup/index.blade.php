@@ -884,9 +884,9 @@
                                     </div>
                                 @elseif($game->slug == 'love-and-deepspace')
                                     <div class="col-md-12">
-                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <div class="form-label mt-3">Masukkan Hunter No.</div>
                                         <input type="number" id="userid" name="userid" class="form-control"
-                                            placeholder="-- User ID --" required>
+                                            placeholder="-- Hunter No. --" required>
                                     </div>
                                 @else
                                 @endif
