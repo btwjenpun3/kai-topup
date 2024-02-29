@@ -888,6 +888,42 @@
                                         <input type="number" id="userid" name="userid" class="form-control"
                                             placeholder="-- Hunter No. --" required>
                                     </div>
+                                @elseif($game->slug == 'laplace-m')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <input type="number" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID --" required>
+                                    </div>
+                                @elseif($game->slug == 'mangatoon')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <input type="number" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID --" required>
+                                    </div>
+                                @elseif($game->slug == 'tom-and-jerry-chase')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <input type="number" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID --" required>
+                                    </div>
+                                @elseif($game->slug == 'state-of-survival')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <input type="number" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID --" required>
+                                    </div>
+                                @elseif($game->slug == 'kings-choice')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <input type="number" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID --" required>
+                                    </div>
+                                @elseif($game->slug == 'pubg-new-state-mobile')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <input type="number" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID --" required>
+                                    </div>
                                 @else
                                 @endif
 

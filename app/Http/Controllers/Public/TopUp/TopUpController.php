@@ -467,6 +467,66 @@ class TopUpController extends Controller
                 'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
                 'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
             ]);        
+        } elseif($game->slug == 'laplace-m') {
+            return view('pages.public.topup.laplace-m', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);        
+        } elseif($game->slug == 'mangatoon') {
+            return view('pages.public.topup.mangatoon', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);        
+        } elseif($game->slug == 'tom-and-jerry-chase') {
+            return view('pages.public.topup.tom-and-jerry-chase', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);        
+        } elseif($game->slug == 'state-of-survival') {
+            return view('pages.public.topup.state-of-survival', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);        
+        } elseif($game->slug == 'kings-choice') {
+            return view('pages.public.topup.kings-choice', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);        
+        } elseif($game->slug == 'pubg-new-state-mobile') {
+            return view('pages.public.topup.pubg-new-state-mobile', [
+                'now' => $now,               
+                'game' => $game,
+                'harga' => $harga,
+                'ewallets' => Payment::where('status', 1)->where('payment_type', 'EWALLET')->get(),
+                'qris' => Payment::where('status', 1)->where('payment_type', 'QRIS')->get(),
+                'vas' => Payment::where('status', 1)->where('payment_type', 'VA')->get(),
+                'outlets' => Payment::where('status', 1)->where('payment_type', 'OUTLET')->get()
+            ]);        
         } else {
             abort(404);
         }       
