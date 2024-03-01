@@ -1126,6 +1126,9 @@
                     '</div>';
 
                 $('#notification').html(notificationAlert);
+                setTimeout(function() {
+                    $('#notification').hide(); // Kosongkan konten notifikasi
+                }, 5000);
             });
 
         window.Echo.channel('top-up-fail{{ auth()->id() }}')
@@ -1145,6 +1148,9 @@
                     '</div>';
 
                 $('#notification-failed').html(notificationAlert);
+                setTimeout(function() {
+                    $('#notification-failed').hide(); // Kosongkan konten notifikasi
+                }, 5000);
             });
     </script>
     <script>
