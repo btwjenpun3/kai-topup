@@ -1248,6 +1248,7 @@
         }
 
         function successAlert(message) {
+            $('#success').show();
             var successAlert = '<div class="alert alert-success" role="alert">' +
                 '<div class="d-flex justify-content-between">' +
                 '<div class="text-secondary">' + message + '</div>' +
