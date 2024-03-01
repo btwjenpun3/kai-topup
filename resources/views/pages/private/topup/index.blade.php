@@ -1125,6 +1125,7 @@
                     '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
                     '</div>';
 
+                $('#notification').show();
                 $('#notification').html(notificationAlert);
                 setTimeout(function() {
                     $('#notification').hide(); // Kosongkan konten notifikasi
@@ -1147,6 +1148,7 @@
                     '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
                     '</div>';
 
+                $('#notification-failed').show();
                 $('#notification-failed').html(notificationAlert);
                 setTimeout(function() {
                     $('#notification-failed').hide(); // Kosongkan konten notifikasi
