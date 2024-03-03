@@ -924,6 +924,12 @@
                                         <input type="number" id="userid" name="userid" class="form-control"
                                             placeholder="-- User ID --" required>
                                     </div>
+                                @elseif($game->slug == 'fc-mobile')
+                                    <div class="col-md-12">
+                                        <div class="form-label mt-3">Masukkan User ID</div>
+                                        <input type="number" id="userid" name="userid" class="form-control"
+                                            placeholder="-- User ID --" required>
+                                    </div>
                                 @else
                                 @endif
 
