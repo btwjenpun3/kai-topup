@@ -329,13 +329,23 @@ class PrivateTopUpController extends Controller
                                 'ref_id' => $invoiceNumber,
                                 'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . $invoiceNumber)
                             ]);      
-                            Log::channel('invoice')->error('Error occurred: ' . $response);                       
+                            Log::channel('invoice')->error('Error occurred: ' . $response); 
+                            if(isset($response['data']['wa'])) {
+                                $wa = $response['data']['wa'];
+                            } else {
+                                $wa = 'Kosong';
+                            }    
+                            if(isset($response['data']['tele'])) {
+                                $tele = $response['data']['tele'];
+                            } else {
+                                $tele = 'Kosong';
+                            }                  
                             $digiflazz = Digiflazz::create([
                                 'saldo_terakhir' => $response['data']['buyer_last_saldo'],
                                 'saldo_terpotong' => $response['data']['price'],
                                 'message' => $response['data']['message'],
-                                'seller_telegram' => $response['data']['tele'],
-                                'seller_whatsapp' => $response['data']['wa'],
+                                'seller_telegram' => $tele,
+                                'seller_whatsapp' => $wa,
                                 'status' => $response['data']['status']
                             ]);   
                             $createInvoice->update([
