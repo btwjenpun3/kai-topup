@@ -35,12 +35,22 @@ class XenditController extends Controller
                             'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . $invoice->nomor_invoice)
                         ]);
                         if($digiflazz->successful()) {
+                            if(isset($digiflazz['data']['wa'])) {
+                                $wa = $digiflazz['data']['wa'];
+                            } else {
+                                $wa = 'Kosong';
+                            }
+                            if(isset($digiflazz['data']['tele'])) {
+                                $tele = $digiflazz['data']['tele'];
+                            } else {
+                                $tele = 'Kosong';
+                            }
                             $updateDigiflazz = Digiflazz::create([
                                 'saldo_terakhir' => $digiflazz['data']['buyer_last_saldo'],
                                 'saldo_terpotong' => $digiflazz['data']['price'],
                                 'message' => $digiflazz['data']['message'],
-                                'seller_telegram' => $digiflazz['data']['tele'],
-                                'seller_whatsapp' => $digiflazz['data']['wa'],
+                                'seller_telegram' => $tele,
+                                'seller_whatsapp' => $wa,
                                 'status' => $digiflazz['data']['status']
                             ]);
                             $invoice->update([
@@ -96,12 +106,22 @@ class XenditController extends Controller
                             'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . $invoice->nomor_invoice)
                         ]);
                         if($digiflazz->successful()) {
+                            if(isset($digiflazz['data']['wa'])) {
+                                $wa = $digiflazz['data']['wa'];
+                            } else {
+                                $wa = 'Kosong';
+                            }
+                            if(isset($digiflazz['data']['tele'])) {
+                                $tele = $digiflazz['data']['tele'];
+                            } else {
+                                $tele = 'Kosong';
+                            }
                             $updateDigiflazz = Digiflazz::create([
                                 'saldo_terakhir' => $digiflazz['data']['buyer_last_saldo'],
                                 'saldo_terpotong' => $digiflazz['data']['price'],
                                 'message' => $digiflazz['data']['message'],
-                                'seller_telegram' => $digiflazz['data']['tele'],
-                                'seller_whatsapp' => $digiflazz['data']['wa'],
+                                'seller_telegram' => $tele,
+                                'seller_whatsapp' => $wa,
                                 'status' => $digiflazz['data']['status']
                             ]);
                             $invoice->update([
@@ -159,12 +179,22 @@ class XenditController extends Controller
                             'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . $invoice->nomor_invoice)
                         ]);
                         if($digiflazz->successful()) {
+                            if(isset($digiflazz['data']['wa'])) {
+                                $wa = $digiflazz['data']['wa'];
+                            } else {
+                                $wa = 'Kosong';
+                            }
+                            if(isset($digiflazz['data']['tele'])) {
+                                $tele = $digiflazz['data']['tele'];
+                            } else {
+                                $tele = 'Kosong';
+                            }
                             $updateDigiflazz = Digiflazz::create([
                                 'saldo_terakhir' => $digiflazz['data']['buyer_last_saldo'],
                                 'saldo_terpotong' => $digiflazz['data']['price'],
                                 'message' => $digiflazz['data']['message'],
-                                'seller_telegram' => $digiflazz['data']['tele'],
-                                'seller_whatsapp' => $digiflazz['data']['wa'],
+                                'seller_telegram' => $tele,
+                                'seller_whatsapp' => $wa,
                                 'status' => $digiflazz['data']['status']
                             ]);
                             $invoice->update([
@@ -225,13 +255,23 @@ class XenditController extends Controller
                             'ref_id' => $invoice->nomor_invoice,
                             'sign' => md5(env('DIGIFLAZZ_USERNAME') . env('DIGIFLAZZ_SECRET_KEY') . $invoice->nomor_invoice)
                         ]);
-                        if($digiflazz->successful()) {                            
+                        if($digiflazz->successful()) {   
+                            if(isset($digiflazz['data']['wa'])) {
+                                $wa = $digiflazz['data']['wa'];
+                            } else {
+                                $wa = 'Kosong';
+                            }
+                            if(isset($digiflazz['data']['tele'])) {
+                                $tele = $digiflazz['data']['tele'];
+                            } else {
+                                $tele = 'Kosong';
+                            }                         
                             $updateDigiflazz = Digiflazz::create([
                                 'saldo_terakhir' => $digiflazz['data']['buyer_last_saldo'],
                                 'saldo_terpotong' => $digiflazz['data']['price'],
                                 'message' => $digiflazz['data']['message'],
-                                'seller_telegram' => $digiflazz['data']['tele'],
-                                'seller_whatsapp' => $digiflazz['data']['wa'],
+                                'seller_telegram' => $tele,
+                                'seller_whatsapp' => $wa,
                                 'status' => $digiflazz['data']['status']
                             ]);
                             $invoice->update([

@@ -32,7 +32,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="description">
-                                <p>Cara Top Up Undawn - All Bind Murah, Mudah, dan Nyaman</p>
+                                <p>Cara Top Up Undawn - Bind Garena Murah, Mudah, dan Nyaman</p>
                                 <ul>
                                     <li>1. Pilih Produk yang Ingin di Beli</li>
                                     <li>2. Masukkan User ID</li>
