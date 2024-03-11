@@ -1,0 +1,152 @@
+.content {
+    position: relative;
+    z-index: 1;
+    background-color: #061b29;
+    padding-top: 30px;
+    padding-bottom: 60px;
+}
+
+.content .content-title h2 {
+    margin-top:30px;
+    color:rgb(245, 142, 9);
+}
+
+.content .additional-title h2 {
+    font-size: 24px;
+    margin-top:30px;
+    margin-bottom:20px;
+    color:rgb(255, 255, 255);
+}
+
+.content .additional-title h3 {
+    font-size: 16px;
+    margin-top:30px;
+    margin-bottom:20px;
+    color:rgb(255, 255, 255);
+}
+
+.content .additional-title ul li {
+    color:rgb(192, 185, 185);
+    margin-top:8px;
+    font-size: 14px;
+}
+
+.content .additional-title ol li {
+    color:rgb(192, 185, 185);
+    margin-top:8px;
+    font-size: 14px;
+}
+
+
+.content .content-title h3 {
+    margin-top:15px;
+    font-size: 16px;
+}
+
+.content .additional-title p {
+    color:rgb(192, 185, 185);
+    margin-top:15px;
+    font-size: 14px;
+}
+
+.content .additional-title mark {
+    color:rgb(2, 0, 0);
+    margin-top:15px;
+    font-size: 14px;
+}
+
+.content .content-title p {
+    margin-top:15px;
+}
+
+.content .sales-container {
+    margin-top:15px;
+}
+
+.sales-flex {
+    display: flex;
+    justify-content:space-between;
+}
+
+.content .sales-container .sales h5 {
+    font-size:13px;
+}
+
+.content .sales-review-container {
+    margin-top:40px;
+}
+
+
+.content .item .sales-review {
+    background-color: antiquewhite;
+    padding:15px;
+    border-radius: 23px;
+    margin-top: 30px;
+    margin-left:30px;
+}
+
+.content .item .sales-review-p {
+    margin-top:10px;
+}
+
+.content .item .sales-user-p {
+    font-weight: 700;
+    margin-top:30px;
+}
+
+.content .item .sales-review img {
+    width:50%;
+}
+
+.content .item .sales-review h5 {
+    color:#061b29;
+}
+
+@media (max-width: 375px) {
+    .content .sales-container h5 {
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 767px) {
+    .content {       
+        padding-top: 0px;
+        padding-top: 30px;
+    }
+
+    .content .sales-container .sales h4 {
+        font-size: 12px;
+    }    
+
+    .content .sales-container .sales h5 {
+        margin-bottom:15px;
+    }
+    
+
+    .content .sales-review-container {  
+        margin-top: 0;     
+        margin-left:0px;
+    }
+
+    .content .content-title {
+        padding-left:15px;
+    }
+
+    .content .content-title h5 {
+        font-size: 16px;
+    }
+
+    .content .sales-container {
+        padding-left:15px;
+    }
+}
+
+@media (max-width: 992px) {
+    .content .sales-container .sales h4 {
+        font-size: 21px;
+    }
+
+    .content .sales-container .sales h5 {
+        font-size: 13px;  
+    }
+}

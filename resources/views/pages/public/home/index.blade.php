@@ -1,5 +1,10 @@
 @extends('master.public.index')
 
+@section('meta')
+    <meta name="description"
+        content="Tempat top up game termurah dan terpercaya di Indonesia. Kami menjamin keamanan dan kecepatan transaksi di Fumolastore.id!" />
+@endsection
+
 @section('title')
     <title>Fumola Store - Tempat Untuk Top Up Murah, Cepat, Aman dan Nyaman</title>
 @endsection
