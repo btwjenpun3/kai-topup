@@ -1,7 +1,13 @@
 @extends('master.public.index')
 
+@section('meta')
+    <meta name="description"
+        content="Beli CP atau top up CODM murah dan terpercaya tanpa ribet! Bayar pakai E-Wallet, Bank, atau QRIS." />
+@endsection
+
+
 @section('title')
-    <title>Fumola Store - {{ $game->nama }}</title>
+    <title>Top Up CODM Murah dan Instan - Call of Duty Mobile</title>
 @endsection
 
 @section('message')
@@ -130,6 +136,160 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="additional-title">
+            <h2>Mau Top Up CODM Murah dan Aman? Fumola Store Jawabannya!</h2>
+            <p>
+                Di era gaming yang semakin maju ini, Call of Duty Mobile (CODM) telah menjadi salah satu game yang paling
+                banyak dimainkan di seluruh dunia. Belum lagi, harga top up CODM murah dan sering banyak diskon.
+                <b>Hah, Top up …?</b>
+            </p>
+            <div class="text-center mt-3">
+                <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#description">
+                    Baca Selengkapnya
+                </button>
+            </div>
+            <div class="collapse" id="description">
+                <div class="additional-title">
+                    <p>
+                        Ya, game ini tidak hanya menawarkan aksi yang seru, tapi juga grafik yang memukau dan gameplay yang
+                        menantang.
+                        Dibalik semua itu, untuk mendapatkan pengalaman bermain yang maksimal, kamu memerlukan COD Points
+                        (CP). Biar nggak ambigu, biar kami jelaskan sampai tuntas!
+                    </p>
+                    <h2>
+                        Kenapa Sih, Top Up CP Itu Penting dalam CODM?
+                    </h2>
+                    <p>
+                        Sebelum membahas lebih jauh, penting bagi pemain baru untuk mengerti mengapa CP (COD Points) sangat
+                        penting dalam Call of Duty Mobile. Jadi, <b>CP adalah mata uang dalam game yang memungkinkan pemain
+                            untuk membeli item premium, seperti skin senjata, karakter, dan Battle Pass.</b>
+                    </p>
+                    <p>
+                        Dengan item-item ini, tidak hanya penampilan karakter kamu yang menjadi lebih keren, tapi juga bisa
+                        menambah semangat dan motivasi dalam bermain.
+                    </p>
+                    <p>
+                        Nah, disitulah Fumola Store berperan. Kami hadir untuk memudahkan kamu melakukan top up CODM dengan
+                        harga murah, proses cepat, dan tentunya aman.
+                    </p>
+                    <h2>
+                        Memangnya, Apa Saja Keuntungan Top Up CODM di Fumola Store?
+                    </h2>
+                    <p>
+                        Fumola Store bukan sembarang tempat top up Call of Duty Mobile! Kami menawarkan berbagai keunggulan
+                        yang membuat kamu tidak perlu lagi mencari tempat lain untuk kebutuhan top up CODM-mu:
+                    </p>
+                    <ul>
+                        <li>
+                            <b>1. Harga Bersahabat:</b> Di Fumola Store, kami menawarkan harga top up CODM murah dan
+                            bersahabat.
+                            Karena kami benar-benar memahami kebutuhan para gamers yang ingin berhemat tanpa mengurangi
+                            keseruan bermain.
+                        </li>
+                        <li>
+                            <b>2. Proses Mudah dan Cepat:</b> Kami mengerti waktu adalah hal yang berharga bagi setiap
+                            gamer. Oleh
+                            karena itu, proses top up game CODM di Fumola Store dirancang agar mudah dan cepat, sehingga CP
+                            kamu bisa segera terisi dan kamu bisa kembali beraksi.
+                        </li>
+                        <li>
+                            <b>3. Keamanan Transaksi:</b> Keamanan transaksi adalah prioritas kami. Fumola Store menggunakan
+                            sistem
+                            pembayaran yang aman dan terpercaya untuk menjamin keamanan dana dan data pribadi kamu.
+                        </li>
+                        <li>
+                            <b>4. Pelayanan Pelanggan:</b> Tim support kami siap melayani pertanyaan atau masalah yang
+                            mungkin kamu
+                            hadapi selama proses top up CODM. Kami berkomitmen untuk memberikan pengalaman terbaik bagi
+                            pelanggan.
+                        </li>
+                    </ul>
+                    <p>
+                        Gimana? Kurang apa coba? Udah biaya top up CODM murah, cepat, aman, dan selalu ada support, lagi!
+                    </p>
+                    <h3>
+                        Gimana? Kurang apa coba? Udah biaya top up CODM murah, cepat, aman, dan selalu ada support, lagi!
+                    </h3>
+                    <p>
+                        Kamu pengen top up CODM murah dan simple? Ikuti langkah-langkah berikut ini:
+                    </p>
+                    <ul>
+                        <li>
+                            <b>1. Kunjungi Website:</b> Pertama, buka website Fumola Store. Interface yang ramah pengguna
+                            akan memudahkan kamu menavigasi situs kami.
+                        </li>
+                        <li>
+                            <b>2. Pilih Paket:</b> Kami menyediakan berbagai pilihan paket CP yang bisa kamu pilih sesuai
+                            dengan kebutuhan dan budgetmu.
+                        </li>
+                        <li>
+                            <b>3. Masukkan Detail Akun:</b> Setelah memilih paket, masukkan ID pengguna CODM-mu. Pastikan ID
+                            yang kamu masukkan sudah benar untuk menghindari kesalahan pengisian.
+                        </li>
+                        <li>
+                            <b>4. Pilih Metode Pembayaran:</b> Kami menyediakan berbagai metode pembayaran, mulai dari
+                            transfer bank,
+                            e-wallet, QRIS, hingga via outlet. Pokoknya, pilih aja yang paling nyaman untukmu.
+                        </li>
+                        <li>
+                            <b>5. Konfirmasi dan Tunggu:</b> Setelah pembayaran dikonfirmasi, CP akan segera ditambahkan ke
+                            akun
+                            CODM-mu. Proses ini tidak akan memakan waktu lama, kok! Cukup beberapa detik saja, CP sudah
+                            masuk ke akunmu
+                        </li>
+                    </ul>
+                    <h2>
+                        Jangan Boros! Ikuti Tips Menggunakan CP dengan Bijak dari Fumola Store
+                    </h2>
+                    <p>
+                        Setelah berhasil melakukan top up CODM murah di Fumola Store, menggunakan CP dengan bijak adalah
+                        kunci untuk meningkatkan pengalaman bermainmu. Berikut beberapa tips dari kami:
+                    </p>
+                    <h3>
+                        1. Investasikan pada Battle Pass
+                    </h3>
+                    <p>
+                        Dengan Battle Pass, kamu bisa mendapatkan berbagai item eksklusif yang <b>tidak hanya meningkatkan
+                            penampilan karaktermu, tapi juga bisa memberikan keuntungan dalam permainan.</b>
+                    </p>
+                    <h3>
+                        2. Perhatikan Bundle dan Promo
+                    </h3>
+                    <p>
+                        Fumola Store <b>seringkali menawarkan bundle dan promo eksklusif.</b> Jadi, selalu perhatikan
+                        penawaran
+                        yang kami berikan untuk mendapatkan deal terbaik. Kalau kamu langganan top up CODM di Fumola Store,
+                        pasti nanti bakalan dapat promo.
+                    </p>
+                    <h3>
+                        3. Prioritaskan Kebutuhan
+                    </h3>
+                    <p>
+                        Meskipun tergoda untuk membeli banyak item, <b>prioritaskan pembelian berdasarkan kebutuhan dalam
+                            game.</b>
+                        Misalnya, jika kamu sering bermain mode tertentu, belilah item yang mendukung mode tersebut.
+                    </p>
+                    <p>
+                        Nah, tiga tips di atas dapat kamu terapkan, supaya tidak menyia-nyiakan CP yang sudah kamu beli. Ya
+                        tau sendiri lah, penyesalan itu datang di akhir!
+                    </p>
+                    <p>
+                        <b>Kesimpulannya,</b> top up Call of Duty Mobile bisa kamu dapatkan di Fumola Store. Dengan layanan
+                        yang
+                        mudah, cepat, aman, dan harga yang bersahabat, kamu bisa mendapatkan CP dan meningkatkan
+                        pengalaman bermain CODM-mu tanpa khawatir.
+                    </p>
+                    <p>
+                        Jangan lewatkan kesempatan untuk menjadi yang terbaik di Call of Duty Mobile dengan dukungan penuh
+                        dari layanan top up CODM murah Fumola Store. Selamat bermain, dan temukan keseruan tak terhingga di
+                        setiap pertempuran yang kamu hadapi!
+                    </p>
                 </div>
             </div>
         </div>
@@ -322,6 +482,7 @@
     <link rel="stylesheet" href="/assets/css/payment.css">
     <link rel="stylesheet" href="/assets/css/data.css">
     <link rel="stylesheet" href="/assets/css/product-header.css">
+    <link rel="stylesheet" href="/assets/css/contents.css">
     <style>
         .clickable-item {
             cursor: pointer;
