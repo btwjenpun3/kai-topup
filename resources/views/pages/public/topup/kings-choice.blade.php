@@ -1,5 +1,10 @@
 @extends('master.public.index')
 
+@section('meta')
+    <meta name="description"
+        content="Tempat top up game termurah dan terpercaya di Indonesia. Kami menjamin keamanan dan kecepatan transaksi di Fumolastore.id!" />
+@endsection
+
 @section('title')
     <title>Fumola Store - {{ $game->nama }}</title>
 @endsection
@@ -53,7 +58,7 @@
             <div class="container">
                 <div class="heading-section text-center">
                     <h4>Pilih Produk dan Nominal</h4>
-                </div>                
+                </div>
                 <div class="item-parent mb-4">
                     <div class="col-md-12">
                         <div class="row align-items-center mb-4">
