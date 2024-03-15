@@ -698,10 +698,10 @@ class TopUpController extends Controller
                     $customer_no = '#' . $request->userId;
 
                 } elseif ($data->game->brand == 'League of Legends Wild Rift') {
-                    if($data->seller_name == 'CV DFLASH TEKNOLOGI INDO') {
-                        $customer_no = $request->userId . $request->userId;
+                    if($data->seller_name == 'CV  DFLASH TEKNOLOGI INDO') {
+                        $customer_no = $request->userId . $request->serverId;
                     } else {
-                        $customer_no = $request->userId . '#' . $request->userId;
+                        $customer_no = $request->userId . '#' . $request->serverId;
                     }
 
                 } elseif ($data->game->brand == 'Valorant') {
